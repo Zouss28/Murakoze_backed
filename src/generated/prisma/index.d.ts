@@ -263,6 +263,11 @@ export type sectors = $Result.DefaultSelection<Prisma.$sectorsPayload>
  * 
  */
 export type users_profile = $Result.DefaultSelection<Prisma.$users_profilePayload>
+/**
+ * Model reviews
+ * 
+ */
+export type reviews = $Result.DefaultSelection<Prisma.$reviewsPayload>
 
 /**
  * Enums
@@ -984,6 +989,16 @@ export class PrismaClient<
     * ```
     */
   get users_profile(): Prisma.users_profileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reviews`: Exposes CRUD operations for the **reviews** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Reviews
+    * const reviews = await prisma.reviews.findMany()
+    * ```
+    */
+  get reviews(): Prisma.reviewsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1473,7 +1488,8 @@ export namespace Prisma {
     wallet_users: 'wallet_users',
     images: 'images',
     sectors: 'sectors',
-    users_profile: 'users_profile'
+    users_profile: 'users_profile',
+    reviews: 'reviews'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1492,7 +1508,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "app_releases" | "appointments" | "apps" | "audit_trail" | "categories" | "change_request" | "device" | "device_heartbeat" | "institution" | "institution_invoices" | "institution_service_tracking" | "login_history" | "migration" | "mms_file" | "notification" | "notification_recipient" | "option" | "popup_questions" | "popup_questions_answers" | "popup_questions_possible_answers" | "qms_branch_operator" | "qms_branch_transactions" | "qms_counter" | "qms_customer" | "qms_operator" | "qms_operator_transactions" | "qms_queue" | "qms_queue_operator_lnk" | "qms_ticket" | "qms_ticket_assignment" | "rating" | "rating_assets" | "rating_qr_code_sessions" | "rating_reply" | "reports" | "request_institution" | "service" | "service_group" | "survey" | "survey_result" | "tags" | "tip" | "user" | "wallet_accounts" | "wallet_accounts_types" | "wallet_transfers" | "wallet_users" | "images" | "sectors" | "users_profile"
+      modelProps: "app_releases" | "appointments" | "apps" | "audit_trail" | "categories" | "change_request" | "device" | "device_heartbeat" | "institution" | "institution_invoices" | "institution_service_tracking" | "login_history" | "migration" | "mms_file" | "notification" | "notification_recipient" | "option" | "popup_questions" | "popup_questions_answers" | "popup_questions_possible_answers" | "qms_branch_operator" | "qms_branch_transactions" | "qms_counter" | "qms_customer" | "qms_operator" | "qms_operator_transactions" | "qms_queue" | "qms_queue_operator_lnk" | "qms_ticket" | "qms_ticket_assignment" | "rating" | "rating_assets" | "rating_qr_code_sessions" | "rating_reply" | "reports" | "request_institution" | "service" | "service_group" | "survey" | "survey_result" | "tags" | "tip" | "user" | "wallet_accounts" | "wallet_accounts_types" | "wallet_transfers" | "wallet_users" | "images" | "sectors" | "users_profile" | "reviews"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4796,6 +4812,72 @@ export namespace Prisma {
           }
         }
       }
+      reviews: {
+        payload: Prisma.$reviewsPayload<ExtArgs>
+        fields: Prisma.reviewsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.reviewsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.reviewsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          findFirst: {
+            args: Prisma.reviewsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.reviewsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          findMany: {
+            args: Prisma.reviewsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>[]
+          }
+          create: {
+            args: Prisma.reviewsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          createMany: {
+            args: Prisma.reviewsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.reviewsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          update: {
+            args: Prisma.reviewsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          deleteMany: {
+            args: Prisma.reviewsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.reviewsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.reviewsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$reviewsPayload>
+          }
+          aggregate: {
+            args: Prisma.ReviewsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReviews>
+          }
+          groupBy: {
+            args: Prisma.reviewsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReviewsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.reviewsCountArgs<ExtArgs>
+            result: $Utils.Optional<ReviewsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4930,6 +5012,7 @@ export namespace Prisma {
     images?: imagesOmit
     sectors?: sectorsOmit
     users_profile?: users_profileOmit
+    reviews?: reviewsOmit
   }
 
   /* Types for Logging */
@@ -5112,6 +5195,7 @@ export namespace Prisma {
     qms_branch_operator: number
     qms_branch_transactions: number
     qms_operator: number
+    reviews: number
     service: number
     service_group: number
   }
@@ -5125,6 +5209,7 @@ export namespace Prisma {
     qms_branch_operator?: boolean | InstitutionCountOutputTypeCountQms_branch_operatorArgs
     qms_branch_transactions?: boolean | InstitutionCountOutputTypeCountQms_branch_transactionsArgs
     qms_operator?: boolean | InstitutionCountOutputTypeCountQms_operatorArgs
+    reviews?: boolean | InstitutionCountOutputTypeCountReviewsArgs
     service?: boolean | InstitutionCountOutputTypeCountServiceArgs
     service_group?: boolean | InstitutionCountOutputTypeCountService_groupArgs
   }
@@ -5194,6 +5279,13 @@ export namespace Prisma {
    */
   export type InstitutionCountOutputTypeCountQms_operatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: qms_operatorWhereInput
+  }
+
+  /**
+   * InstitutionCountOutputType without action
+   */
+  export type InstitutionCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: reviewsWhereInput
   }
 
   /**
@@ -5728,10 +5820,12 @@ export namespace Prisma {
 
   export type Users_profileCountOutputType = {
     images: number
+    reviews: number
   }
 
   export type Users_profileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | Users_profileCountOutputTypeCountImagesArgs
+    reviews?: boolean | Users_profileCountOutputTypeCountReviewsArgs
   }
 
   // Custom InputTypes
@@ -5749,6 +5843,44 @@ export namespace Prisma {
    * Users_profileCountOutputType without action
    */
   export type Users_profileCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: imagesWhereInput
+  }
+
+  /**
+   * Users_profileCountOutputType without action
+   */
+  export type Users_profileCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: reviewsWhereInput
+  }
+
+
+  /**
+   * Count Type ReviewsCountOutputType
+   */
+
+  export type ReviewsCountOutputType = {
+    images: number
+  }
+
+  export type ReviewsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | ReviewsCountOutputTypeCountImagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ReviewsCountOutputType without action
+   */
+  export type ReviewsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewsCountOutputType
+     */
+    select?: ReviewsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ReviewsCountOutputType without action
+   */
+  export type ReviewsCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: imagesWhereInput
   }
 
@@ -14743,6 +14875,7 @@ export namespace Prisma {
     qms_branch_operator?: boolean | institution$qms_branch_operatorArgs<ExtArgs>
     qms_branch_transactions?: boolean | institution$qms_branch_transactionsArgs<ExtArgs>
     qms_operator?: boolean | institution$qms_operatorArgs<ExtArgs>
+    reviews?: boolean | institution$reviewsArgs<ExtArgs>
     service?: boolean | institution$serviceArgs<ExtArgs>
     service_group?: boolean | institution$service_groupArgs<ExtArgs>
     _count?: boolean | InstitutionCountOutputTypeDefaultArgs<ExtArgs>
@@ -14798,6 +14931,7 @@ export namespace Prisma {
     qms_branch_operator?: boolean | institution$qms_branch_operatorArgs<ExtArgs>
     qms_branch_transactions?: boolean | institution$qms_branch_transactionsArgs<ExtArgs>
     qms_operator?: boolean | institution$qms_operatorArgs<ExtArgs>
+    reviews?: boolean | institution$reviewsArgs<ExtArgs>
     service?: boolean | institution$serviceArgs<ExtArgs>
     service_group?: boolean | institution$service_groupArgs<ExtArgs>
     _count?: boolean | InstitutionCountOutputTypeDefaultArgs<ExtArgs>
@@ -14815,6 +14949,7 @@ export namespace Prisma {
       qms_branch_operator: Prisma.$qms_branch_operatorPayload<ExtArgs>[]
       qms_branch_transactions: Prisma.$qms_branch_transactionsPayload<ExtArgs>[]
       qms_operator: Prisma.$qms_operatorPayload<ExtArgs>[]
+      reviews: Prisma.$reviewsPayload<ExtArgs>[]
       service: Prisma.$servicePayload<ExtArgs>[]
       service_group: Prisma.$service_groupPayload<ExtArgs>[]
     }
@@ -15202,6 +15337,7 @@ export namespace Prisma {
     qms_branch_operator<T extends institution$qms_branch_operatorArgs<ExtArgs> = {}>(args?: Subset<T, institution$qms_branch_operatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qms_branch_operatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     qms_branch_transactions<T extends institution$qms_branch_transactionsArgs<ExtArgs> = {}>(args?: Subset<T, institution$qms_branch_transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qms_branch_transactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     qms_operator<T extends institution$qms_operatorArgs<ExtArgs> = {}>(args?: Subset<T, institution$qms_operatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$qms_operatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviews<T extends institution$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, institution$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     service<T extends institution$serviceArgs<ExtArgs> = {}>(args?: Subset<T, institution$serviceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$servicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     service_group<T extends institution$service_groupArgs<ExtArgs> = {}>(args?: Subset<T, institution$service_groupArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$service_groupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -15818,6 +15954,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Qms_operatorScalarFieldEnum | Qms_operatorScalarFieldEnum[]
+  }
+
+  /**
+   * institution.reviews
+   */
+  export type institution$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    where?: reviewsWhereInput
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    cursor?: reviewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewsScalarFieldEnum | ReviewsScalarFieldEnum[]
   }
 
   /**
@@ -55387,12 +55547,14 @@ export namespace Prisma {
     id: number | null
     institution_id: number | null
     user_id: number | null
+    review_id: number | null
   }
 
   export type ImagesSumAggregateOutputType = {
     id: number | null
     institution_id: number | null
     user_id: number | null
+    review_id: number | null
   }
 
   export type ImagesMinAggregateOutputType = {
@@ -55403,6 +55565,7 @@ export namespace Prisma {
     image_url: string | null
     caption: string | null
     uploaded_at: Date | null
+    review_id: number | null
   }
 
   export type ImagesMaxAggregateOutputType = {
@@ -55413,6 +55576,7 @@ export namespace Prisma {
     image_url: string | null
     caption: string | null
     uploaded_at: Date | null
+    review_id: number | null
   }
 
   export type ImagesCountAggregateOutputType = {
@@ -55423,6 +55587,7 @@ export namespace Prisma {
     image_url: number
     caption: number
     uploaded_at: number
+    review_id: number
     _all: number
   }
 
@@ -55431,12 +55596,14 @@ export namespace Prisma {
     id?: true
     institution_id?: true
     user_id?: true
+    review_id?: true
   }
 
   export type ImagesSumAggregateInputType = {
     id?: true
     institution_id?: true
     user_id?: true
+    review_id?: true
   }
 
   export type ImagesMinAggregateInputType = {
@@ -55447,6 +55614,7 @@ export namespace Prisma {
     image_url?: true
     caption?: true
     uploaded_at?: true
+    review_id?: true
   }
 
   export type ImagesMaxAggregateInputType = {
@@ -55457,6 +55625,7 @@ export namespace Prisma {
     image_url?: true
     caption?: true
     uploaded_at?: true
+    review_id?: true
   }
 
   export type ImagesCountAggregateInputType = {
@@ -55467,6 +55636,7 @@ export namespace Prisma {
     image_url?: true
     caption?: true
     uploaded_at?: true
+    review_id?: true
     _all?: true
   }
 
@@ -55564,6 +55734,7 @@ export namespace Prisma {
     image_url: string | null
     caption: string | null
     uploaded_at: Date
+    review_id: number | null
     _count: ImagesCountAggregateOutputType | null
     _avg: ImagesAvgAggregateOutputType | null
     _sum: ImagesSumAggregateOutputType | null
@@ -55593,7 +55764,9 @@ export namespace Prisma {
     image_url?: boolean
     caption?: boolean
     uploaded_at?: boolean
+    review_id?: boolean
     institution?: boolean | images$institutionArgs<ExtArgs>
+    reviews?: boolean | images$reviewsArgs<ExtArgs>
     users_profile?: boolean | images$users_profileArgs<ExtArgs>
   }, ExtArgs["result"]["images"]>
 
@@ -55607,11 +55780,13 @@ export namespace Prisma {
     image_url?: boolean
     caption?: boolean
     uploaded_at?: boolean
+    review_id?: boolean
   }
 
-  export type imagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "institution_id" | "user_id" | "type" | "image_url" | "caption" | "uploaded_at", ExtArgs["result"]["images"]>
+  export type imagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "institution_id" | "user_id" | "type" | "image_url" | "caption" | "uploaded_at" | "review_id", ExtArgs["result"]["images"]>
   export type imagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     institution?: boolean | images$institutionArgs<ExtArgs>
+    reviews?: boolean | images$reviewsArgs<ExtArgs>
     users_profile?: boolean | images$users_profileArgs<ExtArgs>
   }
 
@@ -55619,6 +55794,7 @@ export namespace Prisma {
     name: "images"
     objects: {
       institution: Prisma.$institutionPayload<ExtArgs> | null
+      reviews: Prisma.$reviewsPayload<ExtArgs> | null
       users_profile: Prisma.$users_profilePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -55629,6 +55805,7 @@ export namespace Prisma {
       image_url: string | null
       caption: string | null
       uploaded_at: Date
+      review_id: number | null
     }, ExtArgs["result"]["images"]>
     composites: {}
   }
@@ -55970,6 +56147,7 @@ export namespace Prisma {
   export interface Prisma__imagesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     institution<T extends images$institutionArgs<ExtArgs> = {}>(args?: Subset<T, images$institutionArgs<ExtArgs>>): Prisma__institutionClient<$Result.GetResult<Prisma.$institutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    reviews<T extends images$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, images$reviewsArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     users_profile<T extends images$users_profileArgs<ExtArgs> = {}>(args?: Subset<T, images$users_profileArgs<ExtArgs>>): Prisma__users_profileClient<$Result.GetResult<Prisma.$users_profilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -56007,6 +56185,7 @@ export namespace Prisma {
     readonly image_url: FieldRef<"images", 'String'>
     readonly caption: FieldRef<"images", 'String'>
     readonly uploaded_at: FieldRef<"images", 'DateTime'>
+    readonly review_id: FieldRef<"images", 'Int'>
   }
     
 
@@ -56366,6 +56545,25 @@ export namespace Prisma {
      */
     include?: institutionInclude<ExtArgs> | null
     where?: institutionWhereInput
+  }
+
+  /**
+   * images.reviews
+   */
+  export type images$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    where?: reviewsWhereInput
   }
 
   /**
@@ -57612,6 +57810,7 @@ export namespace Prisma {
     address?: boolean
     added_at?: boolean
     images?: boolean | users_profile$imagesArgs<ExtArgs>
+    reviews?: boolean | users_profile$reviewsArgs<ExtArgs>
     _count?: boolean | Users_profileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users_profile"]>
 
@@ -57633,6 +57832,7 @@ export namespace Prisma {
   export type users_profileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "first_name" | "last_name" | "email" | "password" | "phone_number" | "age_group" | "gender" | "address" | "added_at", ExtArgs["result"]["users_profile"]>
   export type users_profileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | users_profile$imagesArgs<ExtArgs>
+    reviews?: boolean | users_profile$reviewsArgs<ExtArgs>
     _count?: boolean | Users_profileCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -57640,6 +57840,7 @@ export namespace Prisma {
     name: "users_profile"
     objects: {
       images: Prisma.$imagesPayload<ExtArgs>[]
+      reviews: Prisma.$reviewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -57993,6 +58194,7 @@ export namespace Prisma {
   export interface Prisma__users_profileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     images<T extends users_profile$imagesArgs<ExtArgs> = {}>(args?: Subset<T, users_profile$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviews<T extends users_profile$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, users_profile$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -58399,6 +58601,30 @@ export namespace Prisma {
   }
 
   /**
+   * users_profile.reviews
+   */
+  export type users_profile$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    where?: reviewsWhereInput
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    cursor?: reviewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewsScalarFieldEnum | ReviewsScalarFieldEnum[]
+  }
+
+  /**
    * users_profile without action
    */
   export type users_profileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -58414,6 +58640,1026 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: users_profileInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model reviews
+   */
+
+  export type AggregateReviews = {
+    _count: ReviewsCountAggregateOutputType | null
+    _avg: ReviewsAvgAggregateOutputType | null
+    _sum: ReviewsSumAggregateOutputType | null
+    _min: ReviewsMinAggregateOutputType | null
+    _max: ReviewsMaxAggregateOutputType | null
+  }
+
+  export type ReviewsAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    institution_id: number | null
+    rating: number | null
+  }
+
+  export type ReviewsSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    institution_id: number | null
+    rating: number | null
+  }
+
+  export type ReviewsMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    institution_id: number | null
+    rating: number | null
+    review: string | null
+    created_at: Date | null
+  }
+
+  export type ReviewsMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    institution_id: number | null
+    rating: number | null
+    review: string | null
+    created_at: Date | null
+  }
+
+  export type ReviewsCountAggregateOutputType = {
+    id: number
+    user_id: number
+    institution_id: number
+    rating: number
+    review: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type ReviewsAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    institution_id?: true
+    rating?: true
+  }
+
+  export type ReviewsSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    institution_id?: true
+    rating?: true
+  }
+
+  export type ReviewsMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    institution_id?: true
+    rating?: true
+    review?: true
+    created_at?: true
+  }
+
+  export type ReviewsMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    institution_id?: true
+    rating?: true
+    review?: true
+    created_at?: true
+  }
+
+  export type ReviewsCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    institution_id?: true
+    rating?: true
+    review?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type ReviewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which reviews to aggregate.
+     */
+    where?: reviewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of reviews to fetch.
+     */
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: reviewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned reviews
+    **/
+    _count?: true | ReviewsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReviewsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReviewsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReviewsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReviewsMaxAggregateInputType
+  }
+
+  export type GetReviewsAggregateType<T extends ReviewsAggregateArgs> = {
+        [P in keyof T & keyof AggregateReviews]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReviews[P]>
+      : GetScalarType<T[P], AggregateReviews[P]>
+  }
+
+
+
+
+  export type reviewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: reviewsWhereInput
+    orderBy?: reviewsOrderByWithAggregationInput | reviewsOrderByWithAggregationInput[]
+    by: ReviewsScalarFieldEnum[] | ReviewsScalarFieldEnum
+    having?: reviewsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReviewsCountAggregateInputType | true
+    _avg?: ReviewsAvgAggregateInputType
+    _sum?: ReviewsSumAggregateInputType
+    _min?: ReviewsMinAggregateInputType
+    _max?: ReviewsMaxAggregateInputType
+  }
+
+  export type ReviewsGroupByOutputType = {
+    id: number
+    user_id: number
+    institution_id: number
+    rating: number
+    review: string | null
+    created_at: Date
+    _count: ReviewsCountAggregateOutputType | null
+    _avg: ReviewsAvgAggregateOutputType | null
+    _sum: ReviewsSumAggregateOutputType | null
+    _min: ReviewsMinAggregateOutputType | null
+    _max: ReviewsMaxAggregateOutputType | null
+  }
+
+  type GetReviewsGroupByPayload<T extends reviewsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReviewsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReviewsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReviewsGroupByOutputType[P]>
+            : GetScalarType<T[P], ReviewsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type reviewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    institution_id?: boolean
+    rating?: boolean
+    review?: boolean
+    created_at?: boolean
+    images?: boolean | reviews$imagesArgs<ExtArgs>
+    institution?: boolean | institutionDefaultArgs<ExtArgs>
+    users_profile?: boolean | users_profileDefaultArgs<ExtArgs>
+    _count?: boolean | ReviewsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reviews"]>
+
+
+
+  export type reviewsSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    institution_id?: boolean
+    rating?: boolean
+    review?: boolean
+    created_at?: boolean
+  }
+
+  export type reviewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "institution_id" | "rating" | "review" | "created_at", ExtArgs["result"]["reviews"]>
+  export type reviewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | reviews$imagesArgs<ExtArgs>
+    institution?: boolean | institutionDefaultArgs<ExtArgs>
+    users_profile?: boolean | users_profileDefaultArgs<ExtArgs>
+    _count?: boolean | ReviewsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $reviewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "reviews"
+    objects: {
+      images: Prisma.$imagesPayload<ExtArgs>[]
+      institution: Prisma.$institutionPayload<ExtArgs>
+      users_profile: Prisma.$users_profilePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number
+      institution_id: number
+      rating: number
+      review: string | null
+      created_at: Date
+    }, ExtArgs["result"]["reviews"]>
+    composites: {}
+  }
+
+  type reviewsGetPayload<S extends boolean | null | undefined | reviewsDefaultArgs> = $Result.GetResult<Prisma.$reviewsPayload, S>
+
+  type reviewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<reviewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReviewsCountAggregateInputType | true
+    }
+
+  export interface reviewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['reviews'], meta: { name: 'reviews' } }
+    /**
+     * Find zero or one Reviews that matches the filter.
+     * @param {reviewsFindUniqueArgs} args - Arguments to find a Reviews
+     * @example
+     * // Get one Reviews
+     * const reviews = await prisma.reviews.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends reviewsFindUniqueArgs>(args: SelectSubset<T, reviewsFindUniqueArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reviews that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {reviewsFindUniqueOrThrowArgs} args - Arguments to find a Reviews
+     * @example
+     * // Get one Reviews
+     * const reviews = await prisma.reviews.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends reviewsFindUniqueOrThrowArgs>(args: SelectSubset<T, reviewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reviews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsFindFirstArgs} args - Arguments to find a Reviews
+     * @example
+     * // Get one Reviews
+     * const reviews = await prisma.reviews.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends reviewsFindFirstArgs>(args?: SelectSubset<T, reviewsFindFirstArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reviews that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsFindFirstOrThrowArgs} args - Arguments to find a Reviews
+     * @example
+     * // Get one Reviews
+     * const reviews = await prisma.reviews.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends reviewsFindFirstOrThrowArgs>(args?: SelectSubset<T, reviewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Reviews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Reviews
+     * const reviews = await prisma.reviews.findMany()
+     * 
+     * // Get first 10 Reviews
+     * const reviews = await prisma.reviews.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reviewsWithIdOnly = await prisma.reviews.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends reviewsFindManyArgs>(args?: SelectSubset<T, reviewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reviews.
+     * @param {reviewsCreateArgs} args - Arguments to create a Reviews.
+     * @example
+     * // Create one Reviews
+     * const Reviews = await prisma.reviews.create({
+     *   data: {
+     *     // ... data to create a Reviews
+     *   }
+     * })
+     * 
+     */
+    create<T extends reviewsCreateArgs>(args: SelectSubset<T, reviewsCreateArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Reviews.
+     * @param {reviewsCreateManyArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const reviews = await prisma.reviews.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends reviewsCreateManyArgs>(args?: SelectSubset<T, reviewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Reviews.
+     * @param {reviewsDeleteArgs} args - Arguments to delete one Reviews.
+     * @example
+     * // Delete one Reviews
+     * const Reviews = await prisma.reviews.delete({
+     *   where: {
+     *     // ... filter to delete one Reviews
+     *   }
+     * })
+     * 
+     */
+    delete<T extends reviewsDeleteArgs>(args: SelectSubset<T, reviewsDeleteArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reviews.
+     * @param {reviewsUpdateArgs} args - Arguments to update one Reviews.
+     * @example
+     * // Update one Reviews
+     * const reviews = await prisma.reviews.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends reviewsUpdateArgs>(args: SelectSubset<T, reviewsUpdateArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Reviews.
+     * @param {reviewsDeleteManyArgs} args - Arguments to filter Reviews to delete.
+     * @example
+     * // Delete a few Reviews
+     * const { count } = await prisma.reviews.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends reviewsDeleteManyArgs>(args?: SelectSubset<T, reviewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Reviews
+     * const reviews = await prisma.reviews.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends reviewsUpdateManyArgs>(args: SelectSubset<T, reviewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Reviews.
+     * @param {reviewsUpsertArgs} args - Arguments to update or create a Reviews.
+     * @example
+     * // Update or create a Reviews
+     * const reviews = await prisma.reviews.upsert({
+     *   create: {
+     *     // ... data to create a Reviews
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reviews we want to update
+     *   }
+     * })
+     */
+    upsert<T extends reviewsUpsertArgs>(args: SelectSubset<T, reviewsUpsertArgs<ExtArgs>>): Prisma__reviewsClient<$Result.GetResult<Prisma.$reviewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsCountArgs} args - Arguments to filter Reviews to count.
+     * @example
+     * // Count the number of Reviews
+     * const count = await prisma.reviews.count({
+     *   where: {
+     *     // ... the filter for the Reviews we want to count
+     *   }
+     * })
+    **/
+    count<T extends reviewsCountArgs>(
+      args?: Subset<T, reviewsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReviewsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReviewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReviewsAggregateArgs>(args: Subset<T, ReviewsAggregateArgs>): Prisma.PrismaPromise<GetReviewsAggregateType<T>>
+
+    /**
+     * Group by Reviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {reviewsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends reviewsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: reviewsGroupByArgs['orderBy'] }
+        : { orderBy?: reviewsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, reviewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReviewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the reviews model
+   */
+  readonly fields: reviewsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for reviews.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__reviewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    images<T extends reviews$imagesArgs<ExtArgs> = {}>(args?: Subset<T, reviews$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    institution<T extends institutionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, institutionDefaultArgs<ExtArgs>>): Prisma__institutionClient<$Result.GetResult<Prisma.$institutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users_profile<T extends users_profileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, users_profileDefaultArgs<ExtArgs>>): Prisma__users_profileClient<$Result.GetResult<Prisma.$users_profilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the reviews model
+   */
+  interface reviewsFieldRefs {
+    readonly id: FieldRef<"reviews", 'Int'>
+    readonly user_id: FieldRef<"reviews", 'Int'>
+    readonly institution_id: FieldRef<"reviews", 'Int'>
+    readonly rating: FieldRef<"reviews", 'Int'>
+    readonly review: FieldRef<"reviews", 'String'>
+    readonly created_at: FieldRef<"reviews", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * reviews findUnique
+   */
+  export type reviewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter, which reviews to fetch.
+     */
+    where: reviewsWhereUniqueInput
+  }
+
+  /**
+   * reviews findUniqueOrThrow
+   */
+  export type reviewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter, which reviews to fetch.
+     */
+    where: reviewsWhereUniqueInput
+  }
+
+  /**
+   * reviews findFirst
+   */
+  export type reviewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter, which reviews to fetch.
+     */
+    where?: reviewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of reviews to fetch.
+     */
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for reviews.
+     */
+    cursor?: reviewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of reviews.
+     */
+    distinct?: ReviewsScalarFieldEnum | ReviewsScalarFieldEnum[]
+  }
+
+  /**
+   * reviews findFirstOrThrow
+   */
+  export type reviewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter, which reviews to fetch.
+     */
+    where?: reviewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of reviews to fetch.
+     */
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for reviews.
+     */
+    cursor?: reviewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` reviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of reviews.
+     */
+    distinct?: ReviewsScalarFieldEnum | ReviewsScalarFieldEnum[]
+  }
+
+  /**
+   * reviews findMany
+   */
+  export type reviewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter, which reviews to fetch.
+     */
+    where?: reviewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of reviews to fetch.
+     */
+    orderBy?: reviewsOrderByWithRelationInput | reviewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing reviews.
+     */
+    cursor?: reviewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` reviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` reviews.
+     */
+    skip?: number
+    distinct?: ReviewsScalarFieldEnum | ReviewsScalarFieldEnum[]
+  }
+
+  /**
+   * reviews create
+   */
+  export type reviewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a reviews.
+     */
+    data: XOR<reviewsCreateInput, reviewsUncheckedCreateInput>
+  }
+
+  /**
+   * reviews createMany
+   */
+  export type reviewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many reviews.
+     */
+    data: reviewsCreateManyInput | reviewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * reviews update
+   */
+  export type reviewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a reviews.
+     */
+    data: XOR<reviewsUpdateInput, reviewsUncheckedUpdateInput>
+    /**
+     * Choose, which reviews to update.
+     */
+    where: reviewsWhereUniqueInput
+  }
+
+  /**
+   * reviews updateMany
+   */
+  export type reviewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update reviews.
+     */
+    data: XOR<reviewsUpdateManyMutationInput, reviewsUncheckedUpdateManyInput>
+    /**
+     * Filter which reviews to update
+     */
+    where?: reviewsWhereInput
+    /**
+     * Limit how many reviews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * reviews upsert
+   */
+  export type reviewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the reviews to update in case it exists.
+     */
+    where: reviewsWhereUniqueInput
+    /**
+     * In case the reviews found by the `where` argument doesn't exist, create a new reviews with this data.
+     */
+    create: XOR<reviewsCreateInput, reviewsUncheckedCreateInput>
+    /**
+     * In case the reviews was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<reviewsUpdateInput, reviewsUncheckedUpdateInput>
+  }
+
+  /**
+   * reviews delete
+   */
+  export type reviewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
+    /**
+     * Filter which reviews to delete.
+     */
+    where: reviewsWhereUniqueInput
+  }
+
+  /**
+   * reviews deleteMany
+   */
+  export type reviewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which reviews to delete
+     */
+    where?: reviewsWhereInput
+    /**
+     * Limit how many reviews to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * reviews.images
+   */
+  export type reviews$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the images
+     */
+    select?: imagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the images
+     */
+    omit?: imagesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imagesInclude<ExtArgs> | null
+    where?: imagesWhereInput
+    orderBy?: imagesOrderByWithRelationInput | imagesOrderByWithRelationInput[]
+    cursor?: imagesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ImagesScalarFieldEnum | ImagesScalarFieldEnum[]
+  }
+
+  /**
+   * reviews without action
+   */
+  export type reviewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the reviews
+     */
+    select?: reviewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the reviews
+     */
+    omit?: reviewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: reviewsInclude<ExtArgs> | null
   }
 
 
@@ -59247,7 +60493,8 @@ export namespace Prisma {
     type: 'type',
     image_url: 'image_url',
     caption: 'caption',
-    uploaded_at: 'uploaded_at'
+    uploaded_at: 'uploaded_at',
+    review_id: 'review_id'
   };
 
   export type ImagesScalarFieldEnum = (typeof ImagesScalarFieldEnum)[keyof typeof ImagesScalarFieldEnum]
@@ -59276,6 +60523,18 @@ export namespace Prisma {
   };
 
   export type Users_profileScalarFieldEnum = (typeof Users_profileScalarFieldEnum)[keyof typeof Users_profileScalarFieldEnum]
+
+
+  export const ReviewsScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    institution_id: 'institution_id',
+    rating: 'rating',
+    review: 'review',
+    created_at: 'created_at'
+  };
+
+  export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -59788,6 +61047,13 @@ export namespace Prisma {
   };
 
   export type users_profileOrderByRelevanceFieldEnum = (typeof users_profileOrderByRelevanceFieldEnum)[keyof typeof users_profileOrderByRelevanceFieldEnum]
+
+
+  export const reviewsOrderByRelevanceFieldEnum: {
+    review: 'review'
+  };
+
+  export type reviewsOrderByRelevanceFieldEnum = (typeof reviewsOrderByRelevanceFieldEnum)[keyof typeof reviewsOrderByRelevanceFieldEnum]
 
 
   /**
@@ -60687,6 +61953,7 @@ export namespace Prisma {
     qms_branch_operator?: Qms_branch_operatorListRelationFilter
     qms_branch_transactions?: Qms_branch_transactionsListRelationFilter
     qms_operator?: Qms_operatorListRelationFilter
+    reviews?: ReviewsListRelationFilter
     service?: ServiceListRelationFilter
     service_group?: Service_groupListRelationFilter
   }
@@ -60735,6 +62002,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorOrderByRelationAggregateInput
     qms_branch_transactions?: qms_branch_transactionsOrderByRelationAggregateInput
     qms_operator?: qms_operatorOrderByRelationAggregateInput
+    reviews?: reviewsOrderByRelationAggregateInput
     service?: serviceOrderByRelationAggregateInput
     service_group?: service_groupOrderByRelationAggregateInput
     _relevance?: institutionOrderByRelevanceInput
@@ -60787,6 +62055,7 @@ export namespace Prisma {
     qms_branch_operator?: Qms_branch_operatorListRelationFilter
     qms_branch_transactions?: Qms_branch_transactionsListRelationFilter
     qms_operator?: Qms_operatorListRelationFilter
+    reviews?: ReviewsListRelationFilter
     service?: ServiceListRelationFilter
     service_group?: Service_groupListRelationFilter
   }, "id" | "uuid">
@@ -64172,7 +65441,9 @@ export namespace Prisma {
     image_url?: StringNullableFilter<"images"> | string | null
     caption?: StringNullableFilter<"images"> | string | null
     uploaded_at?: DateTimeFilter<"images"> | Date | string
+    review_id?: IntNullableFilter<"images"> | number | null
     institution?: XOR<InstitutionNullableScalarRelationFilter, institutionWhereInput> | null
+    reviews?: XOR<ReviewsNullableScalarRelationFilter, reviewsWhereInput> | null
     users_profile?: XOR<Users_profileNullableScalarRelationFilter, users_profileWhereInput> | null
   }
 
@@ -64184,7 +65455,9 @@ export namespace Prisma {
     image_url?: SortOrderInput | SortOrder
     caption?: SortOrderInput | SortOrder
     uploaded_at?: SortOrder
+    review_id?: SortOrderInput | SortOrder
     institution?: institutionOrderByWithRelationInput
+    reviews?: reviewsOrderByWithRelationInput
     users_profile?: users_profileOrderByWithRelationInput
     _relevance?: imagesOrderByRelevanceInput
   }
@@ -64200,7 +65473,9 @@ export namespace Prisma {
     image_url?: StringNullableFilter<"images"> | string | null
     caption?: StringNullableFilter<"images"> | string | null
     uploaded_at?: DateTimeFilter<"images"> | Date | string
+    review_id?: IntNullableFilter<"images"> | number | null
     institution?: XOR<InstitutionNullableScalarRelationFilter, institutionWhereInput> | null
+    reviews?: XOR<ReviewsNullableScalarRelationFilter, reviewsWhereInput> | null
     users_profile?: XOR<Users_profileNullableScalarRelationFilter, users_profileWhereInput> | null
   }, "id">
 
@@ -64212,6 +65487,7 @@ export namespace Prisma {
     image_url?: SortOrderInput | SortOrder
     caption?: SortOrderInput | SortOrder
     uploaded_at?: SortOrder
+    review_id?: SortOrderInput | SortOrder
     _count?: imagesCountOrderByAggregateInput
     _avg?: imagesAvgOrderByAggregateInput
     _max?: imagesMaxOrderByAggregateInput
@@ -64230,6 +65506,7 @@ export namespace Prisma {
     image_url?: StringNullableWithAggregatesFilter<"images"> | string | null
     caption?: StringNullableWithAggregatesFilter<"images"> | string | null
     uploaded_at?: DateTimeWithAggregatesFilter<"images"> | Date | string
+    review_id?: IntNullableWithAggregatesFilter<"images"> | number | null
   }
 
   export type sectorsWhereInput = {
@@ -64295,6 +65572,7 @@ export namespace Prisma {
     address?: StringNullableFilter<"users_profile"> | string | null
     added_at?: DateTimeFilter<"users_profile"> | Date | string
     images?: ImagesListRelationFilter
+    reviews?: ReviewsListRelationFilter
   }
 
   export type users_profileOrderByWithRelationInput = {
@@ -64309,6 +65587,7 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     added_at?: SortOrder
     images?: imagesOrderByRelationAggregateInput
+    reviews?: reviewsOrderByRelationAggregateInput
     _relevance?: users_profileOrderByRelevanceInput
   }
 
@@ -64327,6 +65606,7 @@ export namespace Prisma {
     address?: StringNullableFilter<"users_profile"> | string | null
     added_at?: DateTimeFilter<"users_profile"> | Date | string
     images?: ImagesListRelationFilter
+    reviews?: ReviewsListRelationFilter
   }, "id" | "email">
 
   export type users_profileOrderByWithAggregationInput = {
@@ -64361,6 +65641,75 @@ export namespace Prisma {
     gender?: StringNullableWithAggregatesFilter<"users_profile"> | string | null
     address?: StringNullableWithAggregatesFilter<"users_profile"> | string | null
     added_at?: DateTimeWithAggregatesFilter<"users_profile"> | Date | string
+  }
+
+  export type reviewsWhereInput = {
+    AND?: reviewsWhereInput | reviewsWhereInput[]
+    OR?: reviewsWhereInput[]
+    NOT?: reviewsWhereInput | reviewsWhereInput[]
+    id?: IntFilter<"reviews"> | number
+    user_id?: IntFilter<"reviews"> | number
+    institution_id?: IntFilter<"reviews"> | number
+    rating?: IntFilter<"reviews"> | number
+    review?: StringNullableFilter<"reviews"> | string | null
+    created_at?: DateTimeFilter<"reviews"> | Date | string
+    images?: ImagesListRelationFilter
+    institution?: XOR<InstitutionScalarRelationFilter, institutionWhereInput>
+    users_profile?: XOR<Users_profileScalarRelationFilter, users_profileWhereInput>
+  }
+
+  export type reviewsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+    review?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    images?: imagesOrderByRelationAggregateInput
+    institution?: institutionOrderByWithRelationInput
+    users_profile?: users_profileOrderByWithRelationInput
+    _relevance?: reviewsOrderByRelevanceInput
+  }
+
+  export type reviewsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: reviewsWhereInput | reviewsWhereInput[]
+    OR?: reviewsWhereInput[]
+    NOT?: reviewsWhereInput | reviewsWhereInput[]
+    user_id?: IntFilter<"reviews"> | number
+    institution_id?: IntFilter<"reviews"> | number
+    rating?: IntFilter<"reviews"> | number
+    review?: StringNullableFilter<"reviews"> | string | null
+    created_at?: DateTimeFilter<"reviews"> | Date | string
+    images?: ImagesListRelationFilter
+    institution?: XOR<InstitutionScalarRelationFilter, institutionWhereInput>
+    users_profile?: XOR<Users_profileScalarRelationFilter, users_profileWhereInput>
+  }, "id">
+
+  export type reviewsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+    review?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    _count?: reviewsCountOrderByAggregateInput
+    _avg?: reviewsAvgOrderByAggregateInput
+    _max?: reviewsMaxOrderByAggregateInput
+    _min?: reviewsMinOrderByAggregateInput
+    _sum?: reviewsSumOrderByAggregateInput
+  }
+
+  export type reviewsScalarWhereWithAggregatesInput = {
+    AND?: reviewsScalarWhereWithAggregatesInput | reviewsScalarWhereWithAggregatesInput[]
+    OR?: reviewsScalarWhereWithAggregatesInput[]
+    NOT?: reviewsScalarWhereWithAggregatesInput | reviewsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"reviews"> | number
+    user_id?: IntWithAggregatesFilter<"reviews"> | number
+    institution_id?: IntWithAggregatesFilter<"reviews"> | number
+    rating?: IntWithAggregatesFilter<"reviews"> | number
+    review?: StringNullableWithAggregatesFilter<"reviews"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"reviews"> | Date | string
   }
 
   export type app_releasesCreateInput = {
@@ -65222,6 +66571,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -65269,6 +66619,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -65315,6 +66666,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -65362,6 +66714,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -69024,6 +70377,7 @@ export namespace Prisma {
     caption?: string | null
     uploaded_at?: Date | string
     institution?: institutionCreateNestedOneWithoutImagesInput
+    reviews?: reviewsCreateNestedOneWithoutImagesInput
     users_profile?: users_profileCreateNestedOneWithoutImagesInput
   }
 
@@ -69035,6 +70389,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
   }
 
   export type imagesUpdateInput = {
@@ -69043,6 +70398,7 @@ export namespace Prisma {
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
     institution?: institutionUpdateOneWithoutImagesNestedInput
+    reviews?: reviewsUpdateOneWithoutImagesNestedInput
     users_profile?: users_profileUpdateOneWithoutImagesNestedInput
   }
 
@@ -69054,6 +70410,7 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type imagesCreateManyInput = {
@@ -69064,6 +70421,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
   }
 
   export type imagesUpdateManyMutationInput = {
@@ -69081,6 +70439,7 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type sectorsCreateInput = {
@@ -69137,6 +70496,7 @@ export namespace Prisma {
     address?: string | null
     added_at?: Date | string
     images?: imagesCreateNestedManyWithoutUsers_profileInput
+    reviews?: reviewsCreateNestedManyWithoutUsers_profileInput
   }
 
   export type users_profileUncheckedCreateInput = {
@@ -69151,6 +70511,7 @@ export namespace Prisma {
     address?: string | null
     added_at?: Date | string
     images?: imagesUncheckedCreateNestedManyWithoutUsers_profileInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutUsers_profileInput
   }
 
   export type users_profileUpdateInput = {
@@ -69164,6 +70525,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: imagesUpdateManyWithoutUsers_profileNestedInput
+    reviews?: reviewsUpdateManyWithoutUsers_profileNestedInput
   }
 
   export type users_profileUncheckedUpdateInput = {
@@ -69178,6 +70540,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: imagesUncheckedUpdateManyWithoutUsers_profileNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
 
   export type users_profileCreateManyInput = {
@@ -69216,6 +70579,68 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type reviewsCreateInput = {
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesCreateNestedManyWithoutReviewsInput
+    institution: institutionCreateNestedOneWithoutReviewsInput
+    users_profile: users_profileCreateNestedOneWithoutReviewsInput
+  }
+
+  export type reviewsUncheckedCreateInput = {
+    id?: number
+    user_id: number
+    institution_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesUncheckedCreateNestedManyWithoutReviewsInput
+  }
+
+  export type reviewsUpdateInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUpdateManyWithoutReviewsNestedInput
+    institution?: institutionUpdateOneRequiredWithoutReviewsNestedInput
+    users_profile?: users_profileUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    institution_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUncheckedUpdateManyWithoutReviewsNestedInput
+  }
+
+  export type reviewsCreateManyInput = {
+    id?: number
+    user_id: number
+    institution_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+  }
+
+  export type reviewsUpdateManyMutationInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type reviewsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    institution_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -70110,6 +71535,12 @@ export namespace Prisma {
     none?: qms_operatorWhereInput
   }
 
+  export type ReviewsListRelationFilter = {
+    every?: reviewsWhereInput
+    some?: reviewsWhereInput
+    none?: reviewsWhereInput
+  }
+
   export type ServiceListRelationFilter = {
     every?: serviceWhereInput
     some?: serviceWhereInput
@@ -70151,6 +71582,10 @@ export namespace Prisma {
   }
 
   export type qms_operatorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type reviewsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -72940,6 +74375,11 @@ export namespace Prisma {
     device_id?: SortOrder
   }
 
+  export type ReviewsNullableScalarRelationFilter = {
+    is?: reviewsWhereInput | null
+    isNot?: reviewsWhereInput | null
+  }
+
   export type Users_profileNullableScalarRelationFilter = {
     is?: users_profileWhereInput | null
     isNot?: users_profileWhereInput | null
@@ -72959,12 +74399,14 @@ export namespace Prisma {
     image_url?: SortOrder
     caption?: SortOrder
     uploaded_at?: SortOrder
+    review_id?: SortOrder
   }
 
   export type imagesAvgOrderByAggregateInput = {
     id?: SortOrder
     institution_id?: SortOrder
     user_id?: SortOrder
+    review_id?: SortOrder
   }
 
   export type imagesMaxOrderByAggregateInput = {
@@ -72975,6 +74417,7 @@ export namespace Prisma {
     image_url?: SortOrder
     caption?: SortOrder
     uploaded_at?: SortOrder
+    review_id?: SortOrder
   }
 
   export type imagesMinOrderByAggregateInput = {
@@ -72985,12 +74428,14 @@ export namespace Prisma {
     image_url?: SortOrder
     caption?: SortOrder
     uploaded_at?: SortOrder
+    review_id?: SortOrder
   }
 
   export type imagesSumOrderByAggregateInput = {
     id?: SortOrder
     institution_id?: SortOrder
     user_id?: SortOrder
+    review_id?: SortOrder
   }
 
   export type CategoriesListRelationFilter = {
@@ -73086,6 +74531,58 @@ export namespace Prisma {
 
   export type users_profileSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type Users_profileScalarRelationFilter = {
+    is?: users_profileWhereInput
+    isNot?: users_profileWhereInput
+  }
+
+  export type reviewsOrderByRelevanceInput = {
+    fields: reviewsOrderByRelevanceFieldEnum | reviewsOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type reviewsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+    review?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type reviewsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type reviewsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+    review?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type reviewsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
+    review?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type reviewsSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    institution_id?: SortOrder
+    rating?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -73490,6 +74987,13 @@ export namespace Prisma {
     connect?: qms_operatorWhereUniqueInput | qms_operatorWhereUniqueInput[]
   }
 
+  export type reviewsCreateNestedManyWithoutInstitutionInput = {
+    create?: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput> | reviewsCreateWithoutInstitutionInput[] | reviewsUncheckedCreateWithoutInstitutionInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutInstitutionInput | reviewsCreateOrConnectWithoutInstitutionInput[]
+    createMany?: reviewsCreateManyInstitutionInputEnvelope
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+  }
+
   export type serviceCreateNestedManyWithoutInstitutionInput = {
     create?: XOR<serviceCreateWithoutInstitutionInput, serviceUncheckedCreateWithoutInstitutionInput> | serviceCreateWithoutInstitutionInput[] | serviceUncheckedCreateWithoutInstitutionInput[]
     connectOrCreate?: serviceCreateOrConnectWithoutInstitutionInput | serviceCreateOrConnectWithoutInstitutionInput[]
@@ -73558,6 +75062,13 @@ export namespace Prisma {
     connectOrCreate?: qms_operatorCreateOrConnectWithoutInstitutionInput | qms_operatorCreateOrConnectWithoutInstitutionInput[]
     createMany?: qms_operatorCreateManyInstitutionInputEnvelope
     connect?: qms_operatorWhereUniqueInput | qms_operatorWhereUniqueInput[]
+  }
+
+  export type reviewsUncheckedCreateNestedManyWithoutInstitutionInput = {
+    create?: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput> | reviewsCreateWithoutInstitutionInput[] | reviewsUncheckedCreateWithoutInstitutionInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutInstitutionInput | reviewsCreateOrConnectWithoutInstitutionInput[]
+    createMany?: reviewsCreateManyInstitutionInputEnvelope
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
   }
 
   export type serviceUncheckedCreateNestedManyWithoutInstitutionInput = {
@@ -73694,6 +75205,20 @@ export namespace Prisma {
     update?: qms_operatorUpdateWithWhereUniqueWithoutInstitutionInput | qms_operatorUpdateWithWhereUniqueWithoutInstitutionInput[]
     updateMany?: qms_operatorUpdateManyWithWhereWithoutInstitutionInput | qms_operatorUpdateManyWithWhereWithoutInstitutionInput[]
     deleteMany?: qms_operatorScalarWhereInput | qms_operatorScalarWhereInput[]
+  }
+
+  export type reviewsUpdateManyWithoutInstitutionNestedInput = {
+    create?: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput> | reviewsCreateWithoutInstitutionInput[] | reviewsUncheckedCreateWithoutInstitutionInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutInstitutionInput | reviewsCreateOrConnectWithoutInstitutionInput[]
+    upsert?: reviewsUpsertWithWhereUniqueWithoutInstitutionInput | reviewsUpsertWithWhereUniqueWithoutInstitutionInput[]
+    createMany?: reviewsCreateManyInstitutionInputEnvelope
+    set?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    disconnect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    delete?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    update?: reviewsUpdateWithWhereUniqueWithoutInstitutionInput | reviewsUpdateWithWhereUniqueWithoutInstitutionInput[]
+    updateMany?: reviewsUpdateManyWithWhereWithoutInstitutionInput | reviewsUpdateManyWithWhereWithoutInstitutionInput[]
+    deleteMany?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
   }
 
   export type serviceUpdateManyWithoutInstitutionNestedInput = {
@@ -73834,6 +75359,20 @@ export namespace Prisma {
     update?: qms_operatorUpdateWithWhereUniqueWithoutInstitutionInput | qms_operatorUpdateWithWhereUniqueWithoutInstitutionInput[]
     updateMany?: qms_operatorUpdateManyWithWhereWithoutInstitutionInput | qms_operatorUpdateManyWithWhereWithoutInstitutionInput[]
     deleteMany?: qms_operatorScalarWhereInput | qms_operatorScalarWhereInput[]
+  }
+
+  export type reviewsUncheckedUpdateManyWithoutInstitutionNestedInput = {
+    create?: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput> | reviewsCreateWithoutInstitutionInput[] | reviewsUncheckedCreateWithoutInstitutionInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutInstitutionInput | reviewsCreateOrConnectWithoutInstitutionInput[]
+    upsert?: reviewsUpsertWithWhereUniqueWithoutInstitutionInput | reviewsUpsertWithWhereUniqueWithoutInstitutionInput[]
+    createMany?: reviewsCreateManyInstitutionInputEnvelope
+    set?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    disconnect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    delete?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    update?: reviewsUpdateWithWhereUniqueWithoutInstitutionInput | reviewsUpdateWithWhereUniqueWithoutInstitutionInput[]
+    updateMany?: reviewsUpdateManyWithWhereWithoutInstitutionInput | reviewsUpdateManyWithWhereWithoutInstitutionInput[]
+    deleteMany?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
   }
 
   export type serviceUncheckedUpdateManyWithoutInstitutionNestedInput = {
@@ -75350,6 +76889,12 @@ export namespace Prisma {
     connect?: institutionWhereUniqueInput
   }
 
+  export type reviewsCreateNestedOneWithoutImagesInput = {
+    create?: XOR<reviewsCreateWithoutImagesInput, reviewsUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: reviewsCreateOrConnectWithoutImagesInput
+    connect?: reviewsWhereUniqueInput
+  }
+
   export type users_profileCreateNestedOneWithoutImagesInput = {
     create?: XOR<users_profileCreateWithoutImagesInput, users_profileUncheckedCreateWithoutImagesInput>
     connectOrCreate?: users_profileCreateOrConnectWithoutImagesInput
@@ -75364,6 +76909,16 @@ export namespace Prisma {
     delete?: institutionWhereInput | boolean
     connect?: institutionWhereUniqueInput
     update?: XOR<XOR<institutionUpdateToOneWithWhereWithoutImagesInput, institutionUpdateWithoutImagesInput>, institutionUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type reviewsUpdateOneWithoutImagesNestedInput = {
+    create?: XOR<reviewsCreateWithoutImagesInput, reviewsUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: reviewsCreateOrConnectWithoutImagesInput
+    upsert?: reviewsUpsertWithoutImagesInput
+    disconnect?: reviewsWhereInput | boolean
+    delete?: reviewsWhereInput | boolean
+    connect?: reviewsWhereUniqueInput
+    update?: XOR<XOR<reviewsUpdateToOneWithWhereWithoutImagesInput, reviewsUpdateWithoutImagesInput>, reviewsUncheckedUpdateWithoutImagesInput>
   }
 
   export type users_profileUpdateOneWithoutImagesNestedInput = {
@@ -75425,11 +76980,25 @@ export namespace Prisma {
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
   }
 
+  export type reviewsCreateNestedManyWithoutUsers_profileInput = {
+    create?: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput> | reviewsCreateWithoutUsers_profileInput[] | reviewsUncheckedCreateWithoutUsers_profileInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutUsers_profileInput | reviewsCreateOrConnectWithoutUsers_profileInput[]
+    createMany?: reviewsCreateManyUsers_profileInputEnvelope
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+  }
+
   export type imagesUncheckedCreateNestedManyWithoutUsers_profileInput = {
     create?: XOR<imagesCreateWithoutUsers_profileInput, imagesUncheckedCreateWithoutUsers_profileInput> | imagesCreateWithoutUsers_profileInput[] | imagesUncheckedCreateWithoutUsers_profileInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutUsers_profileInput | imagesCreateOrConnectWithoutUsers_profileInput[]
     createMany?: imagesCreateManyUsers_profileInputEnvelope
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type reviewsUncheckedCreateNestedManyWithoutUsers_profileInput = {
+    create?: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput> | reviewsCreateWithoutUsers_profileInput[] | reviewsUncheckedCreateWithoutUsers_profileInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutUsers_profileInput | reviewsCreateOrConnectWithoutUsers_profileInput[]
+    createMany?: reviewsCreateManyUsers_profileInputEnvelope
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
   }
 
   export type imagesUpdateManyWithoutUsers_profileNestedInput = {
@@ -75446,6 +77015,20 @@ export namespace Prisma {
     deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
   }
 
+  export type reviewsUpdateManyWithoutUsers_profileNestedInput = {
+    create?: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput> | reviewsCreateWithoutUsers_profileInput[] | reviewsUncheckedCreateWithoutUsers_profileInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutUsers_profileInput | reviewsCreateOrConnectWithoutUsers_profileInput[]
+    upsert?: reviewsUpsertWithWhereUniqueWithoutUsers_profileInput | reviewsUpsertWithWhereUniqueWithoutUsers_profileInput[]
+    createMany?: reviewsCreateManyUsers_profileInputEnvelope
+    set?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    disconnect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    delete?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    update?: reviewsUpdateWithWhereUniqueWithoutUsers_profileInput | reviewsUpdateWithWhereUniqueWithoutUsers_profileInput[]
+    updateMany?: reviewsUpdateManyWithWhereWithoutUsers_profileInput | reviewsUpdateManyWithWhereWithoutUsers_profileInput[]
+    deleteMany?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
+  }
+
   export type imagesUncheckedUpdateManyWithoutUsers_profileNestedInput = {
     create?: XOR<imagesCreateWithoutUsers_profileInput, imagesUncheckedCreateWithoutUsers_profileInput> | imagesCreateWithoutUsers_profileInput[] | imagesUncheckedCreateWithoutUsers_profileInput[]
     connectOrCreate?: imagesCreateOrConnectWithoutUsers_profileInput | imagesCreateOrConnectWithoutUsers_profileInput[]
@@ -75457,6 +77040,90 @@ export namespace Prisma {
     connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
     update?: imagesUpdateWithWhereUniqueWithoutUsers_profileInput | imagesUpdateWithWhereUniqueWithoutUsers_profileInput[]
     updateMany?: imagesUpdateManyWithWhereWithoutUsers_profileInput | imagesUpdateManyWithWhereWithoutUsers_profileInput[]
+    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput = {
+    create?: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput> | reviewsCreateWithoutUsers_profileInput[] | reviewsUncheckedCreateWithoutUsers_profileInput[]
+    connectOrCreate?: reviewsCreateOrConnectWithoutUsers_profileInput | reviewsCreateOrConnectWithoutUsers_profileInput[]
+    upsert?: reviewsUpsertWithWhereUniqueWithoutUsers_profileInput | reviewsUpsertWithWhereUniqueWithoutUsers_profileInput[]
+    createMany?: reviewsCreateManyUsers_profileInputEnvelope
+    set?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    disconnect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    delete?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    connect?: reviewsWhereUniqueInput | reviewsWhereUniqueInput[]
+    update?: reviewsUpdateWithWhereUniqueWithoutUsers_profileInput | reviewsUpdateWithWhereUniqueWithoutUsers_profileInput[]
+    updateMany?: reviewsUpdateManyWithWhereWithoutUsers_profileInput | reviewsUpdateManyWithWhereWithoutUsers_profileInput[]
+    deleteMany?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
+  }
+
+  export type imagesCreateNestedManyWithoutReviewsInput = {
+    create?: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput> | imagesCreateWithoutReviewsInput[] | imagesUncheckedCreateWithoutReviewsInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutReviewsInput | imagesCreateOrConnectWithoutReviewsInput[]
+    createMany?: imagesCreateManyReviewsInputEnvelope
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type institutionCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<institutionCreateWithoutReviewsInput, institutionUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: institutionCreateOrConnectWithoutReviewsInput
+    connect?: institutionWhereUniqueInput
+  }
+
+  export type users_profileCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<users_profileCreateWithoutReviewsInput, users_profileUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: users_profileCreateOrConnectWithoutReviewsInput
+    connect?: users_profileWhereUniqueInput
+  }
+
+  export type imagesUncheckedCreateNestedManyWithoutReviewsInput = {
+    create?: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput> | imagesCreateWithoutReviewsInput[] | imagesUncheckedCreateWithoutReviewsInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutReviewsInput | imagesCreateOrConnectWithoutReviewsInput[]
+    createMany?: imagesCreateManyReviewsInputEnvelope
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+  }
+
+  export type imagesUpdateManyWithoutReviewsNestedInput = {
+    create?: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput> | imagesCreateWithoutReviewsInput[] | imagesUncheckedCreateWithoutReviewsInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutReviewsInput | imagesCreateOrConnectWithoutReviewsInput[]
+    upsert?: imagesUpsertWithWhereUniqueWithoutReviewsInput | imagesUpsertWithWhereUniqueWithoutReviewsInput[]
+    createMany?: imagesCreateManyReviewsInputEnvelope
+    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    update?: imagesUpdateWithWhereUniqueWithoutReviewsInput | imagesUpdateWithWhereUniqueWithoutReviewsInput[]
+    updateMany?: imagesUpdateManyWithWhereWithoutReviewsInput | imagesUpdateManyWithWhereWithoutReviewsInput[]
+    deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
+  }
+
+  export type institutionUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<institutionCreateWithoutReviewsInput, institutionUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: institutionCreateOrConnectWithoutReviewsInput
+    upsert?: institutionUpsertWithoutReviewsInput
+    connect?: institutionWhereUniqueInput
+    update?: XOR<XOR<institutionUpdateToOneWithWhereWithoutReviewsInput, institutionUpdateWithoutReviewsInput>, institutionUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type users_profileUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<users_profileCreateWithoutReviewsInput, users_profileUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: users_profileCreateOrConnectWithoutReviewsInput
+    upsert?: users_profileUpsertWithoutReviewsInput
+    connect?: users_profileWhereUniqueInput
+    update?: XOR<XOR<users_profileUpdateToOneWithWhereWithoutReviewsInput, users_profileUpdateWithoutReviewsInput>, users_profileUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type imagesUncheckedUpdateManyWithoutReviewsNestedInput = {
+    create?: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput> | imagesCreateWithoutReviewsInput[] | imagesUncheckedCreateWithoutReviewsInput[]
+    connectOrCreate?: imagesCreateOrConnectWithoutReviewsInput | imagesCreateOrConnectWithoutReviewsInput[]
+    upsert?: imagesUpsertWithWhereUniqueWithoutReviewsInput | imagesUpsertWithWhereUniqueWithoutReviewsInput[]
+    createMany?: imagesCreateManyReviewsInputEnvelope
+    set?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    disconnect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    delete?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    connect?: imagesWhereUniqueInput | imagesWhereUniqueInput[]
+    update?: imagesUpdateWithWhereUniqueWithoutReviewsInput | imagesUpdateWithWhereUniqueWithoutReviewsInput[]
+    updateMany?: imagesUpdateManyWithWhereWithoutReviewsInput | imagesUpdateManyWithWhereWithoutReviewsInput[]
     deleteMany?: imagesScalarWhereInput | imagesScalarWhereInput[]
   }
 
@@ -75968,6 +77635,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -76014,6 +77682,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -76291,6 +77960,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -76337,6 +78007,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -76550,6 +78221,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -76596,6 +78268,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -76657,6 +78330,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -76703,6 +78377,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -76764,6 +78439,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -76810,6 +78486,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -76943,6 +78620,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -76989,6 +78667,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -77172,6 +78851,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -77218,6 +78898,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -77478,6 +79159,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    reviews?: reviewsCreateNestedOneWithoutImagesInput
     users_profile?: users_profileCreateNestedOneWithoutImagesInput
   }
 
@@ -77488,6 +79170,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
   }
 
   export type imagesCreateOrConnectWithoutInstitutionInput = {
@@ -77663,6 +79346,33 @@ export namespace Prisma {
 
   export type qms_operatorCreateManyInstitutionInputEnvelope = {
     data: qms_operatorCreateManyInstitutionInput | qms_operatorCreateManyInstitutionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type reviewsCreateWithoutInstitutionInput = {
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesCreateNestedManyWithoutReviewsInput
+    users_profile: users_profileCreateNestedOneWithoutReviewsInput
+  }
+
+  export type reviewsUncheckedCreateWithoutInstitutionInput = {
+    id?: number
+    user_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesUncheckedCreateNestedManyWithoutReviewsInput
+  }
+
+  export type reviewsCreateOrConnectWithoutInstitutionInput = {
+    where: reviewsWhereUniqueInput
+    create: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput>
+  }
+
+  export type reviewsCreateManyInstitutionInputEnvelope = {
+    data: reviewsCreateManyInstitutionInput | reviewsCreateManyInstitutionInput[]
     skipDuplicates?: boolean
   }
 
@@ -77916,6 +79626,7 @@ export namespace Prisma {
     image_url?: StringNullableFilter<"images"> | string | null
     caption?: StringNullableFilter<"images"> | string | null
     uploaded_at?: DateTimeFilter<"images"> | Date | string
+    review_id?: IntNullableFilter<"images"> | number | null
   }
 
   export type categoriesUpsertWithoutInstitutionInput = {
@@ -78068,6 +79779,34 @@ export namespace Prisma {
     email_address?: StringFilter<"qms_operator"> | string
     phone_number?: StringNullableFilter<"qms_operator"> | string | null
     terminal?: BoolNullableFilter<"qms_operator"> | boolean | null
+  }
+
+  export type reviewsUpsertWithWhereUniqueWithoutInstitutionInput = {
+    where: reviewsWhereUniqueInput
+    update: XOR<reviewsUpdateWithoutInstitutionInput, reviewsUncheckedUpdateWithoutInstitutionInput>
+    create: XOR<reviewsCreateWithoutInstitutionInput, reviewsUncheckedCreateWithoutInstitutionInput>
+  }
+
+  export type reviewsUpdateWithWhereUniqueWithoutInstitutionInput = {
+    where: reviewsWhereUniqueInput
+    data: XOR<reviewsUpdateWithoutInstitutionInput, reviewsUncheckedUpdateWithoutInstitutionInput>
+  }
+
+  export type reviewsUpdateManyWithWhereWithoutInstitutionInput = {
+    where: reviewsScalarWhereInput
+    data: XOR<reviewsUpdateManyMutationInput, reviewsUncheckedUpdateManyWithoutInstitutionInput>
+  }
+
+  export type reviewsScalarWhereInput = {
+    AND?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
+    OR?: reviewsScalarWhereInput[]
+    NOT?: reviewsScalarWhereInput | reviewsScalarWhereInput[]
+    id?: IntFilter<"reviews"> | number
+    user_id?: IntFilter<"reviews"> | number
+    institution_id?: IntFilter<"reviews"> | number
+    rating?: IntFilter<"reviews"> | number
+    review?: StringNullableFilter<"reviews"> | string | null
+    created_at?: DateTimeFilter<"reviews"> | Date | string
   }
 
   export type serviceUpsertWithWhereUniqueWithoutInstitutionInput = {
@@ -78296,6 +80035,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -78342,6 +80082,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -78436,6 +80177,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -78482,6 +80224,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -78771,6 +80514,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -78817,6 +80561,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -78920,6 +80665,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -78966,6 +80712,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -79059,6 +80806,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsCreateNestedManyWithoutInstitutionInput
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -79105,6 +80853,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -79191,6 +80940,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUpdateManyWithoutInstitutionNestedInput
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -79237,6 +80987,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -79689,6 +81440,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsCreateNestedManyWithoutInstitutionInput
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -79735,6 +81487,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -79917,6 +81670,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUpdateManyWithoutInstitutionNestedInput
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -79963,6 +81717,7 @@ export namespace Prisma {
     popup_questions?: popup_questionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -81692,6 +83447,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
 
@@ -81738,6 +83494,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
 
@@ -81947,6 +83704,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
 
@@ -81993,6 +83751,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
 
@@ -82091,6 +83850,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
   }
 
@@ -82137,6 +83897,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
   }
 
@@ -82214,6 +83975,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
   }
 
@@ -82260,6 +84022,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
   }
 
@@ -82999,6 +84762,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsCreateNestedManyWithoutInstitutionInput
     service?: serviceCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupCreateNestedManyWithoutInstitutionInput
   }
@@ -83045,6 +84809,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
     qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    reviews?: reviewsUncheckedCreateNestedManyWithoutInstitutionInput
     service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
     service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
   }
@@ -83052,6 +84817,28 @@ export namespace Prisma {
   export type institutionCreateOrConnectWithoutImagesInput = {
     where: institutionWhereUniqueInput
     create: XOR<institutionCreateWithoutImagesInput, institutionUncheckedCreateWithoutImagesInput>
+  }
+
+  export type reviewsCreateWithoutImagesInput = {
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    institution: institutionCreateNestedOneWithoutReviewsInput
+    users_profile: users_profileCreateNestedOneWithoutReviewsInput
+  }
+
+  export type reviewsUncheckedCreateWithoutImagesInput = {
+    id?: number
+    user_id: number
+    institution_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+  }
+
+  export type reviewsCreateOrConnectWithoutImagesInput = {
+    where: reviewsWhereUniqueInput
+    create: XOR<reviewsCreateWithoutImagesInput, reviewsUncheckedCreateWithoutImagesInput>
   }
 
   export type users_profileCreateWithoutImagesInput = {
@@ -83064,6 +84851,7 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    reviews?: reviewsCreateNestedManyWithoutUsers_profileInput
   }
 
   export type users_profileUncheckedCreateWithoutImagesInput = {
@@ -83077,6 +84865,7 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    reviews?: reviewsUncheckedCreateNestedManyWithoutUsers_profileInput
   }
 
   export type users_profileCreateOrConnectWithoutImagesInput = {
@@ -83136,6 +84925,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -83182,8 +84972,37 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
+  }
+
+  export type reviewsUpsertWithoutImagesInput = {
+    update: XOR<reviewsUpdateWithoutImagesInput, reviewsUncheckedUpdateWithoutImagesInput>
+    create: XOR<reviewsCreateWithoutImagesInput, reviewsUncheckedCreateWithoutImagesInput>
+    where?: reviewsWhereInput
+  }
+
+  export type reviewsUpdateToOneWithWhereWithoutImagesInput = {
+    where?: reviewsWhereInput
+    data: XOR<reviewsUpdateWithoutImagesInput, reviewsUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type reviewsUpdateWithoutImagesInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    institution?: institutionUpdateOneRequiredWithoutReviewsNestedInput
+    users_profile?: users_profileUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateWithoutImagesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    institution_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type users_profileUpsertWithoutImagesInput = {
@@ -83207,6 +85026,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: reviewsUpdateManyWithoutUsers_profileNestedInput
   }
 
   export type users_profileUncheckedUpdateWithoutImagesInput = {
@@ -83220,6 +85040,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
 
   export type categoriesCreateWithoutSectorsInput = {
@@ -83274,6 +85095,7 @@ export namespace Prisma {
     caption?: string | null
     uploaded_at?: Date | string
     institution?: institutionCreateNestedOneWithoutImagesInput
+    reviews?: reviewsCreateNestedOneWithoutImagesInput
   }
 
   export type imagesUncheckedCreateWithoutUsers_profileInput = {
@@ -83283,6 +85105,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
   }
 
   export type imagesCreateOrConnectWithoutUsers_profileInput = {
@@ -83292,6 +85115,33 @@ export namespace Prisma {
 
   export type imagesCreateManyUsers_profileInputEnvelope = {
     data: imagesCreateManyUsers_profileInput | imagesCreateManyUsers_profileInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type reviewsCreateWithoutUsers_profileInput = {
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesCreateNestedManyWithoutReviewsInput
+    institution: institutionCreateNestedOneWithoutReviewsInput
+  }
+
+  export type reviewsUncheckedCreateWithoutUsers_profileInput = {
+    id?: number
+    institution_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
+    images?: imagesUncheckedCreateNestedManyWithoutReviewsInput
+  }
+
+  export type reviewsCreateOrConnectWithoutUsers_profileInput = {
+    where: reviewsWhereUniqueInput
+    create: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput>
+  }
+
+  export type reviewsCreateManyUsers_profileInputEnvelope = {
+    data: reviewsCreateManyUsers_profileInput | reviewsCreateManyUsers_profileInput[]
     skipDuplicates?: boolean
   }
 
@@ -83309,6 +85159,339 @@ export namespace Prisma {
   export type imagesUpdateManyWithWhereWithoutUsers_profileInput = {
     where: imagesScalarWhereInput
     data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutUsers_profileInput>
+  }
+
+  export type reviewsUpsertWithWhereUniqueWithoutUsers_profileInput = {
+    where: reviewsWhereUniqueInput
+    update: XOR<reviewsUpdateWithoutUsers_profileInput, reviewsUncheckedUpdateWithoutUsers_profileInput>
+    create: XOR<reviewsCreateWithoutUsers_profileInput, reviewsUncheckedCreateWithoutUsers_profileInput>
+  }
+
+  export type reviewsUpdateWithWhereUniqueWithoutUsers_profileInput = {
+    where: reviewsWhereUniqueInput
+    data: XOR<reviewsUpdateWithoutUsers_profileInput, reviewsUncheckedUpdateWithoutUsers_profileInput>
+  }
+
+  export type reviewsUpdateManyWithWhereWithoutUsers_profileInput = {
+    where: reviewsScalarWhereInput
+    data: XOR<reviewsUpdateManyMutationInput, reviewsUncheckedUpdateManyWithoutUsers_profileInput>
+  }
+
+  export type imagesCreateWithoutReviewsInput = {
+    type?: string | null
+    image_url?: string | null
+    caption?: string | null
+    uploaded_at?: Date | string
+    institution?: institutionCreateNestedOneWithoutImagesInput
+    users_profile?: users_profileCreateNestedOneWithoutImagesInput
+  }
+
+  export type imagesUncheckedCreateWithoutReviewsInput = {
+    id?: number
+    institution_id?: number | null
+    user_id?: number | null
+    type?: string | null
+    image_url?: string | null
+    caption?: string | null
+    uploaded_at?: Date | string
+  }
+
+  export type imagesCreateOrConnectWithoutReviewsInput = {
+    where: imagesWhereUniqueInput
+    create: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type imagesCreateManyReviewsInputEnvelope = {
+    data: imagesCreateManyReviewsInput | imagesCreateManyReviewsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type institutionCreateWithoutReviewsInput = {
+    uuid?: string | null
+    name: string
+    search_term?: string | null
+    email?: string | null
+    address?: string | null
+    phone_number?: string | null
+    url?: string | null
+    status?: number | null
+    created_at?: Date | string
+    plan?: number | null
+    type?: number | null
+    level?: number | null
+    parent_id?: number | null
+    good_ratings?: number | null
+    bad_ratings?: number | null
+    excellent_ratings?: number | null
+    nps?: number | null
+    csat?: number | null
+    queue_autocreation?: number | null
+    queue_manual_creation?: number | null
+    working_hours?: string | null
+    qms_message?: string | null
+    priority_list?: string | null
+    logo?: string | null
+    app_name?: string | null
+    allowed_context?: number | null
+    host_name?: string | null
+    membership_type?: number
+    latest_membership_renew_time?: Date | string | null
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    appointments?: appointmentsCreateNestedManyWithoutInstitutionInput
+    apps?: appsCreateNestedManyWithoutInstitutionInput
+    device?: deviceCreateNestedManyWithoutInstitutionInput
+    images?: imagesCreateNestedManyWithoutInstitutionInput
+    categories?: categoriesCreateNestedOneWithoutInstitutionInput
+    popup_questions?: popup_questionsCreateNestedManyWithoutInstitutionInput
+    qms_branch_operator?: qms_branch_operatorCreateNestedManyWithoutInstitutionInput
+    qms_branch_transactions?: qms_branch_transactionsCreateNestedManyWithoutInstitutionInput
+    qms_operator?: qms_operatorCreateNestedManyWithoutInstitutionInput
+    service?: serviceCreateNestedManyWithoutInstitutionInput
+    service_group?: service_groupCreateNestedManyWithoutInstitutionInput
+  }
+
+  export type institutionUncheckedCreateWithoutReviewsInput = {
+    id?: number
+    uuid?: string | null
+    name: string
+    search_term?: string | null
+    email?: string | null
+    address?: string | null
+    phone_number?: string | null
+    url?: string | null
+    status?: number | null
+    created_at?: Date | string
+    plan?: number | null
+    type?: number | null
+    level?: number | null
+    parent_id?: number | null
+    good_ratings?: number | null
+    bad_ratings?: number | null
+    excellent_ratings?: number | null
+    nps?: number | null
+    csat?: number | null
+    queue_autocreation?: number | null
+    queue_manual_creation?: number | null
+    working_hours?: string | null
+    qms_message?: string | null
+    priority_list?: string | null
+    logo?: string | null
+    app_name?: string | null
+    allowed_context?: number | null
+    host_name?: string | null
+    membership_type?: number
+    category_id?: number | null
+    latest_membership_renew_time?: Date | string | null
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    appointments?: appointmentsUncheckedCreateNestedManyWithoutInstitutionInput
+    apps?: appsUncheckedCreateNestedManyWithoutInstitutionInput
+    device?: deviceUncheckedCreateNestedManyWithoutInstitutionInput
+    images?: imagesUncheckedCreateNestedManyWithoutInstitutionInput
+    popup_questions?: popup_questionsUncheckedCreateNestedManyWithoutInstitutionInput
+    qms_branch_operator?: qms_branch_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    qms_branch_transactions?: qms_branch_transactionsUncheckedCreateNestedManyWithoutInstitutionInput
+    qms_operator?: qms_operatorUncheckedCreateNestedManyWithoutInstitutionInput
+    service?: serviceUncheckedCreateNestedManyWithoutInstitutionInput
+    service_group?: service_groupUncheckedCreateNestedManyWithoutInstitutionInput
+  }
+
+  export type institutionCreateOrConnectWithoutReviewsInput = {
+    where: institutionWhereUniqueInput
+    create: XOR<institutionCreateWithoutReviewsInput, institutionUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type users_profileCreateWithoutReviewsInput = {
+    first_name: string
+    last_name: string
+    email: string
+    password: string
+    phone_number?: string | null
+    age_group?: string | null
+    gender?: string | null
+    address?: string | null
+    added_at?: Date | string
+    images?: imagesCreateNestedManyWithoutUsers_profileInput
+  }
+
+  export type users_profileUncheckedCreateWithoutReviewsInput = {
+    id?: number
+    first_name: string
+    last_name: string
+    email: string
+    password: string
+    phone_number?: string | null
+    age_group?: string | null
+    gender?: string | null
+    address?: string | null
+    added_at?: Date | string
+    images?: imagesUncheckedCreateNestedManyWithoutUsers_profileInput
+  }
+
+  export type users_profileCreateOrConnectWithoutReviewsInput = {
+    where: users_profileWhereUniqueInput
+    create: XOR<users_profileCreateWithoutReviewsInput, users_profileUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type imagesUpsertWithWhereUniqueWithoutReviewsInput = {
+    where: imagesWhereUniqueInput
+    update: XOR<imagesUpdateWithoutReviewsInput, imagesUncheckedUpdateWithoutReviewsInput>
+    create: XOR<imagesCreateWithoutReviewsInput, imagesUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type imagesUpdateWithWhereUniqueWithoutReviewsInput = {
+    where: imagesWhereUniqueInput
+    data: XOR<imagesUpdateWithoutReviewsInput, imagesUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type imagesUpdateManyWithWhereWithoutReviewsInput = {
+    where: imagesScalarWhereInput
+    data: XOR<imagesUpdateManyMutationInput, imagesUncheckedUpdateManyWithoutReviewsInput>
+  }
+
+  export type institutionUpsertWithoutReviewsInput = {
+    update: XOR<institutionUpdateWithoutReviewsInput, institutionUncheckedUpdateWithoutReviewsInput>
+    create: XOR<institutionCreateWithoutReviewsInput, institutionUncheckedCreateWithoutReviewsInput>
+    where?: institutionWhereInput
+  }
+
+  export type institutionUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: institutionWhereInput
+    data: XOR<institutionUpdateWithoutReviewsInput, institutionUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type institutionUpdateWithoutReviewsInput = {
+    uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    search_term?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableIntFieldUpdateOperationsInput | number | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
+    parent_id?: NullableIntFieldUpdateOperationsInput | number | null
+    good_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    bad_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    excellent_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    nps?: NullableIntFieldUpdateOperationsInput | number | null
+    csat?: NullableIntFieldUpdateOperationsInput | number | null
+    queue_autocreation?: NullableIntFieldUpdateOperationsInput | number | null
+    queue_manual_creation?: NullableIntFieldUpdateOperationsInput | number | null
+    working_hours?: NullableStringFieldUpdateOperationsInput | string | null
+    qms_message?: NullableStringFieldUpdateOperationsInput | string | null
+    priority_list?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    app_name?: NullableStringFieldUpdateOperationsInput | string | null
+    allowed_context?: NullableIntFieldUpdateOperationsInput | number | null
+    host_name?: NullableStringFieldUpdateOperationsInput | string | null
+    membership_type?: IntFieldUpdateOperationsInput | number
+    latest_membership_renew_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
+    appointments?: appointmentsUpdateManyWithoutInstitutionNestedInput
+    apps?: appsUpdateManyWithoutInstitutionNestedInput
+    device?: deviceUpdateManyWithoutInstitutionNestedInput
+    images?: imagesUpdateManyWithoutInstitutionNestedInput
+    categories?: categoriesUpdateOneWithoutInstitutionNestedInput
+    popup_questions?: popup_questionsUpdateManyWithoutInstitutionNestedInput
+    qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
+    qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
+    qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    service?: serviceUpdateManyWithoutInstitutionNestedInput
+    service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
+  }
+
+  export type institutionUncheckedUpdateWithoutReviewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    search_term?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableIntFieldUpdateOperationsInput | number | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
+    parent_id?: NullableIntFieldUpdateOperationsInput | number | null
+    good_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    bad_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    excellent_ratings?: NullableIntFieldUpdateOperationsInput | number | null
+    nps?: NullableIntFieldUpdateOperationsInput | number | null
+    csat?: NullableIntFieldUpdateOperationsInput | number | null
+    queue_autocreation?: NullableIntFieldUpdateOperationsInput | number | null
+    queue_manual_creation?: NullableIntFieldUpdateOperationsInput | number | null
+    working_hours?: NullableStringFieldUpdateOperationsInput | string | null
+    qms_message?: NullableStringFieldUpdateOperationsInput | string | null
+    priority_list?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    app_name?: NullableStringFieldUpdateOperationsInput | string | null
+    allowed_context?: NullableIntFieldUpdateOperationsInput | number | null
+    host_name?: NullableStringFieldUpdateOperationsInput | string | null
+    membership_type?: IntFieldUpdateOperationsInput | number
+    category_id?: NullableIntFieldUpdateOperationsInput | number | null
+    latest_membership_renew_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
+    appointments?: appointmentsUncheckedUpdateManyWithoutInstitutionNestedInput
+    apps?: appsUncheckedUpdateManyWithoutInstitutionNestedInput
+    device?: deviceUncheckedUpdateManyWithoutInstitutionNestedInput
+    images?: imagesUncheckedUpdateManyWithoutInstitutionNestedInput
+    popup_questions?: popup_questionsUncheckedUpdateManyWithoutInstitutionNestedInput
+    qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
+    qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
+    service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
+  }
+
+  export type users_profileUpsertWithoutReviewsInput = {
+    update: XOR<users_profileUpdateWithoutReviewsInput, users_profileUncheckedUpdateWithoutReviewsInput>
+    create: XOR<users_profileCreateWithoutReviewsInput, users_profileUncheckedCreateWithoutReviewsInput>
+    where?: users_profileWhereInput
+  }
+
+  export type users_profileUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: users_profileWhereInput
+    data: XOR<users_profileUpdateWithoutReviewsInput, users_profileUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type users_profileUpdateWithoutReviewsInput = {
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    age_group?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUpdateManyWithoutUsers_profileNestedInput
+  }
+
+  export type users_profileUncheckedUpdateWithoutReviewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone_number?: NullableStringFieldUpdateOperationsInput | string | null
+    age_group?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
 
   export type institutionCreateManyCategoriesInput = {
@@ -83388,6 +85571,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUpdateManyWithoutInstitutionNestedInput
     service?: serviceUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUpdateManyWithoutInstitutionNestedInput
   }
@@ -83434,6 +85618,7 @@ export namespace Prisma {
     qms_branch_operator?: qms_branch_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_branch_transactions?: qms_branch_transactionsUncheckedUpdateManyWithoutInstitutionNestedInput
     qms_operator?: qms_operatorUncheckedUpdateManyWithoutInstitutionNestedInput
+    reviews?: reviewsUncheckedUpdateManyWithoutInstitutionNestedInput
     service?: serviceUncheckedUpdateManyWithoutInstitutionNestedInput
     service_group?: service_groupUncheckedUpdateManyWithoutInstitutionNestedInput
   }
@@ -83718,6 +85903,7 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
   }
 
   export type popup_questionsCreateManyInstitutionInput = {
@@ -83768,6 +85954,14 @@ export namespace Prisma {
     email_address: string
     phone_number?: string | null
     terminal?: boolean | null
+  }
+
+  export type reviewsCreateManyInstitutionInput = {
+    id?: number
+    user_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
   }
 
   export type serviceCreateManyInstitutionInput = {
@@ -83988,6 +86182,7 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: reviewsUpdateOneWithoutImagesNestedInput
     users_profile?: users_profileUpdateOneWithoutImagesNestedInput
   }
 
@@ -83998,6 +86193,7 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type imagesUncheckedUpdateManyWithoutInstitutionInput = {
@@ -84007,6 +86203,7 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type popup_questionsUpdateWithoutInstitutionInput = {
@@ -84167,6 +86364,31 @@ export namespace Prisma {
     email_address?: StringFieldUpdateOperationsInput | string
     phone_number?: NullableStringFieldUpdateOperationsInput | string | null
     terminal?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type reviewsUpdateWithoutInstitutionInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUpdateManyWithoutReviewsNestedInput
+    users_profile?: users_profileUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateWithoutInstitutionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUncheckedUpdateManyWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateManyWithoutInstitutionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type serviceUpdateWithoutInstitutionInput = {
@@ -85751,6 +87973,15 @@ export namespace Prisma {
     image_url?: string | null
     caption?: string | null
     uploaded_at?: Date | string
+    review_id?: number | null
+  }
+
+  export type reviewsCreateManyUsers_profileInput = {
+    id?: number
+    institution_id: number
+    rating: number
+    review?: string | null
+    created_at?: Date | string
   }
 
   export type imagesUpdateWithoutUsers_profileInput = {
@@ -85759,6 +87990,7 @@ export namespace Prisma {
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
     institution?: institutionUpdateOneWithoutImagesNestedInput
+    reviews?: reviewsUpdateOneWithoutImagesNestedInput
   }
 
   export type imagesUncheckedUpdateWithoutUsers_profileInput = {
@@ -85768,11 +88000,77 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type imagesUncheckedUpdateManyWithoutUsers_profileInput = {
     id?: IntFieldUpdateOperationsInput | number
     institution_id?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    review_id?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type reviewsUpdateWithoutUsers_profileInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUpdateManyWithoutReviewsNestedInput
+    institution?: institutionUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateWithoutUsers_profileInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    institution_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: imagesUncheckedUpdateManyWithoutReviewsNestedInput
+  }
+
+  export type reviewsUncheckedUpdateManyWithoutUsers_profileInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    institution_id?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    review?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type imagesCreateManyReviewsInput = {
+    id?: number
+    institution_id?: number | null
+    user_id?: number | null
+    type?: string | null
+    image_url?: string | null
+    caption?: string | null
+    uploaded_at?: Date | string
+  }
+
+  export type imagesUpdateWithoutReviewsInput = {
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    institution?: institutionUpdateOneWithoutImagesNestedInput
+    users_profile?: users_profileUpdateOneWithoutImagesNestedInput
+  }
+
+  export type imagesUncheckedUpdateWithoutReviewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    institution_id?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    image_url?: NullableStringFieldUpdateOperationsInput | string | null
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type imagesUncheckedUpdateManyWithoutReviewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    institution_id?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
     caption?: NullableStringFieldUpdateOperationsInput | string | null

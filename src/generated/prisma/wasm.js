@@ -792,7 +792,8 @@ exports.Prisma.ImagesScalarFieldEnum = {
   type: 'type',
   image_url: 'image_url',
   caption: 'caption',
-  uploaded_at: 'uploaded_at'
+  uploaded_at: 'uploaded_at',
+  review_id: 'review_id'
 };
 
 exports.Prisma.SectorsScalarFieldEnum = {
@@ -812,6 +813,15 @@ exports.Prisma.Users_profileScalarFieldEnum = {
   gender: 'gender',
   address: 'address',
   added_at: 'added_at'
+};
+
+exports.Prisma.ReviewsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  institution_id: 'institution_id',
+  rating: 'rating',
+  review: 'review',
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -1178,6 +1188,10 @@ exports.Prisma.users_profileOrderByRelevanceFieldEnum = {
   gender: 'gender',
   address: 'address'
 };
+
+exports.Prisma.reviewsOrderByRelevanceFieldEnum = {
+  review: 'review'
+};
 exports.app_releases_app_name = exports.$Enums.app_releases_app_name = {
   mobile_rating: 'mobile_rating',
   tablet_rating: 'tablet_rating',
@@ -1270,7 +1284,8 @@ exports.Prisma.ModelName = {
   wallet_users: 'wallet_users',
   images: 'images',
   sectors: 'sectors',
-  users_profile: 'users_profile'
+  users_profile: 'users_profile',
+  reviews: 'reviews'
 };
 
 /**

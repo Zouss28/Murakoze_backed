@@ -9,6 +9,7 @@ const SECRET_KEY = process.env.JWT_SECRET || 'mysecretkey';
 
 // SIGNUP
 router.post('/signup', async (req, res) => {
+  try {
   const { email, password, first_name,last_name } = req.body;
 
   const existingUser = await prisma.users_profile.findUnique({ where: { email } });
@@ -19,8 +20,13 @@ router.post('/signup', async (req, res) => {
   const user = await prisma.users_profile.create({
     data: { email, password: hashedPassword, first_name, last_name },
   });
+  const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
 
-  res.json({ message: 'User created successfully', user: { id: user.id, email: user.email } });
+  res.json({ message: 'User created successfully', accessToken });
+  }catch(err){
+    console.log(err)
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // LOGIN
@@ -33,9 +39,9 @@ router.post('/login', async (req, res) => {
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return res.status(400).json({ error: 'Invalid email or password' });
 
-//   const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+  const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
 
-  res.json({ message: 'Login successful' });
+  res.json({ message: 'Login successful', accessToken });
 });
 
 module.exports = router;
