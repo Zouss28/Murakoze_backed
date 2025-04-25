@@ -14,18 +14,13 @@ router.get('/dashboard', async (req, res) => {
       include: { images: true }
     });
     if (!user) return res.status(404).json({ error: "User doesn't exist" });
-    const profile_image = '';
-    for (let i in user.images){
-      if (i.caption == 'Profile'){
-        profile_image = i.image_url
-      }
-    }
+   
 
 
     res.json({
       message: "Profile found",
       user: user,
-      profile_image: profile_image
+      profile_image: user.images
     });
 
   } catch (err) {
@@ -35,7 +30,7 @@ router.get('/dashboard', async (req, res) => {
 });
 
 
-router.post('/dashboard/update', async (req, res) => {
+router.put('/dashboard/update', async (req, res) => {
   try{
     const {first_name, last_name, email, password, phone_number, age_group, gender,address} = req.body;
     const user_id = req.user.userId;
@@ -88,7 +83,7 @@ router.get('/reviews', async (req, res) => {
 });
 
 // Update profile image
-router.post('/update_image', upload.single('profile_image'), async (req, res) => {
+router.put('/update_image', upload.single('profile_image'), async (req, res) => {
   try {
     const userId = req.user.userId;
     const imagePath = req.file.path; 

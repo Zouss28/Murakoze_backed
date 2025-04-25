@@ -11,10 +11,14 @@ const errorHandler = require('./middleware/errorHandler');
 const instit = require('./routes/institution')
 
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
-
+const corsOptions = {
+  origin: '*', // Allow all origins, you can change this for more security
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow Authorization header
+};app.use(cors(corsOptions));
 
 // Routes
 app.get('/', (req, res) => res.send('API is running'));

@@ -6,13 +6,29 @@ const prisma = new PrismaClient();
 
 router.get('/',async (req,res)=>{
     try{
-        const institutions = await prisma.institution.findMany()
-        res.json({'institutions':institutions})
+        const categories = await prisma.categories.findMany()
+        res.json({'categories':categories})
     }catch(error){
         console.log(`Error fetching data: ${error}`)
         res.status(500).json({'error':'Something went wrong!'})
     }
 })
+
+router.get('/:category_id',async (req,res)=>{
+    try{
+        const category_id = parseInt(req.params.category_id);
+        const categories = await prisma.categories.findFirst({
+            where : {id : category_id},
+            include : {institution : true}
+        })
+        res.json({'categories':categories})
+    }catch(error){
+        console.log(`Error fetching data: ${error}`)
+        res.status(500).json({'error':'Something went wrong!'})
+    }
+})
+
+
 
 router.post("/create", async (req, res)=>{
     const {name} = req.body;
@@ -21,7 +37,7 @@ router.post("/create", async (req, res)=>{
             data :{name}
         })
         res.json({
-            ...institutions
+            institutions: institutions.name
         })
     }catch(error){
         console.log(`Error creating institution: ${error}`)
