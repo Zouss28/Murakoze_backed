@@ -7,6 +7,51 @@ const upload = require('../../uploads')
 
 const prisma = new PrismaClient();
 
+/**
+ * @swagger
+ * /api/review/{ist_id}:
+ *   post:
+ *     summary: Submit a review for an institution with an image
+ *     tags:
+ *       - Reviews
+ *     security:
+ *       - bearerAuth: []
+ *     consumes:
+ *       - multipart/form-data
+ *     parameters:
+ *       - in: path
+ *         name: ist_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Institution ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - profile_image
+ *               - rating
+ *               - review
+ *             properties:
+ *               profile_image:
+ *                 type: string
+ *                 format: binary
+ *               rating:
+ *                 type: integer
+ *               review:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Review created successfully
+ *       400:
+ *         description: Image missing or Institution not found
+ *       500:
+ *         description: Internal server error
+ */
+
 router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) => {
   const institution_id = parseInt(req.params.ist_id);
   const user_id = req.user.userId;
@@ -64,6 +109,54 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
     res.status(500).json({ error: 'Something went wrong!' });
   }
 });
+
+/**
+ * @swagger
+ * /api/review/recent:
+ *   get:
+ *     summary: Get top 3 most recent reviews with user profiles
+ *     tags:
+ *       - Reviews
+ *     responses:
+ *       200:
+ *         description: Recent reviews fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Top 3 recent reviews fetched successfully
+ *                 reviews:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       review:
+ *                         type: string
+ *                       rating:
+ *                         type: integer
+ *                       user:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           first_name:
+ *                             type: string
+ *                           last_name:
+ *                             type: string
+ *                           email:
+ *                             type: string
+ *                           profile:
+ *                             type: array
+ *                             items:
+ *                               type: object
+ *       500:
+ *         description: Internal server error
+ */
 
 router.get('/recent', async (req, res) => {
     try {
