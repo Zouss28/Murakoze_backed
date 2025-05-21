@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const reviews = require('./routes/reviews');
+const search = require('./routes/search')
 const cors = require('cors');
 const auth = require('./middleware/authMiddleware');
 const errorHandler = require('./middleware/errorHandler');
@@ -37,6 +38,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/profile', auth, profileRoutes); 
 app.use('/api/institutions',instit)
 app.use('/api/review', reviews)
+app.use('/api/search', search)
 
 
 

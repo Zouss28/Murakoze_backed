@@ -116,12 +116,13 @@ router.put('/dashboard/update', async (req, res) => {
     const user_id = req.user.userId;
     const user = await prisma.users_profile.findUnique({ where : {id:user_id}});
     if(!user) return res.status(404).json({'error':"User doesn't exist"})
-    await prisma.users_profile.update({
+    const newProfile = await prisma.users_profile.update({
       where : {id : user_id},
       data : {first_name, last_name, email, password, phone_number, age_group, gender,address}
   });
   res.json({
-    Message : "Profile updated"
+    Message : "Profile updated",
+    profile : newProfile
   })
     
   }catch(err){
@@ -174,7 +175,8 @@ router.get('/reviews', async (req, res) => {
         images: true,
         reviews: {
           include: {
-            images: true
+            images: true,
+            institution:true
           }
         }
       }

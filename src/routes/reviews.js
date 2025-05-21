@@ -2,10 +2,58 @@ const express = require('express')
 const router = express.Router()
 const { PrismaClient } = require('../generated/prisma');
 const auth = require('../middleware/authMiddleware')
-const upload = require('../../uploads')
+const upload = require('../../uploads');
+const Filter = require('bad-words');
 
 
 const prisma = new PrismaClient();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Reviews
+ *   description: Reviews-related endpoints
+ */
+
+/**
+ * @swagger
+ * /api/review/institution:
+ *   get:
+ *     summary: Get all institutions
+ *     tags:
+ *       - Reviews
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved list of institutions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   name:
+ *                     type: string
+ *                     example: Institution Name
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get("/institution",async (req,res)=>{
+  const institutions = await prisma.institution.findMany();
+  const result = institutions.map(inst =>{
+    return{
+      id: inst.id,
+      name : inst.name
+    }
+  });
+  res.json({
+    institutions : result
+  })
+})
 
 /**
  * @swagger
@@ -77,12 +125,14 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
     }
 
     // Create review
+    const filter = new Filter();
     const createdReview = await prisma.reviews.create({
       data: {
         user_id,
         institution_id,
         rating: parseInt(rating),
         review,
+        is_approved: !filter.isProfane(review) 
       },
     });
 
@@ -161,6 +211,9 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
 router.get('/recent', async (req, res) => {
     try {
       const reviews = await prisma.reviews.findMany({
+        where :{
+          is_approved: true
+        },
         include: {
           images: true
         },
@@ -211,30 +264,6 @@ router.get('/recent', async (req, res) => {
   
 
 
-// router.get('/list', async (req, res)=>{
-//     response = {
-//         'user':"user_name",
-//         inistitute_image,
-//         review
 
-//     }
-// })
-
-// const login = async () => {
-//     const res = await fetch(`${API}/login`, {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       credentials: 'include',
-//       body: JSON.stringify({ email, password })
-//     });
-
-//     const data = await res.json();
-//     if (res.ok) {
-//       localStorage.setItem('accessToken', data.accessToken);
-//       setAccessToken(data.accessToken);
-//     } else {
-//       alert(data.message || 'Login failed');
-//     }
-//   };
 
 module.exports = router;

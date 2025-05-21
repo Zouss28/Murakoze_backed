@@ -270,7 +270,10 @@ exports.Prisma.InstitutionScalarFieldEnum = {
   latest_membership_renew_time: 'latest_membership_renew_time',
   description: 'description',
   latitude: 'latitude',
-  longitude: 'longitude'
+  longitude: 'longitude',
+  button_one: 'button_one',
+  button_two: 'button_two',
+  amenities: 'amenities'
 };
 
 exports.Prisma.Institution_invoicesScalarFieldEnum = {
@@ -821,7 +824,37 @@ exports.Prisma.ReviewsScalarFieldEnum = {
   institution_id: 'institution_id',
   rating: 'rating',
   review: 'review',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  is_approved: 'is_approved'
+};
+
+exports.Prisma.WorkingHourScalarFieldEnum = {
+  id: 'id',
+  institution_id: 'institution_id',
+  day_of_week: 'day_of_week',
+  open_time: 'open_time',
+  close_time: 'close_time'
+};
+
+exports.Prisma.AmenitiesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  added_at: 'added_at'
+};
+
+exports.Prisma.Business_amenitiesScalarFieldEnum = {
+  id: 'id',
+  institution_id: 'institution_id',
+  amenitY_id: 'amenitY_id'
+};
+
+exports.Prisma.Price_rangesScalarFieldEnum = {
+  id: 'id',
+  max_value: 'max_value',
+  min_value: 'min_value',
+  institution_id: 'institution_id',
+  label: 'label'
 };
 
 exports.Prisma.SortOrder = {
@@ -912,7 +945,12 @@ exports.Prisma.institutionOrderByRelevanceFieldEnum = {
   logo: 'logo',
   app_name: 'app_name',
   host_name: 'host_name',
-  description: 'description'
+  description: 'description',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  button_one: 'button_one',
+  button_two: 'button_two',
+  amenities: 'amenities'
 };
 
 exports.Prisma.institution_invoicesOrderByRelevanceFieldEnum = {
@@ -1192,6 +1230,19 @@ exports.Prisma.users_profileOrderByRelevanceFieldEnum = {
 exports.Prisma.reviewsOrderByRelevanceFieldEnum = {
   review: 'review'
 };
+
+exports.Prisma.workingHourOrderByRelevanceFieldEnum = {
+  day_of_week: 'day_of_week'
+};
+
+exports.Prisma.amenitiesOrderByRelevanceFieldEnum = {
+  name: 'name',
+  icon: 'icon'
+};
+
+exports.Prisma.price_rangesOrderByRelevanceFieldEnum = {
+  label: 'label'
+};
 exports.app_releases_app_name = exports.$Enums.app_releases_app_name = {
   mobile_rating: 'mobile_rating',
   tablet_rating: 'tablet_rating',
@@ -1285,7 +1336,11 @@ exports.Prisma.ModelName = {
   images: 'images',
   sectors: 'sectors',
   users_profile: 'users_profile',
-  reviews: 'reviews'
+  reviews: 'reviews',
+  workingHour: 'workingHour',
+  amenities: 'amenities',
+  business_amenities: 'business_amenities',
+  price_ranges: 'price_ranges'
 };
 
 /**

@@ -209,20 +209,26 @@ model institution {
   category_id                  Int?
   latest_membership_renew_time DateTime?                 @db.DateTime(0)
   description                  String?                   @db.Text
-  latitude                     Int?
-  longitude                    Int?
+  latitude                     String?                   @db.VarChar(200)
+  longitude                    String?                   @db.VarChar(200)
+  button_one                   String?                   @db.LongText
+  button_two                   String?                   @db.LongText
+  amenities                    String?                   @db.LongText
   appointments                 appointments[]
   apps                         apps[]
+  business_amenities           business_amenities[]
   device                       device[]
   images                       images[]
   categories                   categories?               @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_category_id")
   popup_questions              popup_questions[]
+  price_ranges                 price_ranges[]
   qms_branch_operator          qms_branch_operator[]
   qms_branch_transactions      qms_branch_transactions[]
   qms_operator                 qms_operator[]
   reviews                      reviews[]
   service                      service[]
   service_group                service_group[]
+  workingHour                  workingHour[]
 
   @@index([category_id], map: "fk_category_id")
   @@index([plan], map: "fk_institution_plan")
@@ -904,12 +910,54 @@ model reviews {
   rating         Int
   review         String?       @db.Text
   created_at     DateTime      @default(now()) @db.Timestamp(0)
+  is_approved    Boolean?      @default(true)
   images         images[]
   institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
   users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")
+}
+
+model workingHour {
+  id             Int         @id @default(autoincrement())
+  institution_id Int
+  day_of_week    String      @db.VarChar(20)
+  open_time      DateTime?   @db.Time(0)
+  close_time     DateTime?   @db.Time(0)
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institit_id")
+
+  @@index([institution_id], map: "fk_institit_id")
+}
+
+model amenities {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(100)
+  icon               String?              @db.VarChar(255)
+  added_at           DateTime?            @default(now()) @db.Timestamp(0)
+  business_amenities business_amenities[]
+}
+
+model business_amenities {
+  id             Int          @id @default(autoincrement())
+  institution_id Int?
+  amenitY_id     Int?
+  amenities      amenities?   @relation(fields: [amenitY_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_amen_id")
+  institution    institution? @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_instititu_id")
+
+  @@unique([amenitY_id, institution_id], map: "amenitY_id")
+  @@index([institution_id], map: "fk_instititu_id")
+}
+
+model price_ranges {
+  id             Int         @id @default(autoincrement())
+  max_value      Int
+  min_value      Int
+  institution_id Int
+  label          String?     @db.VarChar(255)
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_price_range")
+
+  @@index([institution_id], map: "fk_price_range")
 }
 
 enum app_releases_app_name {

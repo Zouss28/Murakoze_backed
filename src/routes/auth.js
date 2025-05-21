@@ -3,12 +3,59 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('../generated/prisma');
-const passport = require('passport');
+const auth = require('../middleware/authMiddleware');
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.JWT_SECRET || 'mysecretkey';
 
-// SIGNUP
+/**
+ * @swagger
+ * /api/auth/signup:
+ *   post:
+ *     summary: Register a new user
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - first_name
+ *               - last_name
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: User created successfully
+ *                 accessToken:
+ *                   type: string
+ *       400:
+ *         description: User already exists
+ *       500:
+ *         description: Internal server error
+ */
+
 router.post('/signup', async (req, res) => {
   try {
   const { email, password, first_name,last_name } = req.body;
@@ -30,7 +77,48 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// LOGIN
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Login user and get access token
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Login successful
+ *                 accessToken:
+ *                   type: string
+ *       400:
+ *         description: Invalid email or password
+ *       500:
+ *         description: Internal server error
+ */
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -45,6 +133,22 @@ router.post('/login', async (req, res) => {
   res.json({ message: 'Login successful', accessToken });
 });
 
+router.delete('/delete_account', auth, async (req, res) => {
+  const userID = req.user.userId;
 
+  try {
+    await prisma.users_profile.delete({
+      where: { id: userID}
+    });
+
+
+    res.json({
+      message:"Account succesfully deleted."
+    });
+  } catch (error) {
+    console.error('Error deleting account:', error);
+    res.status(500).json({ error: 'Failed to delete account' });
+  }
+});
 
 module.exports = router;

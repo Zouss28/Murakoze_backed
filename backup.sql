@@ -1,0 +1,2173 @@
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19-11.8.1-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: mydump_db
+-- ------------------------------------------------------
+-- Server version	11.8.1-MariaDB-2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
+
+--
+-- Table structure for table `_prisma_migrations`
+--
+
+DROP TABLE IF EXISTS `_prisma_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `_prisma_migrations` (
+  `id` varchar(36) NOT NULL,
+  `checksum` varchar(64) NOT NULL,
+  `finished_at` datetime(3) DEFAULT NULL,
+  `migration_name` varchar(255) NOT NULL,
+  `logs` text DEFAULT NULL,
+  `rolled_back_at` datetime(3) DEFAULT NULL,
+  `started_at` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `applied_steps_count` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `_prisma_migrations`
+--
+
+LOCK TABLES `_prisma_migrations` WRITE;
+/*!40000 ALTER TABLE `_prisma_migrations` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `_prisma_migrations` VALUES
+('0d33a9c7-a15a-4db4-99aa-3df3281bac27','99aeca32a79670ccfd032a0037223e1706ee299a72dc7994bbe6c5b2aeea1bec','2025-04-22 12:25:19.794','20250416104220_make_email_unique',NULL,NULL,'2025-04-22 12:25:19.767',1),
+('2f11ef21-434a-49d2-b2ab-7d22a3c80816','cf758ba966cae2a36c1eb27c347ec3f3ccda903f6713031b39a07ce9c2b35ee4','2025-04-22 12:26:03.150','20250422122600_add_review_table',NULL,NULL,'2025-04-22 12:26:03.055',1),
+('471d1305-ea2c-4aaf-b33a-14d977e562a0','7e4e3b1410fdefc7de61204c9bfee719d3fc1b148bf9011bd5e0381d2a607d4d','2025-04-24 09:26:06.812','20250424092604_add_review_id_in_images',NULL,NULL,'2025-04-24 09:26:06.723',1),
+('ab3a4592-3b7c-48b2-b760-d2baa4d43fa0','9b7351ce9f10afc448c9a67a2f50d907a68c595531bf27796b420d9540e1c0d6','2025-04-22 12:25:19.592','20250416074950_migration_v0',NULL,NULL,'2025-04-22 12:25:17.870',1),
+('dcb41191-64a5-4fc4-a460-205275f38f2d','3eb632e10262de08aa1e58de1a5f4a2e22ee222602a2aa0710de8e1585319bc2','2025-04-22 12:25:19.766','20250416093043_migration_v1',NULL,NULL,'2025-04-22 12:25:19.594',1);
+/*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `app_releases`
+--
+
+DROP TABLE IF EXISTS `app_releases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `app_releases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `release_version` varchar(64) NOT NULL,
+  `app_name` enum('mobile_rating','tablet_rating','tablet_qms_o') NOT NULL,
+  `platform` enum('android','ios') NOT NULL,
+  `release_note` text DEFAULT NULL,
+  `release_url` varchar(255) NOT NULL,
+  `minimum_version` varchar(64) NOT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_releases`
+--
+
+LOCK TABLES `app_releases` WRITE;
+/*!40000 ALTER TABLE `app_releases` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `app_releases` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `appointments`
+--
+
+DROP TABLE IF EXISTS `appointments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `registry_type` smallint(6) NOT NULL,
+  `institution_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `operator_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `reason` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL,
+  `start_time` timestamp NOT NULL,
+  `end_time` timestamp NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `additional_note` varchar(255) NOT NULL,
+  `creator_id` int(11) NOT NULL,
+  `recurring` smallint(6) DEFAULT 0,
+  `notification_status` smallint(6) DEFAULT 1,
+  `ticket_created` smallint(6) DEFAULT 0,
+  `appointment_cancelled` smallint(6) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `cancellation_reason` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_appointment_creator` (`creator_id`),
+  KEY `fk_appointment_institution` (`institution_id`),
+  KEY `fk_appointment_operator` (`operator_id`),
+  KEY `fk_appointment_service` (`service_id`),
+  KEY `fk_appointment_user` (`user_id`),
+  CONSTRAINT `fk_appointment_creator` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `fk_appointment_institution` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`),
+  CONSTRAINT `fk_appointment_operator` FOREIGN KEY (`operator_id`) REFERENCES `qms_operator` (`id`),
+  CONSTRAINT `fk_appointment_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
+  CONSTRAINT `fk_appointment_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `appointments`
+--
+
+LOCK TABLES `appointments` WRITE;
+/*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `apps`
+--
+
+DROP TABLE IF EXISTS `apps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `institution_id` int(11) NOT NULL,
+  `secret_key` varchar(255) DEFAULT NULL,
+  `access_key` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_app_institution_id` (`institution_id`),
+  CONSTRAINT `fk_app_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `apps`
+--
+
+LOCK TABLES `apps` WRITE;
+/*!40000 ALTER TABLE `apps` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `apps` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `audit_trail`
+--
+
+DROP TABLE IF EXISTS `audit_trail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `audit_trail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `old_value` text DEFAULT NULL,
+  `new_value` text DEFAULT NULL,
+  `action` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `field` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `model_id` varchar(255) NOT NULL,
+  `display_name` varchar(255) DEFAULT NULL,
+  `time` datetime NOT NULL,
+  `status` enum('1','2','3') DEFAULT NULL,
+  `reviewed_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_audit_trail_action` (`action`),
+  KEY `idx_audit_trail_field` (`field`),
+  KEY `idx_audit_trail_ip` (`ip`),
+  KEY `idx_audit_trail_model` (`model`),
+  KEY `idx_audit_trail_model_id` (`model_id`),
+  KEY `idx_audit_trail_user_agent` (`user_agent`),
+  KEY `idx_audit_trail_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `audit_trail`
+--
+
+LOCK TABLES `audit_trail` WRITE;
+/*!40000 ALTER TABLE `audit_trail` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `audit_trail` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `sector_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_sector_id` (`sector_id`),
+  CONSTRAINT `fk_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectors` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `categories` VALUES
+(1,'Food/Drinks',NULL),
+(2,'Finincial Services',NULL),
+(3,'Hotel/Travels',NULL),
+(4,'Health/Medical',NULL),
+(5,'Home Services',NULL);
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `change_request`
+--
+
+DROP TABLE IF EXISTS `change_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `change_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `old_value` text DEFAULT NULL,
+  `new_value` text DEFAULT NULL,
+  `action` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `model_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `display_name` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `reviewed_by` int(11) DEFAULT NULL,
+  `time` datetime NOT NULL,
+  `institution_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_change_request_action` (`action`),
+  KEY `idx_change_request_ip` (`ip`),
+  KEY `idx_change_request_model` (`model`),
+  KEY `idx_change_request_model_id` (`model_id`),
+  KEY `idx_change_request_user_agent` (`user_agent`),
+  KEY `idx_change_request_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `change_request`
+--
+
+LOCK TABLES `change_request` WRITE;
+/*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `device`
+--
+
+DROP TABLE IF EXISTS `device`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `device` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(64) DEFAULT NULL,
+  `notification_token` varchar(255) DEFAULT NULL,
+  `affiliate_id` int(11) DEFAULT NULL,
+  `service_id` varchar(256) DEFAULT NULL,
+  `serial_number` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `device_type` tinyint(4) NOT NULL DEFAULT 1,
+  `gender` int(11) DEFAULT NULL,
+  `age_range` int(11) DEFAULT NULL,
+  `language` int(11) DEFAULT NULL,
+  `notification_enabled` tinyint(1) DEFAULT 0,
+  `apiKey` varchar(225) DEFAULT NULL,
+  `nonce` int(11) DEFAULT 0,
+  `linkShortCode` varchar(16) DEFAULT NULL,
+  `linkShortCodeExp` datetime DEFAULT NULL,
+  `phone_number` varchar(64) DEFAULT NULL,
+  `latest_hb` datetime DEFAULT NULL,
+  `latest_hb_version` varchar(64) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  KEY `fk_device_affiliate` (`affiliate_id`),
+  KEY `fk_service_device` (`service_id`),
+  CONSTRAINT `fk_device_affiliate` FOREIGN KEY (`affiliate_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `device`
+--
+
+LOCK TABLES `device` WRITE;
+/*!40000 ALTER TABLE `device` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `device` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `device_heartbeat`
+--
+
+DROP TABLE IF EXISTS `device_heartbeat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `device_heartbeat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `device_id` int(11) DEFAULT NULL,
+  `operator_id` int(11) DEFAULT NULL,
+  `version` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `device_id_idx` (`device_id`),
+  KEY `operator_id_idx` (`operator_id`),
+  KEY `time_idx` (`time`),
+  KEY `version_idx` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `device_heartbeat`
+--
+
+LOCK TABLES `device_heartbeat` WRITE;
+/*!40000 ALTER TABLE `device_heartbeat` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `device_heartbeat` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `caption` varchar(255) DEFAULT NULL,
+  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `review_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_institution_id` (`institution_id`),
+  KEY `fk_user_id` (`user_id`),
+  KEY `fk_review_id` (`review_id`),
+  CONSTRAINT `fk_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_review_id` FOREIGN KEY (`review_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `images`
+--
+
+LOCK TABLES `images` WRITE;
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `images` VALUES
+(1,NULL,2,'jpeg','uploads/1745329854372-240918638.jpeg',NULL,'2025-04-22 11:37:10',NULL),
+(2,NULL,4,'jpeg','uploads/1745483916662-857229404.jpeg',NULL,'2025-04-24 06:30:50',NULL),
+(4,NULL,13,'jpeg','uploads/1745495694171-292395046.jpeg',NULL,'2025-04-24 09:54:54',NULL),
+(5,NULL,26,'jpeg','uploads/1745505763005-23047755.jpeg',NULL,'2025-04-24 12:42:43',NULL),
+(6,NULL,25,'jpeg','uploads/1745506285371-698202216.jpg',NULL,'2025-04-24 12:44:07',NULL),
+(16,1,NULL,'jpg','uploads/bk1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(17,1,NULL,'jpg','uploads/bk2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(18,1,NULL,'jpeg','uploads/bk3.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(19,1,NULL,'jpeg','uploads/bk4.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(20,3,NULL,'png','uploads/java1.png',NULL,'2025-05-07 07:00:37',NULL),
+(21,3,NULL,'jpg','uploads/java2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(22,3,NULL,'jpg','uploads/java3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(23,3,NULL,'jpg','uploads/java4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(24,4,NULL,'png','uploads/hut1.png',NULL,'2025-05-07 07:00:37',NULL),
+(25,4,NULL,'jpg','uploads/hut2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(26,4,NULL,'jpg','uploads/hut3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(27,4,NULL,'jpeg','uploads/hut4.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(28,5,NULL,'jpeg','uploads/radisson1.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(29,5,NULL,'jpeg','uploads/radisson2.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(30,5,NULL,'jpeg','uploads/radisson3.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(31,5,NULL,'jpeg','uploads/radisson4.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(32,6,NULL,'jpg','uploads/kurry1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(33,6,NULL,'jpg','uploads/kurry2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(34,6,NULL,'jpg','uploads/kurry3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(35,6,NULL,'jpg','uploads/kurry4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(36,7,NULL,'jpg','uploads/i&m1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(37,7,NULL,'jpg','uploads/i&m2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(38,7,NULL,'jpg','uploads/i&m3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(39,7,NULL,'jpg','uploads/i&m4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(40,8,NULL,'jpg','uploads/cogebanque1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(41,8,NULL,'jpg','uploads/cogebanque2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(42,8,NULL,'jpg','uploads/cogebanque3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(43,8,NULL,'jpg','uploads/cogebanque4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(44,9,NULL,'jpg','uploads/copedu1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(45,9,NULL,'jpg','uploads/copedu2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(46,9,NULL,'jpg','uploads/copedu3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(47,9,NULL,'jpeg','uploads/copedu4.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(48,10,NULL,'png','uploads/marriott1.png',NULL,'2025-05-07 07:00:37',NULL),
+(49,10,NULL,'png','uploads/marriott2.png',NULL,'2025-05-07 07:00:37',NULL),
+(50,10,NULL,'png','uploads/marriott3.png',NULL,'2025-05-07 07:00:37',NULL),
+(51,10,NULL,'png','uploads/marriott4.png',NULL,'2025-05-07 07:00:37',NULL),
+(52,11,NULL,'png','uploads/serena1.png',NULL,'2025-05-07 07:00:37',NULL),
+(53,11,NULL,'png','uploads/serena2.png',NULL,'2025-05-07 07:00:37',NULL),
+(54,11,NULL,'png','uploads/serena3.png',NULL,'2025-05-07 07:00:37',NULL),
+(55,11,NULL,'png','uploads/serena4.png',NULL,'2025-05-07 07:00:37',NULL),
+(56,19,NULL,'jpeg','uploads/filini1.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(57,19,NULL,'jpg','uploads/filini2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(58,19,NULL,'jpeg','uploads/filini3.jpeg',NULL,'2025-05-07 07:00:37',NULL),
+(59,19,NULL,'jpg','uploads/filini4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(60,20,NULL,'jpg','uploads/collines1.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(61,20,NULL,'jpg','uploads/collines2.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(62,20,NULL,'jpg','uploads/collines3.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(63,20,NULL,'jpg','uploads/collines4.jpg',NULL,'2025-05-07 07:00:37',NULL),
+(67,NULL,NULL,'png','uploads/kurryreview9.png',NULL,'2025-05-07 07:12:55',9),
+(68,NULL,NULL,'jpg','uploads/i&mreview11.jpg',NULL,'2025-05-07 07:12:55',11),
+(69,NULL,NULL,'jpg','uploads/cogebanquereview13.jpg',NULL,'2025-05-07 07:12:55',13),
+(70,NULL,NULL,'jpg','uploads/copedureview16.jpg',NULL,'2025-05-07 07:12:55',16),
+(71,NULL,NULL,'png','uploads/marriottreview17.png',NULL,'2025-05-07 07:12:55',17),
+(72,NULL,NULL,'png','uploads/serenareview19.png',NULL,'2025-05-07 07:12:55',19),
+(73,NULL,NULL,'png','uploads/filinireview22.png',NULL,'2025-05-07 07:12:55',22),
+(74,NULL,NULL,'png','uploads/collinesreview24.png',NULL,'2025-05-07 07:12:55',24),
+(75,NULL,NULL,'png','uploads/radissonreview8.png',NULL,'2025-05-07 07:12:55',8),
+(76,NULL,NULL,'jpeg','uploads/bkreview1.jpeg',NULL,'2025-05-07 08:19:33',1),
+(77,NULL,NULL,'png','uploads/javareview4.png',NULL,'2025-05-07 08:19:33',4),
+(78,NULL,NULL,'png','uploads/hutreview6.png',NULL,'2025-05-07 08:19:33',6);
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `institution`
+--
+
+DROP TABLE IF EXISTS `institution`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `institution` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(64) DEFAULT NULL,
+  `name` varchar(45) NOT NULL,
+  `search_term` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `plan` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `level` tinyint(4) DEFAULT 2,
+  `parent_id` int(11) DEFAULT NULL,
+  `good_ratings` int(11) DEFAULT NULL,
+  `bad_ratings` int(11) DEFAULT NULL,
+  `excellent_ratings` int(11) DEFAULT NULL,
+  `nps` int(11) DEFAULT NULL,
+  `csat` int(11) DEFAULT NULL,
+  `queue_autocreation` tinyint(4) DEFAULT 0,
+  `queue_manual_creation` tinyint(4) DEFAULT 1,
+  `working_hours` varchar(256) DEFAULT NULL,
+  `qms_message` varchar(256) DEFAULT NULL,
+  `priority_list` longtext DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `app_name` varchar(255) DEFAULT NULL,
+  `allowed_context` tinyint(4) DEFAULT 1,
+  `host_name` varchar(255) DEFAULT NULL,
+  `membership_type` int(11) NOT NULL DEFAULT 1,
+  `category_id` int(11) DEFAULT NULL,
+  `latest_membership_renew_time` datetime DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `latitude` varchar(200) DEFAULT NULL,
+  `longitude` varchar(200) DEFAULT NULL,
+  `button_one` longtext DEFAULT NULL,
+  `button_two` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `institution_uuid` (`uuid`),
+  KEY `fk_category_id` (`category_id`),
+  KEY `fk_institution_plan` (`plan`),
+  CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `institution`
+--
+
+LOCK TABLES `institution` WRITE;
+/*!40000 ALTER TABLE `institution` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `institution` VALUES
+(1,NULL,'Bank of Kigali Plc',NULL,'bk@bk.rw','KN 4 Avenue, No. 12, Plot No. 790, P.O. Box 175, Nyarugenge District, Kigali, Rwanda','4455','https://www.bk.rw',0,'2025-04-24 09:38:08',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'Bank of Kigali Plc is the largest commercial bank in Rwanda, offering a comprehensive range of financial services including loans, savings, investments, mortgages, internet banking, and insurance. Established in 1966, it operates under a license from the National Bank of Rwanda and is listed on both the Rwanda Stock Exchange and the Nairobi Securities Exchange.','-1.948333','30.059722','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.bk.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }'),
+(3,NULL,'Java House Kigali Heights',NULL,'info@javahouseafrica.com','KG 7 Avenue, Kigali Heights, Kigali, Rwanda','+250 788 381 132','https://javahouseafrica.com',0,'2025-04-24 12:28:13',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Java House Kigali Heights is a popular café and restaurant located in the Kigali Heights complex, offering a diverse menu that includes breakfast items, Mexican dishes, pastries, and locally sourced Rwandan coffee. The establishment features both indoor and outdoor seating, providing a vibrant atmosphere suitable for various dining occasions.','-1.9533','30.0932','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://javahousetesting.com/wp-content/uploads/2022/04/Java_A4_Kigali_Master_Menu-2.pdf\"  }'),
+(4,NULL,'The Hut Restaurant & Boutique Hotel ',NULL,'reservation@thehuthotelrwanda.com','KG 646 Street No.1, Rugando, Kimihurura (Behind Kigali Convention Center), Kigali, Rwanda','+250 783 419 980','https://thehuthotelrwanda.com',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'The Hut Restaurant & Boutique Hotel is a modern establishment in Kigali, Rwanda, offering a blend of international cuisine and comfortable accommodations. The restaurant features a diverse menu with fresh ingredients, while the boutique hotel provides well-appointed rooms, a rooftop restaurant with scenic views, an outdoor swimming pool, spa services, and a fitness center. Located in a serene neighborhood behind the Kigali Convention Center, it offers a peaceful atmosphere for guests.','-1.9515','30.0932','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://thehuthotelrwanda.com/online-ordering/#/products\"  }'),
+(5,NULL,'Radisson Blu Hotel & Convention Centre Kigali',NULL,'info.kigali@radissonblu.com','Kimihurura Roundabout, KG 2 Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'The Radisson Blu Hotel & Convention Centre in Kigali is a premier 5-star establishment offering 292 modern rooms and suites. Strategically located adjacent to the Kigali Convention Centre, it provides state-of-the-art meeting facilities, a wellness spa, fitness center, outdoor pool, and diverse dining options. Its proximity to Kigali International Airport and the city center makes it ideal for both business and leisure travelers.','-1.95465','30.092757','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }'),
+(6,NULL,'Kurry Kingdom',NULL,'kingdomkurry@gmail.com','House No.24, KG 5 Avenue, Kacyiru, Kigali, Rwanda','+250 787 605 789','https://kurrykingdom.rw',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Kurry Kingdom is a fine dining Indian restaurant located in Kigali’s Kacyiru district. Housed in a beautifully renovated colonial residence, it offers a blend of traditional Indian cuisine and contemporary culinary creations. The restaurant features multiple dining areas, including a serene garden pavilion, and is known for its authentic North and South Indian dishes prepared with freshly ground herbs and spices. Kurry Kingdom caters to various dietary preferences and is a popular spot for both casual dining and special occasions.','-1.94565','30.08912','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://kurrykingdom.rw/#\"  }'),
+(7,NULL,'I&M Bank Rwanda',NULL,'info@imbank.co.rw','KN 03 Avenue, No. 9, Nyarugenge District, Kigali, Rwanda','+250 788 162 006','https://www.imbankgroup.com/rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'I&M Bank (Rwanda) Plc is one of Rwanda’s leading commercial banks, offering a wide range of personal, business, and corporate banking services. Established in 1963 as the Banque Commerciale du Rwanda (BCR), it was acquired by I&M Group in 2012 and rebranded in 2013. The bank is part of the I&M Group, which operates across East Africa, and is regulated by the National Bank of Rwanda.','-1.94929','30.06148','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.imbankgroup.com/rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }'),
+(8,NULL,'COGEBANQUE',NULL,'customercare@cogebank.com','Centenary House, KN 63 Street, Avenue de l’Paix, Kigali, Rwanda','+250 788 155 500','https://www.cogebanque.co.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COGEBANQUE, officially known as Compagnie Générale de Banque, is a Rwandan commercial bank established in 1999. It offers a range of financial services, including loans and savings, with a focus on customer service and financial inclusivity. In November 2023, Equity Group Holdings Plc acquired a 99.125% stake in COGEBANQUE, making it a subsidiary.','-1.9462','30.0606','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.cogebanque.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }'),
+(9,NULL,'COPEDU PLC',NULL,'info@copeduplc.rw','KN 03 Rd, African Union Road, Kicukiro District, Kigali, Rwanda','2012','https://copeduplc.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COPEDU PLC is a well-established microfinance institution in Rwanda, licensed by the National Bank of Rwanda (BNR). Founded in 1997, it transitioned from a cooperative to a public limited company in 2013. COPEDU offers a range of financial services, including savings and credit loans, aiming to foster financial inclusion and empower individuals and businesses across Rwanda.','-1.96102','30.11986','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://copeduplc.rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }'),
+(10,NULL,'Kigali Marriott Hotel',NULL,'reservations.kigali@marriott.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 222 111 111','https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/',0,'2025-04-24 13:05:01',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Marriott Hotel is a premier 5-star hotel located in the heart of Rwanda’s capital city. The hotel offers luxurious accommodations with floor-to-ceiling windows, marble bathrooms, and modern amenities. Guests can enjoy a variety of on-site facilities, including multiple dining options, a fitness center, spa, outdoor pool, and extensive meeting and event spaces. Its central location provides easy access to the city’s financial district, embassies, and cultural attractions, making it ideal for both business and leisure travelers.','-1.95374','30.06235','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }'),
+(11,NULL,'Kigali Serena Hotel',NULL,'kigali@serenahotels.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 252 597 100','https://www.serenahotels.com/kigali',0,'2025-04-25 05:30:40',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Serena Hotel is a 5-star luxury hotel situated in the heart of Kigali, just a five-minute walk from the Central Business District and approximately 10 kilometers from Kigali International Airport. The hotel features 148 rooms and suites that blend Rwandan heritage with contemporary comfort. Amenities include an outdoor swimming pool, spa, fitness center, and multiple dining options such as the Milima Restaurant and Sokoni Café and Bar. The hotel is a preferred choice for international diplomats and executives seeking a private and peaceful retreat.','-1.9563339','30.0627322','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.serenahotels.com/kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }'),
+(19,NULL,'Filini Restaurant',NULL,'kcc.kigali@radissonblu.com','Kimihurura Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.kcc.rw/filini_main.html',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Filini Restaurant offers an authentic Italian dining experience in the heart of Kigali. Situated within the Radisson Blu Hotel & Convention Centre, the restaurant boasts a sophisticated ambiance complemented by contemporary design. Guests can indulge in a menu that features classic Italian dishes crafted with fresh ingredients, alongside a curated selection of wines and signature cocktails. Whether you’re in the mood for a hearty pasta, a wood-fired pizza, or a delectable dessert, Filini promises a culinary journey that captures the essence of Italy.','-1.95465','30.092757','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://www.visitrwanda.com/wp-content/uploads/2020/07/Filini-Menu-May-2020-Two-Face.pdf\"  }'),
+(20,NULL,'Hôtel des Mille Collines',NULL,'info@millecollines.rw','2 KN 6th Avenue, Nyarugenge District, Kigali, Rwanda','+250 788 192 000','https://www.millecollines.rw',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Hôtel des Mille Collines is a historic 4-star hotel located in the heart of Kigali’s central business district. Inaugurated in 1973, the hotel gained international recognition during the 1994 Rwandan Genocide, where it provided refuge to over 1,200 people—a story later depicted in the film Hotel Rwanda. The hotel offers 112 rooms and suites, a restaurant, bar, outdoor swimming pool, tennis courts, and conference facilities, making it a prominent destination for both business and leisure travelers.','-1.9469','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.millecollines.rw/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }'),
+(21,NULL,'King Faisal Hospital Rwanda',NULL,'info@kfhkigali.com','KG 544 Street 10, Kacyiru, Gasabo, Kigali, Rwanda','+250 788 123 200','https://kfh.rw',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'King Faisal Hospital Rwanda is a multi-specialty quaternary hospital providing specialized healthcare in East and Central Africa. With state-of-the-art amenities, equipment, and well-trained staff, it is committed to delivering accessible, affordable, and high-quality care to patients.','-1.9469','30.0619',NULL,NULL),
+(22,NULL,'MBC Hospital',NULL,'info@mbchospital.rw','KN 7 Ave, Kigali, Rwanda','+250 787 233 553','https://mbchospital.rw',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'MBC Hospital is a private healthcare facility offering a range of services including emergency care, internal medicine, surgery, obstetrics & gynecology, and more. The hospital emphasizes patient safety, cleanliness, and compassionate care.','-1.9446','30.0615',NULL,NULL),
+(23,NULL,'Nyarugenge District Hospital',NULL,'info@nyarugengehospital.gov.rw','KN 247 St, Nyarugenge, Kigali, Rwanda','+250 790 666 663','https://www.nyarugengehospital.gov.rw',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Nyarugenge District Hospital provides comprehensive healthcare services including emergency care, maternal health, and surgical services. The hospital is known for its commitment to patient-centered care and community health initiatives.','-1.9442','30.0610',NULL,NULL),
+(24,NULL,'Baho International Hospital',NULL,'info@baho.rw','KG 9 Ave 42, Nyarutarama, Kigali, Rwanda','+250 782 343 710','https://x.com/bahointhospital',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Baho International Hospital is a private healthcare facility offering a range of medical services. Located in the Nyarutarama area, it provides 24-hour services with a focus on patient comfort and quality care.','-1.9379','30.1015',NULL,NULL),
+(25,NULL,'',NULL,NULL,NULL,NULL,NULL,0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(26,NULL,'',NULL,NULL,NULL,NULL,NULL,0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(27,NULL,'',NULL,NULL,NULL,NULL,NULL,0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(28,NULL,'',NULL,NULL,NULL,NULL,NULL,0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `institution` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `institution_invoices`
+--
+
+DROP TABLE IF EXISTS `institution_invoices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `institution_invoices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_number` text NOT NULL,
+  `institution_id` smallint(6) NOT NULL,
+  `institution_name` text NOT NULL,
+  `period_start` datetime NOT NULL,
+  `period_end` datetime NOT NULL,
+  `generated_at` timestamp NOT NULL,
+  `expiry` timestamp NOT NULL,
+  `payment_reference_number` text NOT NULL,
+  `ext_payment_reference_number` text DEFAULT NULL,
+  `payment_status` enum('FAILED','PENDING','COMPLETED') NOT NULL,
+  `payment_status_desc` text DEFAULT NULL,
+  `payment_method` text DEFAULT NULL,
+  `payment_retries` smallint(6) DEFAULT NULL,
+  `status` enum('PENDING','EXPIRED','PAID','CANCELED') NOT NULL,
+  `total_amount` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `institution_invoices`
+--
+
+LOCK TABLES `institution_invoices` WRITE;
+/*!40000 ALTER TABLE `institution_invoices` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `institution_invoices` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `institution_service_tracking`
+--
+
+DROP TABLE IF EXISTS `institution_service_tracking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `institution_service_tracking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_id` int(11) DEFAULT NULL,
+  `branch_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `branch_name` varchar(255) DEFAULT NULL,
+  `service_group_name` varchar(255) DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `action` tinyint(1) DEFAULT 0,
+  `status` tinyint(1) DEFAULT 1,
+  `invoice_number` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `institution_service_tracking`
+--
+
+LOCK TABLES `institution_service_tracking` WRITE;
+/*!40000 ALTER TABLE `institution_service_tracking` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `institution_service_tracking` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `login_history`
+--
+
+DROP TABLE IF EXISTS `login_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `login_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_audit_trail_ip` (`ip`),
+  KEY `idx_audit_trail_user_agent` (`user_agent`),
+  KEY `idx_audit_trail_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `login_history`
+--
+
+LOCK TABLES `login_history` WRITE;
+/*!40000 ALTER TABLE `login_history` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `login_history` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `migration`
+--
+
+DROP TABLE IF EXISTS `migration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migration`
+--
+
+LOCK TABLES `migration` WRITE;
+/*!40000 ALTER TABLE `migration` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `migration` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `mms_file`
+--
+
+DROP TABLE IF EXISTS `mms_file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mms_file` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_uuid` varchar(255) NOT NULL,
+  `institution_id` int(11) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `comment` varchar(5000) DEFAULT NULL,
+  `type` smallint(6) NOT NULL,
+  `longitude` double DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `first_view_time` timestamp NULL DEFAULT NULL,
+  `last_view_time` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mms_file`
+--
+
+LOCK TABLES `mms_file` WRITE;
+/*!40000 ALTER TABLE `mms_file` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `mms_file` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) NOT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `seen` tinyint(1) DEFAULT NULL,
+  `time_sent` timestamp NULL DEFAULT current_timestamp(),
+  `time_seen` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification`
+--
+
+LOCK TABLES `notification` WRITE;
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `notification_recipient`
+--
+
+DROP TABLE IF EXISTS `notification_recipient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notification_recipient` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_notification` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `seen` int(11) DEFAULT NULL,
+  `ticket` int(11) DEFAULT NULL,
+  `reference_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification_recipient`
+--
+
+LOCK TABLES `notification_recipient` WRITE;
+/*!40000 ALTER TABLE `notification_recipient` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `notification_recipient` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `option`
+--
+
+DROP TABLE IF EXISTS `option`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `option`
+--
+
+LOCK TABLES `option` WRITE;
+/*!40000 ALTER TABLE `option` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `option` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `popup_questions`
+--
+
+DROP TABLE IF EXISTS `popup_questions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `popup_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_en` varchar(255) NOT NULL,
+  `name_fr` varchar(255) DEFAULT NULL,
+  `name_rw` varchar(255) DEFAULT NULL,
+  `name_sw` varchar(255) DEFAULT NULL,
+  `service_id` text NOT NULL,
+  `description_en` varchar(255) NOT NULL,
+  `description_fr` varchar(255) DEFAULT NULL,
+  `description_rw` varchar(255) DEFAULT NULL,
+  `description_sw` varchar(255) DEFAULT NULL,
+  `applies_to_bad` tinyint(1) NOT NULL DEFAULT 1,
+  `applies_to_good` tinyint(1) NOT NULL DEFAULT 0,
+  `applies_to_excellent` tinyint(1) NOT NULL DEFAULT 0,
+  `institution_id` int(11) NOT NULL,
+  `status` tinyint(1) DEFAULT 0,
+  `type` tinyint(4) DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_institution` (`institution_id`),
+  CONSTRAINT `fk_institution` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `popup_questions`
+--
+
+LOCK TABLES `popup_questions` WRITE;
+/*!40000 ALTER TABLE `popup_questions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `popup_questions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `popup_questions_answers`
+--
+
+DROP TABLE IF EXISTS `popup_questions_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `popup_questions_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` int(11) NOT NULL,
+  `rating_id` int(11) DEFAULT NULL,
+  `ticket_id` int(11) DEFAULT NULL,
+  `answer_id` int(11) NOT NULL,
+  `answered_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_popup_questions_possible_answers` (`answer_id`),
+  KEY `popup_questions_answers_device_id` (`device_id`),
+  KEY `popup_questions_answers_rating_id` (`rating_id`),
+  KEY `popup_questions_answers_ticket_id` (`ticket_id`),
+  CONSTRAINT `fk_popup_questions_possible_answers` FOREIGN KEY (`answer_id`) REFERENCES `popup_questions_possible_answers` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `popup_questions_answers`
+--
+
+LOCK TABLES `popup_questions_answers` WRITE;
+/*!40000 ALTER TABLE `popup_questions_answers` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `popup_questions_answers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `popup_questions_possible_answers`
+--
+
+DROP TABLE IF EXISTS `popup_questions_possible_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `popup_questions_possible_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `popup_question_id` int(11) NOT NULL,
+  `answer_en` varchar(255) NOT NULL,
+  `answer_fr` varchar(255) NOT NULL,
+  `answer_rw` varchar(255) NOT NULL,
+  `answer_sw` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `priority` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_popup_questions_answers` (`popup_question_id`),
+  CONSTRAINT `fk_popup_questions_answers` FOREIGN KEY (`popup_question_id`) REFERENCES `popup_questions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `popup_questions_possible_answers`
+--
+
+LOCK TABLES `popup_questions_possible_answers` WRITE;
+/*!40000 ALTER TABLE `popup_questions_possible_answers` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `popup_questions_possible_answers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_branch_operator`
+--
+
+DROP TABLE IF EXISTS `qms_branch_operator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_branch_operator` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operator_id` int(11) NOT NULL,
+  `institution_id` int(11) NOT NULL,
+  `service_id` text NOT NULL,
+  `linked_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `fk_qms_branch_operator_institution` (`institution_id`),
+  KEY `fk_qms_operator` (`operator_id`),
+  CONSTRAINT `fk_qms_branch_operator_institution` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`),
+  CONSTRAINT `fk_qms_operator` FOREIGN KEY (`operator_id`) REFERENCES `qms_operator` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_branch_operator`
+--
+
+LOCK TABLES `qms_branch_operator` WRITE;
+/*!40000 ALTER TABLE `qms_branch_operator` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_branch_operator` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_branch_transactions`
+--
+
+DROP TABLE IF EXISTS `qms_branch_transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_branch_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliate_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `note` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_unique_column` (`affiliate_id`,`date`),
+  CONSTRAINT `fk_affiliate` FOREIGN KEY (`affiliate_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_branch_transactions`
+--
+
+LOCK TABLES `qms_branch_transactions` WRITE;
+/*!40000 ALTER TABLE `qms_branch_transactions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_branch_transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_counter`
+--
+
+DROP TABLE IF EXISTS `qms_counter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_counter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_service` (`service_id`),
+  CONSTRAINT `fk_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_counter`
+--
+
+LOCK TABLES `qms_counter` WRITE;
+/*!40000 ALTER TABLE `qms_counter` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_counter` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_customer`
+--
+
+DROP TABLE IF EXISTS `qms_customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_uuid` varchar(64) NOT NULL,
+  `device_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone_number` varchar(64) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `has_priority_service` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `device_id` (`device_id`),
+  CONSTRAINT `qms_customer_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_customer`
+--
+
+LOCK TABLES `qms_customer` WRITE;
+/*!40000 ALTER TABLE `qms_customer` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_customer` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_operator`
+--
+
+DROP TABLE IF EXISTS `qms_operator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_operator` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operator_uuid` varchar(64) NOT NULL,
+  `institution_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `email_address` varchar(255) NOT NULL,
+  `phone_number` varchar(64) DEFAULT NULL,
+  `terminal` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `fk_qms_operator_institution` (`institution_id`),
+  CONSTRAINT `fk_qms_operator_institution` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_operator`
+--
+
+LOCK TABLES `qms_operator` WRITE;
+/*!40000 ALTER TABLE `qms_operator` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_operator` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_operator_transactions`
+--
+
+DROP TABLE IF EXISTS `qms_operator_transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_operator_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_transaction_id` int(11) NOT NULL,
+  `operator_id` int(11) NOT NULL,
+  `transaction` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_branch_transactions` (`branch_transaction_id`),
+  KEY `fk_operator` (`operator_id`),
+  CONSTRAINT `fk_branch_transactions` FOREIGN KEY (`branch_transaction_id`) REFERENCES `qms_branch_transactions` (`id`),
+  CONSTRAINT `fk_operator` FOREIGN KEY (`operator_id`) REFERENCES `qms_operator` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_operator_transactions`
+--
+
+LOCK TABLES `qms_operator_transactions` WRITE;
+/*!40000 ALTER TABLE `qms_operator_transactions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_operator_transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_queue`
+--
+
+DROP TABLE IF EXISTS `qms_queue`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `queue_uuid` varchar(64) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `queue_date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `status` enum('open','paused','stopped','closed') NOT NULL,
+  `avg_service_time` float DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `closure_notification` tinyint(4) NOT NULL DEFAULT 0,
+  `inter_arrival_time` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `qms_queue_ibfk_1` (`service_id`),
+  CONSTRAINT `qms_queue_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_queue`
+--
+
+LOCK TABLES `qms_queue` WRITE;
+/*!40000 ALTER TABLE `qms_queue` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_queue` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_queue_operator_lnk`
+--
+
+DROP TABLE IF EXISTS `qms_queue_operator_lnk`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_queue_operator_lnk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `queue_id` int(11) NOT NULL,
+  `operator_id` int(11) NOT NULL,
+  `operator_uuid` varchar(64) DEFAULT NULL,
+  `counter_id` int(11) DEFAULT NULL,
+  `first_login` timestamp NULL DEFAULT NULL,
+  `last_logout` timestamp NULL DEFAULT NULL,
+  `api_key` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `qms_queue_operator_lnk_ibfk_1` (`queue_id`),
+  KEY `qms_queue_operator_lnk_ibfk_2` (`operator_id`),
+  CONSTRAINT `qms_queue_operator_lnk_ibfk_1` FOREIGN KEY (`queue_id`) REFERENCES `qms_queue` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `qms_queue_operator_lnk_ibfk_2` FOREIGN KEY (`operator_id`) REFERENCES `qms_operator` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_queue_operator_lnk`
+--
+
+LOCK TABLES `qms_queue_operator_lnk` WRITE;
+/*!40000 ALTER TABLE `qms_queue_operator_lnk` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_queue_operator_lnk` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_ticket`
+--
+
+DROP TABLE IF EXISTS `qms_ticket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_ticket` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_uuid` varchar(64) NOT NULL,
+  `queue_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `ticket_number` varchar(64) NOT NULL,
+  `full_ticket_number` varchar(255) DEFAULT NULL,
+  `pin` int(11) NOT NULL,
+  `status` tinyint(4) DEFAULT 1,
+  `service_time` float DEFAULT NULL,
+  `estimated_waiting_time` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `waiting_ended_on` timestamp NULL DEFAULT NULL,
+  `skipped_at` timestamp NULL DEFAULT NULL,
+  `cancelled_at` timestamp NULL DEFAULT NULL,
+  `on_hold_from` timestamp NULL DEFAULT NULL,
+  `skips_count` int(11) DEFAULT 0,
+  `prioritized` tinyint(1) DEFAULT 0,
+  `reason_id` int(11) DEFAULT NULL,
+  `prioritized_at` timestamp NULL DEFAULT NULL,
+  `is_next` tinyint(1) DEFAULT 0,
+  `prev_ticket_id` int(11) DEFAULT NULL,
+  `rating_notification_sent` tinyint(4) NOT NULL DEFAULT 0,
+  `source` tinyint(4) NOT NULL DEFAULT 2,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx-unique-qms_ticket-queue_id-ticket_number` (`queue_id`,`ticket_number`),
+  KEY `customer_id` (`customer_id`),
+  KEY `fk_reason_option` (`reason_id`),
+  KEY `queue_id` (`queue_id`),
+  CONSTRAINT `fk_reason_option` FOREIGN KEY (`reason_id`) REFERENCES `option` (`id`),
+  CONSTRAINT `qms_ticket_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `qms_customer` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `qms_ticket_ibfk_2` FOREIGN KEY (`queue_id`) REFERENCES `qms_queue` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_ticket`
+--
+
+LOCK TABLES `qms_ticket` WRITE;
+/*!40000 ALTER TABLE `qms_ticket` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_ticket` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `qms_ticket_assignment`
+--
+
+DROP TABLE IF EXISTS `qms_ticket_assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qms_ticket_assignment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) NOT NULL,
+  `queue_id` int(11) DEFAULT NULL,
+  `operator_id` int(11) DEFAULT NULL,
+  `counter_id` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 1,
+  `started_at` timestamp NULL DEFAULT NULL,
+  `completed_at` timestamp NULL DEFAULT NULL,
+  `assigned_at` datetime DEFAULT current_timestamp(),
+  `state` tinyint(4) DEFAULT 1,
+  `comment` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `operator_id` (`operator_id`),
+  KEY `qms_ticket_assignment_ibfk_1` (`ticket_id`),
+  CONSTRAINT `qms_ticket_assignment_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `qms_ticket` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `qms_ticket_assignment_ibfk_2` FOREIGN KEY (`operator_id`) REFERENCES `qms_operator` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qms_ticket_assignment`
+--
+
+LOCK TABLES `qms_ticket_assignment` WRITE;
+/*!40000 ALTER TABLE `qms_ticket_assignment` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `qms_ticket_assignment` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `rating`
+--
+
+DROP TABLE IF EXISTS `rating`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rating` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `state` tinyint(1) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `service_id` int(11) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `age_range` int(11) DEFAULT NULL,
+  `location` int(11) DEFAULT NULL,
+  `device_id` int(11) DEFAULT NULL,
+  `nps_score` int(11) DEFAULT NULL,
+  `ticket_id` int(11) DEFAULT NULL,
+  `finger_print` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk1_service_id` (`service_id`),
+  KEY `fk_device` (`device_id`),
+  CONSTRAINT `fk1_service_id` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
+  CONSTRAINT `fk_device` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rating`
+--
+
+LOCK TABLES `rating` WRITE;
+/*!40000 ALTER TABLE `rating` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `rating` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `rating_assets`
+--
+
+DROP TABLE IF EXISTS `rating_assets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rating_assets` (
+  `rating_assets_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rating_assets_image` varchar(45) DEFAULT NULL,
+  `rating_assets_video` varchar(35) DEFAULT NULL,
+  `rating_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`rating_assets_id`),
+  KEY `fk_rating_id` (`rating_id`),
+  CONSTRAINT `fk_rating_id` FOREIGN KEY (`rating_id`) REFERENCES `rating` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rating_assets`
+--
+
+LOCK TABLES `rating_assets` WRITE;
+/*!40000 ALTER TABLE `rating_assets` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `rating_assets` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `rating_qr_code_sessions`
+--
+
+DROP TABLE IF EXISTS `rating_qr_code_sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rating_qr_code_sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_uuid` varchar(255) DEFAULT NULL,
+  `service_uuid` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `finger_print` varchar(255) NOT NULL,
+  `ip_address` varchar(255) NOT NULL,
+  `session_token` varchar(255) NOT NULL,
+  `session_expiration` timestamp NOT NULL,
+  `status` enum('Open','Close') NOT NULL DEFAULT 'Open',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_token` (`session_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rating_qr_code_sessions`
+--
+
+LOCK TABLES `rating_qr_code_sessions` WRITE;
+/*!40000 ALTER TABLE `rating_qr_code_sessions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `rating_qr_code_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `rating_reply`
+--
+
+DROP TABLE IF EXISTS `rating_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rating_reply` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `specific` tinyint(1) DEFAULT NULL,
+  `rating_id` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT current_timestamp(),
+  `reply` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rating_reply`
+--
+
+LOCK TABLES `rating_reply` WRITE;
+/*!40000 ALTER TABLE `rating_reply` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `rating_reply` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `institution_id` int(11) NOT NULL,
+  `service_ids` longtext NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `report_created_by` int(11) NOT NULL,
+  `report_institution_id` longtext NOT NULL,
+  `report_recipient` longtext NOT NULL,
+  `report_queue_uuid` varchar(36) NOT NULL,
+  `report_content_key` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `report_queue_uuid` (`report_queue_uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reports`
+--
+
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `request_institution`
+--
+
+DROP TABLE IF EXISTS `request_institution`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `request_institution` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_name` varchar(45) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(45) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `business_certificate` varchar(255) NOT NULL,
+  `product_type` varchar(255) NOT NULL,
+  `approval_status` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `request_institution`
+--
+
+LOCK TABLES `request_institution` WRITE;
+/*!40000 ALTER TABLE `request_institution` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `request_institution` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `reviews`
+--
+
+DROP TABLE IF EXISTS `reviews`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `institution_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `review` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_institutions_id` (`institution_id`),
+  KEY `fk_users_id` (`user_id`),
+  CONSTRAINT `fk_institutions_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reviews`
+--
+
+LOCK TABLES `reviews` WRITE;
+/*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `reviews` VALUES
+(1,2,1,4,'The customer service was efficient and friendly. I appreciate how easy it was to open a new savings account. The waiting time could be shorter though.','2025-05-07 08:12:30'),
+(2,4,1,4,'Their mobile banking app is improving and helpful for quick transactions. I just wish ATM service was available in more rural areas.','2025-05-07 07:29:00'),
+(3,13,3,4,'Nice atmosphere and great coffee! The location at Kigali Heights is perfect for quick business meetups. Wish they had more Rwandan food options.','2025-05-07 07:29:00'),
+(4,26,3,5,'Their burgers are amazing and the staff is super welcoming. It’s my go-to spot on weekends!','2025-05-07 08:13:42'),
+(5,25,4,4,'Beautiful setting and delicious food. The presentation was impressive. Just took a bit long to get served.','2025-05-07 07:29:00'),
+(6,13,4,5,'One of Kigali’s gems. Perfect for date nights with cozy lighting and a lovely menu.','2025-05-07 08:15:15'),
+(7,2,5,5,'Top-notch service and facilities! The rooms are spacious and the breakfast buffet is unbeatable.','2025-05-07 07:29:00'),
+(8,4,5,4,'Perfect for conferences and events. Internet could be faster in some areas though.','2025-05-07 07:29:00'),
+(9,13,6,4,'Great Indian flavors! The butter chicken and naan were amazing. Slightly pricey but worth it.','2025-05-07 07:29:00'),
+(10,26,6,4,'Cozy place with good vegetarian options. I’ll definitely be coming back.','2025-05-07 07:29:00'),
+(11,25,7,3,'Decent banking services, but long queues during peak hours can be frustrating.','2025-05-07 07:29:00'),
+(12,1,7,4,'Reliable for international transfers and business accounts. Their customer reps are professional.','2025-05-07 07:35:22'),
+(13,2,8,4,'Great local bank with helpful staff. Mobile banking app still needs improvement.','2025-05-07 07:29:00'),
+(14,4,8,3,'Service is okay but the app crashes sometimes. Would love faster turnaround for loan processing.','2025-05-07 07:29:00'),
+(15,13,9,4,'Friendly environment and good for small business loans. Staff is very supportive.','2025-05-07 07:29:00'),
+(16,26,9,3,'Their community focus is impressive, but branch service can be slow at times.','2025-05-07 07:29:00'),
+(17,25,10,5,'Luxury and comfort at its best. Room service was exceptional and the spa is relaxing.','2025-05-07 07:29:00'),
+(18,1,10,4,'Beautiful rooms and excellent breakfast. Pool area can get crowded on weekends.','2025-05-07 07:35:22'),
+(19,2,11,4,'Great place to unwind after meetings. Rooms are clean and staff are attentive.','2025-05-07 07:29:00'),
+(20,2,11,4,'Elegant and peaceful. Their restaurant serves really good buffet lunches.','2025-05-07 07:35:22'),
+(21,4,19,4,'Authentic Italian dining in Kigali. Loved the ravioli. Just wish portions were a bit bigger.','2025-05-07 07:29:00'),
+(22,13,19,5,'Classy vibe with excellent pizza and wine selection. Great service too!','2025-05-07 07:29:00'),
+(23,26,20,4,'A historic and charming hotel with excellent views. Restaurant is a bit expensive, though.','2025-05-07 07:29:00'),
+(24,25,20,4,'Very comfortable stay. The pool area and live music nights make it extra special.','2025-05-07 07:29:00');
+/*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `sectors`
+--
+
+DROP TABLE IF EXISTS `sectors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sectors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sectors`
+--
+
+LOCK TABLES `sectors` WRITE;
+/*!40000 ALTER TABLE `sectors` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `sectors` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `service`
+--
+
+DROP TABLE IF EXISTS `service`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `service` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_id` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `bad_rating_threshold` int(11) DEFAULT 10,
+  `group` int(11) DEFAULT NULL,
+  `good_ratings` int(11) DEFAULT NULL,
+  `bad_ratings` int(11) DEFAULT NULL,
+  `excellent_ratings` int(11) DEFAULT NULL,
+  `nps` int(11) DEFAULT NULL,
+  `csat` int(11) DEFAULT NULL,
+  `mean_service_time` int(11) DEFAULT 5,
+  `avg_service_time` float DEFAULT NULL,
+  `uuid` varchar(255) DEFAULT NULL,
+  `inter_arrival_time` float DEFAULT NULL,
+  `estimated_time` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_institution_id` (`institution_id`),
+  KEY `fk_service_group` (`group`),
+  CONSTRAINT `fk_service_group` FOREIGN KEY (`group`) REFERENCES `service_group` (`id`),
+  CONSTRAINT `service_ibfk_1` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service`
+--
+
+LOCK TABLES `service` WRITE;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `service_group`
+--
+
+DROP TABLE IF EXISTS `service_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `service_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `name_rw` varchar(255) DEFAULT NULL,
+  `name_fr` varchar(255) DEFAULT NULL,
+  `name_sw` varchar(255) DEFAULT NULL,
+  `search_term` varchar(255) DEFAULT NULL,
+  `institution_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `uuid` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `good_ratings` int(11) DEFAULT NULL,
+  `bad_ratings` int(11) DEFAULT NULL,
+  `excellent_ratings` int(11) DEFAULT NULL,
+  `nps` int(11) DEFAULT NULL,
+  `csat` int(11) DEFAULT NULL,
+  `mean_service_time` int(11) DEFAULT 5,
+  `ticket_prefix` varchar(64) DEFAULT NULL,
+  `bad_rating_threshold` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_service_group_institution_id` (`institution_id`),
+  CONSTRAINT `fk_service_group_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service_group`
+--
+
+LOCK TABLES `service_group` WRITE;
+/*!40000 ALTER TABLE `service_group` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `service_group` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `survey`
+--
+
+DROP TABLE IF EXISTS `survey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `survey` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(64) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT 1,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `survey_data` longtext DEFAULT NULL,
+  `institution_id` int(11) NOT NULL,
+  `service_id` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(1) DEFAULT 0,
+  `access_key` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `survey`
+--
+
+LOCK TABLES `survey` WRITE;
+/*!40000 ALTER TABLE `survey` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `survey` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `survey_result`
+--
+
+DROP TABLE IF EXISTS `survey_result`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `survey_result` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(11) NOT NULL,
+  `rating_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `device_id` int(11) DEFAULT NULL,
+  `agent` text DEFAULT NULL,
+  `result_data` longtext NOT NULL,
+  `replied_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `survey_result`
+--
+
+LOCK TABLES `survey_result` WRITE;
+/*!40000 ALTER TABLE `survey_result` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `survey_result` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `services` longtext NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `fk-tags-created_by` (`created_by`),
+  KEY `fk-tags-updated_by` (`updated_by`),
+  CONSTRAINT `fk-tags-created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk-tags-updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `tip`
+--
+
+DROP TABLE IF EXISTS `tip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `collection_reference_id` varchar(255) NOT NULL,
+  `disbursement_reference_id` varchar(255) NOT NULL,
+  `device_id` int(11) NOT NULL,
+  `rating_id` bigint(20) DEFAULT NULL,
+  `payee` varchar(64) NOT NULL,
+  `payer` varchar(64) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `tip_amount` int(11) NOT NULL,
+  `collection_status` varchar(64) DEFAULT NULL,
+  `collection_status_details` longtext DEFAULT NULL,
+  `closed_at` timestamp NULL DEFAULT NULL,
+  `disbursed_at` timestamp NULL DEFAULT NULL,
+  `disbursement_status` varchar(64) DEFAULT NULL,
+  `disbursement_status_details` longtext DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_tip_device` (`device_id`),
+  KEY `fk_tip_rating` (`rating_id`),
+  CONSTRAINT `fk_tip_device` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`),
+  CONSTRAINT `fk_tip_rating` FOREIGN KEY (`rating_id`) REFERENCES `rating` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tip`
+--
+
+LOCK TABLES `tip` WRITE;
+/*!40000 ALTER TABLE `tip` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `tip` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `auth_key` varchar(32) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `password_reset_token` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `role` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `verification_token` varchar(255) DEFAULT NULL,
+  `allowed_context` tinyint(4) DEFAULT 1,
+  `institution_id` text DEFAULT NULL,
+  `last_received_hb_alert_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_received_rating_notification_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `language` varchar(64) DEFAULT NULL,
+  `notifications_enabled` tinyint(1) DEFAULT 1,
+  `last_login` datetime DEFAULT NULL,
+  `allow_auto_approved_changes` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `password_reset_token` (`password_reset_token`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `users_profile`
+--
+
+DROP TABLE IF EXISTS `users_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_number` varchar(50) DEFAULT NULL,
+  `age_group` varchar(50) DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_profile`
+--
+
+LOCK TABLES `users_profile` WRITE;
+/*!40000 ALTER TABLE `users_profile` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `users_profile` VALUES
+(1,'John ','Doe','user@example.com','$2b$10$yhO6CioWbs3i4KtNZj0j8.XQlOhrO3CDsSqxtItTvy7uqOflpbj2K',NULL,NULL,NULL,NULL,'2025-04-22 11:01:49'),
+(2,'John ','Doe','user2@example.com','$2b$10$F506hathQVZlqCC8n2Q8/u0sSGDKrU3VFB1PiQ6Tdn6HhOl1PTdb6',NULL,NULL,NULL,NULL,'2025-04-22 11:03:36'),
+(3,'mutoni','josiane','josiane@gmail.com','$2b$10$hqxJ2T.baZDaTdZfqVBDg.93Q6E9ZZ5tuNsnc/ev2uUsDY1L8XVk6',NULL,NULL,NULL,NULL,'2025-04-23 09:34:14'),
+(4,'alan','jonse','alan@gmail.com','asdewq123','0788438','18 to 25','','','2025-04-24 06:17:13'),
+(5,'rudolph','maroyi','rudolph@gmail.com','$2b$10$PfX4zf1mQYqvQ7J.E7H0YuO5bNyzwwqKaNANpfr18cgweV/m1VE62',NULL,NULL,NULL,NULL,'2025-04-24 07:11:28'),
+(6,'jean','jonse','bolebole@gmail.com','asdewq123',NULL,'18 to 25','female',NULL,'2025-04-24 07:37:37'),
+(7,'yves','rushanika','yves@gmail.com','$2b$10$rOpFjkTZSXG3mIRdkrs1g.YEZopls2e80VZrCb18X5Ds/0/gRFX/.',NULL,NULL,NULL,NULL,'2025-04-24 07:38:50'),
+(8,'migele','jean','jean@gmail.com','$2b$10$v9lkcTu6xHkxQYf2b/B0dufVgAzyQ5Ss7K/yNojfY7M5AYtCoUzyu',NULL,NULL,NULL,NULL,'2025-04-24 07:46:42'),
+(9,'Elia','Rams','elia@gmail.com','$2b$10$MwkkOhPlwrPzkfAKjzmF/.BTM6y4z7KnhpIfgKvt3aSwcRNjpm44e',NULL,NULL,NULL,NULL,'2025-04-24 08:03:15'),
+(10,'patrick','mboma','patrick@gmail.com','$2b$10$3xGySDROeHu02T/UOhxDRuq9keAJNPLLLfki/u3oEHH9GWARJOk0G',NULL,NULL,NULL,NULL,'2025-04-24 08:17:24'),
+(11,'felix','musiwa','felix@gmail.com','$2b$10$QeXfB8DVCTd5FbG.ax3OLuEZxIvVEoC0m6hFscctrDJxP8vMpVJ5u',NULL,NULL,NULL,NULL,'2025-04-24 08:24:34'),
+(12,'john','musafiri','john@gmail.com','$2b$10$xGoyIpLYwLjXKmlqo42oe.vLzmdTwU6W88/WBoco9o5K6B.hGVwvW',NULL,NULL,NULL,NULL,'2025-04-24 08:35:17'),
+(13,'zouss','jonse','soem@gmail.com','$2b$10$OwjrO/3c1S.fB2a6yfkcee3rauYXiF57737stm//dZS69rS9wTtxS',NULL,NULL,NULL,NULL,'2025-04-24 09:31:48'),
+(14,'Don','pierre','don@gmail.com','$2b$10$cO9jt3voMZDvd1MPLubiiex8ul.SoJtwRnJTWgbvVzO0iYKLh7xxe',NULL,NULL,NULL,NULL,'2025-04-24 09:49:11'),
+(15,'alice','feza','alice@gmail.com','$2b$10$yPUYnCIxyNZYSu21nYZ4KO4VoIfiHoAiNNVVJqjxD3A3I9lo2tRdq',NULL,NULL,NULL,NULL,'2025-04-24 10:03:58'),
+(16,'waso','masilya','waso@gmail.com','$2b$10$eVclowX8A46nE2pviDMaXuFvgYdI5ZF.SIUy1WKEDVuP1aGTVbglm',NULL,NULL,NULL,NULL,'2025-04-24 10:20:54'),
+(17,'alain ','wita','alain@gmail.com','$2b$10$4.Ne3NYnJBSw6DhaF/rbl.f/ocm.kcUGkOjbiwP8SJknECxwsVwgS',NULL,NULL,NULL,NULL,'2025-04-24 10:26:58'),
+(25,'kika ','wabenga','wabenga@gmail.com','$2b$10$ipI.Z.fDstKUMnJyGYOQ7.rF/t7f3N775scMyx41AP6Jb0SNG5mZ6','0784015138','20-24','male','kigali','2025-04-24 12:18:59'),
+(26,'jean','BB','sone@gmail.com','$2b$10$/aONJpYf2VI24J00hDJBnO/6ZQII89vWveryW67GNN7fnb.zrlrz6',NULL,NULL,NULL,NULL,'2025-04-24 12:41:11'),
+(38,'linda','maroyi','linda@gmail.com','$2b$10$DVY6C6/NQUkg/JnRmmO/V.kWPUCIxSZWeiEPXXE9BzvfoCB89MaI2',NULL,NULL,NULL,NULL,'2025-04-24 10:28:12'),
+(56,'BK Bank','somi','al@gmg.com','$2b$10$HlqGjd4jDTTNTa445t.MRe4lDAlnBGUn/t4AZOH9.hIYbpJCFGVxq',NULL,NULL,NULL,NULL,'2025-05-07 11:46:24'),
+(57,'awezaye23','awezaye','aline@gmail.com','$2b$10$IdCcIdhx6EHIlKFoiXdAOO4o9pWe/fk9C8phvVpPP6SUH/ktUqi66',NULL,NULL,NULL,NULL,'2025-05-08 05:58:18'),
+(58,'mulamba','yvone','mulamba@gmail.com','$2b$10$OwgrqgKVwBvvow/KtYVNBeVbnRl4ZM9akqT84wyMgady8loU4k/Ta','0783512134','20-24','male','kigali','2025-05-08 06:44:06');
+/*!40000 ALTER TABLE `users_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `wallet_accounts`
+--
+
+DROP TABLE IF EXISTS `wallet_accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wallet_accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `account_type_id` int(11) DEFAULT NULL,
+  `account_number` varchar(255) DEFAULT NULL,
+  `account_name` varchar(255) DEFAULT NULL,
+  `balance` float DEFAULT NULL,
+  `public_key` varchar(255) DEFAULT NULL,
+  `private_key` varchar(255) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wallet_accounts`
+--
+
+LOCK TABLES `wallet_accounts` WRITE;
+/*!40000 ALTER TABLE `wallet_accounts` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `wallet_accounts` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `wallet_accounts_types`
+--
+
+DROP TABLE IF EXISTS `wallet_accounts_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wallet_accounts_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) DEFAULT NULL,
+  `abbreviation` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wallet_accounts_types`
+--
+
+LOCK TABLES `wallet_accounts_types` WRITE;
+/*!40000 ALTER TABLE `wallet_accounts_types` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `wallet_accounts_types` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `wallet_transfers`
+--
+
+DROP TABLE IF EXISTS `wallet_transfers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wallet_transfers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` float DEFAULT NULL,
+  `currency` varchar(64) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `payer_id` int(11) DEFAULT NULL,
+  `payer_account_id` int(11) DEFAULT NULL,
+  `payee_address` varchar(255) DEFAULT NULL,
+  `payee_name` varchar(255) DEFAULT NULL,
+  `payee_account_type` varchar(255) DEFAULT NULL,
+  `payee_account_number` varchar(255) DEFAULT NULL,
+  `payee_type` varchar(255) DEFAULT NULL,
+  `tx_id` varchar(255) DEFAULT NULL,
+  `fspid` varchar(255) DEFAULT NULL,
+  `ext_trx_id` varchar(255) DEFAULT NULL,
+  `pay_money_ext_res` longtext DEFAULT NULL,
+  `confirm_party_ext_res` longtext DEFAULT NULL,
+  `confirm_quote_ext_res` longtext DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `quote_id` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `transfer_fees` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wallet_transfers`
+--
+
+LOCK TABLES `wallet_transfers` WRITE;
+/*!40000 ALTER TABLE `wallet_transfers` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `wallet_transfers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `wallet_users`
+--
+
+DROP TABLE IF EXISTS `wallet_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wallet_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` int(11) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `private_key` varchar(255) DEFAULT NULL,
+  `public_key` varchar(255) DEFAULT NULL,
+  `initiated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wallet_users`
+--
+
+LOCK TABLES `wallet_users` WRITE;
+/*!40000 ALTER TABLE `wallet_users` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `wallet_users` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `workingHour`
+--
+
+DROP TABLE IF EXISTS `workingHour`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `workingHour` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_id` int(11) NOT NULL,
+  `day_of_week` varchar(20) NOT NULL,
+  `open_time` varchar(120) NOT NULL,
+  `close_time` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_institit_id` (`institution_id`),
+  CONSTRAINT `fk_institit_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_institut_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `workingHour`
+--
+
+LOCK TABLES `workingHour` WRITE;
+/*!40000 ALTER TABLE `workingHour` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `workingHour` VALUES
+(78,1,'Monday','09:00','00:00'),
+(79,1,'Tuesday','09:00','00:00'),
+(80,1,'Wednesday','09:00','00:00'),
+(81,1,'Thursday','09:00','00:00'),
+(82,1,'Friday','09:00','00:00'),
+(83,1,'Saturday','09:00','00:00'),
+(84,1,'Sunday','09:00','00:00'),
+(85,3,'Monday','09:00','00:00'),
+(86,3,'Tuesday','09:00','00:00'),
+(87,3,'Wednesday','09:00','00:00'),
+(88,3,'Thursday','09:00','00:00'),
+(89,3,'Friday','09:00','00:00'),
+(90,3,'Saturday','09:00','00:00'),
+(91,3,'Sunday','09:00','00:00'),
+(92,4,'Monday','09:00','00:00'),
+(93,4,'Tuesday','09:00','00:00'),
+(94,4,'Wednesday','09:00','00:00'),
+(95,4,'Thursday','09:00','00:00'),
+(96,4,'Friday','09:00','00:00'),
+(97,4,'Saturday','09:00','00:00'),
+(98,4,'Sunday','09:00','00:00'),
+(99,5,'Monday','09:00','00:00'),
+(100,5,'Tuesday','09:00','00:00'),
+(101,5,'Wednesday','09:00','00:00'),
+(102,5,'Thursday','09:00','00:00'),
+(103,5,'Friday','09:00','00:00'),
+(104,5,'Saturday','09:00','00:00'),
+(105,5,'Sunday','09:00','00:00'),
+(106,6,'Monday','09:00','00:00'),
+(107,6,'Tuesday','09:00','00:00'),
+(108,6,'Wednesday','09:00','00:00'),
+(109,6,'Thursday','09:00','00:00'),
+(110,6,'Friday','09:00','00:00'),
+(111,6,'Saturday','09:00','00:00'),
+(112,6,'Sunday','09:00','00:00'),
+(113,7,'Monday','09:00','00:00'),
+(114,7,'Tuesday','09:00','00:00'),
+(115,7,'Wednesday','09:00','00:00'),
+(116,7,'Thursday','09:00','00:00'),
+(117,7,'Friday','09:00','00:00'),
+(118,7,'Saturday','09:00','00:00'),
+(119,7,'Sunday','09:00','00:00'),
+(120,8,'Monday','09:00','00:00'),
+(121,8,'Tuesday','09:00','00:00'),
+(122,8,'Wednesday','09:00','00:00'),
+(123,8,'Thursday','09:00','00:00'),
+(124,8,'Friday','09:00','00:00'),
+(125,8,'Saturday','09:00','00:00'),
+(126,8,'Sunday','09:00','00:00'),
+(127,9,'Monday','09:00','00:00'),
+(128,9,'Tuesday','09:00','00:00'),
+(129,9,'Wednesday','09:00','00:00'),
+(130,9,'Thursday','09:00','00:00'),
+(131,9,'Friday','09:00','00:00'),
+(132,9,'Saturday','09:00','00:00'),
+(133,9,'Sunday','09:00','00:00'),
+(134,10,'Monday','09:00','00:00'),
+(135,10,'Tuesday','09:00','00:00'),
+(136,10,'Wednesday','09:00','00:00'),
+(137,10,'Thursday','09:00','00:00'),
+(138,10,'Friday','09:00','00:00'),
+(139,10,'Saturday','09:00','00:00'),
+(140,10,'Sunday','09:00','00:00'),
+(141,11,'Monday','09:00','00:00'),
+(142,11,'Tuesday','09:00','00:00'),
+(143,11,'Wednesday','09:00','00:00'),
+(144,11,'Thursday','09:00','00:00'),
+(145,11,'Friday','09:00','00:00'),
+(146,11,'Saturday','09:00','00:00'),
+(147,11,'Sunday','09:00','00:00'),
+(148,19,'Monday','09:00','00:00'),
+(149,19,'Tuesday','09:00','00:00'),
+(150,19,'Wednesday','09:00','00:00'),
+(151,19,'Thursday','09:00','00:00'),
+(152,19,'Friday','09:00','00:00'),
+(153,19,'Saturday','09:00','00:00'),
+(154,19,'Sunday','09:00','00:00'),
+(155,20,'Monday','09:00','00:00'),
+(156,20,'Tuesday','09:00','00:00'),
+(157,20,'Wednesday','09:00','00:00'),
+(158,20,'Thursday','09:00','00:00'),
+(159,20,'Friday','09:00','00:00'),
+(160,20,'Saturday','09:00','00:00'),
+(161,20,'Sunday','09:00','00:00');
+/*!40000 ALTER TABLE `workingHour` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
+
+-- Dump completed on 2025-05-08 11:53:17

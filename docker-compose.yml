@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: A1anj0n53
+      MYSQL_DATABASE: mydumb_db
+      MYSQL_USER: new_user
+      MYSQL_PASSWORD: new_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mysql://new_user:new_password@db:3306/mydumb_db"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
