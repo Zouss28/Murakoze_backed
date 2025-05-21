@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: `murakozebacked-production.up.railway.app`,
+        url: '',
       },
     ],
     components: {

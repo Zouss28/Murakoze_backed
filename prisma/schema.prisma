@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:miNHdZistoLVkuZrPzDCwhmOUwBLtiSS@gondola.proxy.rlwy.net:52565/railway"
+  url      = "env("DATABASE_URL")"
 }
 
 model app_releases {
