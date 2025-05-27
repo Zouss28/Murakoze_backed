@@ -18,7 +18,7 @@ async function sendVerificationEmail(email, token) {
   },
 });
 
-  const verifyUrl = `http://murakozebacked-production.up.railway.app/api/auth/verify-email?token=${token}`;
+  const verifyUrl = `https://murakozebacked-production.up.railway.app/api/auth/verify-email?token=${token}`;
 
   await transporter.sendMail({
     to: email,
@@ -76,6 +76,7 @@ async function sendVerificationEmail(email, token) {
 
 router.post('/signup', async (req, res) => {
   try {
+    console.log("HERE IS THE PROBLEM"+req)
     const { email, password, first_name, last_name } = req.body;
 
     const existingUser = await prisma.users_profile.findUnique({ where: { email } });
@@ -116,8 +117,9 @@ router.get('/verify-email', async (req, res) => {
       where: { id: user.id },
       data: { isVerified: true, verifyToken: null },
     });
+   const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
 
-    res.json({ message: 'Email verified successfully!' });
+    res.json({ message: 'Email verified successfully!', accessToken });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Verification failed' });
