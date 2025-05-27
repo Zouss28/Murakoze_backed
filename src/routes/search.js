@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router()
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
-const {getTopInstitutionsByReview} = require('../filter/most_reviewed');
-const {getTopInstitutionsByRate} = require('../filter/most_rated');
 const {getInstitutionsOpenNow} = require('../filter/openNow');
 
 /**

@@ -3,7 +3,7 @@
 --
 -- Host: localhost    Database: mydump_db
 -- ------------------------------------------------------
--- Server version	11.8.1-MariaDB-2
+-- Server version	11.8.1-MariaDB-4
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,18 +44,77 @@ LOCK TABLES `_prisma_migrations` WRITE;
 /*!40000 ALTER TABLE `_prisma_migrations` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `_prisma_migrations` VALUES
+('00269d40-c4d0-4920-a6e1-ebc95e981f90','873154a252a67e8023bfb869906298d001d6b3e680a233c57d7bc876b2ada5d7','2025-05-16 07:21:13.985','20250516072111_change_category_to_institution_id',NULL,NULL,'2025-05-16 07:21:13.864',1),
+('09e2d21b-1d46-4443-9a24-20bf28d85fbe','7702d7335b0474f75f19500ba2104edd572e381908ac53d7ea7aef50fc7ee1b4','2025-05-15 09:12:38.787','20250515091235_added_price_range_table',NULL,NULL,'2025-05-15 09:12:38.741',1),
 ('0d33a9c7-a15a-4db4-99aa-3df3281bac27','99aeca32a79670ccfd032a0037223e1706ee299a72dc7994bbe6c5b2aeea1bec','2025-04-22 12:25:19.794','20250416104220_make_email_unique',NULL,NULL,'2025-04-22 12:25:19.767',1),
+('2e5d784a-fda9-478c-b947-4ea0fdf19ad5','976ed18db28b372feef17b2c7435147863bc8f396742c514d5d33423c55e3c6e','2025-05-27 09:43:58.643','20250527094355_added_email_verification',NULL,NULL,'2025-05-27 09:43:58.624',1),
 ('2f11ef21-434a-49d2-b2ab-7d22a3c80816','cf758ba966cae2a36c1eb27c347ec3f3ccda903f6713031b39a07ce9c2b35ee4','2025-04-22 12:26:03.150','20250422122600_add_review_table',NULL,NULL,'2025-04-22 12:26:03.055',1),
+('35f6757d-c68b-4d2d-b8c5-94342efac8a8','7325db4a7ccc8050b1c45843aec0d0fa0d8103259f307e5ac2ffd289e87885b0','2025-05-27 07:10:22.298','20250527071019_service_rating_table_added',NULL,NULL,'2025-05-27 07:10:22.226',1),
+('43c4f28f-8815-480d-b2d3-e6e012df379f','e740f8e3fb88d3af60e98f7bb0b41b086a0cbbac1613a4739ce1cd6de8516899','2025-05-26 09:10:20.090','20250526091017_added_a_survey',NULL,NULL,'2025-05-26 09:10:20.037',1),
 ('466875f7-7c96-47aa-88a0-8534441444e3','0e9fa29db49f1b75396897e01fcd93931590f2d5dab3609ab60c51602c866d5a','2025-05-08 10:29:29.081','20250505123202_changed_log_and_lat','',NULL,'2025-05-08 10:29:29.081',0),
 ('471d1305-ea2c-4aaf-b33a-14d977e562a0','7e4e3b1410fdefc7de61204c9bfee719d3fc1b148bf9011bd5e0381d2a607d4d','2025-04-24 09:26:06.812','20250424092604_add_review_id_in_images',NULL,NULL,'2025-04-24 09:26:06.723',1),
 ('4916de9e-21c5-4fcf-b3b6-47e377210c4c','009cfe68c1402396d62ca203b3d0dbddac342a96d4058ea8b9aa66467d60e138','2025-05-08 10:33:01.794','20250508103259_added_is_approved',NULL,NULL,'2025-05-08 10:33:01.777',1),
 ('4dc9a303-5806-4c3c-969c-93d8dcac30bf','7f787c9fb79f65eca02f423c2e71c560cd2263779925c0560a57fe0fb5e66921','2025-05-08 10:30:17.167','20250506102215_added_two_buttons','',NULL,'2025-05-08 10:30:17.167',0),
+('97c74e92-06c0-4ee0-9d75-3e7baab2163a','c7f1f555201ad20a3de4e00bbe58bf37dcc0127d995012dc05067a67b99d8107','2025-05-27 08:35:24.940','20250527083521_connected_q_and_a',NULL,NULL,'2025-05-27 08:35:24.892',1),
 ('9c2e95a1-1380-4c0b-b8dc-42f4129d038d','c3e89d014bc2e7faa113b7415cf1dda81ecd9ef12d0368c54fa6ca99cb239f23','2025-05-08 10:21:05.759','20250505095802_add_working_hour','',NULL,'2025-05-08 10:21:05.759',0),
 ('aa1db9e9-d0b9-415c-8e6c-bfc3a501b007','83ff5b233d37e17c45d06ab9986ded369d30f33ffeb3c38082f5dee2af3f2c89','2025-05-08 12:59:37.504','20250508125934_added_amenities',NULL,NULL,'2025-05-08 12:59:37.485',1),
 ('ab3a4592-3b7c-48b2-b760-d2baa4d43fa0','9b7351ce9f10afc448c9a67a2f50d907a68c595531bf27796b420d9540e1c0d6','2025-04-22 12:25:19.592','20250416074950_migration_v0',NULL,NULL,'2025-04-22 12:25:17.870',1),
+('b1890933-073f-452a-9a11-a39d737a0790','b4f58d87b5704de872d47334dc79e52bca9f0a691994f4c4d509055e443590ef','2025-05-13 13:34:43.955','20250512122840_increased_character_for_icon','',NULL,'2025-05-13 13:34:43.955',0),
+('b413f863-5143-4fc3-8e75-8ecb44446f34','6e3c1b030e8dc08e0cfc1c323a0320ab65a16fb02d5edbf3137a599796bfab0b','2025-05-16 07:33:22.412','20250516073312_added_label',NULL,NULL,'2025-05-16 07:33:22.351',1),
+('bdec823c-d03a-4952-aa23-a01a461ce60b','39ce6fc2ef150113e4af9d86058fc011eacdf8ddd74c296f98bac19b1272752b','2025-05-13 13:34:18.210','20250509102920_added_amenities','',NULL,'2025-05-13 13:34:18.210',0),
+('bfb97104-3aa4-476c-b59d-2dc47fb9a396','16e2d82199edf7f072481eb57c6c42d59ce8f4a1bb77dbe73905861a206555c1','2025-05-15 10:18:52.657','20250515101849_updated_the_price_ranges',NULL,NULL,'2025-05-15 10:18:52.455',1),
+('d2680347-121a-4997-bcd2-99302ab88147','02787669a5754223a8c51a5a23c69f972d36985110290a4c32c52b1ca5f686bd','2025-05-27 08:31:04.181','20250527083101_removed_service_id_from_answers',NULL,NULL,'2025-05-27 08:31:04.157',1),
 ('dcb41191-64a5-4fc4-a460-205275f38f2d','3eb632e10262de08aa1e58de1a5f4a2e22ee222602a2aa0710de8e1585319bc2','2025-04-22 12:25:19.766','20250416093043_migration_v1',NULL,NULL,'2025-04-22 12:25:19.594',1),
 ('ece1b487-4ea5-4803-bc0b-a194614ef61e','0417d7f17a662ec5653b8bc7ed246b32242e823d1d5fd691335d9990555a5a81','2025-05-08 11:30:52.006','20250508113049_changed_time_format',NULL,NULL,'2025-05-08 11:30:51.978',1);
 /*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `amenities`
+--
+
+DROP TABLE IF EXISTS `amenities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `amenities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `added_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `amenities`
+--
+
+LOCK TABLES `amenities` WRITE;
+/*!40000 ALTER TABLE `amenities` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `amenities` VALUES
+(1,'Free Wifi','uploads/icons/Free Wifi Icon.png','2025-05-09 10:09:23'),
+(2,'Free Parking','uploads/icons/Free Parking Icon.png','2025-05-09 10:09:23'),
+(3,'Restaurant','uploads/icons/Restaurant icon.png','2025-05-09 10:09:23'),
+(4,'Coffee','uploads/icons/Coffee cup icon.png','2025-05-09 10:09:23'),
+(5,'Swimming Pool','uploads/icons/Swimming Pool Icon.png','2025-05-09 10:09:23'),
+(6,'King Size Beds','uploads/icons/King Size Bed Icon.png','2025-05-09 10:09:23'),
+(7,'Emergency Room','uploads/icons/Emergency Room Icon.png','2025-05-09 10:09:23'),
+(8,'Pharmacy On-site','uploads/icons/Pharmacy Medicines.png','2025-05-09 10:09:23'),
+(9,'Ambulance Services','uploads/icons/Ambulance Icon.png','2025-05-09 10:09:23'),
+(10,'Wheelchair Accessible','uploads/icons/wheelchair.png','2025-05-09 10:09:23'),
+(11,'24/7 Services','uploads/icons/24-7 Icon.png','2025-05-09 10:09:23'),
+(12,'Same-day Service','uploads/icons/Quick Icon.png','2025-05-09 10:09:23'),
+(13,'Background-Checked Staff','uploads/icons/Background Check Icon.png','2025-05-09 10:09:23'),
+(14,'Equipment Provided','uploads/icons/Cleaning Cart Icon.png','2025-05-09 10:09:23'),
+(15,'Pet-Friendly','uploads/icons/Pet Friendly Animal Care.png','2025-05-09 10:09:23'),
+(16,'Blood Bank','uploads/icons/Blood Bank Icon.png','2025-05-09 10:09:23'),
+(17,'Child-Friendly','uploads/icons/Child Friendly Icon.png','2025-05-09 10:09:23'),
+(18,'CCTV Security','uploads/icons/CCTV Security Camera.png','2025-05-09 10:09:23'),
+(19,'Air Conditioning','uploads/icons/Air Conditioner Icon.png','2025-05-09 10:09:23'),
+(20,'Health Insurance Accepted','uploads/icons/Health Insurance Icon.png','2025-05-09 10:09:23');
+/*!40000 ALTER TABLE `amenities` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -219,6 +278,141 @@ LOCK TABLES `audit_trail` WRITE;
 /*!40000 ALTER TABLE `audit_trail` DISABLE KEYS */;
 set autocommit=0;
 /*!40000 ALTER TABLE `audit_trail` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `business_amenities`
+--
+
+DROP TABLE IF EXISTS `business_amenities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `business_amenities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `institution_id` int(11) DEFAULT NULL,
+  `amenitY_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `amenitY_id` (`amenitY_id`,`institution_id`),
+  KEY `fk_instititu_id` (`institution_id`),
+  CONSTRAINT `fk_amen_id` FOREIGN KEY (`amenitY_id`) REFERENCES `amenities` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_instititu_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `business_amenities`
+--
+
+LOCK TABLES `business_amenities` WRITE;
+/*!40000 ALTER TABLE `business_amenities` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `business_amenities` VALUES
+(1,3,1),
+(7,4,1),
+(26,5,1),
+(19,6,1),
+(35,10,1),
+(44,11,1),
+(13,19,1),
+(53,20,1),
+(2,3,2),
+(8,4,2),
+(27,5,2),
+(20,6,2),
+(36,10,2),
+(45,11,2),
+(14,19,2),
+(54,20,2),
+(62,21,2),
+(70,22,2),
+(78,23,2),
+(86,24,2),
+(3,3,3),
+(9,4,3),
+(28,5,3),
+(21,6,3),
+(37,10,3),
+(46,11,3),
+(15,19,3),
+(55,20,3),
+(4,3,4),
+(10,4,4),
+(29,5,4),
+(22,6,4),
+(38,10,4),
+(47,11,4),
+(16,19,4),
+(56,20,4),
+(30,5,5),
+(39,10,5),
+(48,11,5),
+(57,20,5),
+(31,5,6),
+(40,10,6),
+(49,11,6),
+(58,20,6),
+(63,21,7),
+(71,22,7),
+(79,23,7),
+(87,24,7),
+(64,21,8),
+(72,22,8),
+(80,23,8),
+(88,24,8),
+(65,21,9),
+(73,22,9),
+(81,23,9),
+(89,24,9),
+(32,5,10),
+(41,10,10),
+(50,11,10),
+(59,20,10),
+(66,21,10),
+(74,22,10),
+(82,23,10),
+(90,24,10),
+(67,21,11),
+(75,22,11),
+(83,23,11),
+(91,24,11),
+(94,25,12),
+(97,26,12),
+(100,27,12),
+(103,28,12),
+(95,25,13),
+(98,26,13),
+(101,27,13),
+(104,28,13),
+(96,25,14),
+(99,26,14),
+(102,27,14),
+(105,28,14),
+(68,21,16),
+(76,22,16),
+(84,23,16),
+(92,24,16),
+(5,3,17),
+(11,4,17),
+(23,6,17),
+(17,19,17),
+(6,3,18),
+(12,4,18),
+(33,5,18),
+(24,6,18),
+(42,10,18),
+(51,11,18),
+(18,19,18),
+(60,20,18),
+(34,5,19),
+(43,10,19),
+(52,11,19),
+(61,20,19),
+(69,21,20),
+(77,22,20),
+(85,23,20),
+(93,24,20);
+/*!40000 ALTER TABLE `business_amenities` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -402,7 +596,7 @@ CREATE TABLE `images` (
   CONSTRAINT `fk_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_review_id` FOREIGN KEY (`review_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,7 +717,29 @@ INSERT INTO `images` VALUES
 (121,28,NULL,NULL,'uploads/stellar3.jpeg',NULL,'2025-05-08 11:46:29',NULL),
 (122,28,NULL,NULL,'uploads/stellar4.jpeg',NULL,'2025-05-08 11:46:29',NULL),
 (123,NULL,NULL,NULL,'uploads/stellarreview61.jpeg',NULL,'2025-05-08 11:46:29',61),
-(124,NULL,NULL,NULL,'uploads/stellarreview62.jpeg',NULL,'2025-05-08 11:46:29',62);
+(124,NULL,NULL,NULL,'uploads/stellarreview62.jpeg',NULL,'2025-05-08 11:46:29',62),
+(134,NULL,62,'png','uploads/1747144356640-912720792.png',NULL,'2025-05-13 11:34:13',NULL),
+(135,NULL,63,'jpeg','uploads/1747143809915-909603699.jpg',NULL,'2025-05-13 11:43:29',NULL),
+(136,NULL,NULL,'png','uploads/1747311377579-377106537.png',NULL,'2025-05-15 10:16:17',63),
+(137,NULL,NULL,'png','uploads/1747311389306-371436614.png',NULL,'2025-05-15 10:16:29',64),
+(138,NULL,NULL,'png','uploads/1747311436004-408667963.png',NULL,'2025-05-15 10:17:16',65),
+(139,NULL,NULL,'png','uploads/1747311534268-352690271.png',NULL,'2025-05-15 10:18:54',66),
+(140,NULL,NULL,'png','uploads/1747312026483-650991032.png',NULL,'2025-05-15 10:27:06',67),
+(141,NULL,68,'png','uploads/1747313699932-483898111.png',NULL,'2025-05-15 10:33:16',NULL),
+(142,NULL,NULL,'jpeg','uploads/1747381675664-474244313.jpeg',NULL,'2025-05-16 05:47:55',68),
+(143,NULL,NULL,'png','uploads/1747382206976-977398559.png',NULL,'2025-05-16 05:56:47',69),
+(144,NULL,NULL,'jpeg','uploads/1747382642147-92995812.jpg',NULL,'2025-05-16 06:04:02',70),
+(145,NULL,NULL,'png','uploads/1747384203129-421738669.png',NULL,'2025-05-16 06:30:03',71),
+(146,NULL,73,'png','uploads/1747386983448-856094415.png',NULL,'2025-05-16 07:04:49',NULL),
+(147,NULL,NULL,'png','uploads/1747387462647-390346120.png',NULL,'2025-05-16 07:24:22',72),
+(148,NULL,NULL,'png','uploads/1747388219016-658941277.png',NULL,'2025-05-16 07:36:59',73),
+(149,NULL,NULL,'png','uploads/1747394640270-796662093.png',NULL,'2025-05-16 09:24:00',74),
+(150,NULL,79,'png','uploads/1747730053969-286330762.png',NULL,'2025-05-20 06:20:15',NULL),
+(151,NULL,NULL,'png','uploads/1747733450760-956186621.png',NULL,'2025-05-20 07:30:50',75),
+(152,NULL,NULL,'png','uploads/1747733588431-59580713.png',NULL,'2025-05-20 07:33:08',76),
+(153,NULL,NULL,'png','uploads/1747815628321-203938104.png',NULL,'2025-05-21 06:20:28',77),
+(154,NULL,NULL,'png','uploads/1747816652217-831454088.png',NULL,'2025-05-21 06:37:32',78),
+(155,NULL,NULL,'jpeg','uploads/1747835625002-558943443.jpeg',NULL,'2025-05-21 11:53:45',79);
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -974,6 +1190,57 @@ LOCK TABLES `popup_questions_possible_answers` WRITE;
 /*!40000 ALTER TABLE `popup_questions_possible_answers` DISABLE KEYS */;
 set autocommit=0;
 /*!40000 ALTER TABLE `popup_questions_possible_answers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `price_ranges`
+--
+
+DROP TABLE IF EXISTS `price_ranges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `price_ranges` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `max_value` int(11) NOT NULL,
+  `min_value` int(11) NOT NULL,
+  `institution_id` int(11) NOT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_price_range` (`institution_id`),
+  CONSTRAINT `fk_price_range` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `price_ranges`
+--
+
+LOCK TABLES `price_ranges` WRITE;
+/*!40000 ALTER TABLE `price_ranges` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `price_ranges` VALUES
+(1,12000,0,3,'$'),
+(15,54000,30000,4,'$$$'),
+(16,30000,12000,6,'$$'),
+(17,150000,60000,19,'$$$$'),
+(18,50000,180000,5,'$$$$'),
+(19,50000,18000,10,'$$$$'),
+(20,90000,30000,11,'$$$'),
+(21,500000,180000,20,'$$$$'),
+(22,50000,25000,1,'$$$'),
+(23,50000,25000,7,'$$$'),
+(24,10000,2000,8,'$$'),
+(25,2000,0,9,'$'),
+(26,15000,50000,21,'$$$$'),
+(27,50000,20000,22,'$$$'),
+(28,5000,0,24,'$'),
+(29,20000,5000,25,'$$'),
+(30,10000,0,25,'$'),
+(31,30000,10000,26,'$$'),
+(32,70000,30000,27,'$$$'),
+(33,150000,50000,28,'$$');
+/*!40000 ALTER TABLE `price_ranges` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -1562,7 +1829,7 @@ CREATE TABLE `reviews` (
   KEY `fk_users_id` (`user_id`),
   CONSTRAINT `fk_institutions_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_users_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1618,7 +1885,24 @@ INSERT INTO `reviews` VALUES
 (59,13,27,4,'Shine Home made our move stress-free with their efficient cleaning and relocation services. The team was friendly and professional.','2025-05-08 10:25:51',1),
 (60,25,27,3,'The cleaning was satisfactory, but there was a slight delay in starting the service. Overall, a decent experience.','2025-05-08 10:25:51',1),
 (61,26,28,5,'Stellar Engineering handled our home’s electrical rewiring efficiently. Highly recommend their services.','2025-05-08 10:25:51',1),
-(62,2,28,3,'Quality work, but the project took longer than expected. Planning could be better.','2025-05-08 10:25:51',1);
+(62,2,28,3,'Quality work, but the project took longer than expected. Planning could be better.','2025-05-08 10:25:51',1),
+(63,68,3,4,'Hello there since i have been asking for food i\'m not yet receive anything, please can you just help me to bring it at home you can send it with your deliver ','2025-05-15 10:16:17',1),
+(64,68,3,4,'Hello there since i have been asking for food i\'m not yet receive anything, please can you just help me to bring it at home you can send it with your deliver ','2025-05-15 10:16:29',1),
+(65,68,3,4,'Hello there since i have been asking for food i\'m not yet receive anything, please can you just help me to bring it at home you can send it with your deliver ','2025-05-15 10:17:16',1),
+(66,68,3,5,'Hello there i\'m so happy with your service you did for me i\'m so really impressed of what you have done and i can\'t wait to work with you for the next time. ','2025-05-15 10:18:54',1),
+(67,68,3,5,'Hello there i just want to let you that your pizza was so amazing i can\'t wait to take the second one this was really delicious keep cooking well. ','2025-05-15 10:27:06',1),
+(68,69,1,5,'COOOLLLISM','2025-05-16 05:47:55',1),
+(69,70,4,5,'hello thank you for the support it\'s means a lot to me','2025-05-16 05:56:47',1),
+(70,72,3,0,'it stink','2025-05-16 06:04:02',1),
+(71,71,3,4,'Hello there thank you for the support this was really helpful and i can\'t wait to works with you for next time.','2025-05-16 06:30:03',1),
+(72,73,3,5,'Hello there hope you are doing fine i would like to let you know that your services was really helpful and i can\'t wait to see you next time.','2025-05-16 07:24:22',1),
+(73,74,3,5,'Hello good people hope you are all doing amazing i\'m just happy with your services you help me out with. i can\'t wait to work with in future','2025-05-16 07:36:59',1),
+(74,75,3,5,'hello there i need some could you help me please i just want to make sure i\'m safe that why i need some help','2025-05-16 09:24:00',1),
+(75,80,3,5,'Thank you so much guys for your help, your support means a lot to me and i can\'t wait to work with you for next time keep doing the best works.','2025-05-20 07:30:50',1),
+(76,80,3,4,'Hello good people i just wanna say thanks for everything you did for supporting me and i can\'t wait to works with you for the next time you are best people never seen ever','2025-05-20 07:33:08',1),
+(77,81,3,4,'Good morning i just wanna say thanks for your help because without your help i can\'t be able to achieve this thanks a lot','2025-05-21 06:20:28',1),
+(78,82,3,5,'Hi good people i\'m just happy by seeing the way you have welcome me in hotel and your services was really amazing and i can\'t wait to come again next time.','2025-05-21 06:37:32',1),
+(79,83,1,3,'Fuck it','2025-05-21 11:53:45',0);
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -1693,6 +1977,41 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Table structure for table `serviceReview`
+--
+
+DROP TABLE IF EXISTS `serviceReview`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `serviceReview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `emoRating` varchar(25) NOT NULL,
+  `added_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_Service_id` (`service_id`),
+  KEY `fk_Suser_id` (`user_id`),
+  CONSTRAINT `fk_Service_id` FOREIGN KEY (`service_id`) REFERENCES `service_group` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_Suser_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `serviceReview`
+--
+
+LOCK TABLES `serviceReview` WRITE;
+/*!40000 ALTER TABLE `serviceReview` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `serviceReview` VALUES
+(1,85,1,8,'Satisfied','2025-05-27 05:56:12');
+/*!40000 ALTER TABLE `serviceReview` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Table structure for table `service_group`
 --
 
@@ -1722,7 +2041,7 @@ CREATE TABLE `service_group` (
   PRIMARY KEY (`id`),
   KEY `fk_service_group_institution_id` (`institution_id`),
   CONSTRAINT `fk_service_group_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1732,6 +2051,71 @@ CREATE TABLE `service_group` (
 LOCK TABLES `service_group` WRITE;
 /*!40000 ALTER TABLE `service_group` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `service_group` VALUES
+(1,'Food Quality',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(2,'Cleanliness ',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(3,'Customer Service',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(4,'Wait Time',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(5,'Food Quality',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(6,'Cleanliness ',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(7,'Customer Service',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(8,'Wait Time',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(9,'Food Quality',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(10,'Cleanliness',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(11,'Customer Service',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(12,'Wait Time',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(13,'Food Quality',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(14,'Cleanliness',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(15,'Customer Service',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(16,'Wait Time',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(17,'Teller Services',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(18,'Teller Services',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(19,'Teller Services',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(20,'Teller Services',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(21,'ATM Experience',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(22,'ATM Experience',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(23,'ATM Experience',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(24,'ATM Experience',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(25,'Account Opening/Assistance',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(26,'Account Opening/Assistance',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(27,'Account Opening/Assistance',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(28,'Account Opening/Assistance',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(29,'Digital Banking',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(30,'Digital Banking',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(31,'Digital Banking',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(32,'Digital Banking',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(33,'Food & Beverage',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(34,'Cleanliness',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(35,'Front Desk',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(36,'Room Comfort',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(37,'Food & Beverage',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(38,'Cleanliness',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(39,'Front Desk',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(40,'Room Comfort',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(41,'Food & Beverage',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(42,'Cleanliness',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(43,'Front Desk',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(44,'Room Comfort',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(45,'Food & Beverage',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(46,'Cleanliness',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(47,'Front Desk',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(48,'Room Comfort',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(49,'Registration',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(50,'Consultation',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(51,'Cleanliness',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(52,'Pharmacy',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(53,'Registration',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(54,'Consultation',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(55,'Cleanliness',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(56,'Pharmacy',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(57,'Registration',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(58,'Consultation',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(59,'Cleanliness',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(60,'Pharmacy',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(61,'Registration',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(62,'Consultation',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(63,'Cleanliness',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(64,'Pharmacy',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL);
 /*!40000 ALTER TABLE `service_group` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -1769,6 +2153,67 @@ LOCK TABLES `survey` WRITE;
 /*!40000 ALTER TABLE `survey` DISABLE KEYS */;
 set autocommit=0;
 /*!40000 ALTER TABLE `survey` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `surveyAnswers`
+--
+
+DROP TABLE IF EXISTS `surveyAnswers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `surveyAnswers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  `scale_rating` int(11) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_Serv_id` (`question_id`),
+  CONSTRAINT `fk_Serv_id` FOREIGN KEY (`question_id`) REFERENCES `surveyQuestions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `surveyAnswers`
+--
+
+LOCK TABLES `surveyAnswers` WRITE;
+/*!40000 ALTER TABLE `surveyAnswers` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `surveyAnswers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `surveyQuestions`
+--
+
+DROP TABLE IF EXISTS `surveyQuestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `surveyQuestions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
+  `question` text DEFAULT NULL,
+  `choices` longtext DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_servic_id` (`service_id`),
+  CONSTRAINT `fk_servic_id` FOREIGN KEY (`service_id`) REFERENCES `service_group` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `surveyQuestions`
+--
+
+LOCK TABLES `surveyQuestions` WRITE;
+/*!40000 ALTER TABLE `surveyQuestions` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `surveyQuestions` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -1947,9 +2392,11 @@ CREATE TABLE `users_profile` (
   `gender` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `isVerified` tinyint(1) DEFAULT NULL,
+  `verifyToken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1960,32 +2407,56 @@ LOCK TABLES `users_profile` WRITE;
 /*!40000 ALTER TABLE `users_profile` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `users_profile` VALUES
-(1,'John ','Doe','user@example.com','$2b$10$yhO6CioWbs3i4KtNZj0j8.XQlOhrO3CDsSqxtItTvy7uqOflpbj2K',NULL,NULL,NULL,NULL,'2025-04-22 11:01:49'),
-(2,'John ','Doe','user2@example.com','$2b$10$F506hathQVZlqCC8n2Q8/u0sSGDKrU3VFB1PiQ6Tdn6HhOl1PTdb6',NULL,NULL,NULL,NULL,'2025-04-22 11:03:36'),
-(3,'mutoni','josiane','josiane@gmail.com','$2b$10$hqxJ2T.baZDaTdZfqVBDg.93Q6E9ZZ5tuNsnc/ev2uUsDY1L8XVk6',NULL,NULL,NULL,NULL,'2025-04-23 09:34:14'),
-(4,'alan','jonse','alan@gmail.com','asdewq123','0788438','18 to 25','','','2025-04-24 06:17:13'),
-(5,'rudolph','maroyi','rudolph@gmail.com','$2b$10$PfX4zf1mQYqvQ7J.E7H0YuO5bNyzwwqKaNANpfr18cgweV/m1VE62',NULL,NULL,NULL,NULL,'2025-04-24 07:11:28'),
-(6,'jean','jonse','bolebole@gmail.com','asdewq123',NULL,'18 to 25','female',NULL,'2025-04-24 07:37:37'),
-(7,'yves','rushanika','yves@gmail.com','$2b$10$rOpFjkTZSXG3mIRdkrs1g.YEZopls2e80VZrCb18X5Ds/0/gRFX/.',NULL,NULL,NULL,NULL,'2025-04-24 07:38:50'),
-(8,'migele','jean','jean@gmail.com','$2b$10$v9lkcTu6xHkxQYf2b/B0dufVgAzyQ5Ss7K/yNojfY7M5AYtCoUzyu',NULL,NULL,NULL,NULL,'2025-04-24 07:46:42'),
-(9,'Elia','Rams','elia@gmail.com','$2b$10$MwkkOhPlwrPzkfAKjzmF/.BTM6y4z7KnhpIfgKvt3aSwcRNjpm44e',NULL,NULL,NULL,NULL,'2025-04-24 08:03:15'),
-(10,'patrick','mboma','patrick@gmail.com','$2b$10$3xGySDROeHu02T/UOhxDRuq9keAJNPLLLfki/u3oEHH9GWARJOk0G',NULL,NULL,NULL,NULL,'2025-04-24 08:17:24'),
-(11,'felix','musiwa','felix@gmail.com','$2b$10$QeXfB8DVCTd5FbG.ax3OLuEZxIvVEoC0m6hFscctrDJxP8vMpVJ5u',NULL,NULL,NULL,NULL,'2025-04-24 08:24:34'),
-(12,'john','musafiri','john@gmail.com','$2b$10$xGoyIpLYwLjXKmlqo42oe.vLzmdTwU6W88/WBoco9o5K6B.hGVwvW',NULL,NULL,NULL,NULL,'2025-04-24 08:35:17'),
-(13,'zouss','jonse','soem@gmail.com','$2b$10$OwjrO/3c1S.fB2a6yfkcee3rauYXiF57737stm//dZS69rS9wTtxS',NULL,NULL,NULL,NULL,'2025-04-24 09:31:48'),
-(14,'Don','pierre','don@gmail.com','$2b$10$cO9jt3voMZDvd1MPLubiiex8ul.SoJtwRnJTWgbvVzO0iYKLh7xxe',NULL,NULL,NULL,NULL,'2025-04-24 09:49:11'),
-(15,'alice','feza','alice@gmail.com','$2b$10$yPUYnCIxyNZYSu21nYZ4KO4VoIfiHoAiNNVVJqjxD3A3I9lo2tRdq',NULL,NULL,NULL,NULL,'2025-04-24 10:03:58'),
-(16,'waso','masilya','waso@gmail.com','$2b$10$eVclowX8A46nE2pviDMaXuFvgYdI5ZF.SIUy1WKEDVuP1aGTVbglm',NULL,NULL,NULL,NULL,'2025-04-24 10:20:54'),
-(17,'alain ','wita','alain@gmail.com','$2b$10$4.Ne3NYnJBSw6DhaF/rbl.f/ocm.kcUGkOjbiwP8SJknECxwsVwgS',NULL,NULL,NULL,NULL,'2025-04-24 10:26:58'),
-(25,'kika ','wabenga','wabenga@gmail.com','$2b$10$ipI.Z.fDstKUMnJyGYOQ7.rF/t7f3N775scMyx41AP6Jb0SNG5mZ6','0784015138','20-24','male','kigali','2025-04-24 12:18:59'),
-(26,'jean','BB','sone@gmail.com','$2b$10$/aONJpYf2VI24J00hDJBnO/6ZQII89vWveryW67GNN7fnb.zrlrz6',NULL,NULL,NULL,NULL,'2025-04-24 12:41:11'),
-(38,'linda','maroyi','linda@gmail.com','$2b$10$DVY6C6/NQUkg/JnRmmO/V.kWPUCIxSZWeiEPXXE9BzvfoCB89MaI2',NULL,NULL,NULL,NULL,'2025-04-24 10:28:12'),
-(56,'BK Bank','somi','al@gmg.com','$2b$10$HlqGjd4jDTTNTa445t.MRe4lDAlnBGUn/t4AZOH9.hIYbpJCFGVxq',NULL,NULL,NULL,NULL,'2025-05-07 11:46:24'),
-(57,'awezaye23','awezaye','aline@gmail.com','$2b$10$IdCcIdhx6EHIlKFoiXdAOO4o9pWe/fk9C8phvVpPP6SUH/ktUqi66',NULL,NULL,NULL,NULL,'2025-05-08 05:58:18'),
-(58,'mulamba','yvone','mulamba@gmail.com','$2b$10$OwgrqgKVwBvvow/KtYVNBeVbnRl4ZM9akqT84wyMgady8loU4k/Ta','0783512134','20-24','male','kigali','2025-05-08 06:44:06'),
-(59,'justine','faida','justine@gmail.com','$2b$10$AFH6UjSvM/I3Vhc7TUyXcOx1pTjdrHB0DQZW6S9pU2IxPWk0GgBdy','0783512134','20-24','male','kigali','2025-05-08 12:08:39'),
-(60,'mbilizi','stella','stella@gmail.com','$2b$10$4gvijM8/5HYjlR41wIJxB.tDA43dY2plk.QRMnjFxDFxja4h4JbXK','0784015138','20-24','male','kigali','2025-05-08 12:18:53'),
-(61,'esther23','esther21','esther@gmail.com','$2b$10$OCHYy9.YGDqvjngZLsmBS.vbt1880AHVc3XWXPwpPbDmxy0F0e8Z6',NULL,NULL,NULL,NULL,'2025-05-09 06:00:48');
+(1,'John ','Doe','user@example.com','$2b$10$yhO6CioWbs3i4KtNZj0j8.XQlOhrO3CDsSqxtItTvy7uqOflpbj2K',NULL,NULL,NULL,NULL,'2025-04-22 11:01:49',NULL,NULL),
+(2,'John ','Doe','user2@example.com','$2b$10$F506hathQVZlqCC8n2Q8/u0sSGDKrU3VFB1PiQ6Tdn6HhOl1PTdb6',NULL,NULL,NULL,NULL,'2025-04-22 11:03:36',NULL,NULL),
+(3,'mutoni','josiane','josiane@gmail.com','$2b$10$hqxJ2T.baZDaTdZfqVBDg.93Q6E9ZZ5tuNsnc/ev2uUsDY1L8XVk6',NULL,NULL,NULL,NULL,'2025-04-23 09:34:14',NULL,NULL),
+(4,'alan','jonse','alan@gmail.com','asdewq123','0788438','18 to 25','','','2025-04-24 06:17:13',NULL,NULL),
+(5,'rudolph','maroyi','rudolph@gmail.com','$2b$10$PfX4zf1mQYqvQ7J.E7H0YuO5bNyzwwqKaNANpfr18cgweV/m1VE62',NULL,NULL,NULL,NULL,'2025-04-24 07:11:28',NULL,NULL),
+(6,'jean','jonse','bolebole@gmail.com','asdewq123',NULL,'18 to 25','female',NULL,'2025-04-24 07:37:37',NULL,NULL),
+(7,'yves','rushanika','yves@gmail.com','$2b$10$rOpFjkTZSXG3mIRdkrs1g.YEZopls2e80VZrCb18X5Ds/0/gRFX/.',NULL,NULL,NULL,NULL,'2025-04-24 07:38:50',NULL,NULL),
+(8,'migele','jean','jean@gmail.com','$2b$10$v9lkcTu6xHkxQYf2b/B0dufVgAzyQ5Ss7K/yNojfY7M5AYtCoUzyu',NULL,NULL,NULL,NULL,'2025-04-24 07:46:42',NULL,NULL),
+(9,'Elia','Rams','elia@gmail.com','$2b$10$MwkkOhPlwrPzkfAKjzmF/.BTM6y4z7KnhpIfgKvt3aSwcRNjpm44e',NULL,NULL,NULL,NULL,'2025-04-24 08:03:15',NULL,NULL),
+(10,'patrick','mboma','patrick@gmail.com','$2b$10$3xGySDROeHu02T/UOhxDRuq9keAJNPLLLfki/u3oEHH9GWARJOk0G',NULL,NULL,NULL,NULL,'2025-04-24 08:17:24',NULL,NULL),
+(11,'felix','musiwa','felix@gmail.com','$2b$10$QeXfB8DVCTd5FbG.ax3OLuEZxIvVEoC0m6hFscctrDJxP8vMpVJ5u',NULL,NULL,NULL,NULL,'2025-04-24 08:24:34',NULL,NULL),
+(12,'john','musafiri','john@gmail.com','$2b$10$xGoyIpLYwLjXKmlqo42oe.vLzmdTwU6W88/WBoco9o5K6B.hGVwvW',NULL,NULL,NULL,NULL,'2025-04-24 08:35:17',NULL,NULL),
+(13,'zouss','jonse','soem@gmail.com','$2b$10$OwjrO/3c1S.fB2a6yfkcee3rauYXiF57737stm//dZS69rS9wTtxS',NULL,NULL,NULL,NULL,'2025-04-24 09:31:48',NULL,NULL),
+(14,'Don','pierre','don@gmail.com','$2b$10$cO9jt3voMZDvd1MPLubiiex8ul.SoJtwRnJTWgbvVzO0iYKLh7xxe',NULL,NULL,NULL,NULL,'2025-04-24 09:49:11',NULL,NULL),
+(15,'alice','feza','alice@gmail.com','$2b$10$yPUYnCIxyNZYSu21nYZ4KO4VoIfiHoAiNNVVJqjxD3A3I9lo2tRdq',NULL,NULL,NULL,NULL,'2025-04-24 10:03:58',NULL,NULL),
+(16,'waso','masilya','waso@gmail.com','$2b$10$eVclowX8A46nE2pviDMaXuFvgYdI5ZF.SIUy1WKEDVuP1aGTVbglm',NULL,NULL,NULL,NULL,'2025-04-24 10:20:54',NULL,NULL),
+(17,'alain ','wita','alain@gmail.com','$2b$10$4.Ne3NYnJBSw6DhaF/rbl.f/ocm.kcUGkOjbiwP8SJknECxwsVwgS',NULL,NULL,NULL,NULL,'2025-04-24 10:26:58',NULL,NULL),
+(25,'kika ','wabenga','wabenga@gmail.com','$2b$10$ipI.Z.fDstKUMnJyGYOQ7.rF/t7f3N775scMyx41AP6Jb0SNG5mZ6','0784015138','20-24','male','kigali','2025-04-24 12:18:59',NULL,NULL),
+(26,'jean','BB','sone@gmail.com','$2b$10$/aONJpYf2VI24J00hDJBnO/6ZQII89vWveryW67GNN7fnb.zrlrz6',NULL,NULL,NULL,NULL,'2025-04-24 12:41:11',NULL,NULL),
+(38,'linda','maroyi','linda@gmail.com','$2b$10$DVY6C6/NQUkg/JnRmmO/V.kWPUCIxSZWeiEPXXE9BzvfoCB89MaI2',NULL,NULL,NULL,NULL,'2025-04-24 10:28:12',NULL,NULL),
+(56,'BK Bank','somi','al@gmg.com','$2b$10$HlqGjd4jDTTNTa445t.MRe4lDAlnBGUn/t4AZOH9.hIYbpJCFGVxq',NULL,NULL,NULL,NULL,'2025-05-07 11:46:24',NULL,NULL),
+(57,'awezaye23','awezaye','aline@gmail.com','$2b$10$IdCcIdhx6EHIlKFoiXdAOO4o9pWe/fk9C8phvVpPP6SUH/ktUqi66',NULL,NULL,NULL,NULL,'2025-05-08 05:58:18',NULL,NULL),
+(58,'mulamba','yvone','mulamba@gmail.com','$2b$10$OwgrqgKVwBvvow/KtYVNBeVbnRl4ZM9akqT84wyMgady8loU4k/Ta','0783512134','20-24','male','kigali','2025-05-08 06:44:06',NULL,NULL),
+(59,'justine','faida','justine@gmail.com','$2b$10$AFH6UjSvM/I3Vhc7TUyXcOx1pTjdrHB0DQZW6S9pU2IxPWk0GgBdy','0783512134','20-24','male','kigali','2025-05-08 12:08:39',NULL,NULL),
+(60,'mbilizi','stella','stella@gmail.com','$2b$10$4gvijM8/5HYjlR41wIJxB.tDA43dY2plk.QRMnjFxDFxja4h4JbXK','0784015138','20-24','male','kigali','2025-05-08 12:18:53',NULL,NULL),
+(61,'esther23','esther21','esther@gmail.com','$2b$10$OCHYy9.YGDqvjngZLsmBS.vbt1880AHVc3XWXPwpPbDmxy0F0e8Z6',NULL,NULL,NULL,NULL,'2025-05-09 06:00:48',NULL,NULL),
+(62,'samitamba56','samy34','samitamba56@gmail.com','$2b$10$6tfTWlqG2LUjQxZ8LQPkKePfpthymj16d1JenhBXBi/6izedhM7Y.','0783512134','25-34','Female','gisenyi','2025-05-13 11:28:22',NULL,NULL),
+(63,'bube','bubala','mutiku@gmail.com','$2b$10$BE3q17FgDaI.Hxy1WK8uJeMQmT7m0usVb8KDlDfqyTaf94dS6pQLy',NULL,NULL,NULL,NULL,'2025-05-13 11:42:11',NULL,NULL),
+(64,'iphone','iphone6','iphone@gmail.com','$2b$10$/XIwA.fzL3JagToLe3GfSOwihueghmpr0/BzYCQRUZhjpd3nbwR4C','0784015138','20-24','male','kigali','2025-05-15 05:37:52',NULL,NULL),
+(65,'olivia','mugabo','mutoni@gmail.com','$2b$10$nqXnahqES5BTKhBEk88aoOg6TVVNWh0HZA5uDW8btwW.WJyBWMY16',NULL,NULL,NULL,NULL,'2025-05-15 06:05:18',NULL,NULL),
+(67,'malebo','malebo234','malebo@gmail.com','$2b$10$4qN7TCcRNKLel5o1uSs.ROaJq8nguVJqx/xlKrfL3WjyLq1sB.W..','0783512134','20-24','male','kigali','2025-05-15 08:20:38',NULL,NULL),
+(68,'ben45','kashamy','kashama45@gmail.com','$2b$10$RW/3KujrhygsToZsYrxsyunrY67i5L1.YFJsenlWeWmaa4XbAYQ0u','0784015138','18-24','Male','gisenyi','2025-05-15 10:14:54',NULL,NULL),
+(69,'string','string','alan@example.com','$2b$10$2IluQMsZd5fPJOLWbD2KkeFTIc2GiwHvQ3D7.Or8S9b/vs8Z2EBgW',NULL,NULL,NULL,NULL,'2025-05-16 05:47:06',NULL,NULL),
+(70,'clara','clarisse','carine@gmail.com','$2b$10$8yD36T4UKFC8ws38lzjGK.qpMtyXl8DCPsCmhl4r66dWHbfYIBPeK',NULL,NULL,NULL,NULL,'2025-05-16 05:53:47',NULL,NULL),
+(71,'clara','clarisee','clara@gmail.com','$2b$10$c/aC8VlTggpbtOVEM4RDnOksdQKhfpbjPQ2PSBGyenulivfVKtJJa','0784015138','20-24','male','kigali','2025-05-16 05:58:23',NULL,NULL),
+(72,'string','string','user28@example.com','$2b$10$hTNFbQEfXFwYNnFwGpiu/uB8ebpzHCV8bLbokli7StB0bcjiviJ1y',NULL,NULL,NULL,NULL,'2025-05-16 06:02:51',NULL,NULL),
+(73,'sandrine56','sandra45','sandrine@gmail.com','$2b$10$N2t0j4o90MaI0NJRkI2cru.hu1C2zlEzHzeyvCshDtFJpb3PTgvii','0784015138','25-34','Male','gisenyi','2025-05-16 07:02:33',NULL,NULL),
+(74,'teta','yeta','teta@gmail.com','$2b$10$8EKTveI10Z4DjSfRh.ya6uYp1KkT/nhTrUizZK.xm.TJzR2O5ZU4i','0784015138','20-24','male','kigali','2025-05-16 07:35:19',NULL,NULL),
+(75,'feza','rose','rosali@gmail.com','$2b$10$WZTs26oFpC0Pkm6DYw3wcOknsIXyv3G6rxovK5LJnOzGN4tq8pAjK','0783512134','20-24','male','kigali','2025-05-16 09:22:30',NULL,NULL),
+(76,'cher','fai','caro@gmail.com','$2b$10$mL4KEkPlnaUAh6CTC46Bke1QFbzT9JZNfFWb8zMXZMdN853H/g4uW',NULL,NULL,NULL,NULL,'2025-05-16 12:10:35',NULL,NULL),
+(77,'aimer','chantal','budinga.com','$2b$10$hVtsPfjIiRXeZ1RiG8Qf0eirfmQ/s4IADCNWhfsvHzd1LGYN5Zp9q',NULL,NULL,NULL,NULL,'2025-05-19 07:11:20',NULL,NULL),
+(78,'patrick','patrick23','walumona@gmail.com','$2b$10$Mt8NxRWWpq/F2CVrX075RO.G//HvWY0gwKDksuYh542.axj9PtIBK',NULL,NULL,NULL,NULL,'2025-05-19 09:44:43',NULL,NULL),
+(79,'mpasi56','kakouta53','mpasi@gmail.com','$2b$10$feaj8E3lZmB59TFK74cSzuoHtsoppjU2w65DkTA.wlmhXdtw.tbqe','0784015138','35-44','Male','Musanze','2025-05-20 06:19:31',NULL,NULL),
+(80,'mechak','elia','mechak@gmail.com','$2b$10$Pzf/uXJLXE7hOPSuITSbm.hEEJJCat2EJdryGAMmGMf7gmOnVrxxy','0784015138','20-24','male','rwanda','2025-05-20 07:29:25',NULL,NULL),
+(81,'yoana','yoana23','jacob@gmail.com','$2b$10$i0CK2aR0ibcj6Le6VqOOReeTGuyemOy8.VzuxKnF/rrldB51axfRe',NULL,NULL,NULL,NULL,'2025-05-21 06:16:49',NULL,NULL),
+(82,'andrea ','jackson','andrea@gmail.com','$2b$10$I4yfIfQ4qnVRHa7c79k6zuJ1.2NQB.0yU2FVYaJbZchFi8zL3C95q','0784015138','20-24','male','kigali','2025-05-21 06:22:24',NULL,NULL),
+(83,'string','string','user23467@example.com','$2b$10$/6Ol.2XB6JX6OD/66orjDenuopeVaMt523bec9lRsrp5xvCnqUtUO',NULL,NULL,NULL,NULL,'2025-05-21 11:52:55',NULL,NULL),
+(84,'string','string','zouss@example.com','$2b$10$QJvav5rApSjBMQRk41ppfOLHJyahCnWTs2VA2wNK1KVf96IvPoGVK',NULL,NULL,NULL,NULL,'2025-05-27 05:37:25',NULL,NULL),
+(85,'string','string','userwe@example.com','$2b$10$xpyya7UYmXcG5fwMvWG8Geq5LudSyWfW0oXzaxWrrBsl5l9rjqppS',NULL,NULL,NULL,NULL,'2025-05-27 05:49:40',NULL,NULL),
+(91,'string','string','alanjonse2@gmail.com','$2b$10$bqpxyDw4jO0lLZSvHjAdz.WtzdqqoyJLwxwi4CoQrrnVRrfitvLsO',NULL,NULL,NULL,NULL,'2025-05-27 10:11:41',0,'9c0dfc6bd9cbc925df0a931622590e06aedd0e25acd53e4fe57e8bc3be3166f0');
 /*!40000 ALTER TABLE `users_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2152,91 +2623,91 @@ LOCK TABLES `workingHour` WRITE;
 /*!40000 ALTER TABLE `workingHour` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `workingHour` VALUES
-(78,1,'Monday','09:22:00','09:22:00'),
-(79,1,'Tuesday','09:22:00','09:22:00'),
-(80,1,'Wednesday','09:22:00','09:22:00'),
-(81,1,'Thursday','09:22:00','09:22:00'),
-(82,1,'Friday','09:22:00','09:22:00'),
-(83,1,'Saturday','09:22:00','09:22:00'),
-(84,1,'Sunday','09:22:00','09:22:00'),
-(85,3,'Monday','09:22:00','09:22:00'),
-(86,3,'Tuesday','09:22:00','09:22:00'),
-(87,3,'Wednesday','09:22:00','09:22:00'),
-(88,3,'Thursday','09:22:00','09:22:00'),
-(89,3,'Friday','09:22:00','09:22:00'),
-(90,3,'Saturday','09:22:00','09:22:00'),
-(91,3,'Sunday','09:22:00','09:22:00'),
-(92,4,'Monday','09:22:00','09:22:00'),
-(93,4,'Tuesday','09:22:00','09:22:00'),
-(94,4,'Wednesday','09:22:00','09:22:00'),
-(95,4,'Thursday','09:22:00','09:22:00'),
-(96,4,'Friday','09:22:00','09:22:00'),
-(97,4,'Saturday','09:22:00','09:22:00'),
-(98,4,'Sunday','09:22:00','09:22:00'),
-(99,5,'Monday','09:22:00','09:22:00'),
-(100,5,'Tuesday','09:22:00','09:22:00'),
-(101,5,'Wednesday','09:22:00','09:22:00'),
-(102,5,'Thursday','09:22:00','09:22:00'),
-(103,5,'Friday','09:22:00','09:22:00'),
-(104,5,'Saturday','09:22:00','09:22:00'),
-(105,5,'Sunday','09:22:00','09:22:00'),
-(106,6,'Monday','09:22:00','09:22:00'),
-(107,6,'Tuesday','09:22:00','09:22:00'),
-(108,6,'Wednesday','09:22:00','09:22:00'),
-(109,6,'Thursday','09:22:00','09:22:00'),
-(110,6,'Friday','09:22:00','09:22:00'),
-(111,6,'Saturday','09:22:00','09:22:00'),
-(112,6,'Sunday','09:22:00','09:22:00'),
-(113,7,'Monday','09:22:00','09:22:00'),
-(114,7,'Tuesday','09:22:00','09:22:00'),
-(115,7,'Wednesday','09:22:00','09:22:00'),
-(116,7,'Thursday','09:22:00','09:22:00'),
-(117,7,'Friday','09:22:00','09:22:00'),
-(118,7,'Saturday','09:22:00','09:22:00'),
-(119,7,'Sunday','09:22:00','09:22:00'),
-(120,8,'Monday','09:22:00','09:22:00'),
-(121,8,'Tuesday','09:22:00','09:22:00'),
-(122,8,'Wednesday','09:22:00','09:22:00'),
-(123,8,'Thursday','09:22:00','09:22:00'),
-(124,8,'Friday','09:22:00','09:22:00'),
-(125,8,'Saturday','09:22:00','09:22:00'),
-(126,8,'Sunday','09:22:00','09:22:00'),
-(127,9,'Monday','09:22:00','09:22:00'),
-(128,9,'Tuesday','09:22:00','09:22:00'),
-(129,9,'Wednesday','09:22:00','09:22:00'),
-(130,9,'Thursday','09:22:00','09:22:00'),
-(131,9,'Friday','09:22:00','09:22:00'),
-(132,9,'Saturday','09:22:00','09:22:00'),
-(133,9,'Sunday','09:22:00','09:22:00'),
-(134,10,'Monday','09:22:00','09:22:00'),
-(135,10,'Tuesday','09:22:00','09:22:00'),
-(136,10,'Wednesday','09:22:00','09:22:00'),
-(137,10,'Thursday','09:22:00','09:22:00'),
-(138,10,'Friday','09:22:00','09:22:00'),
-(139,10,'Saturday','09:22:00','09:22:00'),
-(140,10,'Sunday','09:22:00','09:22:00'),
-(141,11,'Monday','09:22:00','09:22:00'),
-(142,11,'Tuesday','09:22:00','09:22:00'),
-(143,11,'Wednesday','09:22:00','09:22:00'),
-(144,11,'Thursday','09:22:00','09:22:00'),
-(145,11,'Friday','09:22:00','09:22:00'),
-(146,11,'Saturday','09:22:00','09:22:00'),
-(147,11,'Sunday','09:22:00','09:22:00'),
-(148,19,'Monday','09:22:00','09:22:00'),
-(149,19,'Tuesday','09:22:00','09:22:00'),
-(150,19,'Wednesday','09:22:00','09:22:00'),
-(151,19,'Thursday','09:22:00','09:22:00'),
-(152,19,'Friday','09:22:00','09:22:00'),
-(153,19,'Saturday','09:22:00','09:22:00'),
-(154,19,'Sunday','09:22:00','09:22:00'),
-(155,20,'Monday','09:22:00','09:22:00'),
-(156,20,'Tuesday','09:22:00','09:22:00'),
-(157,20,'Wednesday','09:22:00','09:22:00'),
-(158,20,'Thursday','09:22:00','09:22:00'),
-(159,20,'Friday','09:22:00','09:22:00'),
-(160,20,'Saturday','09:22:00','09:22:00'),
-(161,20,'Sunday','09:22:00','09:22:00'),
-(162,21,'Monday','09:22:00','09:22:00');
+(78,1,'Monday','09:00:00','22:00:00'),
+(79,1,'Tuesday','09:00:00','22:00:00'),
+(80,1,'Wednesday','09:00:00','22:00:00'),
+(81,1,'Thursday','09:00:00','22:00:00'),
+(82,1,'Friday','09:00:00','22:00:00'),
+(83,1,'Saturday','09:00:00','22:00:00'),
+(84,1,'Sunday','09:00:00','22:00:00'),
+(85,3,'Monday','09:00:00','22:00:00'),
+(86,3,'Tuesday','09:00:00','22:00:00'),
+(87,3,'Wednesday','09:00:00','22:00:00'),
+(88,3,'Thursday','09:00:00','22:00:00'),
+(89,3,'Friday','09:00:00','22:00:00'),
+(90,3,'Saturday','09:00:00','22:00:00'),
+(91,3,'Sunday','09:00:00','22:00:00'),
+(92,4,'Monday','09:00:00','22:00:00'),
+(93,4,'Tuesday','09:00:00','22:00:00'),
+(94,4,'Wednesday','09:00:00','22:00:00'),
+(95,4,'Thursday','09:00:00','22:00:00'),
+(96,4,'Friday','09:00:00','22:00:00'),
+(97,4,'Saturday','09:00:00','22:00:00'),
+(98,4,'Sunday','09:00:00','22:00:00'),
+(99,5,'Monday','09:00:00','22:00:00'),
+(100,5,'Tuesday','09:00:00','22:00:00'),
+(101,5,'Wednesday','09:00:00','22:00:00'),
+(102,5,'Thursday','09:00:00','22:00:00'),
+(103,5,'Friday','09:00:00','22:00:00'),
+(104,5,'Saturday','09:00:00','22:00:00'),
+(105,5,'Sunday','09:00:00','22:00:00'),
+(106,6,'Monday','09:00:00','22:00:00'),
+(107,6,'Tuesday','09:00:00','22:00:00'),
+(108,6,'Wednesday','09:00:00','22:00:00'),
+(109,6,'Thursday','09:00:00','22:00:00'),
+(110,6,'Friday','09:00:00','22:00:00'),
+(111,6,'Saturday','09:00:00','22:00:00'),
+(112,6,'Sunday','09:00:00','22:00:00'),
+(113,7,'Monday','09:00:00','22:00:00'),
+(114,7,'Tuesday','09:00:00','22:00:00'),
+(115,7,'Wednesday','09:00:00','22:00:00'),
+(116,7,'Thursday','09:00:00','22:00:00'),
+(117,7,'Friday','09:00:00','22:00:00'),
+(118,7,'Saturday','09:00:00','22:00:00'),
+(119,7,'Sunday','09:00:00','22:00:00'),
+(120,8,'Monday','09:00:00','22:00:00'),
+(121,8,'Tuesday','09:00:00','22:00:00'),
+(122,8,'Wednesday','09:00:00','22:00:00'),
+(123,8,'Thursday','09:00:00','22:00:00'),
+(124,8,'Friday','09:00:00','22:00:00'),
+(125,8,'Saturday','09:00:00','22:00:00'),
+(126,8,'Sunday','09:00:00','22:00:00'),
+(127,9,'Monday','09:00:00','22:00:00'),
+(128,9,'Tuesday','09:00:00','22:00:00'),
+(129,9,'Wednesday','09:00:00','22:00:00'),
+(130,9,'Thursday','09:00:00','22:00:00'),
+(131,9,'Friday','09:00:00','22:00:00'),
+(132,9,'Saturday','09:00:00','22:00:00'),
+(133,9,'Sunday','09:00:00','22:00:00'),
+(134,10,'Monday','09:00:00','22:00:00'),
+(135,10,'Tuesday','09:00:00','22:00:00'),
+(136,10,'Wednesday','09:00:00','22:00:00'),
+(137,10,'Thursday','09:00:00','22:00:00'),
+(138,10,'Friday','09:00:00','22:00:00'),
+(139,10,'Saturday','09:00:00','22:00:00'),
+(140,10,'Sunday','09:00:00','22:00:00'),
+(141,11,'Monday','09:00:00','22:00:00'),
+(142,11,'Tuesday','09:00:00','22:00:00'),
+(143,11,'Wednesday','09:00:00','22:00:00'),
+(144,11,'Thursday','09:00:00','22:00:00'),
+(145,11,'Friday','09:00:00','22:00:00'),
+(146,11,'Saturday','09:00:00','22:00:00'),
+(147,11,'Sunday','09:00:00','22:00:00'),
+(148,19,'Monday','09:00:00','22:00:00'),
+(149,19,'Tuesday','09:00:00','22:00:00'),
+(150,19,'Wednesday','09:00:00','22:00:00'),
+(151,19,'Thursday','09:00:00','22:00:00'),
+(152,19,'Friday','09:00:00','22:00:00'),
+(153,19,'Saturday','09:00:00','22:00:00'),
+(154,19,'Sunday','09:00:00','22:00:00'),
+(155,20,'Monday','09:00:00','22:00:00'),
+(156,20,'Tuesday','09:00:00','22:00:00'),
+(157,20,'Wednesday','09:00:00','22:00:00'),
+(158,20,'Thursday','09:00:00','22:00:00'),
+(159,20,'Friday','09:00:00','22:00:00'),
+(160,20,'Saturday','09:00:00','22:00:00'),
+(161,20,'Sunday','09:00:00','22:00:00'),
+(162,21,'Monday','09:00:00','22:00:00');
 /*!40000 ALTER TABLE `workingHour` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2250,4 +2721,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-05-09 10:05:38
+-- Dump completed on 2025-05-27 14:16:53

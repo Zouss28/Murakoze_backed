@@ -901,6 +901,8 @@ model users_profile {
   gender        String?         @db.VarChar(50)
   address       String?         @db.VarChar(50)
   added_at      DateTime        @default(now()) @db.Timestamp(0)
+  isVerified    Boolean?
+  verifyToken   String?         @db.VarChar(255)
   images        images[]
   reviews       reviews[]
   serviceReview serviceReview[]

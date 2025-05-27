@@ -58464,6 +58464,8 @@ export namespace Prisma {
     gender: string | null
     address: string | null
     added_at: Date | null
+    isVerified: boolean | null
+    verifyToken: string | null
   }
 
   export type Users_profileMaxAggregateOutputType = {
@@ -58477,6 +58479,8 @@ export namespace Prisma {
     gender: string | null
     address: string | null
     added_at: Date | null
+    isVerified: boolean | null
+    verifyToken: string | null
   }
 
   export type Users_profileCountAggregateOutputType = {
@@ -58490,6 +58494,8 @@ export namespace Prisma {
     gender: number
     address: number
     added_at: number
+    isVerified: number
+    verifyToken: number
     _all: number
   }
 
@@ -58513,6 +58519,8 @@ export namespace Prisma {
     gender?: true
     address?: true
     added_at?: true
+    isVerified?: true
+    verifyToken?: true
   }
 
   export type Users_profileMaxAggregateInputType = {
@@ -58526,6 +58534,8 @@ export namespace Prisma {
     gender?: true
     address?: true
     added_at?: true
+    isVerified?: true
+    verifyToken?: true
   }
 
   export type Users_profileCountAggregateInputType = {
@@ -58539,6 +58549,8 @@ export namespace Prisma {
     gender?: true
     address?: true
     added_at?: true
+    isVerified?: true
+    verifyToken?: true
     _all?: true
   }
 
@@ -58639,6 +58651,8 @@ export namespace Prisma {
     gender: string | null
     address: string | null
     added_at: Date
+    isVerified: boolean | null
+    verifyToken: string | null
     _count: Users_profileCountAggregateOutputType | null
     _avg: Users_profileAvgAggregateOutputType | null
     _sum: Users_profileSumAggregateOutputType | null
@@ -58671,6 +58685,8 @@ export namespace Prisma {
     gender?: boolean
     address?: boolean
     added_at?: boolean
+    isVerified?: boolean
+    verifyToken?: boolean
     images?: boolean | users_profile$imagesArgs<ExtArgs>
     reviews?: boolean | users_profile$reviewsArgs<ExtArgs>
     serviceReview?: boolean | users_profile$serviceReviewArgs<ExtArgs>
@@ -58690,9 +58706,11 @@ export namespace Prisma {
     gender?: boolean
     address?: boolean
     added_at?: boolean
+    isVerified?: boolean
+    verifyToken?: boolean
   }
 
-  export type users_profileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "first_name" | "last_name" | "email" | "password" | "phone_number" | "age_group" | "gender" | "address" | "added_at", ExtArgs["result"]["users_profile"]>
+  export type users_profileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "first_name" | "last_name" | "email" | "password" | "phone_number" | "age_group" | "gender" | "address" | "added_at" | "isVerified" | "verifyToken", ExtArgs["result"]["users_profile"]>
   export type users_profileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | users_profile$imagesArgs<ExtArgs>
     reviews?: boolean | users_profile$reviewsArgs<ExtArgs>
@@ -58718,6 +58736,8 @@ export namespace Prisma {
       gender: string | null
       address: string | null
       added_at: Date
+      isVerified: boolean | null
+      verifyToken: string | null
     }, ExtArgs["result"]["users_profile"]>
     composites: {}
   }
@@ -59100,6 +59120,8 @@ export namespace Prisma {
     readonly gender: FieldRef<"users_profile", 'String'>
     readonly address: FieldRef<"users_profile", 'String'>
     readonly added_at: FieldRef<"users_profile", 'DateTime'>
+    readonly isVerified: FieldRef<"users_profile", 'Boolean'>
+    readonly verifyToken: FieldRef<"users_profile", 'String'>
   }
     
 
@@ -68345,7 +68367,9 @@ export namespace Prisma {
     age_group: 'age_group',
     gender: 'gender',
     address: 'address',
-    added_at: 'added_at'
+    added_at: 'added_at',
+    isVerified: 'isVerified',
+    verifyToken: 'verifyToken'
   };
 
   export type Users_profileScalarFieldEnum = (typeof Users_profileScalarFieldEnum)[keyof typeof Users_profileScalarFieldEnum]
@@ -68951,7 +68975,8 @@ export namespace Prisma {
     phone_number: 'phone_number',
     age_group: 'age_group',
     gender: 'gender',
-    address: 'address'
+    address: 'address',
+    verifyToken: 'verifyToken'
   };
 
   export type users_profileOrderByRelevanceFieldEnum = (typeof users_profileOrderByRelevanceFieldEnum)[keyof typeof users_profileOrderByRelevanceFieldEnum]
@@ -73553,6 +73578,8 @@ export namespace Prisma {
     gender?: StringNullableFilter<"users_profile"> | string | null
     address?: StringNullableFilter<"users_profile"> | string | null
     added_at?: DateTimeFilter<"users_profile"> | Date | string
+    isVerified?: BoolNullableFilter<"users_profile"> | boolean | null
+    verifyToken?: StringNullableFilter<"users_profile"> | string | null
     images?: ImagesListRelationFilter
     reviews?: ReviewsListRelationFilter
     serviceReview?: ServiceReviewListRelationFilter
@@ -73569,6 +73596,8 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     added_at?: SortOrder
+    isVerified?: SortOrderInput | SortOrder
+    verifyToken?: SortOrderInput | SortOrder
     images?: imagesOrderByRelationAggregateInput
     reviews?: reviewsOrderByRelationAggregateInput
     serviceReview?: serviceReviewOrderByRelationAggregateInput
@@ -73589,6 +73618,8 @@ export namespace Prisma {
     gender?: StringNullableFilter<"users_profile"> | string | null
     address?: StringNullableFilter<"users_profile"> | string | null
     added_at?: DateTimeFilter<"users_profile"> | Date | string
+    isVerified?: BoolNullableFilter<"users_profile"> | boolean | null
+    verifyToken?: StringNullableFilter<"users_profile"> | string | null
     images?: ImagesListRelationFilter
     reviews?: ReviewsListRelationFilter
     serviceReview?: ServiceReviewListRelationFilter
@@ -73605,6 +73636,8 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     added_at?: SortOrder
+    isVerified?: SortOrderInput | SortOrder
+    verifyToken?: SortOrderInput | SortOrder
     _count?: users_profileCountOrderByAggregateInput
     _avg?: users_profileAvgOrderByAggregateInput
     _max?: users_profileMaxOrderByAggregateInput
@@ -73626,6 +73659,8 @@ export namespace Prisma {
     gender?: StringNullableWithAggregatesFilter<"users_profile"> | string | null
     address?: StringNullableWithAggregatesFilter<"users_profile"> | string | null
     added_at?: DateTimeWithAggregatesFilter<"users_profile"> | Date | string
+    isVerified?: BoolNullableWithAggregatesFilter<"users_profile"> | boolean | null
+    verifyToken?: StringNullableWithAggregatesFilter<"users_profile"> | string | null
   }
 
   export type reviewsWhereInput = {
@@ -78936,6 +78971,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesCreateNestedManyWithoutUsers_profileInput
     reviews?: reviewsCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewCreateNestedManyWithoutUsers_profileInput
@@ -78952,6 +78989,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesUncheckedCreateNestedManyWithoutUsers_profileInput
     reviews?: reviewsUncheckedCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewUncheckedCreateNestedManyWithoutUsers_profileInput
@@ -78967,6 +79006,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUpdateManyWithoutUsers_profileNestedInput
     reviews?: reviewsUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUpdateManyWithoutUsers_profileNestedInput
@@ -78983,6 +79024,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUncheckedUpdateManyWithoutUsers_profileNestedInput
     reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUncheckedUpdateManyWithoutUsers_profileNestedInput
@@ -78999,6 +79042,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
   }
 
   export type users_profileUpdateManyMutationInput = {
@@ -79011,6 +79056,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type users_profileUncheckedUpdateManyInput = {
@@ -79024,6 +79071,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type reviewsCreateInput = {
@@ -83369,6 +83418,8 @@ export namespace Prisma {
     gender?: SortOrder
     address?: SortOrder
     added_at?: SortOrder
+    isVerified?: SortOrder
+    verifyToken?: SortOrder
   }
 
   export type users_profileAvgOrderByAggregateInput = {
@@ -83386,6 +83437,8 @@ export namespace Prisma {
     gender?: SortOrder
     address?: SortOrder
     added_at?: SortOrder
+    isVerified?: SortOrder
+    verifyToken?: SortOrder
   }
 
   export type users_profileMinOrderByAggregateInput = {
@@ -83399,6 +83452,8 @@ export namespace Prisma {
     gender?: SortOrder
     address?: SortOrder
     added_at?: SortOrder
+    isVerified?: SortOrder
+    verifyToken?: SortOrder
   }
 
   export type users_profileSumOrderByAggregateInput = {
@@ -95004,6 +95059,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     reviews?: reviewsCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewCreateNestedManyWithoutUsers_profileInput
   }
@@ -95019,6 +95076,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     reviews?: reviewsUncheckedCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewUncheckedCreateNestedManyWithoutUsers_profileInput
   }
@@ -95195,6 +95254,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: reviewsUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUpdateManyWithoutUsers_profileNestedInput
   }
@@ -95210,6 +95271,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
@@ -95540,6 +95603,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewCreateNestedManyWithoutUsers_profileInput
   }
@@ -95555,6 +95620,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesUncheckedCreateNestedManyWithoutUsers_profileInput
     serviceReview?: serviceReviewUncheckedCreateNestedManyWithoutUsers_profileInput
   }
@@ -95717,6 +95784,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUpdateManyWithoutUsers_profileNestedInput
   }
@@ -95732,6 +95801,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUncheckedUpdateManyWithoutUsers_profileNestedInput
     serviceReview?: serviceReviewUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
@@ -96762,6 +96833,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesCreateNestedManyWithoutUsers_profileInput
     reviews?: reviewsCreateNestedManyWithoutUsers_profileInput
   }
@@ -96777,6 +96850,8 @@ export namespace Prisma {
     gender?: string | null
     address?: string | null
     added_at?: Date | string
+    isVerified?: boolean | null
+    verifyToken?: string | null
     images?: imagesUncheckedCreateNestedManyWithoutUsers_profileInput
     reviews?: reviewsUncheckedCreateNestedManyWithoutUsers_profileInput
   }
@@ -96865,6 +96940,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUpdateManyWithoutUsers_profileNestedInput
     reviews?: reviewsUpdateManyWithoutUsers_profileNestedInput
   }
@@ -96880,6 +96957,8 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     images?: imagesUncheckedUpdateManyWithoutUsers_profileNestedInput
     reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
   }

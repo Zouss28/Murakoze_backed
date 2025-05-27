@@ -12,6 +12,7 @@ const errorHandler = require('./middleware/errorHandler');
 const instit = require('./routes/institution')
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../swagger');
+const router = express.Router()
 
 
 
@@ -39,7 +40,9 @@ app.use('/api/profile', auth, profileRoutes);
 app.use('/api/institutions',instit)
 app.use('/api/review', reviews)
 app.use('/api/search', search)
-
+router.get('/auth/google/callback', async (req, res) => {
+  console.log(req)
+});
 
 
 app.use(errorHandler);
