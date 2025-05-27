@@ -76,7 +76,6 @@ async function sendVerificationEmail(email, token) {
 
 router.post('/signup', async (req, res) => {
   try {
-    console.log("HERE IS THE PROBLEM"+req)
     const { email, password, first_name, last_name } = req.body;
 
     const existingUser = await prisma.users_profile.findUnique({ where: { email } });
