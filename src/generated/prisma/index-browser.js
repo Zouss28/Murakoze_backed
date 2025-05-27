@@ -857,6 +857,32 @@ exports.Prisma.Price_rangesScalarFieldEnum = {
   label: 'label'
 };
 
+exports.Prisma.SurveyAnswersScalarFieldEnum = {
+  id: 'id',
+  question_id: 'question_id',
+  user_id: 'user_id',
+  answer: 'answer',
+  scale_rating: 'scale_rating',
+  added_at: 'added_at'
+};
+
+exports.Prisma.SurveyQuestionsScalarFieldEnum = {
+  id: 'id',
+  service_id: 'service_id',
+  question: 'question',
+  choices: 'choices',
+  added_at: 'added_at'
+};
+
+exports.Prisma.ServiceReviewScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  service_id: 'service_id',
+  rating: 'rating',
+  emoRating: 'emoRating',
+  added_at: 'added_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1243,6 +1269,19 @@ exports.Prisma.amenitiesOrderByRelevanceFieldEnum = {
 exports.Prisma.price_rangesOrderByRelevanceFieldEnum = {
   label: 'label'
 };
+
+exports.Prisma.surveyAnswersOrderByRelevanceFieldEnum = {
+  answer: 'answer'
+};
+
+exports.Prisma.surveyQuestionsOrderByRelevanceFieldEnum = {
+  question: 'question',
+  choices: 'choices'
+};
+
+exports.Prisma.serviceReviewOrderByRelevanceFieldEnum = {
+  emoRating: 'emoRating'
+};
 exports.app_releases_app_name = exports.$Enums.app_releases_app_name = {
   mobile_rating: 'mobile_rating',
   tablet_rating: 'tablet_rating',
@@ -1340,7 +1379,10 @@ exports.Prisma.ModelName = {
   workingHour: 'workingHour',
   amenities: 'amenities',
   business_amenities: 'business_amenities',
-  price_ranges: 'price_ranges'
+  price_ranges: 'price_ranges',
+  surveyAnswers: 'surveyAnswers',
+  surveyQuestions: 'surveyQuestions',
+  serviceReview: 'serviceReview'
 };
 
 /**

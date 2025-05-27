@@ -686,27 +686,29 @@ model service {
 }
 
 model service_group {
-  id                   Int         @id @default(autoincrement())
-  name                 String      @db.VarChar(255)
-  name_rw              String?     @db.VarChar(255)
-  name_fr              String?     @db.VarChar(255)
-  name_sw              String?     @db.VarChar(255)
-  search_term          String?     @db.VarChar(255)
+  id                   Int               @id @default(autoincrement())
+  name                 String            @db.VarChar(255)
+  name_rw              String?           @db.VarChar(255)
+  name_fr              String?           @db.VarChar(255)
+  name_sw              String?           @db.VarChar(255)
+  search_term          String?           @db.VarChar(255)
   institution_id       Int
-  created_at           DateTime    @default(now()) @db.Timestamp(0)
-  updated_at           DateTime    @default(now()) @db.Timestamp(0)
-  uuid                 String?     @db.VarChar(255)
+  created_at           DateTime          @default(now()) @db.Timestamp(0)
+  updated_at           DateTime          @default(now()) @db.Timestamp(0)
+  uuid                 String?           @db.VarChar(255)
   status               Int?
   good_ratings         Int?
   bad_ratings          Int?
   excellent_ratings    Int?
   nps                  Int?
   csat                 Int?
-  mean_service_time    Int?        @default(5)
-  ticket_prefix        String?     @db.VarChar(64)
+  mean_service_time    Int?              @default(5)
+  ticket_prefix        String?           @db.VarChar(64)
   bad_rating_threshold Int?
   service              service[]
-  institution          institution @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_service_group_institution_id")
+  serviceReview        serviceReview[]
+  institution          institution       @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_service_group_institution_id")
+  surveyQuestions      surveyQuestions[]
 
   @@index([institution_id], map: "fk_service_group_institution_id")
 }
@@ -889,18 +891,19 @@ model sectors {
 }
 
 model users_profile {
-  id           Int       @id @default(autoincrement())
-  first_name   String    @db.VarChar(50)
-  last_name    String    @db.VarChar(50)
-  email        String    @unique(map: "unique_email") @db.VarChar(250)
-  password     String    @db.VarChar(255)
-  phone_number String?   @db.VarChar(50)
-  age_group    String?   @db.VarChar(50)
-  gender       String?   @db.VarChar(50)
-  address      String?   @db.VarChar(50)
-  added_at     DateTime  @default(now()) @db.Timestamp(0)
-  images       images[]
-  reviews      reviews[]
+  id            Int             @id @default(autoincrement())
+  first_name    String          @db.VarChar(50)
+  last_name     String          @db.VarChar(50)
+  email         String          @unique(map: "unique_email") @db.VarChar(250)
+  password      String          @db.VarChar(255)
+  phone_number  String?         @db.VarChar(50)
+  age_group     String?         @db.VarChar(50)
+  gender        String?         @db.VarChar(50)
+  address       String?         @db.VarChar(50)
+  added_at      DateTime        @default(now()) @db.Timestamp(0)
+  images        images[]
+  reviews       reviews[]
+  serviceReview serviceReview[]
 }
 
 model reviews {
@@ -958,6 +961,44 @@ model price_ranges {
   institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_price_range")
 
   @@index([institution_id], map: "fk_price_range")
+}
+
+model surveyAnswers {
+  id              Int             @id @default(autoincrement())
+  question_id     Int
+  user_id         Int?
+  answer          String?         @db.VarChar(255)
+  scale_rating    Int?
+  added_at        DateTime        @default(now()) @db.Timestamp(0)
+  surveyQuestions surveyQuestions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Serv_id")
+
+  @@index([question_id], map: "fk_Serv_id")
+}
+
+model surveyQuestions {
+  id            Int             @id @default(autoincrement())
+  service_id    Int
+  question      String?         @db.Text
+  choices       String?         @db.LongText
+  added_at      DateTime        @default(now()) @db.Timestamp(0)
+  surveyAnswers surveyAnswers[]
+  service_group service_group   @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_servic_id")
+
+  @@index([service_id], map: "fk_servic_id")
+}
+
+model serviceReview {
+  id            Int            @id @default(autoincrement())
+  user_id       Int?
+  service_id    Int?
+  rating        Int?
+  emoRating     String         @db.VarChar(25)
+  added_at      DateTime?      @default(now()) @db.Timestamp(0)
+  service_group service_group? @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Service_id")
+  users_profile users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Suser_id")
+
+  @@index([service_id], map: "fk_Service_id")
+  @@index([user_id], map: "fk_Suser_id")
 }
 
 enum app_releases_app_name {

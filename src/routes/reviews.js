@@ -43,17 +43,103 @@ const prisma = new PrismaClient();
  */
 
 router.get("/institution",async (req,res)=>{
-  const institutions = await prisma.institution.findMany();
+  const institutions = await prisma.institution.findMany({
+    include : {
+      service_group : true
+    }
+  });
   const result = institutions.map(inst =>{
     return{
       id: inst.id,
-      name : inst.name
+      name : inst.name,
+      services : inst.service_group ? inst.service_group.map(service => ({name : service.name,
+        id:service.id
+      })) : ""
     }
   });
   res.json({
     institutions : result
   })
 })
+
+
+/**
+ * @swagger
+ * /api/review/serviceRating:
+ *   get:
+ *     summary: Submit a service rating and emotional feedback
+ *     tags:
+ *       - Reviews
+ *     description: Authenticated users can rate a service and provide emotional feedback.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service being rated
+ *       - in: query
+ *         name: rating
+ *         required: true
+ *         schema:
+ *           type: number
+ *           minimum: 1
+ *           maximum: 10
+ *         description: Numerical rating for the service
+ *       - in: query
+ *         name: emorating
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [happy, satisfied, unhappy]
+ *         description: Emotional state associated with the rating
+ *     responses:
+ *       200:
+ *         description: Rating submitted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: Invalid input
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get("/serviceRating", auth, async (req, res) => {
+  try {
+    const { emorating, service_id, rating } = req.query;
+
+    const ratingExplained = { happy: 'Happy', satisfied: 'Satisfied', unhappy: 'Unhappy' };
+
+    if (!service_id) {
+      return res.status(400).json({ message: "No service ID provided!" });
+    }
+
+    if (!(emorating in ratingExplained)) {
+      return res.status(400).json({ message: "Invalid emorating provided!" });
+    }
+
+    await prisma.serviceReview.create({
+      data: {
+        user_id: req.user.userId,
+        service_id: parseInt(service_id),
+        emoRating: ratingExplained[emorating],
+        rating: parseFloat(rating),
+      },
+    });
+
+    return res.json({ message: "Survey submitted" });
+  } catch (err) {
+    console.error("Error during service rating:", err);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+});
 
 /**
  * @swagger
@@ -262,7 +348,125 @@ router.get('/recent', async (req, res) => {
     }
   });
   
+/**
+ * @swagger
+ * /api/review/Q&A:
+ *   get:
+ *     summary: Get all survey questions for a given service
+ *     description: Authenticated user retrieves questions and choices for a service.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service
+ *     responses:
+ *       200:
+ *         description: List of questions retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 questions:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       question:
+ *                         type: string
+ *                       choices:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ */
+router.get("/Q&A", auth, async (req, res) => {
+  try {
+    const service_id = parseInt(req.query.service_id);
+    if (!service_id) return res.status(400).json({ message: "Missing service_id" });
 
+    const questionInstance = await prisma.surveyQuestions.findMany({
+      where: { service_id },
+    });
+
+    const questions = questionInstance.map((q) => ({
+      id: q.id,
+      question: q.question,
+      choices: q.choices,
+    }));
+
+    return res.json({ message: "Q&A retrieved!", questions });
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({ error: "Something went wrong with the QA!" });
+  }
+});
+
+
+/**
+ * @swagger
+ * /api/review/Q&A:
+ *   post:
+ *     summary: Submit answers to multiple survey questions
+ *     description: Authenticated user submits responses to questions.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               answers:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   required: [question_id, answer]
+ *                   properties:
+ *                     question_id:
+ *                       type: integer
+ *                     answer:
+ *                       type: string
+ *                     scale_rating:
+ *                       type: number
+ *     responses:
+ *       200:
+ *         description: Answers submitted successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.post("/Q&A", auth, async (req, res) => {
+  try {
+    const user_id = req.user.userId;
+    const { answers } = req.body;
+
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return res.status(400).json({ message: "Answers must be a non-empty array." });
+    }
+
+    const answerData = answers.map(({ question_id, answer, scale_rating }) => ({
+      question_id,
+      user_id,
+      answer,
+      scale_rating,
+    }));
+
+    await prisma.surveyAnswers.createMany({ data: answerData });
+
+    return res.json({ message: "Survey submitted" });
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({ error: "Something went wrong with the QA!" });
+  }
+});
 
 
 

@@ -42,7 +42,6 @@ async function getInstitutionsOpenNow(category_id) {
   
     return filteredInstitutions;
   }
-  
-  module.exports = { getInstitutionsOpenNow };
+
   
 module.exports = { getInstitutionsOpenNow };
