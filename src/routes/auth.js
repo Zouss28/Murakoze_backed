@@ -8,6 +8,8 @@ const crypto = require('crypto');
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.JWT_SECRET || 'mysecretkey';
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
 
 async function sendVerificationEmail(email, token) {
   const transporter = nodemailer.createTransport({
@@ -18,12 +20,16 @@ async function sendVerificationEmail(email, token) {
   },
 });
 
-  const verifyUrl = `https://murakozebacked-production.up.railway.app/api/auth/verify-email?token=${token}`;
+  const verifyUrl = `http://murakozebacked-production.up.railway.app/api/auth/verify-email?token=${token}`;
+   // Read and modify HTML template
+  const templatePath = path.join(__dirname, '../templates/verify_email.html');
+  let htmlTemplate = fs.readFileSync(templatePath, 'utf-8');
+  htmlTemplate = htmlTemplate.replaceAll('{{verifyUrl}}', verifyUrl);
 
   await transporter.sendMail({
     to: email,
     subject: 'Verify your email',
-    html: `<p>Please verify your email by clicking <a href="${verifyUrl}">here</a>.</p>`,
+    html: htmlTemplate,
   });
 }
 /**
