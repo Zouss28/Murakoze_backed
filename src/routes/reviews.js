@@ -412,7 +412,7 @@ router.get("/Q&A", auth, async (req, res) => {
 
 /**
  * @swagger
- * /api/review/Q&A:
+ * /api/review/Q&A/post:
  *   post:
  *     summary: Submit answers to multiple survey questions
  *     description: Authenticated user submits responses to questions.
@@ -443,7 +443,7 @@ router.get("/Q&A", auth, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.post("/Q&A", auth, async (req, res) => {
+router.post("/Q&A/post", auth, async (req, res) => {
   try {
     const user_id = req.user.userId;
     const { answers } = req.body;

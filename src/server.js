@@ -43,6 +43,9 @@ app.use('/api/search', search)
 router.get('/auth/google/callback', async (req, res) => {
   console.log(req)
 });
+app.post('/tokenVerification',auth, (req,res)=>{
+  res.json({ message: 'Login successful' })
+})
 
 
 app.use(errorHandler);
