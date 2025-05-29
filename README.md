@@ -1,6 +1,4 @@
-# Recommender API
-
-
+# Murakoze Recommendations
 
 ## Getting started
 

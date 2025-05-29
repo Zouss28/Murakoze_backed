@@ -21,7 +21,6 @@ async function sendVerificationEmail(email, token) {
 });
 
   const verifyUrl = `http://murakozebacked-production.up.railway.app/api/auth/verify-email?token=${token}`;
-   // Read and modify HTML template
   const templatePath = path.join(__dirname, '../templates/verify_email.html');
   let htmlTemplate = fs.readFileSync(templatePath, 'utf-8');
   htmlTemplate = htmlTemplate.replaceAll('{{verifyUrl}}', verifyUrl);
@@ -122,10 +121,8 @@ router.get('/verify-email', async (req, res) => {
       where: { id: user.id },
       data: { isVerified: true, verifyToken: null },
     });
-   const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-
-    // res.json({ message: 'Email verified successfully!', accessToken });
-    res.redirect(`http://localhost:5173/verified?accessToken=${accessToken}`);
+    const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+    res.redirect(`https://murakoze-front-production.up.railway.app/verified?accessToken=${accessToken}`);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Verification failed' });

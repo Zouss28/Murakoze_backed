@@ -43,12 +43,12 @@ app.use('/api/search', search)
 router.get('/auth/google/callback', async (req, res) => {
   console.log(req)
 });
-app.post('/tokenVerification',auth, (req,res)=>{
-  res.json({ message: 'Login successful' })
-})
 
 
 app.use(errorHandler);
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/src/templates');
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
