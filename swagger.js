@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: `http://${process.env.IP}:3000`,
+        url: ``,
       },
     ],
     components: {
