@@ -125,7 +125,7 @@ router.get('/verify-email', async (req, res) => {
    const accessToken = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
 
     // res.json({ message: 'Email verified successfully!', accessToken });
-    res.redirect(`https://murakoze-front-production.up.railway.app/verified?accessToken=${accessToken}`);
+    res.redirect(`http://localhost:5173/verified?accessToken=${accessToken}`);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Verification failed' });
