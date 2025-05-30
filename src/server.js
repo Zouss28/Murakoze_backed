@@ -40,10 +40,14 @@ app.use('/api/profile', auth, profileRoutes);
 app.use('/api/institutions',instit)
 app.use('/api/review', reviews)
 app.use('/api/search', search)
+
 router.get('/auth/google/callback', async (req, res) => {
   console.log(req)
 });
 
+app.post("/tokenVerification",auth,(req, res)=>{
+  console.log(req)
+})
 
 app.use(errorHandler);
 
