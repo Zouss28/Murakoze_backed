@@ -176,7 +176,7 @@ router.get('/categories', async (req, res) => {
 
     // Get all categories along with their search terms
     const allCategories = await prisma.categories.findMany({
-      include: { search_terms: true },
+      include: { category_search_terms: true },
     });
 
     // Flatten the data for Fuse
