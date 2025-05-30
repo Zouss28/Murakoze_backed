@@ -97,11 +97,12 @@ model audit_trail {
 }
 
 model categories {
-  id          Int           @id @default(autoincrement())
-  name        String        @db.VarChar(45)
-  sector_id   Int?
-  sectors     sectors?      @relation(fields: [sector_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_sector_id")
-  institution institution[]
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(45)
+  sector_id             Int?
+  sectors               sectors?                @relation(fields: [sector_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_sector_id")
+  category_search_terms category_search_terms[]
+  institution           institution[]
 
   @@index([sector_id], map: "fk_sector_id")
 }
@@ -1001,6 +1002,15 @@ model serviceReview {
 
   @@index([service_id], map: "fk_Service_id")
   @@index([user_id], map: "fk_Suser_id")
+}
+
+model category_search_terms {
+  id          Int        @id @default(autoincrement())
+  category_id Int
+  term        String     @db.VarChar(255)
+  categories  categories @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "category_search_terms_ibfk_1")
+
+  @@index([category_id], map: "category_id")
 }
 
 enum app_releases_app_name {
