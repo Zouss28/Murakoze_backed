@@ -174,16 +174,29 @@ router.get('/categories', async (req, res) => {
     const pageSize = parseInt(req.query.pageSize) || 5;
     const skip = (page - 1) * pageSize;
 
-    const allCategories = await prisma.categories.findMany();
+    // Get all categories along with their search terms
+    const allCategories = await prisma.categories.findMany({
+      include: { search_terms: true },
+    });
 
-    const fuse = new Fuse(allCategories, {
-      keys: ['name'],
+    // Flatten the data for Fuse
+    const searchableData = allCategories.map(cat => ({
+      ...cat,
+      searchIndex: [
+        cat.name,
+        ...cat.search_terms.map(term => term.term)
+      ].join(' ')
+    }));
+
+    // Fuse search on both category name and custom terms
+    const fuse = new Fuse(searchableData, {
+      keys: ['searchIndex'],
       threshold: 0.4,
     });
 
     const searchResults = searchTerm
       ? fuse.search(searchTerm).map(result => result.item)
-      : allCategories;
+      : searchableData;
 
     const paginatedResults = searchResults.slice(skip, skip + pageSize);
 
