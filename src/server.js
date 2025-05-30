@@ -46,7 +46,7 @@ router.get('/auth/google/callback', async (req, res) => {
 });
 
 app.post("/tokenVerification",auth,(req, res)=>{
-  console.log(req)
+  res.json({"message":"Login succefully"})
 })
 
 app.use(errorHandler);
