@@ -43,11 +43,11 @@ model appointments {
   appointment_cancelled              Int?          @default(0) @db.SmallInt
   created_at                         DateTime?     @default(now()) @db.Timestamp(0)
   cancellation_reason                String?       @db.Text
-  user_appointments_creator_idTouser user          @relation("appointments_creator_idTouser", fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_creator")
-  institution                        institution?  @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_institution")
-  qms_operator                       qms_operator? @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_operator")
-  service                            service?      @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_service")
-  user_appointments_user_idTouser    user?         @relation("appointments_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_user")
+  user_appointments_creator_idTouser user          @relation("appointments_creator_idTouser", fields: [creator_id], references: [id], onUpdate: Restrict, map: "fk_appointment_creator")
+  institution                        institution?  @relation(fields: [institution_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_appointment_institution")
+  qms_operator                       qms_operator? @relation(fields: [operator_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_appointment_operator")
+  service                            service?      @relation(fields: [service_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_appointment_service")
+  user_appointments_user_idTouser    user?         @relation("appointments_user_idTouser", fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_appointment_user")
 
   @@index([creator_id], map: "fk_appointment_creator")
   @@index([institution_id], map: "fk_appointment_institution")
@@ -65,7 +65,7 @@ model apps {
   access_key     String?     @db.VarChar(255)
   created_at     DateTime?   @default(now()) @db.DateTime(0)
   updated_at     DateTime?   @default(now()) @db.DateTime(0)
-  institution    institution @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_app_institution_id")
+  institution    institution @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_app_institution_id")
 
   @@index([institution_id], map: "fk_app_institution_id")
 }
@@ -100,7 +100,7 @@ model categories {
   id                    Int                     @id @default(autoincrement())
   name                  String                  @db.VarChar(45)
   sector_id             Int?
-  sectors               sectors?                @relation(fields: [sector_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_sector_id")
+  sectors               sectors?                @relation(fields: [sector_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_sector_id")
   category_search_terms category_search_terms[]
   institution           institution[]
 
@@ -154,7 +154,7 @@ model device {
   latest_hb            DateTime?      @db.DateTime(0)
   latest_hb_version    String?        @db.VarChar(64)
   updated_at           DateTime       @default(now()) @db.Timestamp(0)
-  institution          institution?   @relation(fields: [affiliate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_device_affiliate")
+  institution          institution?   @relation(fields: [affiliate_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_device_affiliate")
   qms_customer         qms_customer[]
   rating               rating[]
   tip                  tip[]
@@ -220,7 +220,7 @@ model institution {
   business_amenities           business_amenities[]
   device                       device[]
   images                       images[]
-  categories                   categories?               @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_category_id")
+  categories                   categories?               @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_category_id")
   popup_questions              popup_questions[]
   price_ranges                 price_ranges[]
   qms_branch_operator          qms_branch_operator[]
@@ -351,7 +351,7 @@ model popup_questions {
   type                             Int?                               @default(1) @db.TinyInt
   created_at                       DateTime                           @default(now()) @db.Timestamp(0)
   updated_at                       DateTime                           @default(now()) @db.Timestamp(0)
-  institution                      institution                        @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_institution")
+  institution                      institution                        @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_institution")
   popup_questions_possible_answers popup_questions_possible_answers[]
 
   @@index([institution_id], map: "fk_institution")
@@ -364,7 +364,7 @@ model popup_questions_answers {
   ticket_id                        Int?
   answer_id                        Int
   answered_at                      DateTime                         @default(now()) @db.Timestamp(0)
-  popup_questions_possible_answers popup_questions_possible_answers @relation(fields: [answer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_popup_questions_possible_answers")
+  popup_questions_possible_answers popup_questions_possible_answers @relation(fields: [answer_id], references: [id], onUpdate: Restrict, map: "fk_popup_questions_possible_answers")
 
   @@index([answer_id], map: "fk_popup_questions_possible_answers")
   @@index([device_id], map: "popup_questions_answers_device_id")
@@ -384,7 +384,7 @@ model popup_questions_possible_answers {
   updated_at              DateTime                  @default(now()) @db.Timestamp(0)
   priority                Int?
   popup_questions_answers popup_questions_answers[]
-  popup_questions         popup_questions           @relation(fields: [popup_question_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_popup_questions_answers")
+  popup_questions         popup_questions           @relation(fields: [popup_question_id], references: [id], onUpdate: Restrict, map: "fk_popup_questions_answers")
 
   @@index([popup_question_id], map: "fk_popup_questions_answers")
 }
@@ -396,8 +396,8 @@ model qms_branch_operator {
   service_id     String       @db.Text
   linked_at      DateTime     @default(now()) @db.Timestamp(0)
   status         Int          @default(1) @db.TinyInt
-  institution    institution  @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_branch_operator_institution")
-  qms_operator   qms_operator @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_operator")
+  institution    institution  @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_qms_branch_operator_institution")
+  qms_operator   qms_operator @relation(fields: [operator_id], references: [id], onUpdate: Restrict, map: "fk_qms_operator")
 
   @@index([institution_id], map: "fk_qms_branch_operator_institution")
   @@index([operator_id], map: "fk_qms_operator")
@@ -410,7 +410,7 @@ model qms_branch_transactions {
   note                      String?                     @db.Text
   created_at                DateTime                    @default(now()) @db.Timestamp(0)
   last_updated              DateTime                    @default(now()) @db.Timestamp(0)
-  institution               institution                 @relation(fields: [affiliate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_affiliate")
+  institution               institution                 @relation(fields: [affiliate_id], references: [id], onUpdate: Restrict, map: "fk_affiliate")
   qms_operator_transactions qms_operator_transactions[]
 
   @@unique([affiliate_id, date], map: "idx_unique_column")
@@ -423,7 +423,7 @@ model qms_counter {
   service_id  Int?
   created_at  DateTime @default(now()) @db.Timestamp(0)
   updated_at  DateTime @default(now()) @db.Timestamp(0)
-  service     service? @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service")
+  service     service? @relation(fields: [service_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_service")
 
   @@index([service_id], map: "fk_service")
 }
@@ -438,7 +438,7 @@ model qms_customer {
   has_priority_service Boolean?     @default(false)
   created_at           DateTime     @default(now()) @db.Timestamp(0)
   updated_at           DateTime     @default(now()) @db.Timestamp(0)
-  device               device?      @relation(fields: [device_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_customer_ibfk_1")
+  device               device?      @relation(fields: [device_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_customer_ibfk_1")
   qms_ticket           qms_ticket[]
 
   @@index([device_id], map: "device_id")
@@ -459,7 +459,7 @@ model qms_operator {
   terminal                  Boolean?                    @default(false)
   appointments              appointments[]
   qms_branch_operator       qms_branch_operator[]
-  institution               institution?                @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_operator_institution")
+  institution               institution?                @relation(fields: [institution_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_qms_operator_institution")
   qms_operator_transactions qms_operator_transactions[]
   qms_queue_operator_lnk    qms_queue_operator_lnk[]
   qms_ticket_assignment     qms_ticket_assignment[]
@@ -474,8 +474,8 @@ model qms_operator_transactions {
   transaction             Int
   created_at              DateTime                @default(now()) @db.Timestamp(0)
   last_updated            DateTime                @default(now()) @db.Timestamp(0)
-  qms_branch_transactions qms_branch_transactions @relation(fields: [branch_transaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_branch_transactions")
-  qms_operator            qms_operator            @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_operator")
+  qms_branch_transactions qms_branch_transactions @relation(fields: [branch_transaction_id], references: [id], onUpdate: Restrict, map: "fk_branch_transactions")
+  qms_operator            qms_operator            @relation(fields: [operator_id], references: [id], onUpdate: Restrict, map: "fk_operator")
 
   @@index([branch_transaction_id], map: "fk_branch_transactions")
   @@index([operator_id], map: "fk_operator")
@@ -494,7 +494,7 @@ model qms_queue {
   updated_at             DateTime                 @default(now()) @db.Timestamp(0)
   closure_notification   Int                      @default(0) @db.TinyInt
   inter_arrival_time     Float?                   @db.Float
-  service                service                  @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_ibfk_1")
+  service                service                  @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_queue_ibfk_1")
   qms_queue_operator_lnk qms_queue_operator_lnk[]
   qms_ticket             qms_ticket[]
 
@@ -510,8 +510,8 @@ model qms_queue_operator_lnk {
   first_login   DateTime?    @db.Timestamp(0)
   last_logout   DateTime?    @db.Timestamp(0)
   api_key       String?      @db.VarChar(64)
-  qms_queue     qms_queue    @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_operator_lnk_ibfk_1")
-  qms_operator  qms_operator @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_operator_lnk_ibfk_2")
+  qms_queue     qms_queue    @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_queue_operator_lnk_ibfk_1")
+  qms_operator  qms_operator @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_queue_operator_lnk_ibfk_2")
 
   @@index([queue_id], map: "qms_queue_operator_lnk_ibfk_1")
   @@index([operator_id], map: "qms_queue_operator_lnk_ibfk_2")
@@ -541,9 +541,9 @@ model qms_ticket {
   prev_ticket_id           Int?
   rating_notification_sent Int                     @default(0) @db.TinyInt
   source                   Int                     @default(2) @db.TinyInt
-  option                   option?                 @relation(fields: [reason_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_reason_option")
-  qms_customer             qms_customer            @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_ibfk_1")
-  qms_queue                qms_queue               @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_ibfk_2")
+  option                   option?                 @relation(fields: [reason_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_reason_option")
+  qms_customer             qms_customer            @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_ticket_ibfk_1")
+  qms_queue                qms_queue               @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_ticket_ibfk_2")
   qms_ticket_assignment    qms_ticket_assignment[]
 
   @@unique([queue_id, ticket_number], map: "idx-unique-qms_ticket-queue_id-ticket_number")
@@ -564,8 +564,8 @@ model qms_ticket_assignment {
   assigned_at  DateTime?     @default(now()) @db.DateTime(0)
   state        Int?          @default(1) @db.TinyInt
   comment      String?       @db.Text
-  qms_ticket   qms_ticket    @relation(fields: [ticket_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_assignment_ibfk_1")
-  qms_operator qms_operator? @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_assignment_ibfk_2")
+  qms_ticket   qms_ticket    @relation(fields: [ticket_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_ticket_assignment_ibfk_1")
+  qms_operator qms_operator? @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "qms_ticket_assignment_ibfk_2")
 
   @@index([operator_id], map: "operator_id")
   @@index([ticket_id], map: "qms_ticket_assignment_ibfk_1")
@@ -585,8 +585,8 @@ model rating {
   nps_score     Int?
   ticket_id     Int?
   finger_print  String?         @db.VarChar(255)
-  service       service         @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk1_service_id")
-  device        device?         @relation(fields: [device_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_device")
+  service       service         @relation(fields: [service_id], references: [id], onUpdate: Restrict, map: "fk1_service_id")
+  device        device?         @relation(fields: [device_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_device")
   rating_assets rating_assets[]
   tip           tip[]
 
@@ -599,7 +599,7 @@ model rating_assets {
   rating_assets_image String? @db.VarChar(45)
   rating_assets_video String? @db.VarChar(35)
   rating_id           BigInt?
-  rating              rating? @relation(fields: [rating_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rating_id")
+  rating              rating? @relation(fields: [rating_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_rating_id")
 
   @@index([rating_id], map: "fk_rating_id")
 }
@@ -679,8 +679,8 @@ model service {
   qms_counter          qms_counter[]
   qms_queue            qms_queue[]
   rating               rating[]
-  service_group        service_group? @relation(fields: [group], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service_group")
-  institution          institution?   @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "service_ibfk_1")
+  service_group        service_group? @relation(fields: [group], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_service_group")
+  institution          institution?   @relation(fields: [institution_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "service_ibfk_1")
 
   @@index([institution_id], map: "fk_institution_id")
   @@index([group], map: "fk_service_group")
@@ -708,7 +708,7 @@ model service_group {
   bad_rating_threshold Int?
   service              service[]
   serviceReview        serviceReview[]
-  institution          institution       @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service_group_institution_id")
+  institution          institution       @relation(fields: [institution_id], references: [id], onUpdate: Restrict, map: "fk_service_group_institution_id")
   surveyQuestions      surveyQuestions[]
 
   @@index([institution_id], map: "fk_service_group_institution_id")
@@ -775,8 +775,8 @@ model tip {
   disbursement_status_details String?   @db.LongText
   created_at                  DateTime  @default(now()) @db.Timestamp(0)
   updated_at                  DateTime  @default(now()) @db.Timestamp(0)
-  device                      device    @relation(fields: [device_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tip_device")
-  rating                      rating?   @relation(fields: [rating_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tip_rating")
+  device                      device    @relation(fields: [device_id], references: [id], onUpdate: Restrict, map: "fk_tip_device")
+  rating                      rating?   @relation(fields: [rating_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_tip_rating")
 
   @@index([device_id], map: "fk_tip_device")
   @@index([rating_id], map: "fk_tip_rating")
@@ -875,9 +875,9 @@ model images {
   caption        String?        @db.VarChar(255)
   uploaded_at    DateTime       @default(now()) @db.Timestamp(0)
   review_id      Int?
-  institution    institution?   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institution_id")
-  reviews        reviews?       @relation(fields: [review_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_review_id")
-  users_profile  users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user_id")
+  institution    institution?   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institution_id")
+  reviews        reviews?       @relation(fields: [review_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_review_id")
+  users_profile  users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_user_id")
 
   @@index([institution_id], map: "fk_institution_id")
   @@index([user_id], map: "fk_user_id")
@@ -918,8 +918,8 @@ model reviews {
   created_at     DateTime      @default(now()) @db.Timestamp(0)
   is_approved    Boolean?      @default(true)
   images         images[]
-  institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institutions_id")
-  users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_users_id")
+  institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
+  users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")
@@ -931,7 +931,7 @@ model workingHour {
   day_of_week    String      @db.VarChar(20)
   open_time      DateTime?   @db.Time(0)
   close_time     DateTime?   @db.Time(0)
-  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institit_id")
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institit_id")
 
   @@index([institution_id], map: "fk_institit_id")
 }
@@ -948,8 +948,8 @@ model business_amenities {
   id             Int          @id @default(autoincrement())
   institution_id Int?
   amenitY_id     Int?
-  amenities      amenities?   @relation(fields: [amenitY_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_amen_id")
-  institution    institution? @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_instititu_id")
+  amenities      amenities?   @relation(fields: [amenitY_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_amen_id")
+  institution    institution? @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_instititu_id")
 
   @@unique([amenitY_id, institution_id], map: "amenitY_id")
   @@index([institution_id], map: "fk_instititu_id")
@@ -961,7 +961,7 @@ model price_ranges {
   min_value      Int
   institution_id Int
   label          String?     @db.VarChar(255)
-  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_price_range")
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_price_range")
 
   @@index([institution_id], map: "fk_price_range")
 }
@@ -973,7 +973,7 @@ model surveyAnswers {
   answer          String?         @db.VarChar(255)
   scale_rating    Int?
   added_at        DateTime        @default(now()) @db.Timestamp(0)
-  surveyQuestions surveyQuestions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Serv_id")
+  surveyQuestions surveyQuestions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Serv_id")
 
   @@index([question_id], map: "fk_Serv_id")
 }
@@ -985,7 +985,7 @@ model surveyQuestions {
   choices       String?         @db.LongText
   added_at      DateTime        @default(now()) @db.Timestamp(0)
   surveyAnswers surveyAnswers[]
-  service_group service_group   @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_servic_id")
+  service_group service_group   @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_servic_id")
 
   @@index([service_id], map: "fk_servic_id")
 }
@@ -997,8 +997,8 @@ model serviceReview {
   rating        Int?
   emoRating     String         @db.VarChar(25)
   added_at      DateTime?      @default(now()) @db.Timestamp(0)
-  service_group service_group? @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Service_id")
-  users_profile users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Suser_id")
+  service_group service_group? @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Service_id")
+  users_profile users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_Suser_id")
 
   @@index([service_id], map: "fk_Service_id")
   @@index([user_id], map: "fk_Suser_id")
@@ -1008,7 +1008,7 @@ model category_search_terms {
   id          Int        @id @default(autoincrement())
   category_id Int
   term        String     @db.VarChar(255)
-  categories  categories @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "category_search_terms_ibfk_1")
+  categories  categories @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "category_search_terms_ibfk_1")
 
   @@index([category_id], map: "category_id")
 }
