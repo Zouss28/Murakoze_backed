@@ -184,7 +184,7 @@ router.get('/categories', async (req, res) => {
       ...cat,
       searchIndex: [
         cat.name,
-        ...cat.search_terms.map(term => term.term)
+        ...cat.category_search_terms.map(term => term.term)
       ].join(' ')
     }));
 
