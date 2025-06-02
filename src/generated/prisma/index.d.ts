@@ -303,6 +303,11 @@ export type surveyQuestions = $Result.DefaultSelection<Prisma.$surveyQuestionsPa
  * 
  */
 export type serviceReview = $Result.DefaultSelection<Prisma.$serviceReviewPayload>
+/**
+ * Model category_search_terms
+ * 
+ */
+export type category_search_terms = $Result.DefaultSelection<Prisma.$category_search_termsPayload>
 
 /**
  * Enums
@@ -1104,6 +1109,16 @@ export class PrismaClient<
     * ```
     */
   get serviceReview(): Prisma.serviceReviewDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.category_search_terms`: Exposes CRUD operations for the **category_search_terms** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Category_search_terms
+    * const category_search_terms = await prisma.category_search_terms.findMany()
+    * ```
+    */
+  get category_search_terms(): Prisma.category_search_termsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1162,8 +1177,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -1601,7 +1616,8 @@ export namespace Prisma {
     price_ranges: 'price_ranges',
     surveyAnswers: 'surveyAnswers',
     surveyQuestions: 'surveyQuestions',
-    serviceReview: 'serviceReview'
+    serviceReview: 'serviceReview',
+    category_search_terms: 'category_search_terms'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1620,7 +1636,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "app_releases" | "appointments" | "apps" | "audit_trail" | "categories" | "change_request" | "device" | "device_heartbeat" | "institution" | "institution_invoices" | "institution_service_tracking" | "login_history" | "migration" | "mms_file" | "notification" | "notification_recipient" | "option" | "popup_questions" | "popup_questions_answers" | "popup_questions_possible_answers" | "qms_branch_operator" | "qms_branch_transactions" | "qms_counter" | "qms_customer" | "qms_operator" | "qms_operator_transactions" | "qms_queue" | "qms_queue_operator_lnk" | "qms_ticket" | "qms_ticket_assignment" | "rating" | "rating_assets" | "rating_qr_code_sessions" | "rating_reply" | "reports" | "request_institution" | "service" | "service_group" | "survey" | "survey_result" | "tags" | "tip" | "user" | "wallet_accounts" | "wallet_accounts_types" | "wallet_transfers" | "wallet_users" | "images" | "sectors" | "users_profile" | "reviews" | "workingHour" | "amenities" | "business_amenities" | "price_ranges" | "surveyAnswers" | "surveyQuestions" | "serviceReview"
+      modelProps: "app_releases" | "appointments" | "apps" | "audit_trail" | "categories" | "change_request" | "device" | "device_heartbeat" | "institution" | "institution_invoices" | "institution_service_tracking" | "login_history" | "migration" | "mms_file" | "notification" | "notification_recipient" | "option" | "popup_questions" | "popup_questions_answers" | "popup_questions_possible_answers" | "qms_branch_operator" | "qms_branch_transactions" | "qms_counter" | "qms_customer" | "qms_operator" | "qms_operator_transactions" | "qms_queue" | "qms_queue_operator_lnk" | "qms_ticket" | "qms_ticket_assignment" | "rating" | "rating_assets" | "rating_qr_code_sessions" | "rating_reply" | "reports" | "request_institution" | "service" | "service_group" | "survey" | "survey_result" | "tags" | "tip" | "user" | "wallet_accounts" | "wallet_accounts_types" | "wallet_transfers" | "wallet_users" | "images" | "sectors" | "users_profile" | "reviews" | "workingHour" | "amenities" | "business_amenities" | "price_ranges" | "surveyAnswers" | "surveyQuestions" | "serviceReview" | "category_search_terms"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -5452,6 +5468,72 @@ export namespace Prisma {
           }
         }
       }
+      category_search_terms: {
+        payload: Prisma.$category_search_termsPayload<ExtArgs>
+        fields: Prisma.category_search_termsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.category_search_termsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.category_search_termsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          findFirst: {
+            args: Prisma.category_search_termsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.category_search_termsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          findMany: {
+            args: Prisma.category_search_termsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>[]
+          }
+          create: {
+            args: Prisma.category_search_termsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          createMany: {
+            args: Prisma.category_search_termsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.category_search_termsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          update: {
+            args: Prisma.category_search_termsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          deleteMany: {
+            args: Prisma.category_search_termsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.category_search_termsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.category_search_termsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$category_search_termsPayload>
+          }
+          aggregate: {
+            args: Prisma.Category_search_termsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategory_search_terms>
+          }
+          groupBy: {
+            args: Prisma.category_search_termsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Category_search_termsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.category_search_termsCountArgs<ExtArgs>
+            result: $Utils.Optional<Category_search_termsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5594,6 +5676,7 @@ export namespace Prisma {
     surveyAnswers?: surveyAnswersOmit
     surveyQuestions?: surveyQuestionsOmit
     serviceReview?: serviceReviewOmit
+    category_search_terms?: category_search_termsOmit
   }
 
   /* Types for Logging */
@@ -5688,10 +5771,12 @@ export namespace Prisma {
    */
 
   export type CategoriesCountOutputType = {
+    category_search_terms: number
     institution: number
   }
 
   export type CategoriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category_search_terms?: boolean | CategoriesCountOutputTypeCountCategory_search_termsArgs
     institution?: boolean | CategoriesCountOutputTypeCountInstitutionArgs
   }
 
@@ -5704,6 +5789,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CategoriesCountOutputType
      */
     select?: CategoriesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoriesCountOutputType without action
+   */
+  export type CategoriesCountOutputTypeCountCategory_search_termsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: category_search_termsWhereInput
   }
 
   /**
@@ -11031,6 +11123,7 @@ export namespace Prisma {
     name?: boolean
     sector_id?: boolean
     sectors?: boolean | categories$sectorsArgs<ExtArgs>
+    category_search_terms?: boolean | categories$category_search_termsArgs<ExtArgs>
     institution?: boolean | categories$institutionArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["categories"]>
@@ -11046,6 +11139,7 @@ export namespace Prisma {
   export type categoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "sector_id", ExtArgs["result"]["categories"]>
   export type categoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sectors?: boolean | categories$sectorsArgs<ExtArgs>
+    category_search_terms?: boolean | categories$category_search_termsArgs<ExtArgs>
     institution?: boolean | categories$institutionArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11054,6 +11148,7 @@ export namespace Prisma {
     name: "categories"
     objects: {
       sectors: Prisma.$sectorsPayload<ExtArgs> | null
+      category_search_terms: Prisma.$category_search_termsPayload<ExtArgs>[]
       institution: Prisma.$institutionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11401,6 +11496,7 @@ export namespace Prisma {
   export interface Prisma__categoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sectors<T extends categories$sectorsArgs<ExtArgs> = {}>(args?: Subset<T, categories$sectorsArgs<ExtArgs>>): Prisma__sectorsClient<$Result.GetResult<Prisma.$sectorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    category_search_terms<T extends categories$category_search_termsArgs<ExtArgs> = {}>(args?: Subset<T, categories$category_search_termsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     institution<T extends categories$institutionArgs<ExtArgs> = {}>(args?: Subset<T, categories$institutionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$institutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11793,6 +11889,30 @@ export namespace Prisma {
      */
     include?: sectorsInclude<ExtArgs> | null
     where?: sectorsWhereInput
+  }
+
+  /**
+   * categories.category_search_terms
+   */
+  export type categories$category_search_termsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    where?: category_search_termsWhereInput
+    orderBy?: category_search_termsOrderByWithRelationInput | category_search_termsOrderByWithRelationInput[]
+    cursor?: category_search_termsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Category_search_termsScalarFieldEnum | Category_search_termsScalarFieldEnum[]
   }
 
   /**
@@ -67509,6 +67629,951 @@ export namespace Prisma {
 
 
   /**
+   * Model category_search_terms
+   */
+
+  export type AggregateCategory_search_terms = {
+    _count: Category_search_termsCountAggregateOutputType | null
+    _avg: Category_search_termsAvgAggregateOutputType | null
+    _sum: Category_search_termsSumAggregateOutputType | null
+    _min: Category_search_termsMinAggregateOutputType | null
+    _max: Category_search_termsMaxAggregateOutputType | null
+  }
+
+  export type Category_search_termsAvgAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+  }
+
+  export type Category_search_termsSumAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+  }
+
+  export type Category_search_termsMinAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+    term: string | null
+  }
+
+  export type Category_search_termsMaxAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+    term: string | null
+  }
+
+  export type Category_search_termsCountAggregateOutputType = {
+    id: number
+    category_id: number
+    term: number
+    _all: number
+  }
+
+
+  export type Category_search_termsAvgAggregateInputType = {
+    id?: true
+    category_id?: true
+  }
+
+  export type Category_search_termsSumAggregateInputType = {
+    id?: true
+    category_id?: true
+  }
+
+  export type Category_search_termsMinAggregateInputType = {
+    id?: true
+    category_id?: true
+    term?: true
+  }
+
+  export type Category_search_termsMaxAggregateInputType = {
+    id?: true
+    category_id?: true
+    term?: true
+  }
+
+  export type Category_search_termsCountAggregateInputType = {
+    id?: true
+    category_id?: true
+    term?: true
+    _all?: true
+  }
+
+  export type Category_search_termsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which category_search_terms to aggregate.
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of category_search_terms to fetch.
+     */
+    orderBy?: category_search_termsOrderByWithRelationInput | category_search_termsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: category_search_termsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` category_search_terms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` category_search_terms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned category_search_terms
+    **/
+    _count?: true | Category_search_termsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Category_search_termsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Category_search_termsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Category_search_termsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Category_search_termsMaxAggregateInputType
+  }
+
+  export type GetCategory_search_termsAggregateType<T extends Category_search_termsAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategory_search_terms]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategory_search_terms[P]>
+      : GetScalarType<T[P], AggregateCategory_search_terms[P]>
+  }
+
+
+
+
+  export type category_search_termsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: category_search_termsWhereInput
+    orderBy?: category_search_termsOrderByWithAggregationInput | category_search_termsOrderByWithAggregationInput[]
+    by: Category_search_termsScalarFieldEnum[] | Category_search_termsScalarFieldEnum
+    having?: category_search_termsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Category_search_termsCountAggregateInputType | true
+    _avg?: Category_search_termsAvgAggregateInputType
+    _sum?: Category_search_termsSumAggregateInputType
+    _min?: Category_search_termsMinAggregateInputType
+    _max?: Category_search_termsMaxAggregateInputType
+  }
+
+  export type Category_search_termsGroupByOutputType = {
+    id: number
+    category_id: number
+    term: string
+    _count: Category_search_termsCountAggregateOutputType | null
+    _avg: Category_search_termsAvgAggregateOutputType | null
+    _sum: Category_search_termsSumAggregateOutputType | null
+    _min: Category_search_termsMinAggregateOutputType | null
+    _max: Category_search_termsMaxAggregateOutputType | null
+  }
+
+  type GetCategory_search_termsGroupByPayload<T extends category_search_termsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Category_search_termsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Category_search_termsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Category_search_termsGroupByOutputType[P]>
+            : GetScalarType<T[P], Category_search_termsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type category_search_termsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    category_id?: boolean
+    term?: boolean
+    categories?: boolean | categoriesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category_search_terms"]>
+
+
+
+  export type category_search_termsSelectScalar = {
+    id?: boolean
+    category_id?: boolean
+    term?: boolean
+  }
+
+  export type category_search_termsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "category_id" | "term", ExtArgs["result"]["category_search_terms"]>
+  export type category_search_termsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    categories?: boolean | categoriesDefaultArgs<ExtArgs>
+  }
+
+  export type $category_search_termsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "category_search_terms"
+    objects: {
+      categories: Prisma.$categoriesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      category_id: number
+      term: string
+    }, ExtArgs["result"]["category_search_terms"]>
+    composites: {}
+  }
+
+  type category_search_termsGetPayload<S extends boolean | null | undefined | category_search_termsDefaultArgs> = $Result.GetResult<Prisma.$category_search_termsPayload, S>
+
+  type category_search_termsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<category_search_termsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Category_search_termsCountAggregateInputType | true
+    }
+
+  export interface category_search_termsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['category_search_terms'], meta: { name: 'category_search_terms' } }
+    /**
+     * Find zero or one Category_search_terms that matches the filter.
+     * @param {category_search_termsFindUniqueArgs} args - Arguments to find a Category_search_terms
+     * @example
+     * // Get one Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends category_search_termsFindUniqueArgs>(args: SelectSubset<T, category_search_termsFindUniqueArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Category_search_terms that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {category_search_termsFindUniqueOrThrowArgs} args - Arguments to find a Category_search_terms
+     * @example
+     * // Get one Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends category_search_termsFindUniqueOrThrowArgs>(args: SelectSubset<T, category_search_termsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category_search_terms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsFindFirstArgs} args - Arguments to find a Category_search_terms
+     * @example
+     * // Get one Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends category_search_termsFindFirstArgs>(args?: SelectSubset<T, category_search_termsFindFirstArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category_search_terms that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsFindFirstOrThrowArgs} args - Arguments to find a Category_search_terms
+     * @example
+     * // Get one Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends category_search_termsFindFirstOrThrowArgs>(args?: SelectSubset<T, category_search_termsFindFirstOrThrowArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Category_search_terms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findMany()
+     * 
+     * // Get first 10 Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const category_search_termsWithIdOnly = await prisma.category_search_terms.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends category_search_termsFindManyArgs>(args?: SelectSubset<T, category_search_termsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Category_search_terms.
+     * @param {category_search_termsCreateArgs} args - Arguments to create a Category_search_terms.
+     * @example
+     * // Create one Category_search_terms
+     * const Category_search_terms = await prisma.category_search_terms.create({
+     *   data: {
+     *     // ... data to create a Category_search_terms
+     *   }
+     * })
+     * 
+     */
+    create<T extends category_search_termsCreateArgs>(args: SelectSubset<T, category_search_termsCreateArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Category_search_terms.
+     * @param {category_search_termsCreateManyArgs} args - Arguments to create many Category_search_terms.
+     * @example
+     * // Create many Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends category_search_termsCreateManyArgs>(args?: SelectSubset<T, category_search_termsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Category_search_terms.
+     * @param {category_search_termsDeleteArgs} args - Arguments to delete one Category_search_terms.
+     * @example
+     * // Delete one Category_search_terms
+     * const Category_search_terms = await prisma.category_search_terms.delete({
+     *   where: {
+     *     // ... filter to delete one Category_search_terms
+     *   }
+     * })
+     * 
+     */
+    delete<T extends category_search_termsDeleteArgs>(args: SelectSubset<T, category_search_termsDeleteArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Category_search_terms.
+     * @param {category_search_termsUpdateArgs} args - Arguments to update one Category_search_terms.
+     * @example
+     * // Update one Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends category_search_termsUpdateArgs>(args: SelectSubset<T, category_search_termsUpdateArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Category_search_terms.
+     * @param {category_search_termsDeleteManyArgs} args - Arguments to filter Category_search_terms to delete.
+     * @example
+     * // Delete a few Category_search_terms
+     * const { count } = await prisma.category_search_terms.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends category_search_termsDeleteManyArgs>(args?: SelectSubset<T, category_search_termsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Category_search_terms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends category_search_termsUpdateManyArgs>(args: SelectSubset<T, category_search_termsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Category_search_terms.
+     * @param {category_search_termsUpsertArgs} args - Arguments to update or create a Category_search_terms.
+     * @example
+     * // Update or create a Category_search_terms
+     * const category_search_terms = await prisma.category_search_terms.upsert({
+     *   create: {
+     *     // ... data to create a Category_search_terms
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Category_search_terms we want to update
+     *   }
+     * })
+     */
+    upsert<T extends category_search_termsUpsertArgs>(args: SelectSubset<T, category_search_termsUpsertArgs<ExtArgs>>): Prisma__category_search_termsClient<$Result.GetResult<Prisma.$category_search_termsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Category_search_terms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsCountArgs} args - Arguments to filter Category_search_terms to count.
+     * @example
+     * // Count the number of Category_search_terms
+     * const count = await prisma.category_search_terms.count({
+     *   where: {
+     *     // ... the filter for the Category_search_terms we want to count
+     *   }
+     * })
+    **/
+    count<T extends category_search_termsCountArgs>(
+      args?: Subset<T, category_search_termsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Category_search_termsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Category_search_terms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Category_search_termsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Category_search_termsAggregateArgs>(args: Subset<T, Category_search_termsAggregateArgs>): Prisma.PrismaPromise<GetCategory_search_termsAggregateType<T>>
+
+    /**
+     * Group by Category_search_terms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {category_search_termsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends category_search_termsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: category_search_termsGroupByArgs['orderBy'] }
+        : { orderBy?: category_search_termsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, category_search_termsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategory_search_termsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the category_search_terms model
+   */
+  readonly fields: category_search_termsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for category_search_terms.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__category_search_termsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    categories<T extends categoriesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, categoriesDefaultArgs<ExtArgs>>): Prisma__categoriesClient<$Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the category_search_terms model
+   */
+  interface category_search_termsFieldRefs {
+    readonly id: FieldRef<"category_search_terms", 'Int'>
+    readonly category_id: FieldRef<"category_search_terms", 'Int'>
+    readonly term: FieldRef<"category_search_terms", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * category_search_terms findUnique
+   */
+  export type category_search_termsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter, which category_search_terms to fetch.
+     */
+    where: category_search_termsWhereUniqueInput
+  }
+
+  /**
+   * category_search_terms findUniqueOrThrow
+   */
+  export type category_search_termsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter, which category_search_terms to fetch.
+     */
+    where: category_search_termsWhereUniqueInput
+  }
+
+  /**
+   * category_search_terms findFirst
+   */
+  export type category_search_termsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter, which category_search_terms to fetch.
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of category_search_terms to fetch.
+     */
+    orderBy?: category_search_termsOrderByWithRelationInput | category_search_termsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for category_search_terms.
+     */
+    cursor?: category_search_termsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` category_search_terms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` category_search_terms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of category_search_terms.
+     */
+    distinct?: Category_search_termsScalarFieldEnum | Category_search_termsScalarFieldEnum[]
+  }
+
+  /**
+   * category_search_terms findFirstOrThrow
+   */
+  export type category_search_termsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter, which category_search_terms to fetch.
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of category_search_terms to fetch.
+     */
+    orderBy?: category_search_termsOrderByWithRelationInput | category_search_termsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for category_search_terms.
+     */
+    cursor?: category_search_termsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` category_search_terms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` category_search_terms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of category_search_terms.
+     */
+    distinct?: Category_search_termsScalarFieldEnum | Category_search_termsScalarFieldEnum[]
+  }
+
+  /**
+   * category_search_terms findMany
+   */
+  export type category_search_termsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter, which category_search_terms to fetch.
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of category_search_terms to fetch.
+     */
+    orderBy?: category_search_termsOrderByWithRelationInput | category_search_termsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing category_search_terms.
+     */
+    cursor?: category_search_termsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` category_search_terms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` category_search_terms.
+     */
+    skip?: number
+    distinct?: Category_search_termsScalarFieldEnum | Category_search_termsScalarFieldEnum[]
+  }
+
+  /**
+   * category_search_terms create
+   */
+  export type category_search_termsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a category_search_terms.
+     */
+    data: XOR<category_search_termsCreateInput, category_search_termsUncheckedCreateInput>
+  }
+
+  /**
+   * category_search_terms createMany
+   */
+  export type category_search_termsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many category_search_terms.
+     */
+    data: category_search_termsCreateManyInput | category_search_termsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * category_search_terms update
+   */
+  export type category_search_termsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a category_search_terms.
+     */
+    data: XOR<category_search_termsUpdateInput, category_search_termsUncheckedUpdateInput>
+    /**
+     * Choose, which category_search_terms to update.
+     */
+    where: category_search_termsWhereUniqueInput
+  }
+
+  /**
+   * category_search_terms updateMany
+   */
+  export type category_search_termsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update category_search_terms.
+     */
+    data: XOR<category_search_termsUpdateManyMutationInput, category_search_termsUncheckedUpdateManyInput>
+    /**
+     * Filter which category_search_terms to update
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * Limit how many category_search_terms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * category_search_terms upsert
+   */
+  export type category_search_termsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the category_search_terms to update in case it exists.
+     */
+    where: category_search_termsWhereUniqueInput
+    /**
+     * In case the category_search_terms found by the `where` argument doesn't exist, create a new category_search_terms with this data.
+     */
+    create: XOR<category_search_termsCreateInput, category_search_termsUncheckedCreateInput>
+    /**
+     * In case the category_search_terms was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<category_search_termsUpdateInput, category_search_termsUncheckedUpdateInput>
+  }
+
+  /**
+   * category_search_terms delete
+   */
+  export type category_search_termsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+    /**
+     * Filter which category_search_terms to delete.
+     */
+    where: category_search_termsWhereUniqueInput
+  }
+
+  /**
+   * category_search_terms deleteMany
+   */
+  export type category_search_termsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which category_search_terms to delete
+     */
+    where?: category_search_termsWhereInput
+    /**
+     * Limit how many category_search_terms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * category_search_terms without action
+   */
+  export type category_search_termsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the category_search_terms
+     */
+    select?: category_search_termsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the category_search_terms
+     */
+    omit?: category_search_termsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: category_search_termsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -68464,6 +69529,15 @@ export namespace Prisma {
   export type ServiceReviewScalarFieldEnum = (typeof ServiceReviewScalarFieldEnum)[keyof typeof ServiceReviewScalarFieldEnum]
 
 
+  export const Category_search_termsScalarFieldEnum: {
+    id: 'id',
+    category_id: 'category_id',
+    term: 'term'
+  };
+
+  export type Category_search_termsScalarFieldEnum = (typeof Category_search_termsScalarFieldEnum)[keyof typeof Category_search_termsScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -69033,6 +70107,13 @@ export namespace Prisma {
   export type serviceReviewOrderByRelevanceFieldEnum = (typeof serviceReviewOrderByRelevanceFieldEnum)[keyof typeof serviceReviewOrderByRelevanceFieldEnum]
 
 
+  export const category_search_termsOrderByRelevanceFieldEnum: {
+    term: 'term'
+  };
+
+  export type category_search_termsOrderByRelevanceFieldEnum = (typeof category_search_termsOrderByRelevanceFieldEnum)[keyof typeof category_search_termsOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -69538,6 +70619,7 @@ export namespace Prisma {
     name?: StringFilter<"categories"> | string
     sector_id?: IntNullableFilter<"categories"> | number | null
     sectors?: XOR<SectorsNullableScalarRelationFilter, sectorsWhereInput> | null
+    category_search_terms?: Category_search_termsListRelationFilter
     institution?: InstitutionListRelationFilter
   }
 
@@ -69546,6 +70628,7 @@ export namespace Prisma {
     name?: SortOrder
     sector_id?: SortOrderInput | SortOrder
     sectors?: sectorsOrderByWithRelationInput
+    category_search_terms?: category_search_termsOrderByRelationAggregateInput
     institution?: institutionOrderByRelationAggregateInput
     _relevance?: categoriesOrderByRelevanceInput
   }
@@ -69558,6 +70641,7 @@ export namespace Prisma {
     name?: StringFilter<"categories"> | string
     sector_id?: IntNullableFilter<"categories"> | number | null
     sectors?: XOR<SectorsNullableScalarRelationFilter, sectorsWhereInput> | null
+    category_search_terms?: Category_search_termsListRelationFilter
     institution?: InstitutionListRelationFilter
   }, "id">
 
@@ -74147,6 +75231,54 @@ export namespace Prisma {
     added_at?: DateTimeNullableWithAggregatesFilter<"serviceReview"> | Date | string | null
   }
 
+  export type category_search_termsWhereInput = {
+    AND?: category_search_termsWhereInput | category_search_termsWhereInput[]
+    OR?: category_search_termsWhereInput[]
+    NOT?: category_search_termsWhereInput | category_search_termsWhereInput[]
+    id?: IntFilter<"category_search_terms"> | number
+    category_id?: IntFilter<"category_search_terms"> | number
+    term?: StringFilter<"category_search_terms"> | string
+    categories?: XOR<CategoriesScalarRelationFilter, categoriesWhereInput>
+  }
+
+  export type category_search_termsOrderByWithRelationInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+    term?: SortOrder
+    categories?: categoriesOrderByWithRelationInput
+    _relevance?: category_search_termsOrderByRelevanceInput
+  }
+
+  export type category_search_termsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: category_search_termsWhereInput | category_search_termsWhereInput[]
+    OR?: category_search_termsWhereInput[]
+    NOT?: category_search_termsWhereInput | category_search_termsWhereInput[]
+    category_id?: IntFilter<"category_search_terms"> | number
+    term?: StringFilter<"category_search_terms"> | string
+    categories?: XOR<CategoriesScalarRelationFilter, categoriesWhereInput>
+  }, "id">
+
+  export type category_search_termsOrderByWithAggregationInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+    term?: SortOrder
+    _count?: category_search_termsCountOrderByAggregateInput
+    _avg?: category_search_termsAvgOrderByAggregateInput
+    _max?: category_search_termsMaxOrderByAggregateInput
+    _min?: category_search_termsMinOrderByAggregateInput
+    _sum?: category_search_termsSumOrderByAggregateInput
+  }
+
+  export type category_search_termsScalarWhereWithAggregatesInput = {
+    AND?: category_search_termsScalarWhereWithAggregatesInput | category_search_termsScalarWhereWithAggregatesInput[]
+    OR?: category_search_termsScalarWhereWithAggregatesInput[]
+    NOT?: category_search_termsScalarWhereWithAggregatesInput | category_search_termsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"category_search_terms"> | number
+    category_id?: IntWithAggregatesFilter<"category_search_terms"> | number
+    term?: StringWithAggregatesFilter<"category_search_terms"> | string
+  }
+
   export type app_releasesCreateInput = {
     release_version: string
     app_name: $Enums.app_releases_app_name
@@ -74580,6 +75712,7 @@ export namespace Prisma {
   export type categoriesCreateInput = {
     name: string
     sectors?: sectorsCreateNestedOneWithoutCategoriesInput
+    category_search_terms?: category_search_termsCreateNestedManyWithoutCategoriesInput
     institution?: institutionCreateNestedManyWithoutCategoriesInput
   }
 
@@ -74587,12 +75720,14 @@ export namespace Prisma {
     id?: number
     name: string
     sector_id?: number | null
+    category_search_terms?: category_search_termsUncheckedCreateNestedManyWithoutCategoriesInput
     institution?: institutionUncheckedCreateNestedManyWithoutCategoriesInput
   }
 
   export type categoriesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     sectors?: sectorsUpdateOneWithoutCategoriesNestedInput
+    category_search_terms?: category_search_termsUpdateManyWithoutCategoriesNestedInput
     institution?: institutionUpdateManyWithoutCategoriesNestedInput
   }
 
@@ -74600,6 +75735,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     sector_id?: NullableIntFieldUpdateOperationsInput | number | null
+    category_search_terms?: category_search_termsUncheckedUpdateManyWithoutCategoriesNestedInput
     institution?: institutionUncheckedUpdateManyWithoutCategoriesNestedInput
   }
 
@@ -79509,6 +80645,44 @@ export namespace Prisma {
     added_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type category_search_termsCreateInput = {
+    term: string
+    categories: categoriesCreateNestedOneWithoutCategory_search_termsInput
+  }
+
+  export type category_search_termsUncheckedCreateInput = {
+    id?: number
+    category_id: number
+    term: string
+  }
+
+  export type category_search_termsUpdateInput = {
+    term?: StringFieldUpdateOperationsInput | string
+    categories?: categoriesUpdateOneRequiredWithoutCategory_search_termsNestedInput
+  }
+
+  export type category_search_termsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    category_id?: IntFieldUpdateOperationsInput | number
+    term?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type category_search_termsCreateManyInput = {
+    id?: number
+    category_id: number
+    term: string
+  }
+
+  export type category_search_termsUpdateManyMutationInput = {
+    term?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type category_search_termsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    category_id?: IntFieldUpdateOperationsInput | number
+    term?: StringFieldUpdateOperationsInput | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -80046,10 +81220,20 @@ export namespace Prisma {
     isNot?: sectorsWhereInput | null
   }
 
+  export type Category_search_termsListRelationFilter = {
+    every?: category_search_termsWhereInput
+    some?: category_search_termsWhereInput
+    none?: category_search_termsWhereInput
+  }
+
   export type InstitutionListRelationFilter = {
     every?: institutionWhereInput
     some?: institutionWhereInput
     none?: institutionWhereInput
+  }
+
+  export type category_search_termsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type institutionOrderByRelationAggregateInput = {
@@ -83828,6 +85012,45 @@ export namespace Prisma {
     rating?: SortOrder
   }
 
+  export type CategoriesScalarRelationFilter = {
+    is?: categoriesWhereInput
+    isNot?: categoriesWhereInput
+  }
+
+  export type category_search_termsOrderByRelevanceInput = {
+    fields: category_search_termsOrderByRelevanceFieldEnum | category_search_termsOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type category_search_termsCountOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+    term?: SortOrder
+  }
+
+  export type category_search_termsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+  }
+
+  export type category_search_termsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+    term?: SortOrder
+  }
+
+  export type category_search_termsMinOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+    term?: SortOrder
+  }
+
+  export type category_search_termsSumOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -83970,11 +85193,25 @@ export namespace Prisma {
     connect?: sectorsWhereUniqueInput
   }
 
+  export type category_search_termsCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput> | category_search_termsCreateWithoutCategoriesInput[] | category_search_termsUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: category_search_termsCreateOrConnectWithoutCategoriesInput | category_search_termsCreateOrConnectWithoutCategoriesInput[]
+    createMany?: category_search_termsCreateManyCategoriesInputEnvelope
+    connect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+  }
+
   export type institutionCreateNestedManyWithoutCategoriesInput = {
     create?: XOR<institutionCreateWithoutCategoriesInput, institutionUncheckedCreateWithoutCategoriesInput> | institutionCreateWithoutCategoriesInput[] | institutionUncheckedCreateWithoutCategoriesInput[]
     connectOrCreate?: institutionCreateOrConnectWithoutCategoriesInput | institutionCreateOrConnectWithoutCategoriesInput[]
     createMany?: institutionCreateManyCategoriesInputEnvelope
     connect?: institutionWhereUniqueInput | institutionWhereUniqueInput[]
+  }
+
+  export type category_search_termsUncheckedCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput> | category_search_termsCreateWithoutCategoriesInput[] | category_search_termsUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: category_search_termsCreateOrConnectWithoutCategoriesInput | category_search_termsCreateOrConnectWithoutCategoriesInput[]
+    createMany?: category_search_termsCreateManyCategoriesInputEnvelope
+    connect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
   }
 
   export type institutionUncheckedCreateNestedManyWithoutCategoriesInput = {
@@ -83994,6 +85231,20 @@ export namespace Prisma {
     update?: XOR<XOR<sectorsUpdateToOneWithWhereWithoutCategoriesInput, sectorsUpdateWithoutCategoriesInput>, sectorsUncheckedUpdateWithoutCategoriesInput>
   }
 
+  export type category_search_termsUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput> | category_search_termsCreateWithoutCategoriesInput[] | category_search_termsUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: category_search_termsCreateOrConnectWithoutCategoriesInput | category_search_termsCreateOrConnectWithoutCategoriesInput[]
+    upsert?: category_search_termsUpsertWithWhereUniqueWithoutCategoriesInput | category_search_termsUpsertWithWhereUniqueWithoutCategoriesInput[]
+    createMany?: category_search_termsCreateManyCategoriesInputEnvelope
+    set?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    disconnect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    delete?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    connect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    update?: category_search_termsUpdateWithWhereUniqueWithoutCategoriesInput | category_search_termsUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: category_search_termsUpdateManyWithWhereWithoutCategoriesInput | category_search_termsUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: category_search_termsScalarWhereInput | category_search_termsScalarWhereInput[]
+  }
+
   export type institutionUpdateManyWithoutCategoriesNestedInput = {
     create?: XOR<institutionCreateWithoutCategoriesInput, institutionUncheckedCreateWithoutCategoriesInput> | institutionCreateWithoutCategoriesInput[] | institutionUncheckedCreateWithoutCategoriesInput[]
     connectOrCreate?: institutionCreateOrConnectWithoutCategoriesInput | institutionCreateOrConnectWithoutCategoriesInput[]
@@ -84006,6 +85257,20 @@ export namespace Prisma {
     update?: institutionUpdateWithWhereUniqueWithoutCategoriesInput | institutionUpdateWithWhereUniqueWithoutCategoriesInput[]
     updateMany?: institutionUpdateManyWithWhereWithoutCategoriesInput | institutionUpdateManyWithWhereWithoutCategoriesInput[]
     deleteMany?: institutionScalarWhereInput | institutionScalarWhereInput[]
+  }
+
+  export type category_search_termsUncheckedUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput> | category_search_termsCreateWithoutCategoriesInput[] | category_search_termsUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: category_search_termsCreateOrConnectWithoutCategoriesInput | category_search_termsCreateOrConnectWithoutCategoriesInput[]
+    upsert?: category_search_termsUpsertWithWhereUniqueWithoutCategoriesInput | category_search_termsUpsertWithWhereUniqueWithoutCategoriesInput[]
+    createMany?: category_search_termsCreateManyCategoriesInputEnvelope
+    set?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    disconnect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    delete?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    connect?: category_search_termsWhereUniqueInput | category_search_termsWhereUniqueInput[]
+    update?: category_search_termsUpdateWithWhereUniqueWithoutCategoriesInput | category_search_termsUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: category_search_termsUpdateManyWithWhereWithoutCategoriesInput | category_search_termsUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: category_search_termsScalarWhereInput | category_search_termsScalarWhereInput[]
   }
 
   export type institutionUncheckedUpdateManyWithoutCategoriesNestedInput = {
@@ -86826,6 +88091,20 @@ export namespace Prisma {
     update?: XOR<XOR<users_profileUpdateToOneWithWhereWithoutServiceReviewInput, users_profileUpdateWithoutServiceReviewInput>, users_profileUncheckedUpdateWithoutServiceReviewInput>
   }
 
+  export type categoriesCreateNestedOneWithoutCategory_search_termsInput = {
+    create?: XOR<categoriesCreateWithoutCategory_search_termsInput, categoriesUncheckedCreateWithoutCategory_search_termsInput>
+    connectOrCreate?: categoriesCreateOrConnectWithoutCategory_search_termsInput
+    connect?: categoriesWhereUniqueInput
+  }
+
+  export type categoriesUpdateOneRequiredWithoutCategory_search_termsNestedInput = {
+    create?: XOR<categoriesCreateWithoutCategory_search_termsInput, categoriesUncheckedCreateWithoutCategory_search_termsInput>
+    connectOrCreate?: categoriesCreateOrConnectWithoutCategory_search_termsInput
+    upsert?: categoriesUpsertWithoutCategory_search_termsInput
+    connect?: categoriesWhereUniqueInput
+    update?: XOR<XOR<categoriesUpdateToOneWithWhereWithoutCategory_search_termsInput, categoriesUpdateWithoutCategory_search_termsInput>, categoriesUncheckedUpdateWithoutCategory_search_termsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -88145,6 +89424,25 @@ export namespace Prisma {
     create: XOR<sectorsCreateWithoutCategoriesInput, sectorsUncheckedCreateWithoutCategoriesInput>
   }
 
+  export type category_search_termsCreateWithoutCategoriesInput = {
+    term: string
+  }
+
+  export type category_search_termsUncheckedCreateWithoutCategoriesInput = {
+    id?: number
+    term: string
+  }
+
+  export type category_search_termsCreateOrConnectWithoutCategoriesInput = {
+    where: category_search_termsWhereUniqueInput
+    create: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type category_search_termsCreateManyCategoriesInputEnvelope = {
+    data: category_search_termsCreateManyCategoriesInput | category_search_termsCreateManyCategoriesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type institutionCreateWithoutCategoriesInput = {
     uuid?: string | null
     name: string
@@ -88280,6 +89578,31 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type category_search_termsUpsertWithWhereUniqueWithoutCategoriesInput = {
+    where: category_search_termsWhereUniqueInput
+    update: XOR<category_search_termsUpdateWithoutCategoriesInput, category_search_termsUncheckedUpdateWithoutCategoriesInput>
+    create: XOR<category_search_termsCreateWithoutCategoriesInput, category_search_termsUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type category_search_termsUpdateWithWhereUniqueWithoutCategoriesInput = {
+    where: category_search_termsWhereUniqueInput
+    data: XOR<category_search_termsUpdateWithoutCategoriesInput, category_search_termsUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type category_search_termsUpdateManyWithWhereWithoutCategoriesInput = {
+    where: category_search_termsScalarWhereInput
+    data: XOR<category_search_termsUpdateManyMutationInput, category_search_termsUncheckedUpdateManyWithoutCategoriesInput>
+  }
+
+  export type category_search_termsScalarWhereInput = {
+    AND?: category_search_termsScalarWhereInput | category_search_termsScalarWhereInput[]
+    OR?: category_search_termsScalarWhereInput[]
+    NOT?: category_search_termsScalarWhereInput | category_search_termsScalarWhereInput[]
+    id?: IntFilter<"category_search_terms"> | number
+    category_id?: IntFilter<"category_search_terms"> | number
+    term?: StringFilter<"category_search_terms"> | string
   }
 
   export type institutionUpsertWithWhereUniqueWithoutCategoriesInput = {
@@ -88991,12 +90314,14 @@ export namespace Prisma {
   export type categoriesCreateWithoutInstitutionInput = {
     name: string
     sectors?: sectorsCreateNestedOneWithoutCategoriesInput
+    category_search_terms?: category_search_termsCreateNestedManyWithoutCategoriesInput
   }
 
   export type categoriesUncheckedCreateWithoutInstitutionInput = {
     id?: number
     name: string
     sector_id?: number | null
+    category_search_terms?: category_search_termsUncheckedCreateNestedManyWithoutCategoriesInput
   }
 
   export type categoriesCreateOrConnectWithoutInstitutionInput = {
@@ -89525,12 +90850,14 @@ export namespace Prisma {
   export type categoriesUpdateWithoutInstitutionInput = {
     name?: StringFieldUpdateOperationsInput | string
     sectors?: sectorsUpdateOneWithoutCategoriesNestedInput
+    category_search_terms?: category_search_termsUpdateManyWithoutCategoriesNestedInput
   }
 
   export type categoriesUncheckedUpdateWithoutInstitutionInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     sector_id?: NullableIntFieldUpdateOperationsInput | number | null
+    category_search_terms?: category_search_termsUncheckedUpdateManyWithoutCategoriesNestedInput
   }
 
   export type popup_questionsUpsertWithWhereUniqueWithoutInstitutionInput = {
@@ -95279,12 +96606,14 @@ export namespace Prisma {
 
   export type categoriesCreateWithoutSectorsInput = {
     name: string
+    category_search_terms?: category_search_termsCreateNestedManyWithoutCategoriesInput
     institution?: institutionCreateNestedManyWithoutCategoriesInput
   }
 
   export type categoriesUncheckedCreateWithoutSectorsInput = {
     id?: number
     name: string
+    category_search_terms?: category_search_termsUncheckedCreateNestedManyWithoutCategoriesInput
     institution?: institutionUncheckedCreateNestedManyWithoutCategoriesInput
   }
 
@@ -96963,6 +98292,53 @@ export namespace Prisma {
     reviews?: reviewsUncheckedUpdateManyWithoutUsers_profileNestedInput
   }
 
+  export type categoriesCreateWithoutCategory_search_termsInput = {
+    name: string
+    sectors?: sectorsCreateNestedOneWithoutCategoriesInput
+    institution?: institutionCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type categoriesUncheckedCreateWithoutCategory_search_termsInput = {
+    id?: number
+    name: string
+    sector_id?: number | null
+    institution?: institutionUncheckedCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type categoriesCreateOrConnectWithoutCategory_search_termsInput = {
+    where: categoriesWhereUniqueInput
+    create: XOR<categoriesCreateWithoutCategory_search_termsInput, categoriesUncheckedCreateWithoutCategory_search_termsInput>
+  }
+
+  export type categoriesUpsertWithoutCategory_search_termsInput = {
+    update: XOR<categoriesUpdateWithoutCategory_search_termsInput, categoriesUncheckedUpdateWithoutCategory_search_termsInput>
+    create: XOR<categoriesCreateWithoutCategory_search_termsInput, categoriesUncheckedCreateWithoutCategory_search_termsInput>
+    where?: categoriesWhereInput
+  }
+
+  export type categoriesUpdateToOneWithWhereWithoutCategory_search_termsInput = {
+    where?: categoriesWhereInput
+    data: XOR<categoriesUpdateWithoutCategory_search_termsInput, categoriesUncheckedUpdateWithoutCategory_search_termsInput>
+  }
+
+  export type categoriesUpdateWithoutCategory_search_termsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    sectors?: sectorsUpdateOneWithoutCategoriesNestedInput
+    institution?: institutionUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type categoriesUncheckedUpdateWithoutCategory_search_termsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    sector_id?: NullableIntFieldUpdateOperationsInput | number | null
+    institution?: institutionUncheckedUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type category_search_termsCreateManyCategoriesInput = {
+    id?: number
+    term: string
+  }
+
   export type institutionCreateManyCategoriesInput = {
     id?: number
     uuid?: string | null
@@ -97000,6 +98376,20 @@ export namespace Prisma {
     button_one?: string | null
     button_two?: string | null
     amenities?: string | null
+  }
+
+  export type category_search_termsUpdateWithoutCategoriesInput = {
+    term?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type category_search_termsUncheckedUpdateWithoutCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    term?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type category_search_termsUncheckedUpdateManyWithoutCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type institutionUpdateWithoutCategoriesInput = {
@@ -99580,12 +100970,14 @@ export namespace Prisma {
 
   export type categoriesUpdateWithoutSectorsInput = {
     name?: StringFieldUpdateOperationsInput | string
+    category_search_terms?: category_search_termsUpdateManyWithoutCategoriesNestedInput
     institution?: institutionUpdateManyWithoutCategoriesNestedInput
   }
 
   export type categoriesUncheckedUpdateWithoutSectorsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    category_search_terms?: category_search_termsUncheckedUpdateManyWithoutCategoriesNestedInput
     institution?: institutionUncheckedUpdateManyWithoutCategoriesNestedInput
   }
 
