@@ -329,7 +329,12 @@ router.get('/recent', async (req, res) => {
           is_approved: true
         },
         include: {
-          images: true
+          images: true,
+          institution:{
+            select :{
+              name : true
+            }
+          }
         },
         orderBy: {
           created_at: 'desc'
@@ -340,7 +345,6 @@ router.get('/recent', async (req, res) => {
       // Get all unique user_ids from the reviews
       const userIds = [...new Set(reviews.map(r => r.user_id))];
   
-      // Fetch user profiles (and their images) for those user_ids
       const users = await prisma.users_profile.findMany({
         where: {
           id: { in: userIds }
