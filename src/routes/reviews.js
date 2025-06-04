@@ -250,12 +250,20 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  * @swagger
  * /api/review/recent:
  *   get:
- *     summary: Get top 3 most recent reviews with user profiles
+ *     summary: Get recent approved reviews
+ *     description: Fetches the most recent approved reviews along with their associated user profiles and images. Returns 3 * page number of reviews, ordered by creation date descending.
  *     tags:
  *       - Reviews
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number to determine how many reviews to fetch (3 per page).
  *     responses:
  *       200:
- *         description: Recent reviews fetched successfully
+ *         description: A list of recent approved reviews with user info
  *         content:
  *           application/json:
  *             schema:
@@ -271,10 +279,24 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  *                     properties:
  *                       id:
  *                         type: integer
- *                       review:
+ *                       title:
  *                         type: string
- *                       rating:
- *                         type: integer
+ *                       content:
+ *                         type: string
+ *                       is_approved:
+ *                         type: boolean
+ *                       created_at:
+ *                         type: string
+ *                         format: date-time
+ *                       images:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             id:
+ *                               type: integer
+ *                             image_url:
+ *                               type: string
  *                       user:
  *                         type: object
  *                         properties:
@@ -290,12 +312,18 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  *                             type: array
  *                             items:
  *                               type: object
+ *                               properties:
+ *                                 id:
+ *                                   type: integer
+ *                                 image_url:
+ *                                   type: string
  *       500:
- *         description: Internal server error
+ *         description: Server error
  */
 
 router.get('/recent', async (req, res) => {
     try {
+      const page = parseInt(req.query.page) || 1;
       const reviews = await prisma.reviews.findMany({
         where :{
           is_approved: true
@@ -306,7 +334,7 @@ router.get('/recent', async (req, res) => {
         orderBy: {
           created_at: 'desc'
         },
-        take: 3
+        take: 3 * page
       });
   
       // Get all unique user_ids from the reviews

@@ -377,59 +377,92 @@ router.get('/:category_id', async (req, res) => {
 /**
  * @swagger
  * /api/search/list/amenity:
- *   get:
- *     summary: Get top amenities for institutions
- *     description: Retrieve the most frequently used amenities across institutions.
+*   get:
+ *     summary: Get top 10 most common amenities in a category
+ *     description: Returns the top 10 most frequently used amenities among institutions within a given category.
+ *     tags:
+ *       - Amenities
+ *     parameters:
+ *       - in: query
+ *         name: category_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the category to fetch amenities for.
  *     responses:
  *       200:
- *         description: A list of popular amenities with associated institution data
+ *         description: A list of the top 10 amenities
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                   name:
- *                     type: string
- *                   description:
- *                     type: string
- *                   reviews:
- *                     type: array
- *                     items:
- *                       type: object
- *                   images:
- *                     type: array
- *                     items:
- *                       type: object
+ *               type: object
+ *               properties:
+ *                 amenities:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       name:
+ *                         type: string
+ *                       icon:
+ *                         type: string
+ *       400:
+ *         description: Invalid category_id provided
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid category_id
  *       500:
- *         description: Internal server error
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Something went wrong!
  */
-
 router.get("/list/amenity", async (req, res) => {
   try {
+    const categoryId = parseInt(req.query.category_id);
+    if (isNaN(categoryId)) return res.status(400).json({ error: "Invalid category_id" });
 
-    const topInstitutionAmenities = await prisma.business_amenities.groupBy({
+    const institutionsInCategory = await prisma.institution.findMany({
+      where: { category_id: categoryId },
+      select: { id: true }
+    });
+
+    const institutionIds = institutionsInCategory.map(inst => inst.id);
+    if (institutionIds.length === 0) return res.json({ amenities: [] });
+
+    const amenityCounts = await prisma.business_amenities.groupBy({
       by: ['amenitY_id'],
+      where: {
+        institution_id: { in: institutionIds }
+      },
       _count: { id: true },
       orderBy: { _count: { id: 'desc' } }
     });
 
-    const amenityIds = topInstitutionAmenities.map(r => r.amenitY_id);
+    const amenityIds = amenityCounts.map(a => a.amenitY_id);
 
     const amenities = await prisma.amenities.findMany({
-      where: {
-        id: { in: amenityIds }
-      },
-      take :10
+      where: { id: { in: amenityIds } },
+      take: 10
     });
 
     return res.json({ amenities });
+
   } catch (error) {
-    console.error('Error fetching amenities:', error);
-    res.status(500).json({ error: 'Something went wrong!' });
+    console.error("Error fetching amenities by category:", error);
+    res.status(500).json({ error: "Something went wrong!" });
   }
 });
 
