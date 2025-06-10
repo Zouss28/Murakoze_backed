@@ -71,6 +71,64 @@ router.get('/dashboard', async (req, res) => {
 
 /**
  * @swagger
+ * /api/profile/guestDashboard:
+ *   get:
+ *     summary: Get user dashboard information
+ *     tags:
+ *       - Profile
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved user profile
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Profile found
+ *                 user:
+ *                   type: object
+ *                 profile_image:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get('/guestDashboard', async (req, res) => {
+  try {
+    const user_id = req.query.guestID
+
+    const user = await prisma.users_profile.findUnique({
+      where: { id: user_id },
+      include: { images: true }
+    });
+    if (!user) return res.status(404).json({ error: "User doesn't exist" });
+   
+
+
+    res.json({
+      message: "Profile found",
+      first_name : user.first_name,
+      last_name : user.last_name,
+      gender : user.gender,
+      profile_image: user.images
+    });
+
+  } catch (err) {
+    console.log("Error : " + err);
+    res.status(500).json({ error: 'Something went wrong!' });
+  }
+});
+
+/**
+ * @swagger
  * /api/profile/dashboard/update:
  *   put:
  *     summary: Update user profile

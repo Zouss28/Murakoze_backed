@@ -43,103 +43,17 @@ const prisma = new PrismaClient();
  */
 
 router.get("/institution",async (req,res)=>{
-  const institutions = await prisma.institution.findMany({
-    include : {
-      service_group : true
-    }
-  });
+  const institutions = await prisma.institution.findMany();
   const result = institutions.map(inst =>{
     return{
       id: inst.id,
-      name : inst.name,
-      services : inst.service_group ? inst.service_group.map(service => ({name : service.name,
-        id:service.id
-      })) : ""
+      name : inst.name
     }
   });
   res.json({
     institutions : result
   })
 })
-
-
-/**
- * @swagger
- * /api/review/serviceRating:
- *   get:
- *     summary: Submit a service rating and emotional feedback
- *     tags:
- *       - Reviews
- *     description: Authenticated users can rate a service and provide emotional feedback.
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: service_id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID of the service being rated
- *       - in: query
- *         name: rating
- *         required: true
- *         schema:
- *           type: number
- *           minimum: 1
- *           maximum: 10
- *         description: Numerical rating for the service
- *       - in: query
- *         name: emorating
- *         required: true
- *         schema:
- *           type: string
- *           enum: [happy, satisfied, unhappy]
- *         description: Emotional state associated with the rating
- *     responses:
- *       200:
- *         description: Rating submitted successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *       400:
- *         description: Invalid input
- *       500:
- *         description: Internal server error
- */
-
-router.get("/serviceRating", auth, async (req, res) => {
-  try {
-    const { emorating, service_id, rating } = req.query;
-
-    const ratingExplained = { happy: 'Happy', satisfied: 'Satisfied', unhappy: 'Unhappy' };
-
-    if (!service_id) {
-      return res.status(400).json({ message: "No service ID provided!" });
-    }
-
-    if (!(emorating in ratingExplained)) {
-      return res.status(400).json({ message: "Invalid emorating provided!" });
-    }
-
-    await prisma.serviceReview.create({
-      data: {
-        user_id: req.user.userId,
-        service_id: parseInt(service_id),
-        emoRating: ratingExplained[emorating],
-        rating: parseFloat(rating),
-      },
-    });
-
-    return res.json({ message: "Survey submitted" });
-  } catch (err) {
-    console.error("Error during service rating:", err);
-    res.status(500).json({ error: "Something went wrong!" });
-  }
-});
 
 /**
  * @swagger
@@ -250,20 +164,12 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  * @swagger
  * /api/review/recent:
  *   get:
- *     summary: Get recent approved reviews
- *     description: Fetches the most recent approved reviews along with their associated user profiles and images. Returns 3 * page number of reviews, ordered by creation date descending.
+ *     summary: Get top 3 most recent reviews with user profiles
  *     tags:
  *       - Reviews
- *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           default: 1
- *         description: Page number to determine how many reviews to fetch (3 per page).
  *     responses:
  *       200:
- *         description: A list of recent approved reviews with user info
+ *         description: Recent reviews fetched successfully
  *         content:
  *           application/json:
  *             schema:
@@ -279,24 +185,10 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  *                     properties:
  *                       id:
  *                         type: integer
- *                       title:
+ *                       review:
  *                         type: string
- *                       content:
- *                         type: string
- *                       is_approved:
- *                         type: boolean
- *                       created_at:
- *                         type: string
- *                         format: date-time
- *                       images:
- *                         type: array
- *                         items:
- *                           type: object
- *                           properties:
- *                             id:
- *                               type: integer
- *                             image_url:
- *                               type: string
+ *                       rating:
+ *                         type: integer
  *                       user:
  *                         type: object
  *                         properties:
@@ -312,39 +204,29 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  *                             type: array
  *                             items:
  *                               type: object
- *                               properties:
- *                                 id:
- *                                   type: integer
- *                                 image_url:
- *                                   type: string
  *       500:
- *         description: Server error
+ *         description: Internal server error
  */
 
 router.get('/recent', async (req, res) => {
     try {
-      const page = parseInt(req.query.page) || 1;
       const reviews = await prisma.reviews.findMany({
         where :{
           is_approved: true
         },
         include: {
-          images: true,
-          institution:{
-            select :{
-              name : true
-            }
-          }
+          images: true
         },
         orderBy: {
           created_at: 'desc'
         },
-        take: 3 * page
+        take: 3
       });
   
       // Get all unique user_ids from the reviews
       const userIds = [...new Set(reviews.map(r => r.user_id))];
   
+      // Fetch user profiles (and their images) for those user_ids
       const users = await prisma.users_profile.findMany({
         where: {
           id: { in: userIds }
@@ -380,126 +262,106 @@ router.get('/recent', async (req, res) => {
     }
   });
   
+  
 /**
  * @swagger
- * /api/review/Q&A:
+ * /api/review/institution/{id}:
  *   get:
- *     summary: Get all survey questions for a given service
- *     description: Authenticated user retrieves questions and choices for a service.
- *     security:
- *       - bearerAuth: []
+ *     summary: Get reviews for a specific institution with optional rating filter
+ *     tags:
+ *       - Reviews
  *     parameters:
- *       - in: query
- *         name: service_id
+ *       - in: path
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the service
+ *         description: Institution ID
+ *       - in: query
+ *         name: rating
+ *         schema:
+ *           type: integer
+ *           enum: [1, 2, 3, 4, 5]
+ *         description: Filter reviews by star rating (optional)
  *     responses:
  *       200:
- *         description: List of questions retrieved
+ *         description: Reviews retrieved successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 message:
- *                   type: string
- *                 questions:
+ *                 institution_id:
+ *                   type: integer
+ *                 reviews:
  *                   type: array
  *                   items:
  *                     type: object
  *                     properties:
  *                       id:
  *                         type: integer
- *                       question:
+ *                       rating:
+ *                         type: integer
+ *                       review:
  *                         type: string
- *                       choices:
+ *                       is_approved:
+ *                         type: boolean
+ *                       created_at:
+ *                         type: string
+ *                         format: date-time
+ *                       images:
  *                         type: array
  *                         items:
- *                           type: string
- */
-router.get("/Q&A", auth, async (req, res) => {
-  try {
-    const service_id = parseInt(req.query.service_id);
-    if (!service_id) return res.status(400).json({ message: "Missing service_id" });
-
-    const questionInstance = await prisma.surveyQuestions.findMany({
-      where: { service_id },
-    });
-
-    const questions = questionInstance.map((q) => ({
-      id: q.id,
-      question: q.question,
-      choices: q.choices,
-    }));
-
-    return res.json({ message: "Q&A retrieved!", questions });
-  } catch (err) {
-    console.log("Error:", err);
-    res.status(500).json({ error: "Something went wrong with the QA!" });
-  }
-});
-
-
-/**
- * @swagger
- * /api/review/Q&A/post:
- *   post:
- *     summary: Submit answers to multiple survey questions
- *     description: Authenticated user submits responses to questions.
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               answers:
- *                 type: array
- *                 items:
- *                   type: object
- *                   required: [question_id, answer]
- *                   properties:
- *                     question_id:
- *                       type: integer
- *                     answer:
- *                       type: string
- *                     scale_rating:
- *                       type: number
- *     responses:
- *       200:
- *         description: Answers submitted successfully
+ *                           type: object
+ *                           properties:
+ *                             image_url:
+ *                               type: string
+ *       404:
+ *         description: Institution not found
  *       500:
  *         description: Internal server error
  */
-router.post("/Q&A/post", auth, async (req, res) => {
-  try {
-    const user_id = req.user.userId;
-    const { answers } = req.body;
 
-    if (!Array.isArray(answers) || answers.length === 0) {
-      return res.status(400).json({ message: "Answers must be a non-empty array." });
+router.get('/institution/:id', async (req, res) => {
+  const institutionId = parseInt(req.params.id);
+  const rating = req.query.rating ? parseInt(req.query.rating) : null;
+
+  try {
+    const institution = await prisma.institution.findUnique({
+      where: { id: institutionId }
+    });
+
+    if (!institution) {
+      return res.status(404).json({ error: 'Institution not found' });
     }
 
-    const answerData = answers.map(({ question_id, answer, scale_rating }) => ({
-      question_id,
-      user_id,
-      answer,
-      scale_rating,
-    }));
+    const reviewFilters = {
+      institution_id: institutionId,
+      is_approved: true
+    };
 
-    await prisma.surveyAnswers.createMany({ data: answerData });
+    if (rating && rating >= 1 && rating <= 5) {
+      reviewFilters.rating = rating;
+    }
 
-    return res.json({ message: "Survey submitted" });
+    const reviews = await prisma.reviews.findMany({
+      where: reviewFilters,
+      include: {
+        images: true
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+
+    res.json({
+      institution_id: institutionId,
+      reviews
+    });
   } catch (err) {
-    console.log("Error:", err);
-    res.status(500).json({ error: "Something went wrong with the QA!" });
+    console.error('Error filtering institution reviews:', err);
+    res.status(500).json({ error: 'Something went wrong!' });
   }
 });
-
-
 
 module.exports = router;

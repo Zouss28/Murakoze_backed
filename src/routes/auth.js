@@ -191,6 +191,50 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+/**
+ * @swagger
+ * /api/auth/delete-account:
+ *   delete:
+ *     summary: Delete the authenticated user's account
+ *     tags:
+ *       - Auth
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Account deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Account deleted successfully
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+router.delete('/delete-account', auth, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    // await prisma.users_profile.update({
+    //   where: { id: userId },
+    //   data: { isDeleted: true },
+    // });
+
+    await prisma.users_profile.delete({
+      where: { id: userId },
+    });
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting account:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 module.exports = router;
