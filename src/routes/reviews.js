@@ -367,5 +367,124 @@ router.get('/institution/:id', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong!' });
   }
 });
+/**
+ * @swagger
+ * /api/review/Q&A:
+ *   get:
+ *     summary: Get all survey questions for a given service
+ *     description: Authenticated user retrieves questions and choices for a service.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service
+ *     responses:
+ *       200:
+ *         description: List of questions retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 questions:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       question:
+ *                         type: string
+ *                       choices:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ */
+router.get("/Q&A", auth, async (req, res) => {
+  try {
+    const service_id = parseInt(req.query.service_id);
+    if (!service_id) return res.status(400).json({ message: "Missing service_id" });
+
+    const questionInstance = await prisma.surveyQuestions.findMany({
+      where: { service_id },
+    });
+
+    const questions = questionInstance.map((q) => ({
+      id: q.id,
+      question: q.question,
+      choices: q.choices,
+    }));
+
+    return res.json({ message: "Q&A retrieved!", questions });
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({ error: "Something went wrong with the QA!" });
+  }
+});
+
+
+/**
+ * @swagger
+ * /api/review/Q&A/post:
+ *   post:
+ *     summary: Submit answers to multiple survey questions
+ *     description: Authenticated user submits responses to questions.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               answers:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   required: [question_id, answer]
+ *                   properties:
+ *                     question_id:
+ *                       type: integer
+ *                     answer:
+ *                       type: string
+ *                     scale_rating:
+ *                       type: number
+ *     responses:
+ *       200:
+ *         description: Answers submitted successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.post("/Q&A/post", auth, async (req, res) => {
+  try {
+    const user_id = req.user.userId;
+    const { answers } = req.body;
+
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return res.status(400).json({ message: "Answers must be a non-empty array." });
+    }
+
+    const answerData = answers.map(({ question_id, answer, scale_rating }) => ({
+      question_id,
+      user_id,
+      answer,
+      scale_rating,
+    }));
+
+    await prisma.surveyAnswers.createMany({ data: answerData });
+
+    return res.json({ message: "Survey submitted" });
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({ error: "Something went wrong with the QA!" });
+  }
+});
 
 module.exports = router;
