@@ -262,7 +262,86 @@ router.get('/recent', async (req, res) => {
     }
   });
   
-  
+
+
+/**
+ * @swagger
+ * /api/review/serviceRating:
+ *   get:
+ *     summary: Submit a service rating and emotional feedback
+ *     tags:
+ *       - Reviews
+ *     description: Authenticated users can rate a service and provide emotional feedback.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service being rated
+ *       - in: query
+ *         name: rating
+ *         required: true
+ *         schema:
+ *           type: number
+ *           minimum: 1
+ *           maximum: 10
+ *         description: Numerical rating for the service
+ *       - in: query
+ *         name: emorating
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [happy, satisfied, unhappy]
+ *         description: Emotional state associated with the rating
+ *     responses:
+ *       200:
+ *         description: Rating submitted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: Invalid input
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get("/serviceRating", auth, async (req, res) => {
+  try {
+    const { emorating, service_id, rating } = req.query;
+
+    const ratingExplained = { happy: 'Happy', satisfied: 'Satisfied', unhappy: 'Unhappy' };
+
+    if (!service_id) {
+      return res.status(400).json({ message: "No service ID provided!" });
+    }
+
+    if (!(emorating in ratingExplained)) {
+      return res.status(400).json({ message: "Invalid emorating provided!" });
+    }
+
+    await prisma.serviceReview.create({
+      data: {
+        user_id: req.user.userId,
+        service_id: parseInt(service_id),
+        emoRating: ratingExplained[emorating],
+        rating: parseFloat(rating),
+      },
+    });
+
+    return res.json({ message: "Survey submitted" });
+  } catch (err) {
+    console.error("Error during service rating:", err);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+});
+
 /**
  * @swagger
  * /api/review/institution/{id}:
