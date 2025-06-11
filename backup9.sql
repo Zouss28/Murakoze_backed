@@ -47,11 +47,15 @@ INSERT INTO `_prisma_migrations` VALUES
 ('00269d40-c4d0-4920-a6e1-ebc95e981f90','873154a252a67e8023bfb869906298d001d6b3e680a233c57d7bc876b2ada5d7','2025-05-16 07:21:13.985','20250516072111_change_category_to_institution_id',NULL,NULL,'2025-05-16 07:21:13.864',1),
 ('09e2d21b-1d46-4443-9a24-20bf28d85fbe','7702d7335b0474f75f19500ba2104edd572e381908ac53d7ea7aef50fc7ee1b4','2025-05-15 09:12:38.787','20250515091235_added_price_range_table',NULL,NULL,'2025-05-15 09:12:38.741',1),
 ('0d33a9c7-a15a-4db4-99aa-3df3281bac27','99aeca32a79670ccfd032a0037223e1706ee299a72dc7994bbe6c5b2aeea1bec','2025-04-22 12:25:19.794','20250416104220_make_email_unique',NULL,NULL,'2025-04-22 12:25:19.767',1),
+('2e5d784a-fda9-478c-b947-4ea0fdf19ad5','976ed18db28b372feef17b2c7435147863bc8f396742c514d5d33423c55e3c6e','2025-05-27 09:43:58.643','20250527094355_added_email_verification',NULL,NULL,'2025-05-27 09:43:58.624',1),
 ('2f11ef21-434a-49d2-b2ab-7d22a3c80816','cf758ba966cae2a36c1eb27c347ec3f3ccda903f6713031b39a07ce9c2b35ee4','2025-04-22 12:26:03.150','20250422122600_add_review_table',NULL,NULL,'2025-04-22 12:26:03.055',1),
+('35f6757d-c68b-4d2d-b8c5-94342efac8a8','7325db4a7ccc8050b1c45843aec0d0fa0d8103259f307e5ac2ffd289e87885b0','2025-05-27 07:10:22.298','20250527071019_service_rating_table_added',NULL,NULL,'2025-05-27 07:10:22.226',1),
+('43c4f28f-8815-480d-b2d3-e6e012df379f','e740f8e3fb88d3af60e98f7bb0b41b086a0cbbac1613a4739ce1cd6de8516899','2025-05-26 09:10:20.090','20250526091017_added_a_survey',NULL,NULL,'2025-05-26 09:10:20.037',1),
 ('466875f7-7c96-47aa-88a0-8534441444e3','0e9fa29db49f1b75396897e01fcd93931590f2d5dab3609ab60c51602c866d5a','2025-05-08 10:29:29.081','20250505123202_changed_log_and_lat','',NULL,'2025-05-08 10:29:29.081',0),
 ('471d1305-ea2c-4aaf-b33a-14d977e562a0','7e4e3b1410fdefc7de61204c9bfee719d3fc1b148bf9011bd5e0381d2a607d4d','2025-04-24 09:26:06.812','20250424092604_add_review_id_in_images',NULL,NULL,'2025-04-24 09:26:06.723',1),
 ('4916de9e-21c5-4fcf-b3b6-47e377210c4c','009cfe68c1402396d62ca203b3d0dbddac342a96d4058ea8b9aa66467d60e138','2025-05-08 10:33:01.794','20250508103259_added_is_approved',NULL,NULL,'2025-05-08 10:33:01.777',1),
 ('4dc9a303-5806-4c3c-969c-93d8dcac30bf','7f787c9fb79f65eca02f423c2e71c560cd2263779925c0560a57fe0fb5e66921','2025-05-08 10:30:17.167','20250506102215_added_two_buttons','',NULL,'2025-05-08 10:30:17.167',0),
+('97c74e92-06c0-4ee0-9d75-3e7baab2163a','c7f1f555201ad20a3de4e00bbe58bf37dcc0127d995012dc05067a67b99d8107','2025-05-27 08:35:24.940','20250527083521_connected_q_and_a',NULL,NULL,'2025-05-27 08:35:24.892',1),
 ('9c2e95a1-1380-4c0b-b8dc-42f4129d038d','c3e89d014bc2e7faa113b7415cf1dda81ecd9ef12d0368c54fa6ca99cb239f23','2025-05-08 10:21:05.759','20250505095802_add_working_hour','',NULL,'2025-05-08 10:21:05.759',0),
 ('aa1db9e9-d0b9-415c-8e6c-bfc3a501b007','83ff5b233d37e17c45d06ab9986ded369d30f33ffeb3c38082f5dee2af3f2c89','2025-05-08 12:59:37.504','20250508125934_added_amenities',NULL,NULL,'2025-05-08 12:59:37.485',1),
 ('ab3a4592-3b7c-48b2-b760-d2baa4d43fa0','9b7351ce9f10afc448c9a67a2f50d907a68c595531bf27796b420d9540e1c0d6','2025-04-22 12:25:19.592','20250416074950_migration_v0',NULL,NULL,'2025-04-22 12:25:17.870',1),
@@ -59,7 +63,9 @@ INSERT INTO `_prisma_migrations` VALUES
 ('b413f863-5143-4fc3-8e75-8ecb44446f34','6e3c1b030e8dc08e0cfc1c323a0320ab65a16fb02d5edbf3137a599796bfab0b','2025-05-16 07:33:22.412','20250516073312_added_label',NULL,NULL,'2025-05-16 07:33:22.351',1),
 ('bdec823c-d03a-4952-aa23-a01a461ce60b','39ce6fc2ef150113e4af9d86058fc011eacdf8ddd74c296f98bac19b1272752b','2025-05-13 13:34:18.210','20250509102920_added_amenities','',NULL,'2025-05-13 13:34:18.210',0),
 ('bfb97104-3aa4-476c-b59d-2dc47fb9a396','16e2d82199edf7f072481eb57c6c42d59ce8f4a1bb77dbe73905861a206555c1','2025-05-15 10:18:52.657','20250515101849_updated_the_price_ranges',NULL,NULL,'2025-05-15 10:18:52.455',1),
+('d2680347-121a-4997-bcd2-99302ab88147','02787669a5754223a8c51a5a23c69f972d36985110290a4c32c52b1ca5f686bd','2025-05-27 08:31:04.181','20250527083101_removed_service_id_from_answers',NULL,NULL,'2025-05-27 08:31:04.157',1),
 ('dcb41191-64a5-4fc4-a460-205275f38f2d','3eb632e10262de08aa1e58de1a5f4a2e22ee222602a2aa0710de8e1585319bc2','2025-04-22 12:25:19.766','20250416093043_migration_v1',NULL,NULL,'2025-04-22 12:25:19.594',1),
+('e82af0d9-a24f-485d-a3f3-4fc7aa8eb851','bbf5746876ff73bc5cfe90ad9b8caea2aadf2be3c438cce97a0a1a0f567fd384','2025-05-30 09:35:26.830','20250530093523_added_search_term_for_categories',NULL,NULL,'2025-05-30 09:35:26.785',1),
 ('ece1b487-4ea5-4803-bc0b-a194614ef61e','0417d7f17a662ec5653b8bc7ed246b32242e823d1d5fd691335d9990555a5a81','2025-05-08 11:30:52.006','20250508113049_changed_time_format',NULL,NULL,'2025-05-08 11:30:51.978',1);
 /*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -98,7 +104,7 @@ INSERT INTO `amenities` VALUES
 (7,'Emergency Room','uploads/icons/Emergency Room Icon.png','2025-05-09 10:09:23'),
 (8,'Pharmacy On-site','uploads/icons/Pharmacy Medicines.png','2025-05-09 10:09:23'),
 (9,'Ambulance Services','uploads/icons/Ambulance Icon.png','2025-05-09 10:09:23'),
-(10,'Wheelchair Accessible','uploads/icons/wheelchair.png','2025-05-09 10:09:23'),
+(10,'Wheelchair Accessible','uploads/icons/Wheelchair Accessible Icon.png','2025-05-09 10:09:23'),
 (11,'24/7 Services','uploads/icons/24-7 Icon.png','2025-05-09 10:09:23'),
 (12,'Same-day Service','uploads/icons/Quick Icon.png','2025-05-09 10:09:23'),
 (13,'Background-Checked Staff','uploads/icons/Background Check Icon.png','2025-05-09 10:09:23'),
@@ -292,7 +298,7 @@ CREATE TABLE `business_amenities` (
   KEY `fk_instititu_id` (`institution_id`),
   CONSTRAINT `fk_amen_id` FOREIGN KEY (`amenitY_id`) REFERENCES `amenities` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_instititu_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,7 +365,11 @@ INSERT INTO `business_amenities` VALUES
 (73,22,9),
 (81,23,9),
 (89,24,9),
+(106,1,10),
 (32,5,10),
+(108,7,10),
+(110,8,10),
+(112,9,10),
 (41,10,10),
 (50,11,10),
 (59,20,10),
@@ -388,13 +398,14 @@ INSERT INTO `business_amenities` VALUES
 (84,23,16),
 (92,24,16),
 (5,3,17),
-(11,4,17),
-(23,6,17),
-(17,19,17),
+(107,1,18),
 (6,3,18),
 (12,4,18),
 (33,5,18),
 (24,6,18),
+(109,7,18),
+(111,8,18),
+(113,9,18),
 (42,10,18),
 (51,11,18),
 (18,19,18),
@@ -442,6 +453,55 @@ INSERT INTO `categories` VALUES
 (4,'Health/Medical',NULL),
 (5,'Home Services',NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `category_search_terms`
+--
+
+DROP TABLE IF EXISTS `category_search_terms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `category_search_terms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `term` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `category_search_terms_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category_search_terms`
+--
+
+LOCK TABLES `category_search_terms` WRITE;
+/*!40000 ALTER TABLE `category_search_terms` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `category_search_terms` VALUES
+(1,1,'Restaurants'),
+(2,1,'Eat'),
+(3,1,'Fast food'),
+(4,1,'Cafes'),
+(5,1,'Bars'),
+(6,2,'Banks'),
+(7,2,'Forex'),
+(8,2,'Currency exchange'),
+(9,2,'Loan services'),
+(10,3,'Motels'),
+(11,3,'Guesthouses'),
+(12,3,'Lodges'),
+(13,4,'Hospitals '),
+(14,4,'Clinics'),
+(15,4,'Pharmacies'),
+(16,4,'Dentists'),
+(17,5,'Plumbing'),
+(18,5,'Cleaning services '),
+(19,5,'Housekeeping'),
+(20,5,'Electricians');
+/*!40000 ALTER TABLE `category_search_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -800,26 +860,26 @@ LOCK TABLES `institution` WRITE;
 /*!40000 ALTER TABLE `institution` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `institution` VALUES
-(1,NULL,'Bank of Kigali Plc',NULL,'bk@bk.rw','KN 4 Avenue, No. 12, Plot No. 790, P.O. Box 175, Nyarugenge District, Kigali, Rwanda','4455','https://www.bk.rw',0,'2025-04-24 09:38:08',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'Bank of Kigali Plc is the largest commercial bank in Rwanda, offering a comprehensive range of financial services including loans, savings, investments, mortgages, internet banking, and insurance. Established in 1966, it operates under a license from the National Bank of Rwanda and is listed on both the Rwanda Stock Exchange and the Nairobi Securities Exchange.','-1.948333','30.059722','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.bk.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
-(3,NULL,'Java House Kigali Heights',NULL,'info@javahouseafrica.com','KG 7 Avenue, Kigali Heights, Kigali, Rwanda','+250 788 381 132','https://javahouseafrica.com',0,'2025-04-24 12:28:13',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Java House Kigali Heights is a popular café and restaurant located in the Kigali Heights complex, offering a diverse menu that includes breakfast items, Mexican dishes, pastries, and locally sourced Rwandan coffee. The establishment features both indoor and outdoor seating, providing a vibrant atmosphere suitable for various dining occasions.','-1.9533','30.0932','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://javahousetesting.com/wp-content/uploads/2022/04/Java_A4_Kigali_Master_Menu-2.pdf\"  }',NULL),
-(4,NULL,'The Hut Restaurant & Boutique Hotel ',NULL,'reservation@thehuthotelrwanda.com','KG 646 Street No.1, Rugando, Kimihurura (Behind Kigali Convention Center), Kigali, Rwanda','+250 783 419 980','https://thehuthotelrwanda.com',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'The Hut Restaurant & Boutique Hotel is a modern establishment in Kigali, Rwanda, offering a blend of international cuisine and comfortable accommodations. The restaurant features a diverse menu with fresh ingredients, while the boutique hotel provides well-appointed rooms, a rooftop restaurant with scenic views, an outdoor swimming pool, spa services, and a fitness center. Located in a serene neighborhood behind the Kigali Convention Center, it offers a peaceful atmosphere for guests.','-1.9515','30.0932','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://thehuthotelrwanda.com/online-ordering/#/products\"  }',NULL),
-(5,NULL,'Radisson Blu Hotel & Convention Centre Kigali',NULL,'info.kigali@radissonblu.com','Kimihurura Roundabout, KG 2 Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'The Radisson Blu Hotel & Convention Centre in Kigali is a premier 5-star establishment offering 292 modern rooms and suites. Strategically located adjacent to the Kigali Convention Centre, it provides state-of-the-art meeting facilities, a wellness spa, fitness center, outdoor pool, and diverse dining options. Its proximity to Kigali International Airport and the city center makes it ideal for both business and leisure travelers.','-1.95465','30.092757','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
-(6,NULL,'Kurry Kingdom',NULL,'kingdomkurry@gmail.com','House No.24, KG 5 Avenue, Kacyiru, Kigali, Rwanda','+250 787 605 789','https://kurrykingdom.rw',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Kurry Kingdom is a fine dining Indian restaurant located in Kigali’s Kacyiru district. Housed in a beautifully renovated colonial residence, it offers a blend of traditional Indian cuisine and contemporary culinary creations. The restaurant features multiple dining areas, including a serene garden pavilion, and is known for its authentic North and South Indian dishes prepared with freshly ground herbs and spices. Kurry Kingdom caters to various dietary preferences and is a popular spot for both casual dining and special occasions.','-1.94565','30.08912','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://kurrykingdom.rw/#\"  }',NULL),
-(7,NULL,'I&M Bank Rwanda',NULL,'info@imbank.co.rw','KN 03 Avenue, No. 9, Nyarugenge District, Kigali, Rwanda','+250 788 162 006','https://www.imbankgroup.com/rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'I&M Bank (Rwanda) Plc is one of Rwanda’s leading commercial banks, offering a wide range of personal, business, and corporate banking services. Established in 1963 as the Banque Commerciale du Rwanda (BCR), it was acquired by I&M Group in 2012 and rebranded in 2013. The bank is part of the I&M Group, which operates across East Africa, and is regulated by the National Bank of Rwanda.','-1.94929','30.06148','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.imbankgroup.com/rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
-(8,NULL,'COGEBANQUE',NULL,'customercare@cogebank.com','Centenary House, KN 63 Street, Avenue de l’Paix, Kigali, Rwanda','+250 788 155 500','https://www.cogebanque.co.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COGEBANQUE, officially known as Compagnie Générale de Banque, is a Rwandan commercial bank established in 1999. It offers a range of financial services, including loans and savings, with a focus on customer service and financial inclusivity. In November 2023, Equity Group Holdings Plc acquired a 99.125% stake in COGEBANQUE, making it a subsidiary.','-1.9462','30.0606','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.cogebanque.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
-(9,NULL,'COPEDU PLC',NULL,'info@copeduplc.rw','KN 03 Rd, African Union Road, Kicukiro District, Kigali, Rwanda','2012','https://copeduplc.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COPEDU PLC is a well-established microfinance institution in Rwanda, licensed by the National Bank of Rwanda (BNR). Founded in 1997, it transitioned from a cooperative to a public limited company in 2013. COPEDU offers a range of financial services, including savings and credit loans, aiming to foster financial inclusion and empower individuals and businesses across Rwanda.','-1.96102','30.11986','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://copeduplc.rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
-(10,NULL,'Kigali Marriott Hotel',NULL,'reservations.kigali@marriott.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 222 111 111','https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/',0,'2025-04-24 13:05:01',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Marriott Hotel is a premier 5-star hotel located in the heart of Rwanda’s capital city. The hotel offers luxurious accommodations with floor-to-ceiling windows, marble bathrooms, and modern amenities. Guests can enjoy a variety of on-site facilities, including multiple dining options, a fitness center, spa, outdoor pool, and extensive meeting and event spaces. Its central location provides easy access to the city’s financial district, embassies, and cultural attractions, making it ideal for both business and leisure travelers.','-1.95374','30.06235','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
-(11,NULL,'Kigali Serena Hotel',NULL,'kigali@serenahotels.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 252 597 100','https://www.serenahotels.com/kigali',0,'2025-04-25 05:30:40',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Serena Hotel is a 5-star luxury hotel situated in the heart of Kigali, just a five-minute walk from the Central Business District and approximately 10 kilometers from Kigali International Airport. The hotel features 148 rooms and suites that blend Rwandan heritage with contemporary comfort. Amenities include an outdoor swimming pool, spa, fitness center, and multiple dining options such as the Milima Restaurant and Sokoni Café and Bar. The hotel is a preferred choice for international diplomats and executives seeking a private and peaceful retreat.','-1.9563339','30.0627322','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.serenahotels.com/kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
-(19,NULL,'Filini Restaurant',NULL,'kcc.kigali@radissonblu.com','Kimihurura Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.kcc.rw/filini_main.html',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Filini Restaurant offers an authentic Italian dining experience in the heart of Kigali. Situated within the Radisson Blu Hotel & Convention Centre, the restaurant boasts a sophisticated ambiance complemented by contemporary design. Guests can indulge in a menu that features classic Italian dishes crafted with fresh ingredients, alongside a curated selection of wines and signature cocktails. Whether you’re in the mood for a hearty pasta, a wood-fired pizza, or a delectable dessert, Filini promises a culinary journey that captures the essence of Italy.','-1.95465','30.092757','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://www.visitrwanda.com/wp-content/uploads/2020/07/Filini-Menu-May-2020-Two-Face.pdf\"  }',NULL),
-(20,NULL,'Hôtel des Mille Collines',NULL,'info@millecollines.rw','2 KN 6th Avenue, Nyarugenge District, Kigali, Rwanda','+250 788 192 000','https://www.millecollines.rw',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Hôtel des Mille Collines is a historic 4-star hotel located in the heart of Kigali’s central business district. Inaugurated in 1973, the hotel gained international recognition during the 1994 Rwandan Genocide, where it provided refuge to over 1,200 people—a story later depicted in the film Hotel Rwanda. The hotel offers 112 rooms and suites, a restaurant, bar, outdoor swimming pool, tennis courts, and conference facilities, making it a prominent destination for both business and leisure travelers.','-1.9469','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.millecollines.rw/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
-(21,NULL,'King Faisal Hospital Rwanda',NULL,'info@kfhkigali.com','KG 544 Street 10, Kacyiru, Gasabo, Kigali, Rwanda','+250 788 123 200','https://kfh.rw/',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'King Faisal Hospital Rwanda is a multi-specialty quaternary hospital providing specialized healthcare in East and Central Africa. With state-of-the-art amenities, equipment, and well-trained staff, it is committed to delivering accessible, affordable, and high-quality care to patients.','-1.9469','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://kfh.rw/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
-(22,NULL,'MBC Hospital',NULL,'info@mbchospital.rw','KN 7 Ave, Kigali, Rwanda','+250 787 233 553','https://pharma.rw/places/mbc-hospital/',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'MBC Hospital is a private healthcare facility offering a range of services including emergency care, internal medicine, surgery, obstetrics & gynecology, and more. The hospital emphasizes patient safety, cleanliness, and compassionate care.','-1.9446','30.0615','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://pharma.rw/places/mbc-hospital/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
-(23,NULL,'Nyarugenge District Hospital',NULL,'info@nyarugengehospital.gov.rw','KN 247 St, Nyarugenge, Kigali, Rwanda','+250 790 666 663','https://www.nyarugengehospital.gov.rw/home',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Nyarugenge District Hospital provides comprehensive healthcare services including emergency care, maternal health, and surgical services. The hospital is known for its commitment to patient-centered care and community health initiatives.','-1.9442','30.0610','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.nyarugengehospital.gov.rw/home\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
-(24,NULL,'Baho International Hospital',NULL,'info@baho.rw','KG 9 Ave 42, Nyarutarama, Kigali, Rwanda','+250 782 343 710','https://x.com/bahointhospital',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Baho International Hospital is a private healthcare facility offering a range of medical services. Located in the Nyarutarama area, it provides 24-hour services with a focus on patient comfort and quality care.','-1.9379','30.1015','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://x.com/bahointhospital\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
-(25,NULL,'BestAir Cleaning Services',NULL,'info@bestaircleaningservice.rw','KG 688 St 1, Kigali, Rwanda','+250 794 762 218','https://www.bestaircleaningservice.rw/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'BestAir Cleaning Services offers professional cleaning solutions for both residential and commercial spaces. Their services include emergency cleaning, event cleaning, post-construction cleaning, industrial cleaning, fumigation, gardening, and maintenance. They utilize modern equipment and eco-friendly products to ensure a healthy environment.','-1.9579','30.1127','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://x.com/bahointhospital\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
-(26,NULL,'Dakul Clean',NULL,'info@dakulclean.com','CHIC Building E042B, Nyarugenge, Kigali, Rwanda','+250 783 215 763','https://www.dakulclean.com/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Dakul Clean provides a range of cleaning services, including after-builders cleaning, commercial cleaning, office cleaning, property management cleaning, and specialized services like rug and oven cleaning. They emphasize professionalism and eco-friendly practices.',' -1.9441','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.dakulclean.com/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
-(27,NULL,'Shine Home Ltd',NULL,'info@shinehome.co.rw','KK 191 St, Kigali, Rwanda','+250 788 450 999','https://www.shinehome.co.rw/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Shine Home Ltd offers comprehensive cleaning services, including residential and office cleaning, general disinfection, tile and paver cleaning, safe relocation, and carpet and sofa cleaning. They are known for their fast, reliable, and health-conscious cleaning solutions.','-1.9441','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.shinehome.co.rw/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
-(28,NULL,'Stellar Engineering Ltd',NULL,'stellarrwanda@gmail.com','KN 7 Ave, 159 St, Kigali','+250 788 267 679','http://stellarengi.com/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Stellar Engineering Ltd is a leading construction company in Rwanda, offering a wide range of services including electrical installations, plumbing, welding, and maintenance services. They are known for their expertise in MEP (Mechanical, Electrical, and Plumbing) projects.','-1.9441','30.0619','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"http://stellarengi.com/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Core Services\",       \"items\": [         { \"name\": \"Residential Projects\" },         { \"name\": \"Commercial Buildings\" },         { \"name\": \"Renovation & Remodeling\" }       ]     },     {       \"title\": \"Specialties\",       \"items\": [         { \"name\": \"Structural Engineering\" },         { \"name\": \"Project Management\" },         { \"name\": \"Sustainable Construction\" }       ]     }   ] }',NULL);
+(1,NULL,'Bank of Kigali Plc',NULL,'bk@bk.rw','KN 4 Avenue, No. 12, Plot No. 790, P.O. Box 175, Nyarugenge District, Kigali, Rwanda','4455','https://www.bk.rw',0,'2025-04-24 09:38:08',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'Bank of Kigali Plc is the largest commercial bank in Rwanda, offering a comprehensive range of financial services including loans, savings, investments, mortgages, internet banking, and insurance. Established in 1966, it operates under a license from the National Bank of Rwanda and is listed on both the Rwanda Stock Exchange and the Nairobi Securities Exchange.','-1.9475','30.059722222222224','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.bk.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
+(3,NULL,'Java House Kigali Heights',NULL,'info@javahouseafrica.com','KG 7 Avenue, Kigali Heights, Kigali, Rwanda','+250 788 381 132','https://javahouseafrica.com',0,'2025-04-24 12:28:13',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Java House Kigali Heights is a popular café and restaurant located in the Kigali Heights complex, offering a diverse menu that includes breakfast items, Mexican dishes, pastries, and locally sourced Rwandan coffee. The establishment features both indoor and outdoor seating, providing a vibrant atmosphere suitable for various dining occasions.','-1.9530556','30.093333333333334','{        \"label\": \"$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://javahousetesting.com/wp-content/uploads/2022/04/Java_A4_Kigali_Master_Menu-2.pdf\"  }',NULL),
+(4,NULL,'The Hut Restaurant & Boutique Hotel ',NULL,'reservation@thehuthotelrwanda.com','KG 646 Street No.1, Rugando, Kimihurura (Behind Kigali Convention Center), Kigali, Rwanda','+250 783 419 980','https://thehuthotelrwanda.com',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'The Hut Restaurant & Boutique Hotel is a modern establishment in Kigali, Rwanda, offering a blend of international cuisine and comfortable accommodations. The restaurant features a diverse menu with fresh ingredients, while the boutique hotel provides well-appointed rooms, a rooftop restaurant with scenic views, an outdoor swimming pool, spa services, and a fitness center. Located in a serene neighborhood behind the Kigali Convention Center, it offers a peaceful atmosphere for guests.','-1.9577778','30.093333333333334','{        \"label\": \"$$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://thehuthotelrwanda.com/online-ordering/#/products\"  }',NULL),
+(5,NULL,'Radisson Blu Hotel & Convention Centre Kigali',NULL,'info.kigali@radissonblu.com','Kimihurura Roundabout, KG 2 Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'The Radisson Blu Hotel & Convention Centre in Kigali is a premier 5-star establishment offering 292 modern rooms and suites. Strategically located adjacent to the Kigali Convention Centre, it provides state-of-the-art meeting facilities, a wellness spa, fitness center, outdoor pool, and diverse dining options. Its proximity to Kigali International Airport and the city center makes it ideal for both business and leisure travelers.','-1.9541667','30.092499999999998','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.radissonhotels.com/en-us/hotels/radisson-blu-convention-kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
+(6,NULL,'Kurry Kingdom',NULL,'kingdomkurry@gmail.com','House No.24, KG 5 Avenue, Kacyiru, Kigali, Rwanda','+250 787 605 789','https://kurrykingdom.rw',0,'2025-04-24 12:33:12',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Kurry Kingdom is a fine dining Indian restaurant located in Kigali’s Kacyiru district. Housed in a beautifully renovated colonial residence, it offers a blend of traditional Indian cuisine and contemporary culinary creations. The restaurant features multiple dining areas, including a serene garden pavilion, and is known for its authentic North and South Indian dishes prepared with freshly ground herbs and spices. Kurry Kingdom caters to various dietary preferences and is a popular spot for both casual dining and special occasions.','-1.9455556','30.08888888888889','{        \"label\": \"$$$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://kurrykingdom.rw/#\"  }',NULL),
+(7,NULL,'I&M Bank Rwanda',NULL,'info@imbank.co.rw','KN 03 Avenue, No. 9, Nyarugenge District, Kigali, Rwanda','+250 788 162 006','https://www.imbankgroup.com/rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'I&M Bank (Rwanda) Plc is one of Rwanda’s leading commercial banks, offering a wide range of personal, business, and corporate banking services. Established in 1963 as the Banque Commerciale du Rwanda (BCR), it was acquired by I&M Group in 2012 and rebranded in 2013. The bank is part of the I&M Group, which operates across East Africa, and is regulated by the National Bank of Rwanda.','-1.9491667','30.06138888888889','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.imbankgroup.com/rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
+(8,NULL,'COGEBANQUE',NULL,'customercare@cogebank.com','Centenary House, KN 63 Street, Avenue de l’Paix, Kigali, Rwanda','+250 788 155 500','https://www.cogebanque.co.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COGEBANQUE, officially known as Compagnie Générale de Banque, is a Rwandan commercial bank established in 1999. It offers a range of financial services, including loans and savings, with a focus on customer service and financial inclusivity. In November 2023, Equity Group Holdings Plc acquired a 99.125% stake in COGEBANQUE, making it a subsidiary.','-1.95','30.060000000000002','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.cogebanque.rw/\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
+(9,NULL,'COPEDU PLC',NULL,'info@copeduplc.rw','KN 03 Rd, African Union Road, Kicukiro District, Kigali, Rwanda','2012','https://copeduplc.rw',0,'2025-04-24 13:03:04',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,2,NULL,'COPEDU PLC is a well-established microfinance institution in Rwanda, licensed by the National Bank of Rwanda (BNR). Founded in 1997, it transitioned from a cooperative to a public limited company in 2013. COPEDU offers a range of financial services, including savings and credit loans, aiming to foster financial inclusion and empower individuals and businesses across Rwanda.','-1.9666667','30.090277777777775','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://copeduplc.rw\" }','{     \"label\": \"Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Personal Banking\",         \"items\": [           { \"name\": \"Savings Accounts\" },           { \"name\": \"Personal Loans\" },           { \"name\": \"Debit & Credit Cards\" }         ]       },       {         \"title\": \"Business Banking\",         \"items\": [           { \"name\": \"Business Accounts\" },           { \"name\": \"Commercial Loans\" },           { \"name\": \"Merchant Services\" }         ]       },       {         \"title\": \"Other Services\",         \"items\": [           { \"name\": \"Mobile Banking\" },           { \"name\": \"ATM Locator\" },           { \"name\": \"Forex Services\" }         ]       }     ]   }',NULL),
+(10,NULL,'Kigali Marriott Hotel',NULL,'reservations.kigali@marriott.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 222 111 111','https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/',0,'2025-04-24 13:05:01',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Marriott Hotel is a premier 5-star hotel located in the heart of Rwanda’s capital city. The hotel offers luxurious accommodations with floor-to-ceiling windows, marble bathrooms, and modern amenities. Guests can enjoy a variety of on-site facilities, including multiple dining options, a fitness center, spa, outdoor pool, and extensive meeting and event spaces. Its central location provides easy access to the city’s financial district, embassies, and cultural attractions, making it ideal for both business and leisure travelers.','-1.9533333','30.061944444444446','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.marriott.com/en-us/hotels/kglmc-kigali-marriott-hotel/overview/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
+(11,NULL,'Kigali Serena Hotel',NULL,'kigali@serenahotels.com','KN 3 Avenue, Nyarugenge District, Kigali, Rwanda','+250 252 597 100','https://www.serenahotels.com/kigali',0,'2025-04-25 05:30:40',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Kigali Serena Hotel is a 5-star luxury hotel situated in the heart of Kigali, just a five-minute walk from the Central Business District and approximately 10 kilometers from Kigali International Airport. The hotel features 148 rooms and suites that blend Rwandan heritage with contemporary comfort. Amenities include an outdoor swimming pool, spa, fitness center, and multiple dining options such as the Milima Restaurant and Sokoni Café and Bar. The hotel is a preferred choice for international diplomats and executives seeking a private and peaceful retreat.','-1.9561111','30.0625','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.serenahotels.com/kigali\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
+(19,NULL,'Filini Restaurant',NULL,'kcc.kigali@radissonblu.com','Kimihurura Roundabout, P.O. Box 6629, Kigali, Rwanda','+250 252 252 252','https://www.kcc.rw/filini_main.html',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,'Filini Restaurant offers an authentic Italian dining experience in the heart of Kigali. Situated within the Radisson Blu Hotel & Convention Centre, the restaurant boasts a sophisticated ambiance complemented by contemporary design. Guests can indulge in a menu that features classic Italian dishes crafted with fresh ingredients, alongside a curated selection of wines and signature cocktails. Whether you’re in the mood for a hearty pasta, a wood-fired pizza, or a delectable dessert, Filini promises a culinary journey that captures the essence of Italy.','-1.9544444','30.093333333333334','{        \"label\": \"$$$$\",        \"type\": \"tooltip\",        \"content\": [              \"$: Between 1,000 RWF and 12,000 RWF\",         \"$$: Between 12,000 RWF and 30,000 RWF\",         \"$$$: Between 30,000 RWF and 54,000 RWF\",         \"$$$$: 60,000 RWF and above\"      ]  }','{        \"label\": \"View Our Menu\",        \"type\": \"link\",        \"url\": \"https://www.visitrwanda.com/wp-content/uploads/2020/07/Filini-Menu-May-2020-Two-Face.pdf\"  }',NULL),
+(20,NULL,'Hôtel des Mille Collines',NULL,'info@millecollines.rw','2 KN 6th Avenue, Nyarugenge District, Kigali, Rwanda','+250 788 192 000','https://www.millecollines.rw',0,'2025-05-07 05:51:03',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,3,NULL,'Hôtel des Mille Collines is a historic 4-star hotel located in the heart of Kigali’s central business district. Inaugurated in 1973, the hotel gained international recognition during the 1994 Rwandan Genocide, where it provided refuge to over 1,200 people—a story later depicted in the film Hotel Rwanda. The hotel offers 112 rooms and suites, a restaurant, bar, outdoor swimming pool, tennis courts, and conference facilities, making it a prominent destination for both business and leisure travelers.','-1.9463889','30.061944444444446','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.millecollines.rw/\" }','{     \"label\": \"View Our Services\",     \"type\": \"popup\",     \"sections\": [       {         \"title\": \"Dinning\",         \"items\": [           {             \"name\": \"Cuccina restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Iriba Bar & Terrace\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Soko restaurant\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Experiences\",         \"items\": [           {             \"name\": \"Fitness Center\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Swimming Pool\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Saray Spa\",             \"days\": \"Every day\",             \"time\": \"12:30PM-2:30PM\"           }         ]       },       {         \"title\": \"Event Spaces\",         \"items\": [           {             \"name\": \"Meeting & Events\",             \"days\": \"Friday & Saturday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Weddings\",             \"days\": \"Friday-Sunday\",             \"time\": \"12:30PM-2:30PM\"           },           {             \"name\": \"Event Spaces\",             \"days\": \"Monday, Wednesday, Thursday\",             \"time\": \"12:30PM-2:30PM\"           }         ]       }     ]   }',NULL),
+(21,NULL,'King Faisal Hospital Rwanda',NULL,'info@kfhkigali.com','KG 544 Street 10, Kacyiru, Gasabo, Kigali, Rwanda','+250 788 123 200','https://kfh.rw/',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'King Faisal Hospital Rwanda is a multi-specialty quaternary hospital providing specialized healthcare in East and Central Africa. With state-of-the-art amenities, equipment, and well-trained staff, it is committed to delivering accessible, affordable, and high-quality care to patients.','-1.9436111','30.095277777777778','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://kfh.rw/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
+(22,NULL,'MBC Hospital',NULL,'info@mbchospital.rw','KN 7 Ave, Kigali, Rwanda','+250 787 233 553','https://pharma.rw/places/mbc-hospital/',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'MBC Hospital is a private healthcare facility offering a range of services including emergency care, internal medicine, surgery, obstetrics & gynecology, and more. The hospital emphasizes patient safety, cleanliness, and compassionate care.','-1.9641667','30.061666666666667','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://pharma.rw/places/mbc-hospital/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
+(23,NULL,'Nyarugenge District Hospital',NULL,'info@nyarugengehospital.gov.rw','KN 247 St, Nyarugenge, Kigali, Rwanda','+250 790 666 663','https://www.nyarugengehospital.gov.rw/home',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Nyarugenge District Hospital provides comprehensive healthcare services including emergency care, maternal health, and surgical services. The hospital is known for its commitment to patient-centered care and community health initiatives.','-1.9813889','30.043333333333337','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.nyarugengehospital.gov.rw/home\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
+(24,NULL,'Baho International Hospital',NULL,'info@baho.rw','KG 9 Ave 42, Nyarutarama, Kigali, Rwanda','+250 782 343 710','https://x.com/bahointhospital',0,'2025-05-08 07:37:27',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,4,NULL,'Baho International Hospital is a private healthcare facility offering a range of medical services. Located in the Nyarutarama area, it provides 24-hour services with a focus on patient comfort and quality care.','-1.9488889','30.10527777777778','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://x.com/bahointhospital\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Outpatient Services\",       \"items\": [         { \"name\": \"General Consultation\" },         { \"name\": \"Specialist Clinics\" },         { \"name\": \"Emergency Care\" }       ]     },     {       \"title\": \"Inpatient Services\",       \"items\": [         { \"name\": \"Surgery\" },         { \"name\": \"Maternity Ward\" },         { \"name\": \"ICU & HDU\" }       ]     },     {       \"title\": \"Diagnostic Services\",       \"items\": [         { \"name\": \"Laboratory Testing\" },         { \"name\": \"Radiology (X-ray, MRI, CT)\" },         { \"name\": \"Ultrasound\" }       ]     }   ] }',NULL),
+(25,NULL,'BestAir Cleaning Services',NULL,'info@bestaircleaningservice.rw','KG 688 St 1, Kigali, Rwanda','+250 794 762 218','https://www.bestaircleaningservice.rw/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'BestAir Cleaning Services offers professional cleaning solutions for both residential and commercial spaces. Their services include emergency cleaning, event cleaning, post-construction cleaning, industrial cleaning, fumigation, gardening, and maintenance. They utilize modern equipment and eco-friendly products to ensure a healthy environment.','-1.9416667','30.075277777777778','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://x.com/bahointhospital\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
+(26,NULL,'Dakul Clean',NULL,'info@dakulclean.com','CHIC Building E042B, Nyarugenge, Kigali, Rwanda','+250 783 215 763','https://www.dakulclean.com/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Dakul Clean provides a range of cleaning services, including after-builders cleaning, commercial cleaning, office cleaning, property management cleaning, and specialized services like rug and oven cleaning. They emphasize professionalism and eco-friendly practices.','-1.9680556','30.12138888888889','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.dakulclean.com/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
+(27,NULL,'Shine Home Ltd',NULL,'info@shinehome.co.rw','KK 191 St, Kigali, Rwanda','+250 788 450 999','https://www.shinehome.co.rw/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Shine Home Ltd offers comprehensive cleaning services, including residential and office cleaning, general disinfection, tile and paver cleaning, safe relocation, and carpet and sofa cleaning. They are known for their fast, reliable, and health-conscious cleaning solutions.','-1.9680556','30.12138888888889','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"https://www.shinehome.co.rw/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Residential Cleaning\",       \"items\": [         { \"name\": \"Home Deep Cleaning\" },         { \"name\": \"Upholstery Cleaning\" },         { \"name\": \"Pest Control\" }       ]     },     {       \"title\": \"Commercial Cleaning\",       \"items\": [         { \"name\": \"Office Cleaning\" },         { \"name\": \"Window Cleaning\" },         { \"name\": \"Sanitization Services\" }       ]     }   ] }',NULL),
+(28,NULL,'Stellar Engineering Ltd',NULL,'stellarrwanda@gmail.com','KN 7 Ave, 159 St, Kigali','+250 788 267 679','http://stellarengi.com/',0,'2025-05-08 07:50:29',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,1,NULL,1,5,NULL,'Stellar Engineering Ltd is a leading construction company in Rwanda, offering a wide range of services including electrical installations, plumbing, welding, and maintenance services. They are known for their expertise in MEP (Mechanical, Electrical, and Plumbing) projects.','-1.9855556','30.11916666666667','{   \"label\": \"Visit Our Page\",   \"type\": \"link\",   \"url\": \"http://stellarengi.com/\" }','{   \"label\": \"View Our Services\",   \"type\": \"popup\",   \"sections\": [     {       \"title\": \"Core Services\",       \"items\": [         { \"name\": \"Residential Projects\" },         { \"name\": \"Commercial Buildings\" },         { \"name\": \"Renovation & Remodeling\" }       ]     },     {       \"title\": \"Specialties\",       \"items\": [         { \"name\": \"Structural Engineering\" },         { \"name\": \"Project Management\" },         { \"name\": \"Sustainable Construction\" }       ]     }   ] }',NULL);
 /*!40000 ALTER TABLE `institution` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -1972,6 +2032,41 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Table structure for table `serviceReview`
+--
+
+DROP TABLE IF EXISTS `serviceReview`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `serviceReview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `emoRating` varchar(25) NOT NULL,
+  `added_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_Service_id` (`service_id`),
+  KEY `fk_Suser_id` (`user_id`),
+  CONSTRAINT `fk_Service_id` FOREIGN KEY (`service_id`) REFERENCES `service_group` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_Suser_id` FOREIGN KEY (`user_id`) REFERENCES `users_profile` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `serviceReview`
+--
+
+LOCK TABLES `serviceReview` WRITE;
+/*!40000 ALTER TABLE `serviceReview` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `serviceReview` VALUES
+(1,85,1,8,'Satisfied','2025-05-27 05:56:12');
+/*!40000 ALTER TABLE `serviceReview` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Table structure for table `service_group`
 --
 
@@ -2001,7 +2096,7 @@ CREATE TABLE `service_group` (
   PRIMARY KEY (`id`),
   KEY `fk_service_group_institution_id` (`institution_id`),
   CONSTRAINT `fk_service_group_institution_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2011,6 +2106,87 @@ CREATE TABLE `service_group` (
 LOCK TABLES `service_group` WRITE;
 /*!40000 ALTER TABLE `service_group` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `service_group` VALUES
+(1,'Food Quality',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(2,'Cleanliness ',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(3,'Customer Service',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(4,'Wait Time',NULL,NULL,NULL,NULL,3,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(5,'Food Quality',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(6,'Cleanliness ',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(7,'Customer Service',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(8,'Wait Time',NULL,NULL,NULL,NULL,4,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(9,'Food Quality',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(10,'Cleanliness',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(11,'Customer Service',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(12,'Wait Time',NULL,NULL,NULL,NULL,6,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(13,'Food Quality',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(14,'Cleanliness',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(15,'Customer Service',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(16,'Wait Time',NULL,NULL,NULL,NULL,9,'2025-05-26 07:29:16','2025-05-26 07:29:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(17,'Teller Services',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(18,'ATM Experience',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(19,'Account Opening',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(20,'Digital Banking',NULL,NULL,NULL,NULL,1,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(21,'Teller Services',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(22,'ATM Experience',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(23,'Account Opening',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(24,'Digital Banking',NULL,NULL,NULL,NULL,7,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(25,'Teller Services',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(26,'ATM Experience',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(27,'Account Opening',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(28,'Digital Banking',NULL,NULL,NULL,NULL,8,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(29,'Teller Services',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(30,'ATM Experience',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(31,'Account Opening',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(32,'Digital Banking',NULL,NULL,NULL,NULL,9,'2025-05-26 07:32:05','2025-05-26 07:32:05',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(33,'Food & Beverage',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(34,'Cleanliness',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(35,'Front Desk',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(36,'Room Comfort',NULL,NULL,NULL,NULL,5,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(37,'Food & Beverage',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(38,'Cleanliness',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(39,'Front Desk',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(40,'Room Comfort',NULL,NULL,NULL,NULL,10,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(41,'Food & Beverage',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(42,'Cleanliness',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(43,'Front Desk',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(44,'Room Comfort',NULL,NULL,NULL,NULL,11,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(45,'Food & Beverage',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(46,'Cleanliness',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(47,'Front Desk',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(48,'Room Comfort',NULL,NULL,NULL,NULL,20,'2025-05-26 07:36:38','2025-05-26 07:36:38',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(49,'Registration',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(50,'Consultation',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(51,'Cleanliness',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(52,'Pharmacy',NULL,NULL,NULL,NULL,21,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(53,'Registration',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(54,'Consultation',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(55,'Cleanliness',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(56,'Pharmacy',NULL,NULL,NULL,NULL,22,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(57,'Registration',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(58,'Consultation',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(59,'Cleanliness',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(60,'Pharmacy',NULL,NULL,NULL,NULL,23,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(61,'Registration',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(62,'Consultation',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(63,'Cleanliness',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(64,'Pharmacy',NULL,NULL,NULL,NULL,24,'2025-05-26 07:39:01','2025-05-26 07:39:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(65,'Punctuality',NULL,NULL,NULL,NULL,25,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(66,'Quality',NULL,NULL,NULL,NULL,25,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(67,'Communication',NULL,NULL,NULL,NULL,25,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(68,'Clean-up',NULL,NULL,NULL,NULL,25,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(69,'Punctuality',NULL,NULL,NULL,NULL,26,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(70,'Quality',NULL,NULL,NULL,NULL,26,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(71,'Communication',NULL,NULL,NULL,NULL,26,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(72,'Clean-up',NULL,NULL,NULL,NULL,26,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(73,'Punctuality',NULL,NULL,NULL,NULL,27,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(74,'Quality',NULL,NULL,NULL,NULL,27,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(75,'Communication',NULL,NULL,NULL,NULL,27,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(76,'Clean-up',NULL,NULL,NULL,NULL,27,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(77,'Punctuality',NULL,NULL,NULL,NULL,28,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(78,'Quality',NULL,NULL,NULL,NULL,28,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(79,'Communication',NULL,NULL,NULL,NULL,28,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL),
+(80,'Clean-up',NULL,NULL,NULL,NULL,28,'2025-05-27 11:33:49','2025-05-27 11:33:49',NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,NULL,NULL);
 /*!40000 ALTER TABLE `service_group` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2048,6 +2224,230 @@ LOCK TABLES `survey` WRITE;
 /*!40000 ALTER TABLE `survey` DISABLE KEYS */;
 set autocommit=0;
 /*!40000 ALTER TABLE `survey` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `surveyAnswers`
+--
+
+DROP TABLE IF EXISTS `surveyAnswers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `surveyAnswers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  `scale_rating` int(11) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_Serv_id` (`question_id`),
+  CONSTRAINT `fk_Serv_id` FOREIGN KEY (`question_id`) REFERENCES `surveyQuestions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `surveyAnswers`
+--
+
+LOCK TABLES `surveyAnswers` WRITE;
+/*!40000 ALTER TABLE `surveyAnswers` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `surveyAnswers` VALUES
+(1,1,98,'Sucks',1,'2025-05-28 09:43:33');
+/*!40000 ALTER TABLE `surveyAnswers` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `surveyQuestions`
+--
+
+DROP TABLE IF EXISTS `surveyQuestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `surveyQuestions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
+  `question` text DEFAULT NULL,
+  `choices` longtext DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_servic_id` (`service_id`),
+  CONSTRAINT `fk_servic_id` FOREIGN KEY (`service_id`) REFERENCES `service_group` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `surveyQuestions`
+--
+
+LOCK TABLES `surveyQuestions` WRITE;
+/*!40000 ALTER TABLE `surveyQuestions` DISABLE KEYS */;
+set autocommit=0;
+INSERT INTO `surveyQuestions` VALUES
+(1,1,'How tasty was your meal?','[\"Very clear\", \"Somewhat clear\", \"Confusing\"]','2025-05-27 12:26:17'),
+(2,5,'How tasty was your meal?','[\"Very clear\", \"Somewhat clear\", \"Confusing\"]','2025-05-27 12:26:17'),
+(3,9,'How tasty was your meal?','[\"Very clear\", \"Somewhat clear\", \"Confusing\"]','2025-05-27 12:26:17'),
+(4,13,'How tasty was your meal?','[\"Very clear\", \"Somewhat clear\", \"Confusing\"]','2025-05-27 12:26:17'),
+(5,1,'Did the food meet your expectations?','[\"Exceeded expectations\", \"Met expectations\", \"Below expectations\"]','2025-05-27 12:26:17'),
+(6,5,'Did the food meet your expectations?','[\"Exceeded expectations\", \"Met expectations\", \"Below expectations\"]','2025-05-27 12:26:17'),
+(7,9,'Did the food meet your expectations?','[\"Exceeded expectations\", \"Met expectations\", \"Below expectations\"]','2025-05-27 12:26:17'),
+(8,13,'Did the food meet your expectations?','[\"Exceeded expectations\", \"Met expectations\", \"Below expectations\"]','2025-05-27 12:26:17'),
+(9,2,'Was your table and seating area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 12:32:54'),
+(10,6,'Was your table and seating area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 12:32:54'),
+(11,10,'Was your table and seating area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 12:32:54'),
+(12,14,'Was your table and seating area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 12:32:54'),
+(13,2,'How clean was the overall restaurant environment?','[“Very Clean”, “Average”, “Unclean”]','2025-05-27 12:32:54'),
+(14,6,'How clean was the overall restaurant environment?','[“Very Clean”, “Average”, “Unclean”]','2025-05-27 12:32:54'),
+(15,10,'How clean was the overall restaurant environment?','[“Very Clean”, “Average”, “Unclean”]','2025-05-27 12:32:54'),
+(16,14,'How clean was the overall restaurant environment?','[“Very Clean”, “Average”, “Unclean”]','2025-05-27 12:32:54'),
+(17,3,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:32:54'),
+(18,7,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:32:54'),
+(19,11,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:32:54'),
+(20,15,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:32:54'),
+(21,3,'Did the waiter attend to your needs promptly?','[“Immediately”, “Short Wait”, “Long Wait”]','2025-05-27 12:32:54'),
+(22,7,'Did the waiter attend to your needs promptly?','[“Immediately”, “Short Wait”, “Long Wait”]','2025-05-27 12:32:54'),
+(23,11,'Did the waiter attend to your needs promptly?','[“Immediately”, “Short Wait”, “Long Wait”]','2025-05-27 12:32:54'),
+(24,15,'Did the waiter attend to your needs promptly?','[“Immediately”, “Short Wait”, “Long Wait”]','2025-05-27 12:32:54'),
+(25,4,'How long did you wait before being served?','[\"Less than 10 minutes\", \"10–20 minutes\", \"Over 20 minutes\"]','2025-05-27 12:35:06'),
+(26,8,'How long did you wait before being served?','[\"Less than 10 minutes\", \"10–20 minutes\", \"Over 20 minutes\"]','2025-05-27 12:35:06'),
+(27,12,'How long did you wait before being served?','[\"Less than 10 minutes\", \"10–20 minutes\", \"Over 20 minutes\"]','2025-05-27 12:35:06'),
+(28,16,'How long did you wait before being served?','[\"Less than 10 minutes\", \"10–20 minutes\", \"Over 20 minutes\"]','2025-05-27 12:35:06'),
+(29,4,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:35:06'),
+(30,8,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:35:06'),
+(31,12,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:35:06'),
+(32,16,'Was the staff polite and respectful?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:35:06'),
+(33,17,'Was the teller courteous and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(34,21,'Was the teller courteous and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(35,25,'Was the teller courteous and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(36,29,'Was the teller courteous and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(37,17,'How efficiently was your transaction handled?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 12:45:19'),
+(38,21,'How efficiently was your transaction handled?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 12:45:19'),
+(39,25,'How efficiently was your transaction handled?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 12:45:19'),
+(40,29,'How efficiently was your transaction handled?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 12:45:19'),
+(41,18,'Was the ATM working properly?','[“Yes”, “Partially”, “No”]','2025-05-27 12:45:19'),
+(42,22,'Was the ATM working properly?','[“Yes”, “Partially”, “No”]','2025-05-27 12:45:19'),
+(43,26,'Was the ATM working properly?','[“Yes”, “Partially”, “No”]','2025-05-27 12:45:19'),
+(44,30,'Was the ATM working properly?','[“Yes”, “Partially”, “No”]','2025-05-27 12:45:19'),
+(45,18,'Did you encounter any transaction errors?','[“No Errors”, “Minor Issues”, “Major Issues”]','2025-05-27 12:45:19'),
+(46,22,'Did you encounter any transaction errors?','[“No Errors”, “Minor Issues”, “Major Issues”]','2025-05-27 12:45:19'),
+(47,29,'Did you encounter any transaction errors?','[“No Errors”, “Minor Issues”, “Major Issues”]','2025-05-27 12:45:19'),
+(48,30,'Did you encounter any transaction errors?','[“No Errors”, “Minor Issues”, “Major Issues”]','2025-05-27 12:45:19'),
+(49,19,'Was the account opening process smooth?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(50,23,'Was the account opening process smooth?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(51,27,'Was the account opening process smooth?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(52,31,'Was the account opening process smooth?','[“Yes”, “Somewhat”, “No”]','2025-05-27 12:45:19'),
+(53,19,'Was the staff knowledgeable and helpful?','[“Very Helpful”, “Helpful”, “Unhelpful”]','2025-05-27 12:45:19'),
+(54,23,'Was the staff knowledgeable and helpful?','[“Very Helpful”, “Helpful”, “Unhelpful”]','2025-05-27 12:45:19'),
+(55,27,'Was the staff knowledgeable and helpful?','[“Very Helpful”, “Helpful”, “Unhelpful”]','2025-05-27 12:45:19'),
+(56,31,'Was the staff knowledgeable and helpful?','[“Very Helpful”, “Helpful”, “Unhelpful”]','2025-05-27 12:45:19'),
+(57,20,'Was it easy to log into your online/mobile banking?','[“Very Easy”, “Somewhat Easy”, “Difficult”]','2025-05-27 12:45:19'),
+(58,24,'Was it easy to log into your online/mobile banking?','[“Very Easy”, “Somewhat Easy”, “Difficult”]','2025-05-27 12:45:19'),
+(59,28,'Was it easy to log into your online/mobile banking?','[“Very Easy”, “Somewhat Easy”, “Difficult”]','2025-05-27 12:45:19'),
+(60,32,'Was it easy to log into your online/mobile banking?','[“Very Easy”, “Somewhat Easy”, “Difficult”]','2025-05-27 12:45:19'),
+(61,20,'Did you find all the features you needed?','[“Yes”, “Some Missing”, “No”]','2025-05-27 12:45:19'),
+(62,24,'Did you find all the features you needed?','[“Yes”, “Some Missing”, “No”]','2025-05-27 12:45:19'),
+(63,28,'Did you find all the features you needed?','[“Yes”, “Some Missing”, “No”]','2025-05-27 12:45:19'),
+(64,32,'Did you find all the features you needed?','[“Yes”, “Some Missing”, “No”]','2025-05-27 12:45:19'),
+(65,33,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(66,37,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(67,41,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(68,45,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(69,33,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(70,37,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(71,41,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(72,45,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(73,34,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(74,38,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(75,42,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(76,46,'Was your room clean upon arrival?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-27 13:02:34'),
+(77,34,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(78,38,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(79,42,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(80,46,'Were the bathrooms hygienic?','[“Yes”, “Somewhat”, “No”]','2025-05-27 13:02:34'),
+(81,35,'Was the check-in/check-out process efficient?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 13:02:34'),
+(82,39,'Was the check-in/check-out process efficient?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 13:02:34'),
+(83,43,'Was the check-in/check-out process efficient?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 13:02:34'),
+(84,47,'Was the check-in/check-out process efficient?','[“Very Efficient”, “Efficient”, “Slow”]','2025-05-27 13:02:34'),
+(85,35,'Were your requests handled promptly?','[“Yes”, “Sometimes”, “No”]','2025-05-27 13:02:34'),
+(86,39,'Were your requests handled promptly?','[“Yes”, “Sometimes”, “No”]','2025-05-27 13:02:34'),
+(87,43,'Were your requests handled promptly?','[“Yes”, “Sometimes”, “No”]','2025-05-27 13:02:34'),
+(88,47,'Were your requests handled promptly?','[“Yes”, “Sometimes”, “No”]','2025-05-27 13:02:34'),
+(89,36,'Was the bed comfortable?','[“Very Comfortable”, “Comfortable”, “Uncomfortable”]','2025-05-27 13:02:34'),
+(90,40,'Was the bed comfortable?','[“Very Comfortable”, “Comfortable”, “Uncomfortable”]','2025-05-27 13:02:34'),
+(91,44,'Was the bed comfortable?','[“Very Comfortable”, “Comfortable”, “Uncomfortable”]','2025-05-27 13:02:34'),
+(92,48,'Was the bed comfortable?','[“Very Comfortable”, “Comfortable”, “Uncomfortable”]','2025-05-27 13:02:34'),
+(93,36,'Was the room well-lit and ventilated?','[“Excellent”, “Good”, “Poor”]','2025-05-27 13:02:34'),
+(94,40,'Was the room well-lit and ventilated?','[“Excellent”, “Good”, “Poor”]','2025-05-27 13:02:34'),
+(95,44,'Was the room well-lit and ventilated?','[“Excellent”, “Good”, “Poor”]','2025-05-27 13:02:34'),
+(96,48,'Was the room well-lit and ventilated?','[“Excellent”, “Good”, “Poor”]','2025-05-27 13:02:34'),
+(97,49,'Was the registration process easy and quick?','[“Very Easy”, “Moderate”, “Difficult”]','2025-05-28 06:07:55'),
+(98,53,'Was the registration process easy and quick?','[“Very Easy”, “Moderate”, “Difficult”]','2025-05-28 06:07:55'),
+(99,57,'Was the registration process easy and quick?','[“Very Easy”, “Moderate”, “Difficult”]','2025-05-28 06:07:55'),
+(100,61,'Was the registration process easy and quick?','[“Very Easy”, “Moderate”, “Difficult”]','2025-05-28 06:07:55'),
+(101,49,'Did you wait long before seeing the doctor?','[\"Less than 15 mins\", \"15–30 mins\", \"Over 1 hour\"]','2025-05-28 06:07:55'),
+(102,53,'Did you wait long before seeing the doctor?','[\"Less than 15 mins\", \"15–30 mins\", \"Over 1 hour\"]','2025-05-28 06:07:55'),
+(103,57,'Did you wait long before seeing the doctor?','[\"Less than 15 mins\", \"15–30 mins\", \"Over 1 hour\"]','2025-05-28 06:07:55'),
+(104,61,'Did you wait long before seeing the doctor?','[\"Less than 15 mins\", \"15–30 mins\", \"Over 1 hour\"]','2025-05-28 06:07:55'),
+(105,50,'Did the doctor listen to your concerns?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(106,54,'Did the doctor listen to your concerns?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(107,58,'Did the doctor listen to your concerns?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(108,62,'Did the doctor listen to your concerns?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(109,50,'Did you understand the diagnosis and treatment?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(110,54,'Did you understand the diagnosis and treatment?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(111,58,'Did you understand the diagnosis and treatment?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(112,62,'Did you understand the diagnosis and treatment?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:07:55'),
+(113,51,'Were the consultation and waiting rooms clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:07:55'),
+(114,55,'Were the consultation and waiting rooms clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:07:55'),
+(115,59,'Were the consultation and waiting rooms clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:07:55'),
+(116,63,'Were the consultation and waiting rooms clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:07:55'),
+(117,51,'Were hand sanitizers and/or masks available?','[“Yes”, “No”]','2025-05-28 06:07:55'),
+(118,55,'Were hand sanitizers and/or masks available?','[“Yes”, “No”]','2025-05-28 06:07:55'),
+(119,59,'Were hand sanitizers and/or masks available?','[“Yes”, “No”]','2025-05-28 06:07:55'),
+(120,63,'Were hand sanitizers and/or masks available?','[“Yes”, “No”]','2025-05-28 06:07:55'),
+(121,52,'Were prescribed medications available?','[“All Available”, “Some Available”, “None Available”]','2025-05-28 06:07:55'),
+(122,56,'Were prescribed medications available?','[“All Available”, “Some Available”, “None Available”]','2025-05-28 06:07:55'),
+(123,60,'Were prescribed medications available?','[“All Available”, “Some Available”, “None Available”]','2025-05-28 06:07:55'),
+(124,64,'Were prescribed medications available?','[“All Available”, “Some Available”, “None Available”]','2025-05-28 06:07:55'),
+(125,52,'Was the pharmacist helpful and clear?','[“Very Helpful”, “Helpful”, “Not Helpful”]','2025-05-28 06:07:55'),
+(126,56,'Was the pharmacist helpful and clear?','[“Very Helpful”, “Helpful”, “Not Helpful”]','2025-05-28 06:07:55'),
+(127,60,'Was the pharmacist helpful and clear?','[“Very Helpful”, “Helpful”, “Not Helpful”]','2025-05-28 06:07:55'),
+(128,64,'Was the pharmacist helpful and clear?','[“Very Helpful”, “Helpful”, “Not Helpful”]','2025-05-28 06:07:55'),
+(129,65,'Did the workers arrive on time?','[“Yes”, “Slightly Late”, “Very Late”]','2025-05-28 06:23:05'),
+(130,69,'Did the workers arrive on time?','[“Yes”, “Slightly Late”, “Very Late”]','2025-05-28 06:23:05'),
+(131,73,'Did the workers arrive on time?','[“Yes”, “Slightly Late”, “Very Late”]','2025-05-28 06:23:05'),
+(132,77,'Did the workers arrive on time?','[“Yes”, “Slightly Late”, “Very Late”]','2025-05-28 06:23:05'),
+(133,65,'Was the service completed within the estimated time?','[“Yes”, “Slight Delay”, “Major Delay”]','2025-05-28 06:23:05'),
+(134,69,'Was the service completed within the estimated time?','[“Yes”, “Slight Delay”, “Major Delay”]','2025-05-28 06:23:05'),
+(135,73,'Was the service completed within the estimated time?','[“Yes”, “Slight Delay”, “Major Delay”]','2025-05-28 06:23:05'),
+(136,77,'Was the service completed within the estimated time?','[“Yes”, “Slight Delay”, “Major Delay”]','2025-05-28 06:23:05'),
+(137,66,'Did the service meet your expectations?','[“Exceeded”, “Met”, “Below Expectations”]','2025-05-28 06:23:05'),
+(138,70,'Did the service meet your expectations?','[“Exceeded”, “Met”, “Below Expectations”]','2025-05-28 06:23:05'),
+(139,74,'Did the service meet your expectations?','[“Exceeded”, “Met”, “Below Expectations”]','2025-05-28 06:23:05'),
+(140,78,'Did the service meet your expectations?','[“Exceeded”, “Met”, “Below Expectations”]','2025-05-28 06:23:05'),
+(141,66,'Were the materials/tools used appropriate for the job?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(142,70,'Were the materials/tools used appropriate for the job?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(143,74,'Were the materials/tools used appropriate for the job?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(144,78,'Were the materials/tools used appropriate for the job?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(145,67,'Were your instructions clearly understood?','[“Yes”, “Partially”, “No”]','2025-05-28 06:23:05'),
+(146,71,'Were your instructions clearly understood?v','[“Yes”, “Partially”, “No”]','2025-05-28 06:23:05'),
+(147,75,'Were your instructions clearly understood?','[“Yes”, “Partially”, “No”]','2025-05-28 06:23:05'),
+(148,79,'Were your instructions clearly understood?','[“Yes”, “Partially”, “No”]','2025-05-28 06:23:05'),
+(149,67,'Were updates provided throughout the service?','[“Yes”, “Sometimes”, “No”]','2025-05-28 06:23:05'),
+(150,71,'Were updates provided throughout the service?','[“Yes”, “Sometimes”, “No”]','2025-05-28 06:23:05'),
+(151,75,'Were updates provided throughout the service?','[“Yes”, “Sometimes”, “No”]','2025-05-28 06:23:05'),
+(152,79,'Were updates provided throughout the service?','[“Yes”, “Sometimes”, “No”]','2025-05-28 06:23:05'),
+(153,68,'Did the workers leave the area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:23:05'),
+(154,72,'Did the workers leave the area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:23:05'),
+(155,76,'Did the workers leave the area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:23:05'),
+(156,80,'Did the workers leave the area clean?','[“Very Clean”, “Clean”, “Not Clean”]','2025-05-28 06:23:05'),
+(157,68,'Were the staff respectful and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(158,72,'Were the staff respectful and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(159,76,'Were the staff respectful and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05'),
+(160,80,'Were the staff respectful and professional?','[“Yes”, “Somewhat”, “No”]','2025-05-28 06:23:05');
+/*!40000 ALTER TABLE `surveyQuestions` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -2226,9 +2626,11 @@ CREATE TABLE `users_profile` (
   `gender` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `isVerified` tinyint(1) DEFAULT NULL,
+  `verifyToken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2239,53 +2641,56 @@ LOCK TABLES `users_profile` WRITE;
 /*!40000 ALTER TABLE `users_profile` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `users_profile` VALUES
-(1,'John ','Doe','user@example.com','$2b$10$yhO6CioWbs3i4KtNZj0j8.XQlOhrO3CDsSqxtItTvy7uqOflpbj2K',NULL,NULL,NULL,NULL,'2025-04-22 11:01:49'),
-(2,'John ','Doe','user2@example.com','$2b$10$F506hathQVZlqCC8n2Q8/u0sSGDKrU3VFB1PiQ6Tdn6HhOl1PTdb6',NULL,NULL,NULL,NULL,'2025-04-22 11:03:36'),
-(3,'mutoni','josiane','josiane@gmail.com','$2b$10$hqxJ2T.baZDaTdZfqVBDg.93Q6E9ZZ5tuNsnc/ev2uUsDY1L8XVk6',NULL,NULL,NULL,NULL,'2025-04-23 09:34:14'),
-(4,'alan','jonse','alan@gmail.com','asdewq123','0788438','18 to 25','','','2025-04-24 06:17:13'),
-(5,'rudolph','maroyi','rudolph@gmail.com','$2b$10$PfX4zf1mQYqvQ7J.E7H0YuO5bNyzwwqKaNANpfr18cgweV/m1VE62',NULL,NULL,NULL,NULL,'2025-04-24 07:11:28'),
-(6,'jean','jonse','bolebole@gmail.com','asdewq123',NULL,'18 to 25','female',NULL,'2025-04-24 07:37:37'),
-(7,'yves','rushanika','yves@gmail.com','$2b$10$rOpFjkTZSXG3mIRdkrs1g.YEZopls2e80VZrCb18X5Ds/0/gRFX/.',NULL,NULL,NULL,NULL,'2025-04-24 07:38:50'),
-(8,'migele','jean','jean@gmail.com','$2b$10$v9lkcTu6xHkxQYf2b/B0dufVgAzyQ5Ss7K/yNojfY7M5AYtCoUzyu',NULL,NULL,NULL,NULL,'2025-04-24 07:46:42'),
-(9,'Elia','Rams','elia@gmail.com','$2b$10$MwkkOhPlwrPzkfAKjzmF/.BTM6y4z7KnhpIfgKvt3aSwcRNjpm44e',NULL,NULL,NULL,NULL,'2025-04-24 08:03:15'),
-(10,'patrick','mboma','patrick@gmail.com','$2b$10$3xGySDROeHu02T/UOhxDRuq9keAJNPLLLfki/u3oEHH9GWARJOk0G',NULL,NULL,NULL,NULL,'2025-04-24 08:17:24'),
-(11,'felix','musiwa','felix@gmail.com','$2b$10$QeXfB8DVCTd5FbG.ax3OLuEZxIvVEoC0m6hFscctrDJxP8vMpVJ5u',NULL,NULL,NULL,NULL,'2025-04-24 08:24:34'),
-(12,'john','musafiri','john@gmail.com','$2b$10$xGoyIpLYwLjXKmlqo42oe.vLzmdTwU6W88/WBoco9o5K6B.hGVwvW',NULL,NULL,NULL,NULL,'2025-04-24 08:35:17'),
-(13,'zouss','jonse','soem@gmail.com','$2b$10$OwjrO/3c1S.fB2a6yfkcee3rauYXiF57737stm//dZS69rS9wTtxS',NULL,NULL,NULL,NULL,'2025-04-24 09:31:48'),
-(14,'Don','pierre','don@gmail.com','$2b$10$cO9jt3voMZDvd1MPLubiiex8ul.SoJtwRnJTWgbvVzO0iYKLh7xxe',NULL,NULL,NULL,NULL,'2025-04-24 09:49:11'),
-(15,'alice','feza','alice@gmail.com','$2b$10$yPUYnCIxyNZYSu21nYZ4KO4VoIfiHoAiNNVVJqjxD3A3I9lo2tRdq',NULL,NULL,NULL,NULL,'2025-04-24 10:03:58'),
-(16,'waso','masilya','waso@gmail.com','$2b$10$eVclowX8A46nE2pviDMaXuFvgYdI5ZF.SIUy1WKEDVuP1aGTVbglm',NULL,NULL,NULL,NULL,'2025-04-24 10:20:54'),
-(17,'alain ','wita','alain@gmail.com','$2b$10$4.Ne3NYnJBSw6DhaF/rbl.f/ocm.kcUGkOjbiwP8SJknECxwsVwgS',NULL,NULL,NULL,NULL,'2025-04-24 10:26:58'),
-(25,'kika ','wabenga','wabenga@gmail.com','$2b$10$ipI.Z.fDstKUMnJyGYOQ7.rF/t7f3N775scMyx41AP6Jb0SNG5mZ6','0784015138','20-24','male','kigali','2025-04-24 12:18:59'),
-(26,'jean','BB','sone@gmail.com','$2b$10$/aONJpYf2VI24J00hDJBnO/6ZQII89vWveryW67GNN7fnb.zrlrz6',NULL,NULL,NULL,NULL,'2025-04-24 12:41:11'),
-(38,'linda','maroyi','linda@gmail.com','$2b$10$DVY6C6/NQUkg/JnRmmO/V.kWPUCIxSZWeiEPXXE9BzvfoCB89MaI2',NULL,NULL,NULL,NULL,'2025-04-24 10:28:12'),
-(56,'BK Bank','somi','al@gmg.com','$2b$10$HlqGjd4jDTTNTa445t.MRe4lDAlnBGUn/t4AZOH9.hIYbpJCFGVxq',NULL,NULL,NULL,NULL,'2025-05-07 11:46:24'),
-(57,'awezaye23','awezaye','aline@gmail.com','$2b$10$IdCcIdhx6EHIlKFoiXdAOO4o9pWe/fk9C8phvVpPP6SUH/ktUqi66',NULL,NULL,NULL,NULL,'2025-05-08 05:58:18'),
-(58,'mulamba','yvone','mulamba@gmail.com','$2b$10$OwgrqgKVwBvvow/KtYVNBeVbnRl4ZM9akqT84wyMgady8loU4k/Ta','0783512134','20-24','male','kigali','2025-05-08 06:44:06'),
-(59,'justine','faida','justine@gmail.com','$2b$10$AFH6UjSvM/I3Vhc7TUyXcOx1pTjdrHB0DQZW6S9pU2IxPWk0GgBdy','0783512134','20-24','male','kigali','2025-05-08 12:08:39'),
-(60,'mbilizi','stella','stella@gmail.com','$2b$10$4gvijM8/5HYjlR41wIJxB.tDA43dY2plk.QRMnjFxDFxja4h4JbXK','0784015138','20-24','male','kigali','2025-05-08 12:18:53'),
-(61,'esther23','esther21','esther@gmail.com','$2b$10$OCHYy9.YGDqvjngZLsmBS.vbt1880AHVc3XWXPwpPbDmxy0F0e8Z6',NULL,NULL,NULL,NULL,'2025-05-09 06:00:48'),
-(62,'samitamba56','samy34','samitamba56@gmail.com','$2b$10$6tfTWlqG2LUjQxZ8LQPkKePfpthymj16d1JenhBXBi/6izedhM7Y.','0783512134','25-34','Female','gisenyi','2025-05-13 11:28:22'),
-(63,'bube','bubala','mutiku@gmail.com','$2b$10$BE3q17FgDaI.Hxy1WK8uJeMQmT7m0usVb8KDlDfqyTaf94dS6pQLy',NULL,NULL,NULL,NULL,'2025-05-13 11:42:11'),
-(64,'iphone','iphone6','iphone@gmail.com','$2b$10$/XIwA.fzL3JagToLe3GfSOwihueghmpr0/BzYCQRUZhjpd3nbwR4C','0784015138','20-24','male','kigali','2025-05-15 05:37:52'),
-(65,'olivia','mugabo','mutoni@gmail.com','$2b$10$nqXnahqES5BTKhBEk88aoOg6TVVNWh0HZA5uDW8btwW.WJyBWMY16',NULL,NULL,NULL,NULL,'2025-05-15 06:05:18'),
-(67,'malebo','malebo234','malebo@gmail.com','$2b$10$4qN7TCcRNKLel5o1uSs.ROaJq8nguVJqx/xlKrfL3WjyLq1sB.W..','0783512134','20-24','male','kigali','2025-05-15 08:20:38'),
-(68,'ben45','kashamy','kashama45@gmail.com','$2b$10$RW/3KujrhygsToZsYrxsyunrY67i5L1.YFJsenlWeWmaa4XbAYQ0u','0784015138','18-24','Male','gisenyi','2025-05-15 10:14:54'),
-(69,'string','string','alan@example.com','$2b$10$2IluQMsZd5fPJOLWbD2KkeFTIc2GiwHvQ3D7.Or8S9b/vs8Z2EBgW',NULL,NULL,NULL,NULL,'2025-05-16 05:47:06'),
-(70,'clara','clarisse','carine@gmail.com','$2b$10$8yD36T4UKFC8ws38lzjGK.qpMtyXl8DCPsCmhl4r66dWHbfYIBPeK',NULL,NULL,NULL,NULL,'2025-05-16 05:53:47'),
-(71,'clara','clarisee','clara@gmail.com','$2b$10$c/aC8VlTggpbtOVEM4RDnOksdQKhfpbjPQ2PSBGyenulivfVKtJJa','0784015138','20-24','male','kigali','2025-05-16 05:58:23'),
-(72,'string','string','user28@example.com','$2b$10$hTNFbQEfXFwYNnFwGpiu/uB8ebpzHCV8bLbokli7StB0bcjiviJ1y',NULL,NULL,NULL,NULL,'2025-05-16 06:02:51'),
-(73,'sandrine56','sandra45','sandrine@gmail.com','$2b$10$N2t0j4o90MaI0NJRkI2cru.hu1C2zlEzHzeyvCshDtFJpb3PTgvii','0784015138','25-34','Male','gisenyi','2025-05-16 07:02:33'),
-(74,'teta','yeta','teta@gmail.com','$2b$10$8EKTveI10Z4DjSfRh.ya6uYp1KkT/nhTrUizZK.xm.TJzR2O5ZU4i','0784015138','20-24','male','kigali','2025-05-16 07:35:19'),
-(75,'feza','rose','rosali@gmail.com','$2b$10$WZTs26oFpC0Pkm6DYw3wcOknsIXyv3G6rxovK5LJnOzGN4tq8pAjK','0783512134','20-24','male','kigali','2025-05-16 09:22:30'),
-(76,'cher','fai','caro@gmail.com','$2b$10$mL4KEkPlnaUAh6CTC46Bke1QFbzT9JZNfFWb8zMXZMdN853H/g4uW',NULL,NULL,NULL,NULL,'2025-05-16 12:10:35'),
-(77,'aimer','chantal','budinga.com','$2b$10$hVtsPfjIiRXeZ1RiG8Qf0eirfmQ/s4IADCNWhfsvHzd1LGYN5Zp9q',NULL,NULL,NULL,NULL,'2025-05-19 07:11:20'),
-(78,'patrick','patrick23','walumona@gmail.com','$2b$10$Mt8NxRWWpq/F2CVrX075RO.G//HvWY0gwKDksuYh542.axj9PtIBK',NULL,NULL,NULL,NULL,'2025-05-19 09:44:43'),
-(79,'mpasi56','kakouta53','mpasi@gmail.com','$2b$10$feaj8E3lZmB59TFK74cSzuoHtsoppjU2w65DkTA.wlmhXdtw.tbqe','0784015138','35-44','Male','Musanze','2025-05-20 06:19:31'),
-(80,'mechak','elia','mechak@gmail.com','$2b$10$Pzf/uXJLXE7hOPSuITSbm.hEEJJCat2EJdryGAMmGMf7gmOnVrxxy','0784015138','20-24','male','rwanda','2025-05-20 07:29:25'),
-(81,'yoana','yoana23','jacob@gmail.com','$2b$10$i0CK2aR0ibcj6Le6VqOOReeTGuyemOy8.VzuxKnF/rrldB51axfRe',NULL,NULL,NULL,NULL,'2025-05-21 06:16:49'),
-(82,'andrea ','jackson','andrea@gmail.com','$2b$10$I4yfIfQ4qnVRHa7c79k6zuJ1.2NQB.0yU2FVYaJbZchFi8zL3C95q','0784015138','20-24','male','kigali','2025-05-21 06:22:24'),
-(83,'string','string','user23467@example.com','$2b$10$/6Ol.2XB6JX6OD/66orjDenuopeVaMt523bec9lRsrp5xvCnqUtUO',NULL,NULL,NULL,NULL,'2025-05-21 11:52:55');
+(1,'John ','Doe','user@example.com','$2b$10$yhO6CioWbs3i4KtNZj0j8.XQlOhrO3CDsSqxtItTvy7uqOflpbj2K',NULL,NULL,NULL,NULL,'2025-04-22 11:01:49',NULL,NULL),
+(2,'John ','Doe','user2@example.com','$2b$10$F506hathQVZlqCC8n2Q8/u0sSGDKrU3VFB1PiQ6Tdn6HhOl1PTdb6',NULL,NULL,NULL,NULL,'2025-04-22 11:03:36',NULL,NULL),
+(3,'mutoni','josiane','josiane@gmail.com','$2b$10$hqxJ2T.baZDaTdZfqVBDg.93Q6E9ZZ5tuNsnc/ev2uUsDY1L8XVk6',NULL,NULL,NULL,NULL,'2025-04-23 09:34:14',NULL,NULL),
+(4,'alan','jonse','alan@gmail.com','asdewq123','0788438','18 to 25','','','2025-04-24 06:17:13',NULL,NULL),
+(5,'rudolph','maroyi','rudolph@gmail.com','$2b$10$PfX4zf1mQYqvQ7J.E7H0YuO5bNyzwwqKaNANpfr18cgweV/m1VE62',NULL,NULL,NULL,NULL,'2025-04-24 07:11:28',NULL,NULL),
+(6,'jean','jonse','bolebole@gmail.com','asdewq123',NULL,'18 to 25','female',NULL,'2025-04-24 07:37:37',NULL,NULL),
+(7,'yves','rushanika','yves@gmail.com','$2b$10$rOpFjkTZSXG3mIRdkrs1g.YEZopls2e80VZrCb18X5Ds/0/gRFX/.',NULL,NULL,NULL,NULL,'2025-04-24 07:38:50',NULL,NULL),
+(8,'migele','jean','jean@gmail.com','$2b$10$v9lkcTu6xHkxQYf2b/B0dufVgAzyQ5Ss7K/yNojfY7M5AYtCoUzyu',NULL,NULL,NULL,NULL,'2025-04-24 07:46:42',NULL,NULL),
+(9,'Elia','Rams','elia@gmail.com','$2b$10$MwkkOhPlwrPzkfAKjzmF/.BTM6y4z7KnhpIfgKvt3aSwcRNjpm44e',NULL,NULL,NULL,NULL,'2025-04-24 08:03:15',NULL,NULL),
+(10,'patrick','mboma','patrick@gmail.com','$2b$10$3xGySDROeHu02T/UOhxDRuq9keAJNPLLLfki/u3oEHH9GWARJOk0G',NULL,NULL,NULL,NULL,'2025-04-24 08:17:24',NULL,NULL),
+(11,'felix','musiwa','felix@gmail.com','$2b$10$QeXfB8DVCTd5FbG.ax3OLuEZxIvVEoC0m6hFscctrDJxP8vMpVJ5u',NULL,NULL,NULL,NULL,'2025-04-24 08:24:34',NULL,NULL),
+(12,'john','musafiri','john@gmail.com','$2b$10$xGoyIpLYwLjXKmlqo42oe.vLzmdTwU6W88/WBoco9o5K6B.hGVwvW',NULL,NULL,NULL,NULL,'2025-04-24 08:35:17',NULL,NULL),
+(13,'zouss','jonse','soem@gmail.com','$2b$10$OwjrO/3c1S.fB2a6yfkcee3rauYXiF57737stm//dZS69rS9wTtxS',NULL,NULL,NULL,NULL,'2025-04-24 09:31:48',NULL,NULL),
+(14,'Don','pierre','don@gmail.com','$2b$10$cO9jt3voMZDvd1MPLubiiex8ul.SoJtwRnJTWgbvVzO0iYKLh7xxe',NULL,NULL,NULL,NULL,'2025-04-24 09:49:11',NULL,NULL),
+(15,'alice','feza','alice@gmail.com','$2b$10$yPUYnCIxyNZYSu21nYZ4KO4VoIfiHoAiNNVVJqjxD3A3I9lo2tRdq',NULL,NULL,NULL,NULL,'2025-04-24 10:03:58',NULL,NULL),
+(16,'waso','masilya','waso@gmail.com','$2b$10$eVclowX8A46nE2pviDMaXuFvgYdI5ZF.SIUy1WKEDVuP1aGTVbglm',NULL,NULL,NULL,NULL,'2025-04-24 10:20:54',NULL,NULL),
+(17,'alain ','wita','alain@gmail.com','$2b$10$4.Ne3NYnJBSw6DhaF/rbl.f/ocm.kcUGkOjbiwP8SJknECxwsVwgS',NULL,NULL,NULL,NULL,'2025-04-24 10:26:58',NULL,NULL),
+(25,'kika ','wabenga','wabenga@gmail.com','$2b$10$ipI.Z.fDstKUMnJyGYOQ7.rF/t7f3N775scMyx41AP6Jb0SNG5mZ6','0784015138','20-24','male','kigali','2025-04-24 12:18:59',NULL,NULL),
+(26,'jean','BB','sone@gmail.com','$2b$10$/aONJpYf2VI24J00hDJBnO/6ZQII89vWveryW67GNN7fnb.zrlrz6',NULL,NULL,NULL,NULL,'2025-04-24 12:41:11',NULL,NULL),
+(38,'linda','maroyi','linda@gmail.com','$2b$10$DVY6C6/NQUkg/JnRmmO/V.kWPUCIxSZWeiEPXXE9BzvfoCB89MaI2',NULL,NULL,NULL,NULL,'2025-04-24 10:28:12',NULL,NULL),
+(56,'BK Bank','somi','al@gmg.com','$2b$10$HlqGjd4jDTTNTa445t.MRe4lDAlnBGUn/t4AZOH9.hIYbpJCFGVxq',NULL,NULL,NULL,NULL,'2025-05-07 11:46:24',NULL,NULL),
+(57,'awezaye23','awezaye','aline@gmail.com','$2b$10$IdCcIdhx6EHIlKFoiXdAOO4o9pWe/fk9C8phvVpPP6SUH/ktUqi66',NULL,NULL,NULL,NULL,'2025-05-08 05:58:18',NULL,NULL),
+(58,'mulamba','yvone','mulamba@gmail.com','$2b$10$OwgrqgKVwBvvow/KtYVNBeVbnRl4ZM9akqT84wyMgady8loU4k/Ta','0783512134','20-24','male','kigali','2025-05-08 06:44:06',NULL,NULL),
+(59,'justine','faida','justine@gmail.com','$2b$10$AFH6UjSvM/I3Vhc7TUyXcOx1pTjdrHB0DQZW6S9pU2IxPWk0GgBdy','0783512134','20-24','male','kigali','2025-05-08 12:08:39',NULL,NULL),
+(60,'mbilizi','stella','stella@gmail.com','$2b$10$4gvijM8/5HYjlR41wIJxB.tDA43dY2plk.QRMnjFxDFxja4h4JbXK','0784015138','20-24','male','kigali','2025-05-08 12:18:53',NULL,NULL),
+(61,'esther23','esther21','esther@gmail.com','$2b$10$OCHYy9.YGDqvjngZLsmBS.vbt1880AHVc3XWXPwpPbDmxy0F0e8Z6',NULL,NULL,NULL,NULL,'2025-05-09 06:00:48',NULL,NULL),
+(62,'samitamba56','samy34','samitamba56@gmail.com','$2b$10$6tfTWlqG2LUjQxZ8LQPkKePfpthymj16d1JenhBXBi/6izedhM7Y.','0783512134','25-34','Female','gisenyi','2025-05-13 11:28:22',NULL,NULL),
+(63,'bube','bubala','mutiku@gmail.com','$2b$10$BE3q17FgDaI.Hxy1WK8uJeMQmT7m0usVb8KDlDfqyTaf94dS6pQLy',NULL,NULL,NULL,NULL,'2025-05-13 11:42:11',NULL,NULL),
+(64,'iphone','iphone6','iphone@gmail.com','$2b$10$/XIwA.fzL3JagToLe3GfSOwihueghmpr0/BzYCQRUZhjpd3nbwR4C','0784015138','20-24','male','kigali','2025-05-15 05:37:52',NULL,NULL),
+(65,'olivia','mugabo','mutoni@gmail.com','$2b$10$nqXnahqES5BTKhBEk88aoOg6TVVNWh0HZA5uDW8btwW.WJyBWMY16',NULL,NULL,NULL,NULL,'2025-05-15 06:05:18',NULL,NULL),
+(67,'malebo','malebo234','malebo@gmail.com','$2b$10$4qN7TCcRNKLel5o1uSs.ROaJq8nguVJqx/xlKrfL3WjyLq1sB.W..','0783512134','20-24','male','kigali','2025-05-15 08:20:38',NULL,NULL),
+(68,'ben45','kashamy','kashama45@gmail.com','$2b$10$RW/3KujrhygsToZsYrxsyunrY67i5L1.YFJsenlWeWmaa4XbAYQ0u','0784015138','18-24','Male','gisenyi','2025-05-15 10:14:54',NULL,NULL),
+(69,'string','string','alan@example.com','$2b$10$2IluQMsZd5fPJOLWbD2KkeFTIc2GiwHvQ3D7.Or8S9b/vs8Z2EBgW',NULL,NULL,NULL,NULL,'2025-05-16 05:47:06',NULL,NULL),
+(70,'clara','clarisse','carine@gmail.com','$2b$10$8yD36T4UKFC8ws38lzjGK.qpMtyXl8DCPsCmhl4r66dWHbfYIBPeK',NULL,NULL,NULL,NULL,'2025-05-16 05:53:47',NULL,NULL),
+(71,'clara','clarisee','clara@gmail.com','$2b$10$c/aC8VlTggpbtOVEM4RDnOksdQKhfpbjPQ2PSBGyenulivfVKtJJa','0784015138','20-24','male','kigali','2025-05-16 05:58:23',NULL,NULL),
+(72,'string','string','user28@example.com','$2b$10$hTNFbQEfXFwYNnFwGpiu/uB8ebpzHCV8bLbokli7StB0bcjiviJ1y',NULL,NULL,NULL,NULL,'2025-05-16 06:02:51',NULL,NULL),
+(73,'sandrine56','sandra45','sandrine@gmail.com','$2b$10$N2t0j4o90MaI0NJRkI2cru.hu1C2zlEzHzeyvCshDtFJpb3PTgvii','0784015138','25-34','Male','gisenyi','2025-05-16 07:02:33',NULL,NULL),
+(74,'teta','yeta','teta@gmail.com','$2b$10$8EKTveI10Z4DjSfRh.ya6uYp1KkT/nhTrUizZK.xm.TJzR2O5ZU4i','0784015138','20-24','male','kigali','2025-05-16 07:35:19',NULL,NULL),
+(75,'feza','rose','rosali@gmail.com','$2b$10$WZTs26oFpC0Pkm6DYw3wcOknsIXyv3G6rxovK5LJnOzGN4tq8pAjK','0783512134','20-24','male','kigali','2025-05-16 09:22:30',NULL,NULL),
+(76,'cher','fai','caro@gmail.com','$2b$10$mL4KEkPlnaUAh6CTC46Bke1QFbzT9JZNfFWb8zMXZMdN853H/g4uW',NULL,NULL,NULL,NULL,'2025-05-16 12:10:35',NULL,NULL),
+(77,'aimer','chantal','budinga.com','$2b$10$hVtsPfjIiRXeZ1RiG8Qf0eirfmQ/s4IADCNWhfsvHzd1LGYN5Zp9q',NULL,NULL,NULL,NULL,'2025-05-19 07:11:20',NULL,NULL),
+(78,'patrick','patrick23','walumona@gmail.com','$2b$10$Mt8NxRWWpq/F2CVrX075RO.G//HvWY0gwKDksuYh542.axj9PtIBK',NULL,NULL,NULL,NULL,'2025-05-19 09:44:43',NULL,NULL),
+(79,'mpasi56','kakouta53','mpasi@gmail.com','$2b$10$feaj8E3lZmB59TFK74cSzuoHtsoppjU2w65DkTA.wlmhXdtw.tbqe','0784015138','35-44','Male','Musanze','2025-05-20 06:19:31',NULL,NULL),
+(80,'mechak','elia','mechak@gmail.com','$2b$10$Pzf/uXJLXE7hOPSuITSbm.hEEJJCat2EJdryGAMmGMf7gmOnVrxxy','0784015138','20-24','male','rwanda','2025-05-20 07:29:25',NULL,NULL),
+(81,'yoana','yoana23','jacob@gmail.com','$2b$10$i0CK2aR0ibcj6Le6VqOOReeTGuyemOy8.VzuxKnF/rrldB51axfRe',NULL,NULL,NULL,NULL,'2025-05-21 06:16:49',NULL,NULL),
+(82,'andrea ','jackson','andrea@gmail.com','$2b$10$I4yfIfQ4qnVRHa7c79k6zuJ1.2NQB.0yU2FVYaJbZchFi8zL3C95q','0784015138','20-24','male','kigali','2025-05-21 06:22:24',NULL,NULL),
+(83,'string','string','user23467@example.com','$2b$10$/6Ol.2XB6JX6OD/66orjDenuopeVaMt523bec9lRsrp5xvCnqUtUO',NULL,NULL,NULL,NULL,'2025-05-21 11:52:55',NULL,NULL),
+(84,'string','string','zouss@example.com','$2b$10$QJvav5rApSjBMQRk41ppfOLHJyahCnWTs2VA2wNK1KVf96IvPoGVK',NULL,NULL,NULL,NULL,'2025-05-27 05:37:25',NULL,NULL),
+(85,'string','string','userwe@example.com','$2b$10$xpyya7UYmXcG5fwMvWG8Geq5LudSyWfW0oXzaxWrrBsl5l9rjqppS',NULL,NULL,NULL,NULL,'2025-05-27 05:49:40',NULL,NULL),
+(100,'string','string','alanjonse2@gmail.com','$2b$10$h2rG1t2L7aQX8KTWRoP57egtFJ/u8a8we6YkOFymyl9zcB.KJ1S5a',NULL,NULL,NULL,NULL,'2025-05-29 08:23:29',1,NULL);
 /*!40000 ALTER TABLE `users_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2441,7 +2846,7 @@ CREATE TABLE `workingHour` (
   KEY `fk_institit_id` (`institution_id`),
   CONSTRAINT `fk_institit_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_institut_id` FOREIGN KEY (`institution_id`) REFERENCES `institution` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2536,7 +2941,62 @@ INSERT INTO `workingHour` VALUES
 (159,20,'Friday','09:00:00','22:00:00'),
 (160,20,'Saturday','09:00:00','22:00:00'),
 (161,20,'Sunday','09:00:00','22:00:00'),
-(162,21,'Monday','09:00:00','22:00:00');
+(162,21,'Monday','09:00:00','22:00:00'),
+(164,21,'Tuesday','09:00:00','22:00:00'),
+(165,21,'Wednesday','09:00:00','22:00:00'),
+(166,21,'Thursday','09:00:00','22:00:00'),
+(167,21,'Friday','09:00:00','22:00:00'),
+(168,21,'Saturday','09:00:00','22:00:00'),
+(169,21,'Sunday','09:00:00','22:00:00'),
+(170,22,'Monday','09:00:00','22:00:00'),
+(171,22,'Tuesday','09:00:00','22:00:00'),
+(172,22,'Wednesday','09:00:00','22:00:00'),
+(173,22,'Thursday','09:00:00','22:00:00'),
+(174,22,'Friday','09:00:00','22:00:00'),
+(175,22,'Saturday','09:00:00','22:00:00'),
+(176,22,'Sunday','09:00:00','22:00:00'),
+(177,23,'Monday','09:00:00','22:00:00'),
+(178,23,'Tuesday','09:00:00','22:00:00'),
+(179,23,'Wednesday','09:00:00','22:00:00'),
+(180,23,'Thursday','09:00:00','22:00:00'),
+(181,23,'Friday','09:00:00','22:00:00'),
+(182,23,'Saturday','09:00:00','22:00:00'),
+(183,23,'Sunday','09:00:00','22:00:00'),
+(184,24,'Monday','09:00:00','22:00:00'),
+(185,24,'Tuesday','09:00:00','22:00:00'),
+(186,24,'Wednesday','09:00:00','22:00:00'),
+(187,24,'Thursday','09:00:00','22:00:00'),
+(188,24,'Friday','09:00:00','22:00:00'),
+(189,24,'Saturday','09:00:00','22:00:00'),
+(190,24,'Sunday','09:00:00','22:00:00'),
+(191,25,'Monday','09:00:00','22:00:00'),
+(192,25,'Tuesday','09:00:00','22:00:00'),
+(193,25,'Wednesday','09:00:00','22:00:00'),
+(194,25,'Thursday','09:00:00','22:00:00'),
+(195,25,'Friday','09:00:00','22:00:00'),
+(196,25,'Saturday','09:00:00','22:00:00'),
+(197,25,'Sunday','09:00:00','22:00:00'),
+(198,26,'Monday','09:00:00','22:00:00'),
+(199,26,'Tuesday','09:00:00','22:00:00'),
+(200,26,'Wednesday','09:00:00','22:00:00'),
+(201,26,'Thursday','09:00:00','22:00:00'),
+(202,26,'Friday','09:00:00','22:00:00'),
+(203,26,'Saturday','09:00:00','22:00:00'),
+(204,26,'Sunday','09:00:00','22:00:00'),
+(205,27,'Monday','09:00:00','22:00:00'),
+(206,27,'Tuesday','09:00:00','22:00:00'),
+(207,27,'Wednesday','09:00:00','22:00:00'),
+(208,27,'Thursday','09:00:00','22:00:00'),
+(209,27,'Friday','09:00:00','22:00:00'),
+(210,27,'Saturday','09:00:00','22:00:00'),
+(211,27,'Sunday','09:00:00','22:00:00'),
+(212,28,'Monday','09:00:00','22:00:00'),
+(213,28,'Tuesday','09:00:00','22:00:00'),
+(214,28,'Wednesday','09:00:00','22:00:00'),
+(215,28,'Thursday','09:00:00','22:00:00'),
+(216,28,'Friday','09:00:00','22:00:00'),
+(217,28,'Saturday','09:00:00','22:00:00'),
+(218,28,'Sunday','09:00:00','22:00:00');
 /*!40000 ALTER TABLE `workingHour` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2550,4 +3010,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-05-26 10:04:29
+-- Dump completed on 2025-06-05 12:18:16

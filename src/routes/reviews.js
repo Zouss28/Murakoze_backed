@@ -328,38 +328,42 @@ router.get('/institution/:id', async (req, res) => {
 
   try {
     const institution = await prisma.institution.findUnique({
-      where: { id: institutionId }
+      where: { id: institutionId },
+      include: {
+        reviews: {
+          where: {
+            is_approved: true,
+            ...(rating && { rating })
+          },
+          include: {
+            images: true,
+            users_profile: {
+              select: {
+                id: true,
+                first_name: true,
+                last_name: true,
+                email: true,
+                images: true
+              }
+            }
+          },
+          orderBy: {
+            created_at: 'desc'
+          }
+        }
+      }
     });
 
     if (!institution) {
       return res.status(404).json({ error: 'Institution not found' });
     }
 
-    const reviewFilters = {
-      institution_id: institutionId,
-      is_approved: true
-    };
-
-    if (rating && rating >= 1 && rating <= 5) {
-      reviewFilters.rating = rating;
-    }
-
-    const reviews = await prisma.reviews.findMany({
-      where: reviewFilters,
-      include: {
-        images: true
-      },
-      orderBy: {
-        created_at: 'desc'
-      }
-    });
-
     res.json({
-      institution_id: institutionId,
-      reviews
+      institution_id: institution.id,
+      reviews: institution.reviews
     });
   } catch (err) {
-    console.error('Error filtering institution reviews:', err);
+    console.error('Error fetching institution reviews:', err);
     res.status(500).json({ error: 'Something went wrong!' });
   }
 });

@@ -65,6 +65,7 @@ INSERT INTO `_prisma_migrations` VALUES
 ('bfb97104-3aa4-476c-b59d-2dc47fb9a396','16e2d82199edf7f072481eb57c6c42d59ce8f4a1bb77dbe73905861a206555c1','2025-05-15 10:18:52.657','20250515101849_updated_the_price_ranges',NULL,NULL,'2025-05-15 10:18:52.455',1),
 ('d2680347-121a-4997-bcd2-99302ab88147','02787669a5754223a8c51a5a23c69f972d36985110290a4c32c52b1ca5f686bd','2025-05-27 08:31:04.181','20250527083101_removed_service_id_from_answers',NULL,NULL,'2025-05-27 08:31:04.157',1),
 ('dcb41191-64a5-4fc4-a460-205275f38f2d','3eb632e10262de08aa1e58de1a5f4a2e22ee222602a2aa0710de8e1585319bc2','2025-04-22 12:25:19.766','20250416093043_migration_v1',NULL,NULL,'2025-04-22 12:25:19.594',1),
+('e82af0d9-a24f-485d-a3f3-4fc7aa8eb851','bbf5746876ff73bc5cfe90ad9b8caea2aadf2be3c438cce97a0a1a0f567fd384','2025-05-30 09:35:26.830','20250530093523_added_search_term_for_categories',NULL,NULL,'2025-05-30 09:35:26.785',1),
 ('ece1b487-4ea5-4803-bc0b-a194614ef61e','0417d7f17a662ec5653b8bc7ed246b32242e823d1d5fd691335d9990555a5a81','2025-05-08 11:30:52.006','20250508113049_changed_time_format',NULL,NULL,'2025-05-08 11:30:51.978',1);
 /*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -447,6 +448,34 @@ INSERT INTO `categories` VALUES
 (4,'Health/Medical',NULL),
 (5,'Home Services',NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `category_search_terms`
+--
+
+DROP TABLE IF EXISTS `category_search_terms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `category_search_terms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `term` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `category_search_terms_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category_search_terms`
+--
+
+LOCK TABLES `category_search_terms` WRITE;
+/*!40000 ALTER TABLE `category_search_terms` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `category_search_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -2189,7 +2218,7 @@ CREATE TABLE `surveyAnswers` (
   PRIMARY KEY (`id`),
   KEY `fk_Serv_id` (`question_id`),
   CONSTRAINT `fk_Serv_id` FOREIGN KEY (`question_id`) REFERENCES `surveyQuestions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2199,6 +2228,8 @@ CREATE TABLE `surveyAnswers` (
 LOCK TABLES `surveyAnswers` WRITE;
 /*!40000 ALTER TABLE `surveyAnswers` DISABLE KEYS */;
 set autocommit=0;
+INSERT INTO `surveyAnswers` VALUES
+(1,1,98,'Sucks',1,'2025-05-28 09:43:33');
 /*!40000 ALTER TABLE `surveyAnswers` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2573,7 +2604,7 @@ CREATE TABLE `users_profile` (
   `verifyToken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2633,7 +2664,7 @@ INSERT INTO `users_profile` VALUES
 (83,'string','string','user23467@example.com','$2b$10$/6Ol.2XB6JX6OD/66orjDenuopeVaMt523bec9lRsrp5xvCnqUtUO',NULL,NULL,NULL,NULL,'2025-05-21 11:52:55',NULL,NULL),
 (84,'string','string','zouss@example.com','$2b$10$QJvav5rApSjBMQRk41ppfOLHJyahCnWTs2VA2wNK1KVf96IvPoGVK',NULL,NULL,NULL,NULL,'2025-05-27 05:37:25',NULL,NULL),
 (85,'string','string','userwe@example.com','$2b$10$xpyya7UYmXcG5fwMvWG8Geq5LudSyWfW0oXzaxWrrBsl5l9rjqppS',NULL,NULL,NULL,NULL,'2025-05-27 05:49:40',NULL,NULL),
-(98,'string','string','alanjonse2@gmail.com','$2b$10$Eo2gAnW3kJ2aRTdtISNipeYoX92DiscWn6H.1MoXkcM4yHVue.O/m',NULL,NULL,NULL,NULL,'2025-05-28 05:48:43',0,'ee2fb837d9fc3aa8e0937aa53733bbabfc897e869b80ee36e0035063d48a5529');
+(100,'string','string','alanjonse2@gmail.com','$2b$10$h2rG1t2L7aQX8KTWRoP57egtFJ/u8a8we6YkOFymyl9zcB.KJ1S5a',NULL,NULL,NULL,NULL,'2025-05-29 08:23:29',1,NULL);
 /*!40000 ALTER TABLE `users_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -2898,4 +2929,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-05-28 12:18:58
+-- Dump completed on 2025-05-30 11:49:11

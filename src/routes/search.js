@@ -63,7 +63,6 @@ router.get('/institutions', async (req, res) => {
     const pageSize = parseInt(req.query.pageSize) || 5;
     const skip = (page - 1) * pageSize;
 
-    // Fetch all institutions once
     const allInstitutions = await prisma.institution.findMany({
       include: { images: true, reviews: true }
     });
