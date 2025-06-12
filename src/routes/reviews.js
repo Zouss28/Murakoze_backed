@@ -380,25 +380,30 @@ router.get("/serviceRating", auth, async (req, res) => {
  * @swagger
  * /api/review/institution/{id}:
  *   get:
- *     summary: Get reviews for a specific institution with optional rating filter
+ *     summary: Get institution reviews
+ *     description: Fetches all approved reviews for a specific institution, with optional filters by rating, review ID, or a search query in the review text.
  *     tags:
- *       - Reviews
+ *       - Institutions
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: Institution ID
+ *         description: ID of the institution
  *       - in: query
  *         name: rating
  *         schema:
  *           type: integer
- *           enum: [1, 2, 3, 4, 5]
- *         description: Filter reviews by star rating (optional)
+ *         description: Filter reviews by exact rating value (e.g. 4)
+ *       - in: query
+ *         name: review_id
+ *         schema:
+ *           type: integer
+ *         description: Filter by a specific review ID
  *     responses:
  *       200:
- *         description: Reviews retrieved successfully
+ *         description: List of filtered and approved reviews for the institution
  *         content:
  *           application/json:
  *             schema:
@@ -414,11 +419,10 @@ router.get("/serviceRating", auth, async (req, res) => {
  *                       id:
  *                         type: integer
  *                       rating:
- *                         type: integer
- *                       review:
+ *                         type: number
+ *                         format: float
+ *                       review_text:
  *                         type: string
- *                       is_approved:
- *                         type: boolean
  *                       created_at:
  *                         type: string
  *                         format: date-time
@@ -427,14 +431,35 @@ router.get("/serviceRating", auth, async (req, res) => {
  *                         items:
  *                           type: object
  *                           properties:
+ *                             id:
+ *                               type: integer
  *                             image_url:
  *                               type: string
+ *                       users_profile:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           first_name:
+ *                             type: string
+ *                           last_name:
+ *                             type: string
+ *                           email:
+ *                             type: string
+ *                           images:
+ *                             type: array
+ *                             items:
+ *                               type: object
+ *                               properties:
+ *                                 id:
+ *                                   type: integer
+ *                                 image_url:
+ *                                   type: string
  *       404:
- *         description: Institution not found
+ *         description: Institution or matching review not found
  *       500:
  *         description: Internal server error
  */
-
 router.get('/institution/:id', async (req, res) => {
   const institutionId = parseInt(req.params.id);
   const rating = req.query.rating ? parseInt(req.query.rating) : null;
