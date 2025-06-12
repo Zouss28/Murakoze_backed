@@ -43,11 +43,18 @@ const prisma = new PrismaClient();
  */
 
 router.get("/institution",async (req,res)=>{
-  const institutions = await prisma.institution.findMany();
+  const institutions = await prisma.institution.findMany({
+    include : {
+      service_group : true
+    }
+  });
   const result = institutions.map(inst =>{
     return{
       id: inst.id,
-      name : inst.name
+      name : inst.name,
+      services : inst.service_group ? inst.service_group.map(service => ({name : service.name,
+        id:service.id
+      })) : ""
     }
   });
   res.json({
