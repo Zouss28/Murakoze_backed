@@ -258,6 +258,87 @@ router.get('/reviews', async (req, res) => {
 
 /**
  * @swagger
+ * /api/profile/guestReviews:
+ *   get:
+ *     summary: Get reviews of another user (guest profile)
+ *     tags:
+ *       - Profile
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: guestID
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user whose reviews you want to see
+ *     responses:
+ *       200:
+ *         description: Reviews fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 reviews:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 images:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       404:
+ *         description: User not found
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get('/guestReviews', async (req, res) => {
+  try {
+    const requestingUser = req.user?.userId; // This ensures only authenticated users access it
+    const guestID = req.query.guestID;
+
+    if (!requestingUser) {
+      return res.status(401).json({ error: "Unauthorized: Login required" });
+    }
+
+    const guestUser = await prisma.users_profile.findUnique({
+      where: { id: parseInt(guestID) },
+      include: {
+        images: true,
+        reviews: {
+          include: {
+            images: true,
+            institution: true
+          }
+        }
+      }
+    });
+
+    if (!guestUser) {
+      return res.status(404).json({ error: "Guest user not found" });
+    }
+
+    res.json({
+      message: "Guest reviews fetched successfully",
+      reviews: guestUser.reviews,
+      images: guestUser.images
+    });
+
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ error: 'Something went wrong!' });
+  }
+});
+
+
+/**
+ * @swagger
  * /api/profile/update_image:
  *   put:
  *     summary: Update user's profile image

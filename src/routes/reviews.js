@@ -4,6 +4,8 @@ const { PrismaClient } = require('../generated/prisma');
 const auth = require('../middleware/authMiddleware')
 const upload = require('../../uploads');
 const Filter = require('bad-words');
+const Sentiment = require('sentiment');
+const keyword_extractor = require('keyword-extractor');
 
 
 const prisma = new PrismaClient();
@@ -298,6 +300,7 @@ router.get('/recent', async (req, res) => {
   
 
 
+
 /**
  * @swagger
  * /api/review/serviceRating:
@@ -463,6 +466,7 @@ router.get("/serviceRating", auth, async (req, res) => {
 router.get('/institution/:id', async (req, res) => {
   const institutionId = parseInt(req.params.id);
   const rating = req.query.rating ? parseInt(req.query.rating) : null;
+  const reviewId = req.query.review_id ? parseInt(req.query.review_id) : null;
 
   try {
     const institution = await prisma.institution.findUnique({
@@ -471,7 +475,8 @@ router.get('/institution/:id', async (req, res) => {
         reviews: {
           where: {
             is_approved: true,
-            ...(rating && { rating })
+            ...(rating && { rating }),
+            ...(reviewId && { id: reviewId })
           },
           include: {
             images: true,
@@ -496,15 +501,21 @@ router.get('/institution/:id', async (req, res) => {
       return res.status(404).json({ error: 'Institution not found' });
     }
 
+    if ((reviewId || searchQuery) && institution.reviews.length === 0) {
+      return res.status(404).json({ error: 'No matching review found for this institution' });
+    }
+
     res.json({
       institution_id: institution.id,
       reviews: institution.reviews
     });
+
   } catch (err) {
     console.error('Error fetching institution reviews:', err);
     res.status(500).json({ error: 'Something went wrong!' });
   }
 });
+
 /**
  * @swagger
  * /api/review/Q&A:
@@ -622,6 +633,118 @@ router.post("/Q&A/post", auth, async (req, res) => {
   } catch (err) {
     console.log("Error:", err);
     res.status(500).json({ error: "Something went wrong with the QA!" });
+  }
+});
+
+/**
+ * @swagger
+ * /api/review/institution/{id}/summary:
+ *   get:
+ *     summary: Get a summarized version of all reviews for an institution
+ *     tags:
+ *       - Reviews
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Institution ID
+ *     responses:
+ *       200:
+ *         description: Summary generated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 summary:
+ *                   type: string
+ *       404:
+ *         description: Institution not found
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/institution/:id/summary', async (req, res) => {
+  const institutionId = parseInt(req.params.id);
+
+  try {
+    // Fetch institution and its approved reviews
+    const institution = await prisma.institution.findUnique({
+      where: { id: institutionId },
+      include: {
+        reviews: {
+          where: { is_approved: true },
+          select: { review: true }
+        }
+      }
+    });
+
+    if (!institution) {
+      return res.status(404).json({ error: 'Institution not found' });
+    }
+
+    const reviews = institution.reviews.map(r => r.review).filter(Boolean);
+
+    if (reviews.length === 0) {
+      return res.json({ summary: `There are no reviews for ${institution.name} yet.` });
+    }
+
+    // Sentiment and keyword analysis
+    const sentiment = new Sentiment();
+    let positiveKeywords = [];
+    let negativeKeywords = [];
+
+    reviews.forEach(text => {
+      const result = sentiment.analyze(text);
+      const keywords = keyword_extractor.extract(text, {
+        language: "english",
+        remove_digits: true,
+        return_changed_case: true,
+        remove_duplicates: false
+      });
+
+      if (result.score >= 1) {
+        positiveKeywords.push(...keywords);
+      } else if (result.score <= -1) {
+        negativeKeywords.push(...keywords);
+      }
+      // Neutral reviews are ignored for summary
+    });
+
+    // Helper to get top N keywords
+    function getTopKeywords(arr, n = 3) {
+      const freq = {};
+      arr.forEach(word => {
+        if (word.length > 2) { // ignore very short words
+          freq[word] = (freq[word] || 0) + 1;
+        }
+      });
+      return Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, n)
+        .map(([word]) => word);
+    }
+
+    const topPos = getTopKeywords(positiveKeywords);
+    const topNeg = getTopKeywords(negativeKeywords);
+
+    // Build summary string
+    let summary = `Customers of '${institution.name}'`;
+    if (topPos.length && topNeg.length) {
+      summary += ` like ${topPos.join(', ')}, but mention ${topNeg.join(', ')}.`;
+    } else if (topPos.length) {
+      summary += ` like ${topPos.join(', ')}.`;
+    } else if (topNeg.length) {
+      summary += ` mention ${topNeg.join(', ')}.`;
+    } else {
+      summary += ` have mixed opinions.`;
+    }
+
+    res.json({ summary });
+  } catch (err) {
+    console.error('Error generating summary:', err);
+    res.status(500).json({ error: 'Something went wrong!' });
   }
 });
 

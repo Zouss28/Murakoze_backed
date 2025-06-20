@@ -179,6 +179,7 @@ router.get('/categories', async (req, res) => {
     });
 
     // Flatten the data for Fuse
+    console.log(allCategories)
     const searchableData = allCategories.map(cat => ({
       ...cat,
       searchIndex: [

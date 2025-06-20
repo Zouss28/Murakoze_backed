@@ -830,6 +830,14 @@ exports.Prisma.ReviewsScalarFieldEnum = {
   is_approved: 'is_approved'
 };
 
+exports.Prisma.Review_reactionsScalarFieldEnum = {
+  id: 'id',
+  review_id: 'review_id',
+  user_id: 'user_id',
+  reaction: 'reaction',
+  created_at: 'created_at'
+};
+
 exports.Prisma.WorkingHourScalarFieldEnum = {
   id: 'id',
   institution_id: 'institution_id',
@@ -1266,6 +1274,10 @@ exports.Prisma.reviewsOrderByRelevanceFieldEnum = {
   review: 'review'
 };
 
+exports.Prisma.review_reactionsOrderByRelevanceFieldEnum = {
+  reaction: 'reaction'
+};
+
 exports.Prisma.workingHourOrderByRelevanceFieldEnum = {
   day_of_week: 'day_of_week'
 };
@@ -1389,6 +1401,7 @@ exports.Prisma.ModelName = {
   sectors: 'sectors',
   users_profile: 'users_profile',
   reviews: 'reviews',
+  review_reactions: 'review_reactions',
   workingHour: 'workingHour',
   amenities: 'amenities',
   business_amenities: 'business_amenities',

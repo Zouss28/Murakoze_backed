@@ -907,6 +907,7 @@ model users_profile {
   images        images[]
   reviews       reviews[]
   serviceReview serviceReview[]
+  review_reactions review_reactions[]
 }
 
 model reviews {
@@ -920,9 +921,23 @@ model reviews {
   images         images[]
   institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
   users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
+  review_reactions review_reactions[]
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")
+}
+
+model review_reactions {
+  id         Int      @id @default(autoincrement())
+  review_id  Int
+  user_id    Int
+  reaction   String
+  created_at DateTime @default(now())
+  reviews        reviews        @relation(fields: [review_id], references: [id], onDelete: Cascade)
+  users_profile  users_profile  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  @@unique([review_id, user_id, reaction])
+  @@index([review_id])
+  @@index([user_id])
 }
 
 model workingHour {
