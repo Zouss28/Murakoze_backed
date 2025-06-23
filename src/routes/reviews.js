@@ -260,10 +260,8 @@ router.get('/recent', async (req, res) => {
         take: 3 * page
       });
   
-      // Get all unique user_ids from the reviews
       const userIds = [...new Set(reviews.map(r => r.user_id))];
   
-      // Fetch user profiles (and their images) for those user_ids
       const users = await prisma.users_profile.findMany({
         where: {
           id: { in: userIds }
@@ -273,7 +271,6 @@ router.get('/recent', async (req, res) => {
         }
       });
   
-      // Combine review + user profile
       const enrichedReviews = reviews.map(review => {
         const user = users.find(u => u.id === review.user_id);
         return {
@@ -465,50 +462,52 @@ router.get("/serviceRating", auth, async (req, res) => {
  *         description: Internal server error
  */
 router.get('/institution/:id', async (req, res) => {
-  const institutionId = parseInt(req.params.id);
-  const rating = req.query.rating ? parseInt(req.query.rating) : null;
-  const reviewId = req.query.review_id ? parseInt(req.query.review_id) : null;
+  const institutionId = parseInt(req.params.id, 10);
+  const rating = req.query.rating ? parseInt(req.query.rating, 10) : undefined;
+  const reviewId = req.query.review_id ? parseInt(req.query.review_id, 10) : undefined;
 
   try {
     const institution = await prisma.institution.findUnique({
-      where: { id: institutionId },
-      include: {
-        reviews: {
-          where: {
-            is_approved: true,
-            ...(rating && { rating }),
-            ...(reviewId && { id: reviewId })
-          },
-          include: {
-            images: true,
-            users_profile: {
-              select: {
-                id: true,
-                first_name: true,
-                last_name: true,
-                email: true,
-                images: true
-              }
-            }
-          },
-          orderBy: {
-            created_at: 'desc'
-          }
-        }
-      }
+      where: { id: institutionId }
     });
 
     if (!institution) {
       return res.status(404).json({ error: 'Institution not found' });
     }
 
-    if ((reviewId || searchQuery) && institution.reviews.length === 0) {
+    const reviewWhere = {
+      institution_id: institutionId,
+      is_approved: true,
+      ...(typeof rating === 'number' && !isNaN(rating) ? { rating } : {}),
+      ...(typeof reviewId === 'number' && !isNaN(reviewId) ? { id: reviewId } : {})
+    };
+
+    const reviews = await prisma.reviews.findMany({
+      where: reviewWhere,
+      include: {
+        images: true,
+        users_profile: {
+          select: {
+            id: true,
+            first_name: true,
+            last_name: true,
+            email: true,
+            images: true
+          }
+        }
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+
+    if ((typeof reviewId === 'number' && !isNaN(reviewId)) && reviews.length === 0) {
       return res.status(404).json({ error: 'No matching review found for this institution' });
     }
 
     res.json({
       institution_id: institution.id,
-      reviews: institution.reviews
+      reviews
     });
 
   } catch (err) {
@@ -670,7 +669,6 @@ router.get('/institution/:id/summary', async (req, res) => {
   const institutionId = parseInt(req.params.id);
 
   try {
-    // Fetch institution and its approved reviews
     const institution = await prisma.institution.findUnique({
       where: { id: institutionId },
       include: {
@@ -691,7 +689,6 @@ router.get('/institution/:id/summary', async (req, res) => {
       return res.json({ summary: `There are no reviews for ${institution.name} yet.` });
     }
 
-    // Sentiment and keyword analysis
     const sentiment = new Sentiment();
     let positiveKeywords = [];
     let negativeKeywords = [];
@@ -710,14 +707,12 @@ router.get('/institution/:id/summary', async (req, res) => {
       } else if (result.score <= -1) {
         negativeKeywords.push(...keywords);
       }
-      // Neutral reviews are ignored for summary
     });
 
-    // Helper to get top N keywords
     function getTopKeywords(arr, n = 3) {
       const freq = {};
       arr.forEach(word => {
-        if (word.length > 2) { // ignore very short words
+        if (word.length > 2) {
           freq[word] = (freq[word] || 0) + 1;
         }
       });
@@ -730,7 +725,6 @@ router.get('/institution/:id/summary', async (req, res) => {
     const topPos = getTopKeywords(positiveKeywords);
     const topNeg = getTopKeywords(negativeKeywords);
 
-    // Build summary string
     let summary = `Customers of '${institution.name}'`;
     if (topPos.length && topNeg.length) {
       summary += ` like ${topPos.join(', ')}, but mention ${topNeg.join(', ')}.`;
@@ -792,7 +786,6 @@ router.post('/:review_id/reaction', auth, async (req, res) => {
     return res.status(400).json({ error: "Invalid reaction type." });
   }
 
-  // Check review exists
   const review = await prisma.reviews.findUnique({ where: { id: review_id } });
   if (!review) {
     return res.status(404).json({ error: "Review not found." });
