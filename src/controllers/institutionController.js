@@ -53,7 +53,7 @@ exports.updateInstitution = async (req, res,next) => {
 exports.getInstitutionById = async (req, res, next) => {
   try {
   const institution_id = parseInt(req.params.id,10);
-  const result = institutionService.getInstitutionsByID(institution_id);
+  const result = await institutionService.getInstitutionsByID(institution_id);
   res.json(result);
   } catch (err) {
     next(err);
