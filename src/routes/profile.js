@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../../uploads')
 const { PrismaClient } = require('../generated/prisma');
-
+const profileController = require('../controllers/profileController');
+const { validateProfileUpdate } = require('../validators/profileValidator');
 const prisma = new PrismaClient();
 /**
  * @swagger
@@ -44,29 +45,7 @@ const prisma = new PrismaClient();
  *         description: Internal server error
  */
 
-router.get('/dashboard', async (req, res) => {
-  try {
-    const user_id = req.user.userId;
-
-    const user = await prisma.users_profile.findUnique({
-      where: { id: user_id },
-      include: { images: true }
-    });
-    if (!user) return res.status(404).json({ error: "User doesn't exist" });
-   
-
-
-    res.json({
-      message: "Profile found",
-      user: user,
-      profile_image: user.images
-    });
-
-  } catch (err) {
-    console.log("Error : " + err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
+router.get('/dashboard', profileController.getDashboard);
 
 
 /**
@@ -101,31 +80,8 @@ router.get('/dashboard', async (req, res) => {
  *         description: Internal server error
  */
 
-router.get('/guestDashboard', async (req, res) => {
-  try {
-    const user_id = req.query.guestID
+router.get('/guestDashboard', profileController.getGuestDashboard);
 
-    const user = await prisma.users_profile.findUnique({
-      where: { id: user_id },
-      include: { images: true }
-    });
-    if (!user) return res.status(404).json({ error: "User doesn't exist" });
-   
-
-
-    res.json({
-      message: "Profile found",
-      first_name : user.first_name,
-      last_name : user.last_name,
-      gender : user.gender,
-      profile_image: user.images
-    });
-
-  } catch (err) {
-    console.log("Error : " + err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
 
 /**
  * @swagger
@@ -168,26 +124,8 @@ router.get('/guestDashboard', async (req, res) => {
  *         description: Internal server error
  */
 
-router.put('/dashboard/update', async (req, res) => {
-  try{
-    const {first_name, last_name, email, password, phone_number, age_group, gender,address} = req.body;
-    const user_id = req.user.userId;
-    const user = await prisma.users_profile.findUnique({ where : {id:user_id}});
-    if(!user) return res.status(404).json({'error':"User doesn't exist"})
-    const newProfile = await prisma.users_profile.update({
-      where : {id : user_id},
-      data : {first_name, last_name, email, password, phone_number, age_group, gender,address}
-  });
-  res.json({
-    Message : "Profile updated",
-    profile : newProfile
-  })
-    
-  }catch(err){
-    console.log("Error : "+err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
+router.put('/dashboard/update', validateProfileUpdate, profileController.updateProfile);
+
 
 
 /**
@@ -223,38 +161,7 @@ router.put('/dashboard/update', async (req, res) => {
  *         description: Internal server error
  */
 
-router.get('/reviews', async (req, res) => {
-  try {
-    const user_id = req.user.userId; 
-
-    const user = await prisma.users_profile.findUnique({
-      where: { id: user_id },
-      include: {
-        images: true,
-        reviews: {
-          include: {
-            images: true,
-            institution:true
-          }
-        }
-      }
-    });
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    res.json({
-      message: "Reviews fetched successfully",
-      reviews: user.reviews,
-      images: user.images
-    });
-
-  } catch (err) {
-    console.log("Error:", err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
+router.get('/reviews', profileController.getReviews);
 
 /**
  * @swagger
@@ -298,43 +205,7 @@ router.get('/reviews', async (req, res) => {
  *         description: Internal server error
  */
 
-router.get('/guestReviews', async (req, res) => {
-  try {
-    const requestingUser = req.user?.userId; // This ensures only authenticated users access it
-    const guestID = req.query.guestID;
-
-    if (!requestingUser) {
-      return res.status(401).json({ error: "Unauthorized: Login required" });
-    }
-
-    const guestUser = await prisma.users_profile.findUnique({
-      where: { id: parseInt(guestID) },
-      include: {
-        images: true,
-        reviews: {
-          include: {
-            images: true,
-            institution: true
-          }
-        }
-      }
-    });
-
-    if (!guestUser) {
-      return res.status(404).json({ error: "Guest user not found" });
-    }
-
-    res.json({
-      message: "Guest reviews fetched successfully",
-      reviews: guestUser.reviews,
-      images: guestUser.images
-    });
-
-  } catch (err) {
-    console.error("Error:", err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
+router.get('/guestReviews', profileController.getGuestReviews);
 
 
 /**

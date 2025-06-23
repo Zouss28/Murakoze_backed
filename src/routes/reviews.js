@@ -6,6 +6,7 @@ const upload = require('../../uploads');
 const Filter = require('bad-words');
 const Sentiment = require('sentiment');
 const keyword_extractor = require('keyword-extractor');
+const allowedReactions = ["helpful", "thanks", "love", "yikes"];
 
 
 const prisma = new PrismaClient();
@@ -746,6 +747,192 @@ router.get('/institution/:id/summary', async (req, res) => {
     console.error('Error generating summary:', err);
     res.status(500).json({ error: 'Something went wrong!' });
   }
+});
+
+
+/**
+ * @swagger
+ * /api/review/{review_id}/reaction:
+ *   post:
+ *     summary: Add or remove a reaction to a review
+ *     tags:
+ *       - Reviews
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: review_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               reaction:
+ *                 type: string
+ *                 enum: [helpful, thanks, love, yikes]
+ *     responses:
+ *       200:
+ *         description: Reaction toggled
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Review not found
+ */
+router.post('/:review_id/reaction', auth, async (req, res) => {
+  const review_id = parseInt(req.params.review_id);
+  const user_id = req.user.userId;
+  const { reaction } = req.body;
+
+  if (!allowedReactions.includes(reaction)) {
+    return res.status(400).json({ error: "Invalid reaction type." });
+  }
+
+  // Check review exists
+  const review = await prisma.reviews.findUnique({ where: { id: review_id } });
+  if (!review) {
+    return res.status(404).json({ error: "Review not found." });
+  }
+
+  // Check if user already has a reaction for this review
+  const existing = await prisma.review_reactions.findFirst({
+    where: {
+      review_id,
+      user_id,
+    }
+  });
+
+  if (existing) {
+    if (existing.reaction === reaction) {
+      // Toggle off if same reaction
+      await prisma.review_reactions.delete({
+        where: { id: existing.id }
+      });
+      return res.json({ message: "Reaction removed." });
+    } else {
+      // Update to new reaction
+      await prisma.review_reactions.update({
+        where: { id: existing.id },
+        data: { reaction }
+      });
+      return res.json({ message: "Reaction updated." });
+    }
+  } else {
+    // No reaction yet, create new
+    await prisma.review_reactions.create({
+      data: { review_id, user_id, reaction }
+    });
+    return res.json({ message: "Reaction added." });
+  }
+});
+
+// reviews.js
+
+/**
+ * @swagger
+ * /api/review/{review_id}/my-reaction:
+ *   get:
+ *     summary: Get the current user's reaction to a review
+ *     tags:
+ *       - Reviews
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: review_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Review ID
+ *     responses:
+ *       200:
+ *         description: The user's reaction to the review (if any)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 reaction:
+ *                   type: string
+ *                   nullable: true
+ *                   example: helpful
+ *       404:
+ *         description: Review not found
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/:review_id/my-reaction', auth, async (req, res) => {
+  const review_id = parseInt(req.params.review_id);
+  const user_id = req.user.userId;
+
+  try {
+    // Check review exists
+    const review = await prisma.reviews.findUnique({ where: { id: review_id } });
+    if (!review) {
+      return res.status(404).json({ error: "Review not found." });
+    }
+
+    // Find user's reaction
+    const userReaction = await prisma.review_reactions.findFirst({
+      where: {
+        review_id,
+        user_id,
+      },
+    });
+
+    res.json({
+      reaction: userReaction ? userReaction.reaction : null,
+    });
+  } catch (err) {
+    console.error("Error fetching user reaction:", err);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+});
+
+
+/**
+ * @swagger
+ * /api/review/{review_id}/reactions:
+ *   get:
+ *     summary: Get reaction counts for a review
+ *     tags:
+ *       - Reviews
+ *     parameters:
+ *       - in: path
+ *         name: review_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Reaction counts
+ */
+router.get('/:review_id/reactions', async (req, res) => {
+  const review_id = parseInt(req.params.review_id);
+
+  // Get counts for each reaction
+  const reactions = await prisma.review_reactions.groupBy({
+    by: ['reaction'],
+    where: { review_id },
+    _count: { reaction: true }
+  });
+
+  // Format as { helpful: 2, thanks: 1, ... }
+  const counts = {};
+  allowedReactions.forEach(r => {
+    counts[r] = 0;
+  });
+  reactions.forEach(r => {
+    counts[r.reaction] = r._count.reaction;
+  });
+
+  res.json({ reactions: counts });
 });
 
 module.exports = router;

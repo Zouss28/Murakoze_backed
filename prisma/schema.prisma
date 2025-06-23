@@ -908,6 +908,7 @@ model users_profile {
   reviews       reviews[]
   serviceReview serviceReview[]
   review_reactions review_reactions[]
+  review_replies review_replies[]
 }
 
 model reviews {
@@ -922,6 +923,7 @@ model reviews {
   institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
   users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
   review_reactions review_reactions[]
+  review_replies review_replies[]
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")
@@ -938,6 +940,25 @@ model review_reactions {
   @@unique([review_id, user_id, reaction])
   @@index([review_id])
   @@index([user_id])
+}
+
+model review_replies {
+  id              Int              @id @default(autoincrement())
+  review_id       Int
+  user_id         Int
+  reply_text      String           @db.Text
+  created_at      DateTime         @default(now())
+  parent_reply_id Int?             // For nested replies (optional)
+
+  // Relations
+  review          reviews          @relation(fields: [review_id], references: [id], onDelete: Cascade)
+  user            users_profile    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  parent_reply    review_replies?  @relation("ReplyParent", fields: [parent_reply_id], references: [id])
+  child_replies   review_replies[] @relation("ReplyParent")
+
+  @@index([review_id])
+  @@index([user_id])
+  @@index([parent_reply_id])
 }
 
 model workingHour {
