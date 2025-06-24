@@ -892,73 +892,54 @@ model sectors {
 }
 
 model users_profile {
-  id            Int             @id @default(autoincrement())
-  first_name    String          @db.VarChar(50)
-  last_name     String          @db.VarChar(50)
-  email         String          @unique(map: "unique_email") @db.VarChar(250)
-  password      String          @db.VarChar(255)
-  phone_number  String?         @db.VarChar(50)
-  age_group     String?         @db.VarChar(50)
-  gender        String?         @db.VarChar(50)
-  address       String?         @db.VarChar(50)
-  added_at      DateTime        @default(now()) @db.Timestamp(0)
-  isVerified    Boolean?
-  verifyToken   String?         @db.VarChar(255)
-  images        images[]
-  reviews       reviews[]
-  serviceReview serviceReview[]
+  id               Int                @id @default(autoincrement())
+  first_name       String             @db.VarChar(50)
+  last_name        String             @db.VarChar(50)
+  email            String             @unique(map: "unique_email") @db.VarChar(250)
+  password         String             @db.VarChar(255)
+  phone_number     String?            @db.VarChar(50)
+  age_group        String?            @db.VarChar(50)
+  gender           String?            @db.VarChar(50)
+  address          String?            @db.VarChar(50)
+  added_at         DateTime           @default(now()) @db.Timestamp(0)
+  isVerified       Boolean?
+  verifyToken      String?            @db.VarChar(255)
+  profile_image    String?            @db.VarChar(125)
+  images           images[]
   review_reactions review_reactions[]
-  review_replies review_replies[]
+  reviews          reviews[]
+  serviceReview    serviceReview[]
 }
 
 model reviews {
-  id             Int           @id @default(autoincrement())
-  user_id        Int
-  institution_id Int
-  rating         Int
-  review         String?       @db.Text
-  created_at     DateTime      @default(now()) @db.Timestamp(0)
-  is_approved    Boolean?      @default(true)
-  images         images[]
-  institution    institution   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
-  users_profile  users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
+  id               Int                @id @default(autoincrement())
+  user_id          Int
+  institution_id   Int
+  rating           Int
+  review           String?            @db.Text
+  created_at       DateTime           @default(now()) @db.Timestamp(0)
+  is_approved      Boolean?           @default(true)
+  images           images[]
   review_reactions review_reactions[]
-  review_replies review_replies[]
+  institution      institution        @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
+  users_profile    users_profile      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")
 }
 
 model review_reactions {
-  id         Int      @id @default(autoincrement())
-  review_id  Int
-  user_id    Int
-  reaction   String
-  created_at DateTime @default(now())
-  reviews        reviews        @relation(fields: [review_id], references: [id], onDelete: Cascade)
-  users_profile  users_profile  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id            Int           @id @default(autoincrement())
+  review_id     Int
+  user_id       Int
+  reaction      String
+  created_at    DateTime      @default(now())
+  reviews       reviews       @relation(fields: [review_id], references: [id], onDelete: Cascade)
+  users_profile users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
   @@unique([review_id, user_id, reaction])
   @@index([review_id])
   @@index([user_id])
-}
-
-model review_replies {
-  id              Int              @id @default(autoincrement())
-  review_id       Int
-  user_id         Int
-  reply_text      String           @db.Text
-  created_at      DateTime         @default(now())
-  parent_reply_id Int?             // For nested replies (optional)
-
-  // Relations
-  review          reviews          @relation(fields: [review_id], references: [id], onDelete: Cascade)
-  user            users_profile    @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  parent_reply    review_replies?  @relation("ReplyParent", fields: [parent_reply_id], references: [id])
-  child_replies   review_replies[] @relation("ReplyParent")
-
-  @@index([review_id])
-  @@index([user_id])
-  @@index([parent_reply_id])
 }
 
 model workingHour {

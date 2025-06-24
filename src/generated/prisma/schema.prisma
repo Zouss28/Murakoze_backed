@@ -904,10 +904,11 @@ model users_profile {
   added_at         DateTime           @default(now()) @db.Timestamp(0)
   isVerified       Boolean?
   verifyToken      String?            @db.VarChar(255)
+  profile_image    String?            @db.VarChar(125)
   images           images[]
+  review_reactions review_reactions[]
   reviews          reviews[]
   serviceReview    serviceReview[]
-  review_reactions review_reactions[]
 }
 
 model reviews {
@@ -919,9 +920,9 @@ model reviews {
   created_at       DateTime           @default(now()) @db.Timestamp(0)
   is_approved      Boolean?           @default(true)
   images           images[]
+  review_reactions review_reactions[]
   institution      institution        @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_institutions_id")
   users_profile    users_profile      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_users_id")
-  review_reactions review_reactions[]
 
   @@index([institution_id], map: "fk_institutions_id")
   @@index([user_id], map: "fk_users_id")

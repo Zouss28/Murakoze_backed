@@ -78,3 +78,38 @@ exports.getGuestReviews = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateProfileImage = async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const imagePath = req.file.path; 
+    const imageType = req.file.mimetype;
+
+    const imageExtension = imageType.split('/')[1];
+
+    const existingimage = await profileService.updateProfileImage(userId, imagePath);   
+
+    let image; // define image here to use in response
+
+    if (existingimage) {
+      image = await prisma.images.update({
+        where: { id: existingimage.id },
+        data: { image_url: imagePath }
+      });
+    } else {
+      image = await prisma.images.create({
+        data: {
+          user_id: userId,
+          image_url: imagePath,
+          image_type: imageType
+        }
+      });
+    }
+    res.json({
+      message: "Profile image updated",
+      profile_image: image
+    });
+  } catch (err) {
+    next(err);
+  }
+};

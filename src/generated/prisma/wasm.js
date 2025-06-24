@@ -817,7 +817,8 @@ exports.Prisma.Users_profileScalarFieldEnum = {
   address: 'address',
   added_at: 'added_at',
   isVerified: 'isVerified',
-  verifyToken: 'verifyToken'
+  verifyToken: 'verifyToken',
+  profile_image: 'profile_image'
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -1267,7 +1268,8 @@ exports.Prisma.users_profileOrderByRelevanceFieldEnum = {
   age_group: 'age_group',
   gender: 'gender',
   address: 'address',
-  verifyToken: 'verifyToken'
+  verifyToken: 'verifyToken',
+  profile_image: 'profile_image'
 };
 
 exports.Prisma.reviewsOrderByRelevanceFieldEnum = {

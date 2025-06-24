@@ -76,6 +76,8 @@ exports.updateProfileImage = async (user_id, image_url) => {
 
   const user = await prisma.users_profile.update({
     where: { id: user_id },
-    data: { image_url: image_url }
+    data: { profile_image: image_url }
   });
+
+  return user;
 };
