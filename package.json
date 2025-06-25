@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node --watch src/server.js",
     "migrate": "npx prisma migrate deploy",
     "generate": "npx openapi-generator-cli generate -i http://localhost:3000/api-docs -g typescript-axios -o src/generated"
   },

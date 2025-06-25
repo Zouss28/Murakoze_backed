@@ -3,11 +3,9 @@ const router = express.Router()
 const { PrismaClient } = require('../generated/prisma');
 const auth = require('../middleware/authMiddleware')
 const upload = require('../../uploads');
-const Filter = require('bad-words');
-const Sentiment = require('sentiment');
-const keyword_extractor = require('keyword-extractor');
 const allowedReactions = ["helpful", "thanks", "love", "yikes"];
-
+const reviewController = require('../controllers/reviewController');
+const reviewValidator = require('../validators/reviewValidator');
 
 const prisma = new PrismaClient();
 
@@ -45,29 +43,67 @@ const prisma = new PrismaClient();
  *         description: Internal server error
  */
 
-router.get("/institution",async (req,res)=>{
-  const institutions = await prisma.institution.findMany({
-    include : {
-      service_group : true
-    }
-  });
-  const result = institutions.map(inst =>{
-    return{
-      id: inst.id,
-      name : inst.name,
-      services : inst.service_group ? inst.service_group.map(service => ({name : service.name,
-        id:service.id
-      })) : ""
-    }
-  });
-  res.json({
-    institutions : result
-  })
-})
+router.get("/institution", reviewController.getInstitutionToReview);
 
 /**
  * @swagger
- * /api/review/{ist_id}:
+ * /api/review/serviceRating:
+ *   post:
+ *     summary: Submit a service rating and emotional feedback
+ *     tags:
+ *       - Reviews
+ *     description: Authenticated users can rate a service and provide emotional feedback.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - rating
+ *               - emoRating
+ *             properties:
+ *               rating:
+ *                 type: number
+ *                 minimum: 1
+ *                 maximum: 10
+ *                 description: Numerical rating for the service
+ *               emoRating:
+ *                 type: string
+ *                 enum: [happy, satisfied, unhappy]
+ *                 description: Emotional state associated with the rating
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service being rated
+ *     responses:
+ *       200:
+ *         description: Rating submitted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 serviceRating:
+ *                   type: object
+ *       400:
+ *         description: Invalid input
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post("/serviceRating", auth, reviewController.createServiceRating);
+
+/**
+ * @swagger
+ * /api/review/{inst_id}:
  *   post:
  *     summary: Submit a review for an institution with an image
  *     tags:
@@ -78,7 +114,7 @@ router.get("/institution",async (req,res)=>{
  *       - multipart/form-data
  *     parameters:
  *       - in: path
- *         name: ist_id
+ *         name: inst_id
  *         required: true
  *         schema:
  *           type: integer
@@ -110,66 +146,8 @@ router.get("/institution",async (req,res)=>{
  *         description: Internal server error
  */
 
-router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) => {
-  const institution_id = parseInt(req.params.ist_id);
-  const user_id = req.user.userId;
-
-  const imagePath = req.file?.path;
-  const imageType = req.file?.mimetype;
-
-  if (!imagePath || !imageType) {
-    return res.status(400).json({ error: 'Image upload failed or image missing' });
-  }
-
-  const imageExtension = imageType.split('/')[1];
-
-  try {
-    const { rating, review } = req.body;
-
-    const institution = await prisma.institution.findUnique({
-      where: { id: institution_id },
-    });
-
-    if (!institution) {
-      return res.status(400).json({ error: "Institution doesn't exist" });
-    }
-
-    // Create review
-    const filter = new Filter();
-    const createdReview = await prisma.reviews.create({
-      data: {
-        user_id,
-        institution_id,
-        rating: parseInt(rating),
-        review,
-        is_approved: !filter.isProfane(review) 
-      },
-    });
-
-    // Attach image to the review
-    const createdImage = await prisma.images.create({
-      data: {
-        image_url: imagePath,
-        type: imageExtension,
-        reviews: {
-          connect: { id: createdReview.id },
-        },
-      },
-    });
-
-    return res.status(201).json({
-      message: 'Review created successfully',
-      review: {
-        ...createdReview,
-        image: createdImage.image_url,
-      },
-    });
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
-
+router.post('/:inst_id', auth, upload.single('profile_image'), reviewValidator.validateReview, reviewController.createReview);
+ 
 /**
  * @swagger
  * /api/review/recent:
@@ -244,150 +222,20 @@ router.post('/:ist_id', auth, upload.single('profile_image'), async (req, res) =
  *       500:
  *         description: Server error
  */
-router.get('/recent', async (req, res) => {
-    try {
-      const page = parseInt(req.query.page) || 1;
-      const reviews = await prisma.reviews.findMany({
-        where :{
-          is_approved: true
-        },
-        include: {
-          images: true
-        },
-        orderBy: {
-          created_at: 'desc'
-        },
-        take: 3 * page
-      });
-  
-      const userIds = [...new Set(reviews.map(r => r.user_id))];
-  
-      const users = await prisma.users_profile.findMany({
-        where: {
-          id: { in: userIds }
-        },
-        include: {
-          images: true
-        }
-      });
-  
-      const enrichedReviews = reviews.map(review => {
-        const user = users.find(u => u.id === review.user_id);
-        return {
-          ...review,
-          user: {
-            id: user.id,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            email: user.email,
-            profile: user.images
-          }
-        };
-      });
-  
-      res.json({
-        message: "Top 3 recent reviews fetched successfully",
-        reviews: enrichedReviews
-      });
-  
-    } catch (err) {
-      console.log("Error:", err);
-      res.status(500).json({ error: 'Something went wrong!' });
-    }
-  });
-  
-
+router.get('/recent', reviewController.getRecentReviews);
 
 
 /**
  * @swagger
- * /api/review/serviceRating:
- *   get:
- *     summary: Submit a service rating and emotional feedback
- *     tags:
- *       - Reviews
- *     description: Authenticated users can rate a service and provide emotional feedback.
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: service_id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID of the service being rated
- *       - in: query
- *         name: rating
- *         required: true
- *         schema:
- *           type: number
- *           minimum: 1
- *           maximum: 10
- *         description: Numerical rating for the service
- *       - in: query
- *         name: emorating
- *         required: true
- *         schema:
- *           type: string
- *           enum: [happy, satisfied, unhappy]
- *         description: Emotional state associated with the rating
- *     responses:
- *       200:
- *         description: Rating submitted successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *       400:
- *         description: Invalid input
- *       500:
- *         description: Internal server error
- */
-
-router.get("/serviceRating", auth, async (req, res) => {
-  try {
-    const { emorating, service_id, rating } = req.query;
-
-    const ratingExplained = { happy: 'Happy', satisfied: 'Satisfied', unhappy: 'Unhappy' };
-
-    if (!service_id) {
-      return res.status(400).json({ message: "No service ID provided!" });
-    }
-
-    if (!(emorating in ratingExplained)) {
-      return res.status(400).json({ message: "Invalid emorating provided!" });
-    }
-
-    await prisma.serviceReview.create({
-      data: {
-        user_id: req.user.userId,
-        service_id: parseInt(service_id),
-        emoRating: ratingExplained[emorating],
-        rating: parseFloat(rating),
-      },
-    });
-
-    return res.json({ message: "Survey submitted" });
-  } catch (err) {
-    console.error("Error during service rating:", err);
-    res.status(500).json({ error: "Something went wrong!" });
-  }
-});
-
-/**
- * @swagger
- * /api/review/institution/{id}:
+ * /api/review/institution/{inst_id}:
  *   get:
  *     summary: Get institution reviews
- *     description: Fetches all approved reviews for a specific institution, with optional filters by rating, review ID, or a search query in the review text.
+ *     description: Fetches all approved reviews for a specific institution, with optional filters by rating or review ID.
  *     tags:
  *       - Institutions
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: inst_id
  *         required: true
  *         schema:
  *           type: integer
@@ -410,8 +258,8 @@ router.get("/serviceRating", auth, async (req, res) => {
  *             schema:
  *               type: object
  *               properties:
- *                 institution_id:
- *                   type: integer
+ *                 message:
+ *                   type: string
  *                 reviews:
  *                   type: array
  *                   items:
@@ -461,60 +309,8 @@ router.get("/serviceRating", auth, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.get('/institution/:id', async (req, res) => {
-  const institutionId = parseInt(req.params.id, 10);
-  const rating = req.query.rating ? parseInt(req.query.rating, 10) : undefined;
-  const reviewId = req.query.review_id ? parseInt(req.query.review_id, 10) : undefined;
+router.get('/institution/:inst_id', reviewController.getInstitutionReviews);
 
-  try {
-    const institution = await prisma.institution.findUnique({
-      where: { id: institutionId }
-    });
-
-    if (!institution) {
-      return res.status(404).json({ error: 'Institution not found' });
-    }
-
-    const reviewWhere = {
-      institution_id: institutionId,
-      is_approved: true,
-      ...(typeof rating === 'number' && !isNaN(rating) ? { rating } : {}),
-      ...(typeof reviewId === 'number' && !isNaN(reviewId) ? { id: reviewId } : {})
-    };
-
-    const reviews = await prisma.reviews.findMany({
-      where: reviewWhere,
-      include: {
-        images: true,
-        users_profile: {
-          select: {
-            id: true,
-            first_name: true,
-            last_name: true,
-            email: true,
-            images: true
-          }
-        }
-      },
-      orderBy: {
-        created_at: 'desc'
-      }
-    });
-
-    if ((typeof reviewId === 'number' && !isNaN(reviewId)) && reviews.length === 0) {
-      return res.status(404).json({ error: 'No matching review found for this institution' });
-    }
-
-    res.json({
-      institution_id: institution.id,
-      reviews
-    });
-
-  } catch (err) {
-    console.error('Error fetching institution reviews:', err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
 
 /**
  * @swagger
@@ -555,27 +351,7 @@ router.get('/institution/:id', async (req, res) => {
  *                         items:
  *                           type: string
  */
-router.get("/Q&A", auth, async (req, res) => {
-  try {
-    const service_id = parseInt(req.query.service_id);
-    if (!service_id) return res.status(400).json({ message: "Missing service_id" });
-
-    const questionInstance = await prisma.surveyQuestions.findMany({
-      where: { service_id },
-    });
-
-    const questions = questionInstance.map((q) => ({
-      id: q.id,
-      question: q.question,
-      choices: q.choices,
-    }));
-
-    return res.json({ message: "Q&A retrieved!", questions });
-  } catch (err) {
-    console.log("Error:", err);
-    res.status(500).json({ error: "Something went wrong with the QA!" });
-  }
-});
+router.get("/Q&A", reviewController.getQandA);
 
 
 /**
@@ -611,30 +387,7 @@ router.get("/Q&A", auth, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.post("/Q&A/post", auth, async (req, res) => {
-  try {
-    const user_id = req.user.userId;
-    const { answers } = req.body;
-
-    if (!Array.isArray(answers) || answers.length === 0) {
-      return res.status(400).json({ message: "Answers must be a non-empty array." });
-    }
-
-    const answerData = answers.map(({ question_id, answer, scale_rating }) => ({
-      question_id,
-      user_id,
-      answer,
-      scale_rating,
-    }));
-
-    await prisma.surveyAnswers.createMany({ data: answerData });
-
-    return res.json({ message: "Survey submitted" });
-  } catch (err) {
-    console.log("Error:", err);
-    res.status(500).json({ error: "Something went wrong with the QA!" });
-  }
-});
+router.post("/Q&A/post", auth, reviewController.createQandA);
 
 /**
  * @swagger
@@ -743,12 +496,11 @@ router.get('/institution/:id/summary', async (req, res) => {
   }
 });
 
-
 /**
  * @swagger
  * /api/review/{review_id}/reaction:
  *   post:
- *     summary: Add or remove a reaction to a review
+ *     summary: Add or remove a reaction to a review (by reaction_type_id)
  *     tags:
  *       - Reviews
  *     security:
@@ -766,72 +518,118 @@ router.get('/institution/:id/summary', async (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               reaction:
- *                 type: string
- *                 enum: [helpful, thanks, love, yikes]
+ *               reaction_type_id:
+ *                 type: integer
+ *                 example: 1
  *     responses:
  *       200:
  *         description: Reaction toggled
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Review not found
+ *         description: Review or reaction type not found
+ *       500:
+ *         description: Internal server error
  */
 router.post('/:review_id/reaction', auth, async (req, res) => {
   const review_id = parseInt(req.params.review_id);
   const user_id = req.user.userId;
-  const { reaction } = req.body;
+  const { reaction_type_id } = req.body;
 
-  if (!allowedReactions.includes(reaction)) {
-    return res.status(400).json({ error: "Invalid reaction type." });
+  if (!reaction_type_id || isNaN(reaction_type_id)) {
+    return res.status(400).json({ error: "reaction_type_id is required and must be an integer." });
   }
 
+  // Check review exists
   const review = await prisma.reviews.findUnique({ where: { id: review_id } });
   if (!review) {
     return res.status(404).json({ error: "Review not found." });
   }
 
-  // Check if user already has a reaction for this review
+  // Check reaction type exists
+  const reactionType = await prisma.reaction_types.findUnique({ where: { id: reaction_type_id } });
+  if (!reactionType) {
+    return res.status(404).json({ error: "Reaction type not found." });
+  }
+
+  // Check if user already has a reaction for this review and type
   const existing = await prisma.review_reactions.findFirst({
     where: {
       review_id,
       user_id,
+      reaction_type_id,
     }
   });
 
   if (existing) {
-    if (existing.reaction === reaction) {
-      // Toggle off if same reaction
-      await prisma.review_reactions.delete({
-        where: { id: existing.id }
-      });
-      return res.json({ message: "Reaction removed." });
-    } else {
-      // Update to new reaction
-      await prisma.review_reactions.update({
-        where: { id: existing.id },
-        data: { reaction }
-      });
-      return res.json({ message: "Reaction updated." });
-    }
+    // Toggle off if same reaction
+    await prisma.review_reactions.delete({
+      where: { id: existing.id }
+    });
+    return res.json({ message: "Reaction removed." });
   } else {
     // No reaction yet, create new
     await prisma.review_reactions.create({
-      data: { review_id, user_id, reaction }
+      data: { review_id, user_id, reaction_type_id }
     });
     return res.json({ message: "Reaction added." });
   }
 });
 
-// reviews.js
+/**
+ * @swagger
+ * /api/review/{review_id}/reactions:
+ *   get:
+ *     summary: Get reaction counts and icons for a review
+ *     tags:
+ *       - Reviews
+ *     parameters:
+ *       - in: path
+ *         name: review_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Reaction counts and icons
+ */
+router.get('/:review_id/reactions', async (req, res) => {
+  const review_id = parseInt(req.params.review_id);
+
+  // Get all reaction types
+  const reactionTypes = await prisma.reaction_types.findMany({
+    select: { id: true, name: true, icon: true }
+  });
+
+  // Get counts for each reaction type
+  const reactions = await prisma.review_reactions.groupBy({
+    by: ['reaction_type_id'],
+    where: { review_id },
+    _count: { reaction_type_id: true }
+  });
+
+  // Format as array of { id, name, icon, count }
+  const result = reactionTypes.map(rt => {
+    const found = reactions.find(r => r.reaction_type_id === rt.id);
+    return {
+      id: rt.id,
+      name: rt.name,
+      icon: rt.icon,
+      count: found ? found._count.reaction_type_id : 0
+    };
+  });
+
+  res.json({ reactions: result });
+});
+
+
 
 /**
  * @swagger
- * /api/review/{review_id}/my-reaction:
- *   get:
- *     summary: Get the current user's reaction to a review
- *     tags:
- *       - Reviews
+ * /api/review/{review_id}/reply:
+ *   post:
+ *     summary: Add a reply to a review or to another reply (threaded)
+ *     tags: [Reviews]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -840,92 +638,141 @@ router.post('/:review_id/reaction', auth, async (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
- *         description: Review ID
+ *         description: ID of the review to reply to
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - reply_text
+ *             properties:
+ *               reply_text:
+ *                 type: string
+ *                 example: Thank you for your feedback!
+ *               parent_reply_id:
+ *                 type: integer
+ *                 nullable: true
+ *                 description: >
+ *                   (Optional) The ID of the parent reply if replying to another reply.
+ *                   For a direct reply to the review, omit this field or set it to null.
+ *           examples:
+ *             DirectReply:
+ *               summary: Direct reply to review
+ *               value:
+ *                 reply_text: "Thank you for your feedback!"
+ *             NestedReply:
+ *               summary: Reply to another reply
+ *               value:
+ *                 reply_text: "I agree with you!"
+ *                 parent_reply_id: 5
  *     responses:
- *       200:
- *         description: The user's reaction to the review (if any)
+ *       201:
+ *         description: Reply added
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 reaction:
+ *                 message:
  *                   type: string
- *                   nullable: true
- *                   example: helpful
+ *                 reply:
+ *                   $ref: '#/components/schemas/ReviewReply'
+ *       400:
+ *         description: Missing reply text or review_id
  *       404:
  *         description: Review not found
- *       401:
- *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */
-router.get('/:review_id/my-reaction', auth, async (req, res) => {
+
+router.post('/:review_id/reply', auth, async (req, res) => {
   const review_id = parseInt(req.params.review_id);
   const user_id = req.user.userId;
+  const { reply_text, parent_reply_id } = req.body;
+
+  if (!reply_text || !review_id) {
+    return res.status(400).json({ error: "Missing reply text or review_id" });
+  }
 
   try {
-    // Check review exists
+    // Ensure review exists
     const review = await prisma.reviews.findUnique({ where: { id: review_id } });
-    if (!review) {
-      return res.status(404).json({ error: "Review not found." });
+    if (!review) return res.status(404).json({ error: "Review not found" });
+
+    // Optionally, check parent_reply_id exists if provided
+    if (parent_reply_id) {
+      const parent = await prisma.review_replies.findUnique({ where: { id: parent_reply_id } });
+      if (!parent) return res.status(400).json({ error: "Parent reply not found" });
     }
 
-    // Find user's reaction
-    const userReaction = await prisma.review_reactions.findFirst({
-      where: {
+    const reply = await prisma.review_replies.create({
+      data: {
         review_id,
         user_id,
+        reply_text,
+        parent_reply_id: parent_reply_id || null,
       },
     });
 
-    res.json({
-      reaction: userReaction ? userReaction.reaction : null,
-    });
+    res.status(201).json({ message: "Reply added", reply });
   } catch (err) {
-    console.error("Error fetching user reaction:", err);
+    console.error("Error adding reply:", err);
     res.status(500).json({ error: "Something went wrong!" });
   }
 });
 
-
 /**
  * @swagger
- * /api/review/{review_id}/reactions:
+ * /api/review/{review_id}/replies:
  *   get:
- *     summary: Get reaction counts for a review
- *     tags:
- *       - Reviews
+ *     summary: Get all replies for a review
+ *     tags: [Reviews]
  *     parameters:
  *       - in: path
  *         name: review_id
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID of the review
  *     responses:
  *       200:
- *         description: Reaction counts
+ *         description: List of replies
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 replies:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/ReviewReply'
+ *       500:
+ *         description: Internal server error
  */
-router.get('/:review_id/reactions', async (req, res) => {
+router.get('/:review_id/replies', async (req, res) => {
   const review_id = parseInt(req.params.review_id);
 
-  // Get counts for each reaction
-  const reactions = await prisma.review_reactions.groupBy({
-    by: ['reaction'],
-    where: { review_id },
-    _count: { reaction: true }
-  });
+  try {
+    const replies = await prisma.review_replies.findMany({
+      where: { review_id },
+      include: {
+        user: {
+          select: { id: true, first_name: true, last_name: true, email: true, images: true }
+        },
+        child_replies: true, // For nested replies
+      },
+      orderBy: { created_at: 'asc' },
+    });
 
-  // Format as { helpful: 2, thanks: 1, ... }
-  const counts = {};
-  allowedReactions.forEach(r => {
-    counts[r] = 0;
-  });
-  reactions.forEach(r => {
-    counts[r.reaction] = r._count.reaction;
-  });
-
-  res.json({ reactions: counts });
+    res.json({ replies });
+  } catch (err) {
+    console.error("Error fetching replies:", err);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
 });
+
+
 
 module.exports = router;

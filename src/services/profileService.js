@@ -81,3 +81,11 @@ exports.updateProfileImage = async (user_id, image_url) => {
 
   return user;
 };
+
+exports.getProfileImage = async (user_id) => {
+  if (!user_id) throw new Error("User ID is required");
+
+  const image = await prisma.users_profile.findUnique({ where: { id: user_id }});
+
+  return image;
+};

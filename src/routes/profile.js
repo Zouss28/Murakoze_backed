@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../../uploads')
-const { PrismaClient } = require('../generated/prisma');
 const profileController = require('../controllers/profileController');
 const { validateProfileUpdate } = require('../validators/profileValidator');
-const prisma = new PrismaClient();
 /**
  * @swagger
  * tags:
@@ -52,14 +50,21 @@ router.get('/dashboard', profileController.getDashboard);
  * @swagger
  * /api/profile/guestDashboard:
  *   get:
- *     summary: Get user dashboard information
+ *     summary: Get guest user dashboard information
  *     tags:
  *       - Profile
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: guestID
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the guest user to fetch
  *     responses:
  *       200:
- *         description: Successfully retrieved user profile
+ *         description: Successfully retrieved guest user profile
  *         content:
  *           application/json:
  *             schema:
@@ -68,12 +73,18 @@ router.get('/dashboard', profileController.getDashboard);
  *                 message:
  *                   type: string
  *                   example: Profile found
- *                 user:
- *                   type: object
+ *                 first_name:
+ *                   type: string
+ *                   example: John
+ *                 last_name:
+ *                   type: string
+ *                   example: Doe
+ *                 gender:
+ *                   type: string
+ *                   example: male
  *                 profile_image:
- *                   type: array
- *                   items:
- *                     type: object
+ *                   type: string
+ *                   example: https://example.com/image.jpg
  *       404:
  *         description: User not found
  *       500:
@@ -236,49 +247,8 @@ router.get('/guestReviews', profileController.getGuestReviews);
  *         description: Could not update profile image
  */
 
-router.put('/update_image', upload.single('profile_image'), async (req, res) => {
-  try {
-    const userId = req.user.userId;
-    const imagePath = req.file.path; 
-    const imageType = req.file.mimetype;
+router.put('/update_image', upload.single('profile_image'), profileController.updateProfileImage);
 
-    const imageExtension = imageType.split('/')[1];
-
-    const existingimage = await prisma.images.findFirst({ where: { user_id: userId } });
-
-    let image; // define image here to use in response
-
-    if (existingimage) {
-      image = await prisma.images.update({
-        where: { id: existingimage.id },
-        data: {
-          image_url: imagePath,
-          type: imageExtension,
-          user_id: userId
-        }
-      });
-    } else {
-      image = await prisma.images.create({
-        data: {
-          image_url: imagePath,
-          type: imageExtension,
-          users_profile: {
-            connect: { id: userId }
-          }
-        }
-      });
-    }
-
-    res.json({
-      message: 'Profile image updated successfully',
-      profile_image: image.image_url,
-      image: image
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Could not update profile image' });
-  }
-});
 
 /**
  * @swagger
@@ -302,10 +272,13 @@ router.put('/update_image', upload.single('profile_image'), async (req, res) => 
  *             schema:
  *               type: object
  *               properties:
- *                 image_url:
+ *                 message:
+ *                   type: string
+ *                 profile_image:
  *                   type: string
  *                 type:
  *                   type: string
+ *                   format: date-time
  *                 uploaded_at:
  *                   type: string
  *                   format: date-time
@@ -315,28 +288,6 @@ router.put('/update_image', upload.single('profile_image'), async (req, res) => 
  *         description: Internal server error
  */
 
-router.get('/profile-image/:userId', async (req, res) => {
-  const userId = parseInt(req.params.userId);
-
-  try {
-    const image = await prisma.images.findFirst({
-      where: { user_id: userId },
-    });
-
-    if (!image) {
-      return res.status(404).json({ message: 'Image not found for this user.' });
-    }
-
-    res.json({
-      image_url: image.image_url,
-      type: image.type,
-      uploaded_at: image.uploaded_at
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
+router.get('/profile-image/:userId', profileController.getProfileImage);
 
 module.exports = router;

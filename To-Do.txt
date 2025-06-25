@@ -1,0 +1,10 @@
+1.Work on the Profile_image.
+2. Add endpoint and logic for password reset (forgot password and reset password).
+3. Implement user profile update (first name, last name, etc).
+4. Add rate limiting to authentication endpoints to prevent brute force attacks.
+5. Add refresh token support for longer sessions.
+6. Implement social login (Google, Facebook, etc) if needed.
+7. Add email change and re-verification flow.
+8. Improve error handling and validation messages.
+9. Add logging for authentication events (login, signup, delete, etc).
+10. Write tests for authentication flows (unit/integration).

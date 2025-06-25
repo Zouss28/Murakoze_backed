@@ -1,159 +1,161 @@
-# Murakoze_backend
+# Murakoze Recommender API
 
-Description
-
-**Murakoze_backend** is the backend API that powers the Murakoze Recommendations Platform — a digital service that helps users discover, review, and interact with local businesses across Rwanda. It supports features such as institution listings, user reviews, search, and personalized recommendations.
-
-This backend is built using **Node.js**, **Express**, and **Prisma**, and includes support for:
-- JWT-based user authentication
-- File uploads for profile and review images
-- Search and filtering logic
-- Review moderation
-- Dynamic category and institution management
-
-The frontend for this project can be found here: [Recommender UI (GitLab)](https://gitlab.wiredin.rw/internal-projects/murakoze/recommender-ui.git)
+A robust backend API for the Murakoze Recommendations Platform, helping users discover, review, and interact with local businesses in Rwanda. Built for scalability, security, and developer productivity.
 
 ---
 
-Installation
+## 🚀 Features
+- **JWT Authentication** (access & refresh tokens)
+- **Google OAuth (planned)**
+- **User registration, login, email verification, and profile management**
+- **Institution listing, filtering, and search (by category, rating, amenities, price, open status, etc.)**
+- **Review system with moderation, reactions, and image uploads**
+- **Email notifications (Nodemailer)**
+- **Swagger API documentation**
+- **Production-ready Docker & Railway deployment**
 
-Follow the steps below to set up the Murakoze backend locally.
+---
 
-### 🔧 Requirements
-- [Node.js](https://nodejs.org/) (version 16 or later recommended)
-- [MySQL](https://www.mysql.com/) running locally or accessible remotely
-- A `.env` file configured with your database URL, JWT secret, and other environment variables
-- [Prisma](https://www.prisma.io/) for ORM and schema migrations
+## 🛠️ Tech Stack
+- **Node.js** + **Express.js** (API server)
+- **Prisma ORM** (MariaDB/MySQL)
+- **JWT** (auth)
+- **Nodemailer** (email)
+- **Fuse.js** (fuzzy search)
+- **Multer** (file uploads)
+- **Swagger** (API docs)
+- **Docker** (containerization)
+- **Railway** (deployment)
 
-Setup Instructions
+---
 
+## 📁 Folder Structure
+```
+├── src/
+│   ├── controllers/      # Route controllers (business logic)
+│   ├── services/         # DB/service logic
+│   ├── routes/           # Express route definitions
+│   ├── middleware/       # Auth, error handling, etc.
+│   ├── validators/       # Input validation (express-validator)
+│   ├── utils/            # Helpers (email, tokens, etc.)
+│   ├── filter/           # Filtering logic (e.g., openNow)
+│   ├── generated/prisma/ # Prisma client
+│   └── templates/        # Email templates
+├── prisma/               # Prisma schema & migrations
+├── uploads/              # Uploaded images
+├── Dockerfile            # Docker config
+├── docker-compose.yml    # Multi-service orchestration
+├── .env.example          # Example environment config
+└── README.md
+```
+
+---
+
+## ⚙️ Setup & Configuration
+
+### Prerequisites
+- Node.js v16+
+- MariaDB or MySQL
+- [Railway](https://railway.app/) account (for deployment)
+
+### 1. Clone & Install
 ```bash
-# 1. Clone the repository
-git clone <your-repo-url>
-cd backend
-
-# 2. Install dependencies
+git clone https://gitlab.wiredin.rw/internal-projects/murakoze/recommender-api.git
+cd recommender-api
 npm install
+```
 
-# 3. Set up environment variables
+### 2. Environment Variables
+Copy and edit `.env.example`:
+```bash
 cp .env.example .env
+```
+Set your DB URL, JWT secrets, email credentials, etc.
 
-# 4. Generate the Prisma client
+### 3. Prisma Setup
+```bash
 npx prisma generate
-
-# 5. Run database migrations
 npx prisma migrate dev
+```
 
-# 6. Start the development server
+### 4. Start the Server
+```bash
 npm start
 ```
 
-Usage
+---
 
-The Murakoze backend provides RESTful API endpoints for interacting with institutions, user accounts, reviews, search functionality, and more. Many routes require authentication using a Bearer token provided after login.
+## 🧑‍💻 Usage
 
-Public Endpoints
+### Authentication
+- **Sign up:** `POST /api/auth/signup`
+- **Login:** `POST /api/auth/login`
+- **Refresh token:** (planned)
+- **Delete account:** `DELETE /api/auth/delete-account`
 
-# Get all categories
+### Profile
+- **Get dashboard:** `GET /api/profile/dashboard`
+- **Update profile:** `PUT /api/profile/dashboard/update`
+- **Upload image:** `PUT /api/profile/update_image`
 
-GET /api/institutions
+### Institutions
+- **List categories:** `GET /api/institutions`
+- **List by category:** `GET /api/institutions/:category_id`
+- **View details:** `GET /api/institutions/:id/view`
 
-# Get institutions in a category
+### Search & Filter
+- **Fuzzy search:** `GET /api/search/institutions?q=pharmacy&page=1&pageSize=5`
+- **Filter by category:** `GET /api/search/:category_id?filter=rating&amenities=1,2&price=$$&open=true`
+- **Top amenities:** `GET /api/search/list/amenity?category_id=1`
 
-GET /api/institutions/:category_id
+### Reviews
+- **Submit review:** `POST /api/review/:institution_id` (multipart/form-data)
+- **Recent reviews:** `GET /api/review/recent`
+- **Review reactions:** `POST /api/review/:review_id/reaction`
 
-# View institution details
+### API Docs
+- **Swagger UI:** `GET /api-docs`
 
-GET /api/institutions/:id/view
+---
 
-# Search institutions (fuzzy + paginated)
+## 🔒 Security & Production
+- **Secrets:** All sensitive config via `.env` (never hardcode!)
+- **CORS:** Restrict origins in production
+- **Helmet:** Use for HTTP header security
+- **Rate limiting:** Recommended for auth endpoints
+- **Error handling:** Centralized, no stack traces in responses
+- **JWT:** Use httpOnly cookies for refresh tokens (planned)
+- **Audit:** Run `npm audit` regularly
 
-GET /api/search?q=pharmacy&page=1&pageSize=5
+---
 
-# Search institutions in a category with filters
+## 🤝 Contributing
+1. Fork & clone the repo
+2. Create a feature branch (`git checkout -b your initials/your-feature-number`)
+3. Commit with clear messages (see existing format)
+4. Open a pull request
+5. Follow code style and add tests where possible
 
-GET /api/search/:category_id?filter=rating&amenities=1,2&price=$$&open=true
+---
 
-# Get top amenities
+## 🗺️ Roadmap
+- [x] Modular controllers/services/validators
+- [x] Review reactions & moderation
+- [x] Advanced search & filtering
+- [ ] Google OAuth login
+- [ ] Admin dashboard
+- [ ] Rate limiting & security hardening
+- [ ] CI/CD pipeline
 
-GET /api/search/list/amenity
+---
 
-Authentication
+## 👥 Credits
+- **Alain Iyakaremye** – Backend Developer
+- **Gift Dave Furaha** – Backend Developer
+- **Bolingo Baudoin** – Frontend Developer
+- **WiredIn** – Technical guidance & support
 
-# Sign up
+---
 
-POST /api/auth/signup
-Content-Type: application/json
-
-json:
-{
-  "email": "user@example.com",
-  "password": "securepass123",
-  "first_name": "John",
-  "last_name": "Doe"
-}
-
-# Login
-
-POST /api/auth/login
-Content-Type: application/json
-
-# Delete account
-
-DELETE /api/auth/delete_account
-Authorization: Bearer <your_token>
-
-Profile
-
-# Get profile
-
-GET /api/profile/dashboard
-Authorization: Bearer <your_token>
-
-# Update profile
-
-PUT /api/profile/dashboard/update
-Authorization: Bearer <your_token>
-
-# Upload profile image
-
-PUT /api/profile/update_image
-Authorization: Bearer <your_token>
-Content-Type: multipart/form-data
-
-# Get user reviews
-
-GET /api/profile/reviews
-Authorization: Bearer <your_token>
-
-Reviews
-
-# Submit a review with image
-
-POST /api/review/:institution_id
-Authorization: Bearer <your_token>
-Content-Type: multipart/form-data
-
-# Get recent reviews
-
-GET /api/review/recent
-
-Roadmap
-
-The following features are planned for upcoming development cycles:
-	•	✅ Review reaction system (like/dislike)
-	•	✅ Favorite institutions (save for later)
-	•	✅ Review reporting and moderation
-	•	✅ Admin dashboard for managing users, reviews, and institutions
-	•	✅ Expanded search filters (e.g., by location or business hours)
-
-⸻
-
-Authors and Acknowledgment
-
-This backend was developed as part of the Murakoze Recommendations Platform by the following contributors:
-	•	Alain Iyakaremye – Backend Developer
-	•	Gift Dave Furaha – Backend Developer
-	•	Bolingo Baudoin – Frontend Developer
-
-Special thanks to WiredIn for providing technical guidance, resources, and support throughout the development of this project.
+## 📄 License
+MIT
