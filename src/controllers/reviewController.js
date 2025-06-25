@@ -4,9 +4,18 @@ const { validationResult } = require('express-validator');
 exports.getInstitutionToReview = async (req, res, next) => {
   try { 
     const institutions = await reviewService.institutionToReview();
+    const result = institutions.map(inst =>{
+      return{
+        id: inst.id,
+        name : inst.name,
+        services : inst.service_group ? inst.service_group.map(service => ({name : service.name,
+          id:service.id
+        })) : ""
+      }
+    });
     res.json({
       message: "Institutions fetched successfully",
-      institutions: institutions
+      institutions: result
     });
   } catch (err) {
     next(err);
