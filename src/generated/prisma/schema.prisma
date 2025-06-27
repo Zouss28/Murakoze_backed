@@ -907,6 +907,8 @@ model users_profile {
   profile_image        String?            @db.VarChar(125)
   resetPasswordExpires DateTime?
   resetPasswordToken   String?            @db.VarChar(255)
+  refreshToken         String?            @db.VarChar(244)
+  googleId             String?            @unique
   images               images[]
   review_reactions     review_reactions[]
   review_replies       review_replies[]

@@ -820,7 +820,9 @@ exports.Prisma.Users_profileScalarFieldEnum = {
   verifyToken: 'verifyToken',
   profile_image: 'profile_image',
   resetPasswordExpires: 'resetPasswordExpires',
-  resetPasswordToken: 'resetPasswordToken'
+  resetPasswordToken: 'resetPasswordToken',
+  refreshToken: 'refreshToken',
+  googleId: 'googleId'
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -1287,7 +1289,9 @@ exports.Prisma.users_profileOrderByRelevanceFieldEnum = {
   address: 'address',
   verifyToken: 'verifyToken',
   profile_image: 'profile_image',
-  resetPasswordToken: 'resetPasswordToken'
+  resetPasswordToken: 'resetPasswordToken',
+  refreshToken: 'refreshToken',
+  googleId: 'googleId'
 };
 
 exports.Prisma.reviewsOrderByRelevanceFieldEnum = {

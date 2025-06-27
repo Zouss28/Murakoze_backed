@@ -15,6 +15,7 @@ const swaggerSpec = require('../swagger');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
+const passport = require('./config/passport');
 
 const requiredEnvVars = ['JWT_SECRET', 'DATABASE_URL', 'EMAIL', 'EMAIL_PASS', 'FRONTEND_URL'];
 requiredEnvVars.forEach((key) => {
@@ -76,6 +77,7 @@ app.post("/tokenVerification",auth,(req, res)=>{
 })
 
 app.use(errorHandler);
+app.use(passport.initialize());
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/templates');

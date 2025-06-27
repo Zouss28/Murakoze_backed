@@ -4,9 +4,19 @@ const auth = require('../middleware/authMiddleware');
 const authController = require('../controllers/authController');
 const { validateSignup, validateLogin } = require('../validators/authValidator');
 const cookieParser = require('cookie-parser');
+const passport =   require('../config/passport')
+const googleAuthController = require('../controllers/googleAuthController');
 
 router.use(cookieParser());
 
+router.get('/google', passport.authenticate('google', { 
+    scope: ['profile', 'email'] 
+  }));
+
+router.get('/google/callback', 
+passport.authenticate('google', { session: false }), 
+googleAuthController.googleCallback
+);
 /**
  * @swagger
  * /api/auth/signup:
