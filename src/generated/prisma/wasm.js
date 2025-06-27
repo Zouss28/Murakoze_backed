@@ -818,7 +818,9 @@ exports.Prisma.Users_profileScalarFieldEnum = {
   added_at: 'added_at',
   isVerified: 'isVerified',
   verifyToken: 'verifyToken',
-  profile_image: 'profile_image'
+  profile_image: 'profile_image',
+  resetPasswordExpires: 'resetPasswordExpires',
+  resetPasswordToken: 'resetPasswordToken'
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -835,8 +837,23 @@ exports.Prisma.Review_reactionsScalarFieldEnum = {
   id: 'id',
   review_id: 'review_id',
   user_id: 'user_id',
-  reaction: 'reaction',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  reaction_type_id: 'reaction_type_id'
+};
+
+exports.Prisma.Reaction_typesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon'
+};
+
+exports.Prisma.Review_repliesScalarFieldEnum = {
+  id: 'id',
+  review_id: 'review_id',
+  user_id: 'user_id',
+  reply_text: 'reply_text',
+  created_at: 'created_at',
+  parent_reply_id: 'parent_reply_id'
 };
 
 exports.Prisma.WorkingHourScalarFieldEnum = {
@@ -1269,15 +1286,21 @@ exports.Prisma.users_profileOrderByRelevanceFieldEnum = {
   gender: 'gender',
   address: 'address',
   verifyToken: 'verifyToken',
-  profile_image: 'profile_image'
+  profile_image: 'profile_image',
+  resetPasswordToken: 'resetPasswordToken'
 };
 
 exports.Prisma.reviewsOrderByRelevanceFieldEnum = {
   review: 'review'
 };
 
-exports.Prisma.review_reactionsOrderByRelevanceFieldEnum = {
-  reaction: 'reaction'
+exports.Prisma.reaction_typesOrderByRelevanceFieldEnum = {
+  name: 'name',
+  icon: 'icon'
+};
+
+exports.Prisma.review_repliesOrderByRelevanceFieldEnum = {
+  reply_text: 'reply_text'
 };
 
 exports.Prisma.workingHourOrderByRelevanceFieldEnum = {
@@ -1404,6 +1427,8 @@ exports.Prisma.ModelName = {
   users_profile: 'users_profile',
   reviews: 'reviews',
   review_reactions: 'review_reactions',
+  reaction_types: 'reaction_types',
+  review_replies: 'review_replies',
   workingHour: 'workingHour',
   amenities: 'amenities',
   business_amenities: 'business_amenities',

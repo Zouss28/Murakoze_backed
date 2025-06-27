@@ -132,3 +132,73 @@ exports.createQandA = async (req, res, next) => {
     next(err);
   }
 }
+
+exports.getInstitutionReviewSummary = async (req, res, next) => {
+  const institutionId = parseInt(req.params.id, 10);
+  try {
+    const result = await reviewService.getInstitutionReviewSummary(institutionId);
+    if (result.notFound) {
+      return res.status(result.status).json({ error: result.message });
+    }
+    res.json({ summary: result.summary });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.toggleReviewReaction = async (req, res, next) => {
+  const review_id = parseInt(req.params.review_id);
+  const user_id = req.user.userId;
+  const { reaction_type_id } = req.body;
+
+  try {
+    const result = await reviewService.toggleReviewReaction(review_id, user_id, reaction_type_id);
+    if (result.error) {
+      return res.status(result.status).json({ error: result.error });
+    }
+    res.json({ message: result.message });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReviewReactions = async (req, res, next) => {
+  const review_id = parseInt(req.params.review_id);
+  try {
+    const reactions = await reviewService.getReviewReactions(review_id);
+    res.json({ reactions });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addReviewReply = async (req, res, next) => {
+  const review_id = parseInt(req.params.review_id);
+  const user_id = req.user.userId;
+  const { reply_text, parent_reply_id } = req.body;
+
+  if (!reply_text || !review_id) {
+    return res.status(400).json({ error: "Missing reply text or review_id" });
+  }
+
+  try {
+    const result = await reviewService.addReviewReply(review_id, user_id, reply_text, parent_reply_id);
+    if (result.error) {
+      return res.status(result.status).json({ error: result.error });
+    }
+    res.status(201).json({ message: "Reply added", reply: result.reply });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReviewReplies = async (req, res, next) => {
+  const review_id = parseInt(req.params.review_id);
+  try {
+    const replies = await reviewService.getReviewReplies(review_id);
+    res.json({ replies });
+  } catch (err) {
+    next(err);
+  }
+};
+

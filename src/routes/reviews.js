@@ -3,7 +3,6 @@ const router = express.Router()
 const { PrismaClient } = require('../generated/prisma');
 const auth = require('../middleware/authMiddleware')
 const upload = require('../../uploads');
-const allowedReactions = ["helpful", "thanks", "love", "yikes"];
 const reviewController = require('../controllers/reviewController');
 const reviewValidator = require('../validators/reviewValidator');
 
@@ -42,7 +41,6 @@ const prisma = new PrismaClient();
  *       500:
  *         description: Internal server error
  */
-
 router.get("/institution", reviewController.getInstitutionToReview);
 
 /**
@@ -98,7 +96,6 @@ router.get("/institution", reviewController.getInstitutionToReview);
  *       500:
  *         description: Internal server error
  */
-
 router.post("/serviceRating", auth, reviewController.createServiceRating);
 
 /**
@@ -145,9 +142,8 @@ router.post("/serviceRating", auth, reviewController.createServiceRating);
  *       500:
  *         description: Internal server error
  */
-
 router.post('/:inst_id', auth, upload.single('profile_image'), reviewValidator.validateReview, reviewController.createReview);
- 
+
 /**
  * @swagger
  * /api/review/recent:
@@ -223,7 +219,6 @@ router.post('/:inst_id', auth, upload.single('profile_image'), reviewValidator.v
  *         description: Server error
  */
 router.get('/recent', reviewController.getRecentReviews);
-
 
 /**
  * @swagger
@@ -418,83 +413,7 @@ router.post("/Q&A/post", auth, reviewController.createQandA);
  *       500:
  *         description: Internal server error
  */
-router.get('/institution/:id/summary', async (req, res) => {
-  const institutionId = parseInt(req.params.id);
-
-  try {
-    const institution = await prisma.institution.findUnique({
-      where: { id: institutionId },
-      include: {
-        reviews: {
-          where: { is_approved: true },
-          select: { review: true }
-        }
-      }
-    });
-
-    if (!institution) {
-      return res.status(404).json({ error: 'Institution not found' });
-    }
-
-    const reviews = institution.reviews.map(r => r.review).filter(Boolean);
-
-    if (reviews.length === 0) {
-      return res.json({ summary: `There are no reviews for ${institution.name} yet.` });
-    }
-
-    const sentiment = new Sentiment();
-    let positiveKeywords = [];
-    let negativeKeywords = [];
-
-    reviews.forEach(text => {
-      const result = sentiment.analyze(text);
-      const keywords = keyword_extractor.extract(text, {
-        language: "english",
-        remove_digits: true,
-        return_changed_case: true,
-        remove_duplicates: false
-      });
-
-      if (result.score >= 1) {
-        positiveKeywords.push(...keywords);
-      } else if (result.score <= -1) {
-        negativeKeywords.push(...keywords);
-      }
-    });
-
-    function getTopKeywords(arr, n = 3) {
-      const freq = {};
-      arr.forEach(word => {
-        if (word.length > 2) {
-          freq[word] = (freq[word] || 0) + 1;
-        }
-      });
-      return Object.entries(freq)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, n)
-        .map(([word]) => word);
-    }
-
-    const topPos = getTopKeywords(positiveKeywords);
-    const topNeg = getTopKeywords(negativeKeywords);
-
-    let summary = `Customers of '${institution.name}'`;
-    if (topPos.length && topNeg.length) {
-      summary += ` like ${topPos.join(', ')}, but mention ${topNeg.join(', ')}.`;
-    } else if (topPos.length) {
-      summary += ` like ${topPos.join(', ')}.`;
-    } else if (topNeg.length) {
-      summary += ` mention ${topNeg.join(', ')}.`;
-    } else {
-      summary += ` have mixed opinions.`;
-    }
-
-    res.json({ summary });
-  } catch (err) {
-    console.error('Error generating summary:', err);
-    res.status(500).json({ error: 'Something went wrong!' });
-  }
-});
+router.get('/institution/:id/summary', reviewController.getInstitutionReviewSummary);
 
 /**
  * @swagger
@@ -531,50 +450,7 @@ router.get('/institution/:id/summary', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.post('/:review_id/reaction', auth, async (req, res) => {
-  const review_id = parseInt(req.params.review_id);
-  const user_id = req.user.userId;
-  const { reaction_type_id } = req.body;
-
-  if (!reaction_type_id || isNaN(reaction_type_id)) {
-    return res.status(400).json({ error: "reaction_type_id is required and must be an integer." });
-  }
-
-  // Check review exists
-  const review = await prisma.reviews.findUnique({ where: { id: review_id } });
-  if (!review) {
-    return res.status(404).json({ error: "Review not found." });
-  }
-
-  // Check reaction type exists
-  const reactionType = await prisma.reaction_types.findUnique({ where: { id: reaction_type_id } });
-  if (!reactionType) {
-    return res.status(404).json({ error: "Reaction type not found." });
-  }
-
-  // Check if user already has a reaction for this review and type
-  const existing = await prisma.review_reactions.findFirst({
-    where: {
-      review_id,
-      user_id,
-      reaction_type_id,
-    }
-  });
-
-  if (existing) {
-    // Toggle off if same reaction
-    await prisma.review_reactions.delete({
-      where: { id: existing.id }
-    });
-    return res.json({ message: "Reaction removed." });
-  } else {
-    // No reaction yet, create new
-    await prisma.review_reactions.create({
-      data: { review_id, user_id, reaction_type_id }
-    });
-    return res.json({ message: "Reaction added." });
-  }
-});
+router.post('/:review_id/reaction', auth, reviewController.toggleReviewReaction);
 
 /**
  * @swagger
@@ -593,36 +469,7 @@ router.post('/:review_id/reaction', auth, async (req, res) => {
  *       200:
  *         description: Reaction counts and icons
  */
-router.get('/:review_id/reactions', async (req, res) => {
-  const review_id = parseInt(req.params.review_id);
-
-  // Get all reaction types
-  const reactionTypes = await prisma.reaction_types.findMany({
-    select: { id: true, name: true, icon: true }
-  });
-
-  // Get counts for each reaction type
-  const reactions = await prisma.review_reactions.groupBy({
-    by: ['reaction_type_id'],
-    where: { review_id },
-    _count: { reaction_type_id: true }
-  });
-
-  // Format as array of { id, name, icon, count }
-  const result = reactionTypes.map(rt => {
-    const found = reactions.find(r => r.reaction_type_id === rt.id);
-    return {
-      id: rt.id,
-      name: rt.name,
-      icon: rt.icon,
-      count: found ? found._count.reaction_type_id : 0
-    };
-  });
-
-  res.json({ reactions: result });
-});
-
-
+router.get('/:review_id/reactions', reviewController.getReviewReactions);
 
 /**
  * @swagger
@@ -686,42 +533,7 @@ router.get('/:review_id/reactions', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-
-router.post('/:review_id/reply', auth, async (req, res) => {
-  const review_id = parseInt(req.params.review_id);
-  const user_id = req.user.userId;
-  const { reply_text, parent_reply_id } = req.body;
-
-  if (!reply_text || !review_id) {
-    return res.status(400).json({ error: "Missing reply text or review_id" });
-  }
-
-  try {
-    // Ensure review exists
-    const review = await prisma.reviews.findUnique({ where: { id: review_id } });
-    if (!review) return res.status(404).json({ error: "Review not found" });
-
-    // Optionally, check parent_reply_id exists if provided
-    if (parent_reply_id) {
-      const parent = await prisma.review_replies.findUnique({ where: { id: parent_reply_id } });
-      if (!parent) return res.status(400).json({ error: "Parent reply not found" });
-    }
-
-    const reply = await prisma.review_replies.create({
-      data: {
-        review_id,
-        user_id,
-        reply_text,
-        parent_reply_id: parent_reply_id || null,
-      },
-    });
-
-    res.status(201).json({ message: "Reply added", reply });
-  } catch (err) {
-    console.error("Error adding reply:", err);
-    res.status(500).json({ error: "Something went wrong!" });
-  }
-});
+router.post('/:review_id/reply', auth, reviewController.addReviewReply);
 
 /**
  * @swagger
@@ -751,28 +563,82 @@ router.post('/:review_id/reply', auth, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.get('/:review_id/replies', async (req, res) => {
-  const review_id = parseInt(req.params.review_id);
+router.get('/:review_id/replies', reviewController.getReviewReplies);
 
-  try {
-    const replies = await prisma.review_replies.findMany({
-      where: { review_id },
-      include: {
-        user: {
-          select: { id: true, first_name: true, last_name: true, email: true, images: true }
-        },
-        child_replies: true, // For nested replies
-      },
-      orderBy: { created_at: 'asc' },
-    });
+/**
+ * @swagger
+ * /api/review/Q&A:
+ *   get:
+ *     summary: Get all survey questions for a given service
+ *     description: Authenticated user retrieves questions and choices for a service.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: service_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the service
+ *     responses:
+ *       200:
+ *         description: List of questions retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 questions:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       question:
+ *                         type: string
+ *                       choices:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ */
+router.get("/Q&A", auth, reviewController.getSurveyQuestions);
 
-    res.json({ replies });
-  } catch (err) {
-    console.error("Error fetching replies:", err);
-    res.status(500).json({ error: "Something went wrong!" });
-  }
-});
-
-
+/**
+ * @swagger
+ * /api/review/Q&A/post:
+ *   post:
+ *     summary: Submit answers to multiple survey questions
+ *     description: Authenticated user submits responses to questions.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               answers:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   required: [question_id, answer]
+ *                   properties:
+ *                     question_id:
+ *                       type: integer
+ *                     answer:
+ *                       type: string
+ *                     scale_rating:
+ *                       type: number
+ *     responses:
+ *       200:
+ *         description: Answers submitted successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.post("/Q&A/post", auth, reviewController.submitSurveyAnswers);
 
 module.exports = router;

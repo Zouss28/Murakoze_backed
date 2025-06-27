@@ -3,7 +3,9 @@ const router = express.Router();
 const auth = require('../middleware/authMiddleware');
 const authController = require('../controllers/authController');
 const { validateSignup, validateLogin } = require('../validators/authValidator');
+const cookieParser = require('cookie-parser');
 
+router.use(cookieParser());
 
 /**
  * @swagger
@@ -126,5 +128,7 @@ router.post('/login', validateLogin, authController.login);
  */
 router.delete('/delete-account', auth, authController.deleteAccount);
 
+router.post('/refresh', authController.refresh);
+router.post('/logout', authController.logout);
 
 module.exports = router;

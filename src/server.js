@@ -12,17 +12,46 @@ const errorHandler = require('./middleware/errorHandler');
 const instit = require('./routes/institution')
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../swagger');
-const router = express.Router()
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const logger = require('./utils/logger');
 
+const requiredEnvVars = ['JWT_SECRET', 'DATABASE_URL', 'EMAIL', 'EMAIL_PASS', 'FRONTEND_URL'];
+requiredEnvVars.forEach((key) => {
+  if (!process.env[key]) {
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+});
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests, please try again later.",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 10, 
+  message: "Too many auth attempts, please try again later.",
+});
+
+
+app.use('/api/auth', authLimiter);
+
+app.use(helmet());
+app.use('/api', limiter);
 
 
 // Swagger Docs route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors({
-  origin: '*',
+  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
@@ -41,9 +70,6 @@ app.use('/api/institutions',instit)
 app.use('/api/review', reviews)
 app.use('/api/search', search)
 
-router.get('/auth/google/callback', async (req, res) => {
-  console.log(req)
-});
 
 app.post("/tokenVerification",auth,(req, res)=>{
   res.json({"message":"Login succefully"})
@@ -55,5 +81,5 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/templates');
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  logger.info(`Server is running on port ${port}`);
 });

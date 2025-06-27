@@ -1,0 +1,1098 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model app_releases {
+  id              Int                   @id @default(autoincrement())
+  release_version String                @db.VarChar(64)
+  app_name        app_releases_app_name
+  platform        app_releases_platform
+  release_note    String?               @db.Text
+  release_url     String                @db.VarChar(255)
+  minimum_version String                @db.VarChar(64)
+  added_at        DateTime              @default(now()) @db.Timestamp(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model appointments {
+  id                                 Int           @id @default(autoincrement())
+  name                               String?       @db.VarChar(255)
+  email                              String?       @db.VarChar(255)
+  phone                              String        @db.VarChar(255)
+  registry_type                      Int           @db.SmallInt
+  institution_id                     Int?
+  service_id                         Int?
+  operator_id                        Int?
+  user_id                            Int?
+  reason                             String        @db.VarChar(255)
+  date                               DateTime      @db.Timestamp(0)
+  start_time                         DateTime      @db.Timestamp(0)
+  end_time                           DateTime      @db.Timestamp(0)
+  location                           String        @db.VarChar(255)
+  additional_note                    String        @db.VarChar(255)
+  creator_id                         Int
+  recurring                          Int?          @default(0) @db.SmallInt
+  notification_status                Int?          @default(1) @db.SmallInt
+  ticket_created                     Int?          @default(0) @db.SmallInt
+  appointment_cancelled              Int?          @default(0) @db.SmallInt
+  created_at                         DateTime?     @default(now()) @db.Timestamp(0)
+  cancellation_reason                String?       @db.Text
+  user_appointments_creator_idTouser user          @relation("appointments_creator_idTouser", fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_creator")
+  institution                        institution?  @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_institution")
+  qms_operator                       qms_operator? @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_operator")
+  service                            service?      @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_service")
+  user_appointments_user_idTouser    user?         @relation("appointments_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_appointment_user")
+
+  @@index([creator_id], map: "fk_appointment_creator")
+  @@index([institution_id], map: "fk_appointment_institution")
+  @@index([operator_id], map: "fk_appointment_operator")
+  @@index([service_id], map: "fk_appointment_service")
+  @@index([user_id], map: "fk_appointment_user")
+}
+
+model apps {
+  id             Int         @id @default(autoincrement())
+  name           String      @db.VarChar(128)
+  status         Int         @default(0)
+  institution_id Int
+  secret_key     String?     @db.VarChar(255)
+  access_key     String?     @db.VarChar(255)
+  created_at     DateTime?   @default(now()) @db.DateTime(0)
+  updated_at     DateTime?   @default(now()) @db.DateTime(0)
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_app_institution_id")
+
+  @@index([institution_id], map: "fk_app_institution_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model audit_trail {
+  id           Int                 @id @default(autoincrement())
+  old_value    String?             @db.Text
+  new_value    String?             @db.Text
+  action       String              @db.VarChar(255)
+  model        String              @db.VarChar(255)
+  field        String?             @db.VarChar(255)
+  user_id      Int?
+  ip           String?             @db.VarChar(255)
+  user_agent   String?             @db.VarChar(255)
+  model_id     String              @db.VarChar(255)
+  display_name String?             @db.VarChar(255)
+  time         DateTime            @db.DateTime(0)
+  status       audit_trail_status?
+  reviewed_by  Int?
+
+  @@index([action], map: "idx_audit_trail_action")
+  @@index([field], map: "idx_audit_trail_field")
+  @@index([ip], map: "idx_audit_trail_ip")
+  @@index([model], map: "idx_audit_trail_model")
+  @@index([model_id], map: "idx_audit_trail_model_id")
+  @@index([user_agent], map: "idx_audit_trail_user_agent")
+  @@index([user_id], map: "idx_audit_trail_user_id")
+}
+
+model categories {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(45)
+  sector_id             Int?
+  sectors               sectors?                @relation(fields: [sector_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_sector_id")
+  category_search_terms category_search_terms[]
+  institution           institution[]
+
+  @@index([sector_id], map: "fk_sector_id")
+}
+
+model change_request {
+  id             Int      @id @default(autoincrement())
+  old_value      String?  @db.Text
+  new_value      String?  @db.Text
+  action         String   @db.VarChar(255)
+  model          String   @db.VarChar(255)
+  model_id       Int?
+  user_id        Int
+  ip             String?  @db.VarChar(255)
+  user_agent     String?  @db.VarChar(255)
+  display_name   String?  @db.VarChar(255)
+  status         Boolean? @default(true)
+  reviewed_by    Int?
+  time           DateTime @db.DateTime(0)
+  institution_id Int?
+
+  @@index([action], map: "idx_change_request_action")
+  @@index([ip], map: "idx_change_request_ip")
+  @@index([model], map: "idx_change_request_model")
+  @@index([model_id], map: "idx_change_request_model_id")
+  @@index([user_agent], map: "idx_change_request_user_agent")
+  @@index([user_id], map: "idx_change_request_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model device {
+  id                   Int            @id @default(autoincrement())
+  uuid                 String?        @unique(map: "uuid") @db.VarChar(64)
+  notification_token   String?        @db.VarChar(255)
+  affiliate_id         Int?
+  service_id           String?        @db.VarChar(256)
+  serial_number        String?        @db.VarChar(255)
+  status               Int            @default(1)
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  device_type          Int            @default(1) @db.TinyInt
+  gender               Int?
+  age_range            Int?
+  language             Int?
+  notification_enabled Boolean?       @default(false)
+  apiKey               String?        @db.VarChar(225)
+  nonce                Int?           @default(0)
+  linkShortCode        String?        @db.VarChar(16)
+  linkShortCodeExp     DateTime?      @db.DateTime(0)
+  phone_number         String?        @db.VarChar(64)
+  latest_hb            DateTime?      @db.DateTime(0)
+  latest_hb_version    String?        @db.VarChar(64)
+  updated_at           DateTime       @default(now()) @db.Timestamp(0)
+  institution          institution?   @relation(fields: [affiliate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_device_affiliate")
+  qms_customer         qms_customer[]
+  rating               rating[]
+  tip                  tip[]
+
+  @@index([affiliate_id], map: "fk_device_affiliate")
+  @@index([service_id], map: "fk_service_device")
+}
+
+model device_heartbeat {
+  id          Int      @id @default(autoincrement())
+  time        DateTime @default(now()) @db.Timestamp(0)
+  device_id   Int?
+  operator_id Int?
+  version     String?  @db.VarChar(64)
+
+  @@index([device_id], map: "device_id_idx")
+  @@index([operator_id], map: "operator_id_idx")
+  @@index([time], map: "time_idx")
+  @@index([version], map: "version_idx")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model institution {
+  id                           Int                       @id @default(autoincrement())
+  uuid                         String?                   @unique(map: "institution_uuid") @db.VarChar(64)
+  name                         String                    @db.VarChar(45)
+  search_term                  String?                   @db.VarChar(255)
+  email                        String?                   @db.VarChar(255)
+  address                      String?                   @db.VarChar(255)
+  phone_number                 String?                   @db.VarChar(45)
+  url                          String?                   @db.VarChar(255)
+  status                       Int?                      @default(0) @db.TinyInt
+  created_at                   DateTime                  @default(now()) @db.Timestamp(0)
+  plan                         Int?
+  type                         Int?
+  level                        Int?                      @default(2) @db.TinyInt
+  parent_id                    Int?
+  good_ratings                 Int?
+  bad_ratings                  Int?
+  excellent_ratings            Int?
+  nps                          Int?
+  csat                         Int?
+  queue_autocreation           Int?                      @default(0) @db.TinyInt
+  queue_manual_creation        Int?                      @default(1) @db.TinyInt
+  working_hours                String?                   @db.VarChar(256)
+  qms_message                  String?                   @db.VarChar(256)
+  priority_list                String?                   @db.LongText
+  logo                         String?                   @db.VarChar(255)
+  app_name                     String?                   @db.VarChar(255)
+  allowed_context              Int?                      @default(1) @db.TinyInt
+  host_name                    String?                   @db.VarChar(255)
+  membership_type              Int                       @default(1)
+  category_id                  Int?
+  latest_membership_renew_time DateTime?                 @db.DateTime(0)
+  description                  String?                   @db.Text
+  latitude                     String?                   @db.VarChar(200)
+  longitude                    String?                   @db.VarChar(200)
+  button_one                   String?                   @db.LongText
+  button_two                   String?                   @db.LongText
+  amenities                    String?                   @db.LongText
+  appointments                 appointments[]
+  apps                         apps[]
+  business_amenities           business_amenities[]
+  device                       device[]
+  images                       images[]
+  categories                   categories?               @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_category_id")
+  popup_questions              popup_questions[]
+  price_ranges                 price_ranges[]
+  qms_branch_operator          qms_branch_operator[]
+  qms_branch_transactions      qms_branch_transactions[]
+  qms_operator                 qms_operator[]
+  reviews                      reviews[]
+  service                      service[]
+  service_group                service_group[]
+  workingHour                  workingHour[]
+
+  @@index([category_id], map: "fk_category_id")
+  @@index([plan], map: "fk_institution_plan")
+}
+
+model institution_invoices {
+  id                           Int                                 @id @default(autoincrement())
+  invoice_number               String                              @db.Text
+  institution_id               Int                                 @db.SmallInt
+  institution_name             String                              @db.Text
+  period_start                 DateTime                            @db.DateTime(0)
+  period_end                   DateTime                            @db.DateTime(0)
+  generated_at                 DateTime                            @db.Timestamp(0)
+  expiry                       DateTime                            @db.Timestamp(0)
+  payment_reference_number     String                              @db.Text
+  ext_payment_reference_number String?                             @db.Text
+  payment_status               institution_invoices_payment_status
+  payment_status_desc          String?                             @db.Text
+  payment_method               String?                             @db.Text
+  payment_retries              Int?                                @db.SmallInt
+  status                       institution_invoices_status
+  total_amount                 Float?                              @db.Float
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model institution_service_tracking {
+  id                 Int      @id @default(autoincrement())
+  institution_id     Int?
+  branch_id          Int?
+  service_id         Int?
+  branch_name        String?  @db.VarChar(255)
+  service_group_name String?  @db.VarChar(255)
+  time               DateTime @default(now()) @db.Timestamp(0)
+  action             Boolean? @default(false)
+  status             Boolean? @default(true)
+  invoice_number     String?  @db.VarChar(255)
+}
+
+model login_history {
+  id         Int      @id @default(autoincrement())
+  user_id    Int?
+  ip         String?  @db.VarChar(255)
+  user_agent String?  @db.VarChar(255)
+  time       DateTime @db.DateTime(0)
+
+  @@index([ip], map: "idx_audit_trail_ip")
+  @@index([user_agent], map: "idx_audit_trail_user_agent")
+  @@index([user_id], map: "idx_audit_trail_user_id")
+}
+
+model migration {
+  version    String @id @db.VarChar(180)
+  apply_time Int?
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model mms_file {
+  id              Int       @id @default(autoincrement())
+  device_uuid     String    @db.VarChar(255)
+  institution_id  Int
+  path            String    @db.VarChar(255)
+  comment         String?   @db.VarChar(5000)
+  type            Int       @db.SmallInt
+  longitude       Float?
+  latitude        Float?
+  height          Int?
+  width           Int?
+  first_view_time DateTime? @db.Timestamp(0)
+  last_view_time  DateTime? @db.Timestamp(0)
+  created_at      DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model notification {
+  id        Int       @id @default(autoincrement())
+  title     String?   @db.VarChar(255)
+  content   String    @db.VarChar(255)
+  link      String?   @db.VarChar(255)
+  seen      Boolean?
+  time_sent DateTime? @default(now()) @db.Timestamp(0)
+  time_seen DateTime? @db.DateTime(0)
+}
+
+model notification_recipient {
+  id              Int  @id @default(autoincrement())
+  id_notification Int
+  id_user         Int?
+  seen            Int?
+  ticket          Int?
+  reference_id    Int?
+}
+
+model option {
+  id          Int          @id @default(autoincrement())
+  name        String?      @unique(map: "name") @db.VarChar(128)
+  description String?      @db.Text
+  type        Int?
+  parent_id   Int?
+  created_at  DateTime     @default(now()) @db.Timestamp(0)
+  qms_ticket  qms_ticket[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model popup_questions {
+  id                               Int                                @id @default(autoincrement())
+  name_en                          String                             @db.VarChar(255)
+  name_fr                          String?                            @db.VarChar(255)
+  name_rw                          String?                            @db.VarChar(255)
+  name_sw                          String?                            @db.VarChar(255)
+  service_id                       String                             @db.Text
+  description_en                   String                             @db.VarChar(255)
+  description_fr                   String?                            @db.VarChar(255)
+  description_rw                   String?                            @db.VarChar(255)
+  description_sw                   String?                            @db.VarChar(255)
+  applies_to_bad                   Boolean                            @default(true)
+  applies_to_good                  Boolean                            @default(false)
+  applies_to_excellent             Boolean                            @default(false)
+  institution_id                   Int
+  status                           Boolean?                           @default(false)
+  type                             Int?                               @default(1) @db.TinyInt
+  created_at                       DateTime                           @default(now()) @db.Timestamp(0)
+  updated_at                       DateTime                           @default(now()) @db.Timestamp(0)
+  institution                      institution                        @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_institution")
+  popup_questions_possible_answers popup_questions_possible_answers[]
+
+  @@index([institution_id], map: "fk_institution")
+}
+
+model popup_questions_answers {
+  id                               Int                              @id @default(autoincrement())
+  device_id                        Int
+  rating_id                        Int?
+  ticket_id                        Int?
+  answer_id                        Int
+  answered_at                      DateTime                         @default(now()) @db.Timestamp(0)
+  popup_questions_possible_answers popup_questions_possible_answers @relation(fields: [answer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_popup_questions_possible_answers")
+
+  @@index([answer_id], map: "fk_popup_questions_possible_answers")
+  @@index([device_id], map: "popup_questions_answers_device_id")
+  @@index([rating_id], map: "popup_questions_answers_rating_id")
+  @@index([ticket_id], map: "popup_questions_answers_ticket_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model popup_questions_possible_answers {
+  id                      Int                       @id @default(autoincrement())
+  popup_question_id       Int
+  answer_en               String                    @db.VarChar(255)
+  answer_fr               String                    @db.VarChar(255)
+  answer_rw               String                    @db.VarChar(255)
+  answer_sw               String                    @db.VarChar(255)
+  created_at              DateTime                  @default(now()) @db.Timestamp(0)
+  updated_at              DateTime                  @default(now()) @db.Timestamp(0)
+  priority                Int?
+  popup_questions_answers popup_questions_answers[]
+  popup_questions         popup_questions           @relation(fields: [popup_question_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_popup_questions_answers")
+
+  @@index([popup_question_id], map: "fk_popup_questions_answers")
+}
+
+model qms_branch_operator {
+  id             Int          @id @default(autoincrement())
+  operator_id    Int
+  institution_id Int
+  service_id     String       @db.Text
+  linked_at      DateTime     @default(now()) @db.Timestamp(0)
+  status         Int          @default(1) @db.TinyInt
+  institution    institution  @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_branch_operator_institution")
+  qms_operator   qms_operator @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_operator")
+
+  @@index([institution_id], map: "fk_qms_branch_operator_institution")
+  @@index([operator_id], map: "fk_qms_operator")
+}
+
+model qms_branch_transactions {
+  id                        Int                         @id @default(autoincrement())
+  affiliate_id              Int
+  date                      DateTime                    @db.Date
+  note                      String?                     @db.Text
+  created_at                DateTime                    @default(now()) @db.Timestamp(0)
+  last_updated              DateTime                    @default(now()) @db.Timestamp(0)
+  institution               institution                 @relation(fields: [affiliate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_affiliate")
+  qms_operator_transactions qms_operator_transactions[]
+
+  @@unique([affiliate_id, date], map: "idx_unique_column")
+}
+
+model qms_counter {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String?  @db.VarChar(255)
+  service_id  Int?
+  created_at  DateTime @default(now()) @db.Timestamp(0)
+  updated_at  DateTime @default(now()) @db.Timestamp(0)
+  service     service? @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service")
+
+  @@index([service_id], map: "fk_service")
+}
+
+model qms_customer {
+  id                   Int          @id @default(autoincrement())
+  customer_uuid        String       @db.VarChar(64)
+  device_id            Int?
+  name                 String       @db.VarChar(255)
+  phone_number         String?      @db.VarChar(64)
+  email                String?      @db.VarChar(255)
+  has_priority_service Boolean?     @default(false)
+  created_at           DateTime     @default(now()) @db.Timestamp(0)
+  updated_at           DateTime     @default(now()) @db.Timestamp(0)
+  device               device?      @relation(fields: [device_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_customer_ibfk_1")
+  qms_ticket           qms_ticket[]
+
+  @@index([device_id], map: "device_id")
+}
+
+model qms_operator {
+  id                        Int                         @id @default(autoincrement())
+  operator_uuid             String                      @db.VarChar(64)
+  institution_id            Int?
+  name                      String                      @db.VarChar(255)
+  username                  String                      @db.VarChar(255)
+  password_hash             String?                     @db.VarChar(255)
+  is_active                 Boolean
+  created_at                DateTime                    @default(now()) @db.Timestamp(0)
+  updated_at                DateTime                    @default(now()) @db.Timestamp(0)
+  email_address             String                      @db.VarChar(255)
+  phone_number              String?                     @db.VarChar(64)
+  terminal                  Boolean?                    @default(false)
+  appointments              appointments[]
+  qms_branch_operator       qms_branch_operator[]
+  institution               institution?                @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_qms_operator_institution")
+  qms_operator_transactions qms_operator_transactions[]
+  qms_queue_operator_lnk    qms_queue_operator_lnk[]
+  qms_ticket_assignment     qms_ticket_assignment[]
+
+  @@index([institution_id], map: "fk_qms_operator_institution")
+}
+
+model qms_operator_transactions {
+  id                      Int                     @id @default(autoincrement())
+  branch_transaction_id   Int
+  operator_id             Int
+  transaction             Int
+  created_at              DateTime                @default(now()) @db.Timestamp(0)
+  last_updated            DateTime                @default(now()) @db.Timestamp(0)
+  qms_branch_transactions qms_branch_transactions @relation(fields: [branch_transaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_branch_transactions")
+  qms_operator            qms_operator            @relation(fields: [operator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_operator")
+
+  @@index([branch_transaction_id], map: "fk_branch_transactions")
+  @@index([operator_id], map: "fk_operator")
+}
+
+model qms_queue {
+  id                     Int                      @id @default(autoincrement())
+  queue_uuid             String                   @db.VarChar(64)
+  service_id             Int
+  queue_date             DateTime                 @db.Date
+  start_time             DateTime                 @db.Time(0)
+  end_time               DateTime                 @db.Time(0)
+  status                 qms_queue_status
+  avg_service_time       Float?                   @db.Float
+  created_at             DateTime                 @default(now()) @db.Timestamp(0)
+  updated_at             DateTime                 @default(now()) @db.Timestamp(0)
+  closure_notification   Int                      @default(0) @db.TinyInt
+  inter_arrival_time     Float?                   @db.Float
+  service                service                  @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_ibfk_1")
+  qms_queue_operator_lnk qms_queue_operator_lnk[]
+  qms_ticket             qms_ticket[]
+
+  @@index([service_id], map: "qms_queue_ibfk_1")
+}
+
+model qms_queue_operator_lnk {
+  id            Int          @id @default(autoincrement())
+  queue_id      Int
+  operator_id   Int
+  operator_uuid String?      @db.VarChar(64)
+  counter_id    Int?
+  first_login   DateTime?    @db.Timestamp(0)
+  last_logout   DateTime?    @db.Timestamp(0)
+  api_key       String?      @db.VarChar(64)
+  qms_queue     qms_queue    @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_operator_lnk_ibfk_1")
+  qms_operator  qms_operator @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_queue_operator_lnk_ibfk_2")
+
+  @@index([queue_id], map: "qms_queue_operator_lnk_ibfk_1")
+  @@index([operator_id], map: "qms_queue_operator_lnk_ibfk_2")
+}
+
+model qms_ticket {
+  id                       Int                     @id @default(autoincrement())
+  ticket_uuid              String                  @db.VarChar(64)
+  queue_id                 Int
+  customer_id              Int
+  ticket_number            String                  @db.VarChar(64)
+  full_ticket_number       String?                 @db.VarChar(255)
+  pin                      Int
+  status                   Int?                    @default(1) @db.TinyInt
+  service_time             Float?                  @db.Float
+  estimated_waiting_time   Int?
+  created_at               DateTime                @default(now()) @db.Timestamp(0)
+  waiting_ended_on         DateTime?               @db.Timestamp(0)
+  skipped_at               DateTime?               @db.Timestamp(0)
+  cancelled_at             DateTime?               @db.Timestamp(0)
+  on_hold_from             DateTime?               @db.Timestamp(0)
+  skips_count              Int?                    @default(0)
+  prioritized              Boolean?                @default(false)
+  reason_id                Int?
+  prioritized_at           DateTime?               @db.Timestamp(0)
+  is_next                  Boolean?                @default(false)
+  prev_ticket_id           Int?
+  rating_notification_sent Int                     @default(0) @db.TinyInt
+  source                   Int                     @default(2) @db.TinyInt
+  option                   option?                 @relation(fields: [reason_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_reason_option")
+  qms_customer             qms_customer            @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_ibfk_1")
+  qms_queue                qms_queue               @relation(fields: [queue_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_ibfk_2")
+  qms_ticket_assignment    qms_ticket_assignment[]
+
+  @@unique([queue_id, ticket_number], map: "idx-unique-qms_ticket-queue_id-ticket_number")
+  @@index([customer_id], map: "customer_id")
+  @@index([reason_id], map: "fk_reason_option")
+  @@index([queue_id], map: "queue_id")
+}
+
+model qms_ticket_assignment {
+  id           Int           @id @default(autoincrement())
+  ticket_id    Int
+  queue_id     Int?
+  operator_id  Int?
+  counter_id   Int?
+  status       Int?          @default(1) @db.TinyInt
+  started_at   DateTime?     @db.Timestamp(0)
+  completed_at DateTime?     @db.Timestamp(0)
+  assigned_at  DateTime?     @default(now()) @db.DateTime(0)
+  state        Int?          @default(1) @db.TinyInt
+  comment      String?       @db.Text
+  qms_ticket   qms_ticket    @relation(fields: [ticket_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_assignment_ibfk_1")
+  qms_operator qms_operator? @relation(fields: [operator_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "qms_ticket_assignment_ibfk_2")
+
+  @@index([operator_id], map: "operator_id")
+  @@index([ticket_id], map: "qms_ticket_assignment_ibfk_1")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model rating {
+  id            BigInt          @id @default(autoincrement())
+  state         Boolean
+  time          DateTime        @default(now()) @db.Timestamp(0)
+  service_id    Int
+  comment       String?         @db.Text
+  gender        Int?
+  age_range     Int?
+  location      Int?
+  device_id     Int?
+  nps_score     Int?
+  ticket_id     Int?
+  finger_print  String?         @db.VarChar(255)
+  service       service         @relation(fields: [service_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk1_service_id")
+  device        device?         @relation(fields: [device_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_device")
+  rating_assets rating_assets[]
+  tip           tip[]
+
+  @@index([service_id], map: "fk1_service_id")
+  @@index([device_id], map: "fk_device")
+}
+
+model rating_assets {
+  rating_assets_id    Int     @id @default(autoincrement())
+  rating_assets_image String? @db.VarChar(45)
+  rating_assets_video String? @db.VarChar(35)
+  rating_id           BigInt?
+  rating              rating? @relation(fields: [rating_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rating_id")
+
+  @@index([rating_id], map: "fk_rating_id")
+}
+
+model rating_qr_code_sessions {
+  id                 Int                            @id @default(autoincrement())
+  institution_uuid   String?                        @db.VarChar(255)
+  service_uuid       String?                        @db.VarChar(255)
+  user_agent         String                         @db.VarChar(255)
+  finger_print       String                         @db.VarChar(255)
+  ip_address         String                         @db.VarChar(255)
+  session_token      String                         @unique(map: "session_token") @db.VarChar(255)
+  session_expiration DateTime                       @db.Timestamp(0)
+  status             rating_qr_code_sessions_status @default(Open)
+  created_at         DateTime                       @default(now()) @db.Timestamp(0)
+}
+
+model rating_reply {
+  id        Int       @id @default(autoincrement())
+  specific  Boolean?
+  rating_id Int?
+  time      DateTime? @default(now()) @db.DateTime(0)
+  reply     String?   @db.VarChar(2000)
+}
+
+model reports {
+  id                    Int      @id @default(autoincrement())
+  title                 String   @db.VarChar(255)
+  type                  String   @db.VarChar(255)
+  institution_id        Int
+  service_ids           String   @db.LongText
+  start_date            DateTime @db.Date
+  end_date              DateTime @db.Date
+  report_created_by     Int
+  report_institution_id String   @db.LongText
+  report_recipient      String   @db.LongText
+  report_queue_uuid     String   @unique(map: "report_queue_uuid") @db.VarChar(36)
+  report_content_key    String?  @db.VarChar(255)
+  status                Int      @default(1)
+  created_at            DateTime @default(now()) @db.Timestamp(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model request_institution {
+  id                   Int    @id @default(autoincrement())
+  owner_name           String @db.VarChar(45)
+  address              String @db.VarChar(255)
+  phone_number         String @db.VarChar(45)
+  email                String @db.VarChar(255)
+  name                 String @db.VarChar(255)
+  category             String @db.VarChar(255)
+  location             String @db.VarChar(255)
+  type                 String @db.VarChar(255)
+  business_certificate String @db.VarChar(255)
+  product_type         String @db.VarChar(255)
+  approval_status      Int    @default(0)
+}
+
+model service {
+  id                   Int            @id @default(autoincrement())
+  institution_id       Int?
+  status               Int?           @default(0) @db.TinyInt
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  bad_rating_threshold Int?           @default(10)
+  group                Int?
+  good_ratings         Int?
+  bad_ratings          Int?
+  excellent_ratings    Int?
+  nps                  Int?
+  csat                 Int?
+  mean_service_time    Int?           @default(5)
+  avg_service_time     Float?         @db.Float
+  uuid                 String?        @db.VarChar(255)
+  inter_arrival_time   Float?         @db.Float
+  estimated_time       Float?         @db.Float
+  appointments         appointments[]
+  qms_counter          qms_counter[]
+  qms_queue            qms_queue[]
+  rating               rating[]
+  service_group        service_group? @relation(fields: [group], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service_group")
+  institution          institution?   @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "service_ibfk_1")
+
+  @@index([institution_id], map: "fk_institution_id")
+  @@index([group], map: "fk_service_group")
+}
+
+model service_group {
+  id                   Int               @id @default(autoincrement())
+  name                 String            @db.VarChar(255)
+  name_rw              String?           @db.VarChar(255)
+  name_fr              String?           @db.VarChar(255)
+  name_sw              String?           @db.VarChar(255)
+  search_term          String?           @db.VarChar(255)
+  institution_id       Int
+  created_at           DateTime          @default(now()) @db.Timestamp(0)
+  updated_at           DateTime          @default(now()) @db.Timestamp(0)
+  uuid                 String?           @db.VarChar(255)
+  status               Int?
+  good_ratings         Int?
+  bad_ratings          Int?
+  excellent_ratings    Int?
+  nps                  Int?
+  csat                 Int?
+  mean_service_time    Int?              @default(5)
+  ticket_prefix        String?           @db.VarChar(64)
+  bad_rating_threshold Int?
+  service              service[]
+  serviceReview        serviceReview[]
+  institution          institution       @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_service_group_institution_id")
+  surveyQuestions      surveyQuestions[]
+
+  @@index([institution_id], map: "fk_service_group_institution_id")
+}
+
+model survey {
+  id             Int      @id @default(autoincrement())
+  uuid           String?  @db.VarChar(64)
+  type           Boolean? @default(true)
+  name           String   @db.VarChar(255)
+  description    String   @db.VarChar(255)
+  url            String?  @db.VarChar(255)
+  survey_data    String?  @db.LongText
+  institution_id Int
+  service_id     String   @db.Text
+  created_at     DateTime @default(now()) @db.Timestamp(0)
+  updated_at     DateTime @default(now()) @db.Timestamp(0)
+  status         Boolean? @default(false)
+  access_key     String?  @db.VarChar(64)
+}
+
+model survey_result {
+  id          Int       @id @default(autoincrement())
+  survey_id   Int
+  rating_id   Int?
+  service_id  Int?
+  device_id   Int?
+  agent       String?   @db.Text
+  result_data String    @db.LongText
+  replied_at  DateTime? @default(now()) @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tags {
+  id                         Int       @id @default(autoincrement())
+  name                       String    @db.VarChar(100)
+  services                   String    @db.LongText
+  created_at                 DateTime? @default(now()) @db.Timestamp(0)
+  created_by                 Int
+  updated_by                 Int?
+  status                     Boolean?  @default(false)
+  user_tags_created_byTouser user      @relation("tags_created_byTouser", fields: [created_by], references: [id], onDelete: Cascade, map: "fk-tags-created_by")
+  user_tags_updated_byTouser user?     @relation("tags_updated_byTouser", fields: [updated_by], references: [id], onDelete: Cascade, map: "fk-tags-updated_by")
+
+  @@index([created_by], map: "fk-tags-created_by")
+  @@index([updated_by], map: "fk-tags-updated_by")
+}
+
+model tip {
+  id                          Int       @id @default(autoincrement())
+  collection_reference_id     String    @db.VarChar(255)
+  disbursement_reference_id   String    @db.VarChar(255)
+  device_id                   Int
+  rating_id                   BigInt?
+  payee                       String    @db.VarChar(64)
+  payer                       String    @db.VarChar(64)
+  amount                      Int
+  tip_amount                  Int
+  collection_status           String?   @db.VarChar(64)
+  collection_status_details   String?   @db.LongText
+  closed_at                   DateTime? @db.Timestamp(0)
+  disbursed_at                DateTime? @db.Timestamp(0)
+  disbursement_status         String?   @db.VarChar(64)
+  disbursement_status_details String?   @db.LongText
+  created_at                  DateTime  @default(now()) @db.Timestamp(0)
+  updated_at                  DateTime  @default(now()) @db.Timestamp(0)
+  device                      device    @relation(fields: [device_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tip_device")
+  rating                      rating?   @relation(fields: [rating_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tip_rating")
+
+  @@index([device_id], map: "fk_tip_device")
+  @@index([rating_id], map: "fk_tip_rating")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user {
+  id                                         Int            @id @default(autoincrement())
+  name                                       String?        @db.VarChar(255)
+  title                                      String?        @db.VarChar(255)
+  phone_number                               String?        @db.VarChar(15)
+  username                                   String         @unique(map: "username") @db.VarChar(255)
+  auth_key                                   String         @db.VarChar(32)
+  password_hash                              String         @db.VarChar(255)
+  password_reset_token                       String?        @unique(map: "password_reset_token") @db.VarChar(255)
+  email                                      String?        @unique(map: "email") @db.VarChar(255)
+  status                                     Boolean        @default(true)
+  role                                       Boolean        @default(false)
+  created_at                                 DateTime       @default(now()) @db.Timestamp(0)
+  updated_at                                 DateTime       @default(now()) @db.Timestamp(0)
+  verification_token                         String?        @db.VarChar(255)
+  allowed_context                            Int?           @default(1) @db.TinyInt
+  institution_id                             String?        @db.Text
+  last_received_hb_alert_at                  DateTime       @default(now()) @db.Timestamp(0)
+  last_received_rating_notification_at       DateTime       @default(now()) @db.Timestamp(0)
+  language                                   String?        @db.VarChar(64)
+  notifications_enabled                      Boolean?       @default(true)
+  last_login                                 DateTime?      @db.DateTime(0)
+  allow_auto_approved_changes                Boolean?       @default(false)
+  appointments_appointments_creator_idTouser appointments[] @relation("appointments_creator_idTouser")
+  appointments_appointments_user_idTouser    appointments[] @relation("appointments_user_idTouser")
+  tags_tags_created_byTouser                 tags[]         @relation("tags_created_byTouser")
+  tags_tags_updated_byTouser                 tags[]         @relation("tags_updated_byTouser")
+}
+
+model wallet_accounts {
+  id              Int      @id @default(autoincrement())
+  user_id         Int?
+  account_type_id Int?
+  account_number  String?  @db.VarChar(255)
+  account_name    String?  @db.VarChar(255)
+  balance         Float?   @db.Float
+  public_key      String?  @db.VarChar(255)
+  private_key     String?  @db.VarChar(255)
+  added_at        DateTime @default(now()) @db.Timestamp(0)
+}
+
+model wallet_accounts_types {
+  id           Int      @id @default(autoincrement())
+  category     String?  @db.VarChar(255)
+  abbreviation String?  @db.VarChar(255)
+  name         String?  @db.VarChar(255)
+  added_at     DateTime @default(now()) @db.Timestamp(0)
+}
+
+model wallet_transfers {
+  id                    Int       @id @default(autoincrement())
+  amount                Float?    @db.Float
+  currency              String?   @db.VarChar(64)
+  time                  DateTime? @db.DateTime(0)
+  payer_id              Int?
+  payer_account_id      Int?
+  payee_address         String?   @db.VarChar(255)
+  payee_name            String?   @db.VarChar(255)
+  payee_account_type    String?   @db.VarChar(255)
+  payee_account_number  String?   @db.VarChar(255)
+  payee_type            String?   @db.VarChar(255)
+  tx_id                 String?   @db.VarChar(255)
+  fspid                 String?   @db.VarChar(255)
+  ext_trx_id            String?   @db.VarChar(255)
+  pay_money_ext_res     String?   @db.LongText
+  confirm_party_ext_res String?   @db.LongText
+  confirm_quote_ext_res String?   @db.LongText
+  status                String?   @db.VarChar(255)
+  quote_id              String?   @db.VarChar(255)
+  note                  String?   @db.VarChar(255)
+  transfer_fees         String?   @db.VarChar(255)
+}
+
+model wallet_users {
+  id           Int      @id @default(autoincrement())
+  device_id    Int?
+  fullname     String?  @db.VarChar(255)
+  email        String?  @db.VarChar(255)
+  private_key  String?  @db.VarChar(255)
+  public_key   String?  @db.VarChar(255)
+  initiated_at DateTime @default(now()) @db.Timestamp(0)
+}
+
+model images {
+  id             Int            @id @default(autoincrement())
+  institution_id Int?
+  user_id        Int?
+  type           String?        @db.VarChar(255)
+  image_url      String?        @db.VarChar(255)
+  caption        String?        @db.VarChar(255)
+  uploaded_at    DateTime       @default(now()) @db.Timestamp(0)
+  review_id      Int?
+  institution    institution?   @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institution_id")
+  reviews        reviews?       @relation(fields: [review_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_review_id")
+  users_profile  users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user_id")
+
+  @@index([institution_id], map: "fk_institution_id")
+  @@index([user_id], map: "fk_user_id")
+  @@index([review_id], map: "fk_review_id")
+}
+
+model sectors {
+  id          Int          @id @default(autoincrement())
+  name        String?      @db.VarChar(255)
+  description String?      @db.Text
+  categories  categories[]
+}
+
+model users_profile {
+  id                   Int                @id @default(autoincrement())
+  first_name           String             @db.VarChar(50)
+  last_name            String             @db.VarChar(50)
+  email                String             @unique(map: "unique_email") @db.VarChar(250)
+  password             String             @db.VarChar(255)
+  phone_number         String?            @db.VarChar(50)
+  age_group            String?            @db.VarChar(50)
+  gender               String?            @db.VarChar(50)
+  address              String?            @db.VarChar(50)
+  added_at             DateTime           @default(now()) @db.Timestamp(0)
+  isVerified           Boolean?
+  verifyToken          String?            @db.VarChar(255)
+  profile_image        String?            @db.VarChar(125)
+  resetPasswordExpires DateTime?
+  resetPasswordToken   String?            @db.VarChar(255)
+  images               images[]
+  review_reactions     review_reactions[]
+  review_replies       review_replies[]
+  reviews              reviews[]
+  serviceReview        serviceReview[]
+}
+
+model reviews {
+  id             Int              @id @default(autoincrement())
+  user_id        Int
+  institution_id Int
+  rating         Int
+  review         String?          @db.Text
+  created_at     DateTime         @default(now()) @db.Timestamp(0)
+  is_approved    Boolean?         @default(true)
+  images         images[]
+  review_replies review_replies[]
+  institution    institution      @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institutions_id")
+  users_profile  users_profile    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_users_id")
+
+  @@index([institution_id], map: "fk_institutions_id")
+  @@index([user_id], map: "fk_users_id")
+}
+
+model review_reactions {
+  id               Int           @id @default(autoincrement())
+  review_id        Int
+  user_id          Int
+  created_at       DateTime      @default(now())
+  reaction_type_id Int?
+  users_profile    users_profile @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([review_id, user_id, reaction_type_id])
+  @@index([review_id])
+  @@index([user_id])
+}
+
+model reaction_types {
+  id   Int     @id @default(autoincrement())
+  name String  @unique
+  icon String?
+}
+
+model review_replies {
+  id              Int              @id @default(autoincrement())
+  review_id       Int
+  user_id         Int
+  reply_text      String           @db.Text
+  created_at      DateTime         @default(now())
+  parent_reply_id Int?
+  parent_reply    review_replies?  @relation("ReplyParent", fields: [parent_reply_id], references: [id])
+  child_replies   review_replies[] @relation("ReplyParent")
+  review          reviews          @relation(fields: [review_id], references: [id], onDelete: Cascade)
+  user            users_profile    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([review_id])
+  @@index([user_id])
+  @@index([parent_reply_id])
+}
+
+model workingHour {
+  id             Int         @id @default(autoincrement())
+  institution_id Int
+  day_of_week    String      @db.VarChar(20)
+  open_time      DateTime?   @db.Time(0)
+  close_time     DateTime?   @db.Time(0)
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_institit_id")
+
+  @@index([institution_id], map: "fk_institit_id")
+}
+
+model amenities {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(100)
+  icon               String?              @db.VarChar(255)
+  added_at           DateTime?            @default(now()) @db.Timestamp(0)
+  business_amenities business_amenities[]
+}
+
+model business_amenities {
+  id             Int          @id @default(autoincrement())
+  institution_id Int?
+  amenitY_id     Int?
+  amenities      amenities?   @relation(fields: [amenitY_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_amen_id")
+  institution    institution? @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_instititu_id")
+
+  @@unique([amenitY_id, institution_id], map: "amenitY_id")
+  @@index([institution_id], map: "fk_instititu_id")
+}
+
+model price_ranges {
+  id             Int         @id @default(autoincrement())
+  max_value      Int
+  min_value      Int
+  institution_id Int
+  label          String?     @db.VarChar(255)
+  institution    institution @relation(fields: [institution_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_price_range")
+
+  @@index([institution_id], map: "fk_price_range")
+}
+
+model surveyAnswers {
+  id              Int             @id @default(autoincrement())
+  question_id     Int
+  user_id         Int?
+  answer          String?         @db.VarChar(255)
+  scale_rating    Int?
+  added_at        DateTime        @default(now()) @db.Timestamp(0)
+  surveyQuestions surveyQuestions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Serv_id")
+
+  @@index([question_id], map: "fk_Serv_id")
+}
+
+model surveyQuestions {
+  id            Int             @id @default(autoincrement())
+  service_id    Int
+  question      String?         @db.Text
+  choices       String?         @db.LongText
+  added_at      DateTime        @default(now()) @db.Timestamp(0)
+  surveyAnswers surveyAnswers[]
+  service_group service_group   @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_servic_id")
+
+  @@index([service_id], map: "fk_servic_id")
+}
+
+model serviceReview {
+  id            Int            @id @default(autoincrement())
+  user_id       Int?
+  service_id    Int?
+  rating        Int?
+  emoRating     String         @db.VarChar(25)
+  added_at      DateTime?      @default(now()) @db.Timestamp(0)
+  service_group service_group? @relation(fields: [service_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Service_id")
+  users_profile users_profile? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_Suser_id")
+
+  @@index([service_id], map: "fk_Service_id")
+  @@index([user_id], map: "fk_Suser_id")
+}
+
+model category_search_terms {
+  id          Int        @id @default(autoincrement())
+  category_id Int
+  term        String     @db.VarChar(255)
+  categories  categories @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "category_search_terms_ibfk_1")
+
+  @@index([category_id], map: "category_id")
+}
+
+enum app_releases_app_name {
+  mobile_rating
+  tablet_rating
+  tablet_qms_o
+}
+
+enum app_releases_platform {
+  android
+  ios
+}
+
+enum qms_queue_status {
+  open
+  paused
+  stopped
+  closed
+}
+
+enum rating_qr_code_sessions_status {
+  Open
+  Close
+}
+
+enum institution_invoices_payment_status {
+  FAILED
+  PENDING
+  COMPLETED
+}
+
+enum audit_trail_status {
+  CREATED @map("1")
+  UPDATED @map("2")
+  DELETED @map("3")
+}
+
+enum institution_invoices_status {
+  PENDING
+  EXPIRED
+  PAID
+  CANCELED
+}
