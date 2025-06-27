@@ -17,6 +17,8 @@ const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
 const passport = require('./config/passport');
 
+app.set('trust proxy', 1); 
+
 const requiredEnvVars = ['JWT_SECRET', 'DATABASE_URL', 'EMAIL', 'EMAIL_PASS', 'FRONTEND_URL'];
 requiredEnvVars.forEach((key) => {
   if (!process.env[key]) {
