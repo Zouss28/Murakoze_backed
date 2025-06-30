@@ -4,7 +4,7 @@ exports.googleCallback = async (req, res, next) => {
   try {
     const user = await googleAuthService.findOrCreateGoogleUser(req.user);
     const tokens = await googleAuthService.generateTokensForGoogleUser(user);
-
+    console.log("HERE is the tokens",tokens);
     // Set refresh token as httpOnly cookie
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
@@ -17,6 +17,7 @@ exports.googleCallback = async (req, res, next) => {
     const redirectUrl = `${process.env.FRONTEND_URL}/auth/google-success?accessToken=${tokens.accessToken}`;
     res.redirect(redirectUrl);
   } catch (err) {
+    console.log("HERE is the error",err);
     next(err);
   }
 };
