@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const reviews = require('./routes/reviews');
 const search = require('./routes/search')
+const adminRoutes = require('./routes/admin');
 const cors = require('cors');
 const auth = require('./middleware/authMiddleware');
 const errorHandler = require('./middleware/errorHandler');
@@ -15,6 +16,7 @@ const swaggerSpec = require('../swagger');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
+const morgan = require('morgan');
 const passport = require('./config/passport');
 
 app.set('trust proxy', 1); 
@@ -42,8 +44,16 @@ const authLimiter = rateLimit({
 
 app.use('/api/auth', authLimiter);
 
-app.use(helmet());
+// app.use(helmet());
 app.use('/api', limiter);
+
+// HTTP request logging
+app.use(morgan('combined', {
+  stream: {
+    write: (message) => logger.info(message.trim())
+  }
+}));
+
 
 
 // Swagger Docs route
@@ -54,12 +64,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// Initialize Passport
+app.use(passport.initialize());
+
 
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
-
-
-
 
 app.get('/api-docs-json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -69,17 +79,20 @@ app.get('/api-docs-json', (req, res) => {
 app.get('/', (req, res) => res.send('API is running'));
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', auth, profileRoutes); 
-app.use('/api/institutions',instit)
+app.use('/api/institutions', instit)
 app.use('/api/review', reviews)
 app.use('/api/search', search)
+app.use('/api/admin', adminRoutes)
 
+app.get('/auth/google/callback', async (req, res) => {
+  logger.info('Google auth callback received', { query: req.query });
+});
 
-app.post("/tokenVerification",auth,(req, res)=>{
-  res.json({"message":"Login succefully"})
-})
+app.post("/tokenVerification", auth, (req, res) => {
+  res.json({"message": "Login succefully"});
+});
 
 app.use(errorHandler);
-app.use(passport.initialize());
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/templates');
