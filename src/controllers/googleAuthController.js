@@ -14,7 +14,7 @@ exports.googleCallback = async (req, res, next) => {
     });
 
     // Redirect to frontend with access token
-    const redirectUrl = `${process.env.FRONTEND_URL}auth/google-success?accessToken=${tokens.accessToken}`;
+    const redirectUrl = `${process.env.FRONTEND_URL}/auth/google-success?accessToken=${tokens.accessToken}`;
     res.redirect(redirectUrl);
   } catch (err) {
     next(err);
