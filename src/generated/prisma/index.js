@@ -1426,7 +1426,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/alan/Desktop/backend/recommender-api/src/generated/prisma",
+      "value": "/home/alan/Desktop/sec_git/back/backend/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -1440,7 +1440,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/alan/Desktop/backend/recommender-api/prisma/schema.prisma",
+    "sourceFilePath": "/home/alan/Desktop/sec_git/back/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -1454,11 +1454,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://new_user:new_password@localhost:3306/mydump_db"
+        "value": null
       }
     }
   },

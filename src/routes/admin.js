@@ -10,7 +10,7 @@ router.use(auth, adminAuth);
 
 /**
  * @swagger
- * /admin/dashboard:
+ * /api/admin/dashboard:
  *   get:
  *     summary: Get admin dashboard overview
  *     security:
@@ -25,7 +25,7 @@ router.get('/dashboard', adminController.getDashboard);
 
 /**
  * @swagger
- * /admin/users:
+ * /api/admin/users:
  *   get:
  *     summary: Get all users
  *     security:
@@ -40,7 +40,7 @@ router.get('/users', adminController.getUsers);
 
 /**
  * @swagger
- * /admin/users/{userId}:
+ * /api/admin/users/{userId}:
  *   delete:
  *     summary: Delete a user by ID
  *     security:
@@ -62,7 +62,7 @@ router.delete('/users/:userId', adminController.deleteUser);
 
 /**
  * @swagger
- * /admin/institutions:
+ * /api/admin/institutions:
  *   get:
  *     summary: Get all institutions
  *     security:
@@ -77,7 +77,7 @@ router.get('/institutions', adminController.getInstitutions);
 
 /**
  * @swagger
- * /admin/institutions/{institutionId}:
+ * /api/admin/institutions/{institutionId}:
  *   put:
  *     summary: Update an institution by ID
  *     security:
@@ -105,7 +105,7 @@ router.put('/institutions/:institutionId', validateInstitutionUpdate, adminContr
 
 /**
  * @swagger
- * /admin/reviews:
+ * /api/admin/reviews:
  *   get:
  *     summary: Get all reviews for moderation
  *     security:
@@ -120,7 +120,7 @@ router.get('/reviews', adminController.getReviews);
 
 /**
  * @swagger
- * /admin/reviews/{reviewId}/moderate:
+ * /api/admin/reviews/{reviewId}/moderate:
  *   put:
  *     summary: Moderate a review by ID
  *     security:
@@ -148,7 +148,7 @@ router.put('/reviews/:reviewId/moderate', validateModeration, adminController.mo
 
 /**
  * @swagger
- * /admin/analytics:
+ * /api/admin/analytics:
  *   get:
  *     summary: Get analytics data
  *     security:

@@ -18,6 +18,7 @@ const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
 const morgan = require('morgan');
 const passport = require('./config/passport');
+const path = require('path');
 
 app.set('trust proxy', 1); 
 
@@ -76,7 +77,6 @@ app.get('/api-docs-json', (req, res) => {
   res.send(swaggerSpec);
 });
 
-app.get('/', (req, res) => res.send('API is running'));
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', auth, profileRoutes); 
 app.use('/api/institutions', instit)
@@ -96,6 +96,17 @@ app.use(errorHandler);
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/src/templates');
+
+// Serve static files from frontend build
+app.use(express.static(path.join(__dirname, '../dist')));
+
+
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.startsWith('/api-docs')) {
+    return next();
+  }
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 app.listen(port, () => {
   logger.info(`Server is running on port ${port}`);

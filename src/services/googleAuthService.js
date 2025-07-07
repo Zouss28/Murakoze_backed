@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 
 exports.findOrCreateGoogleUser = async (googleProfile) => {
   const { id: googleId, emails, name } = googleProfile;
-  console.log("HERE is the googleProfile",googleProfile);
   // Check if user exists with this Google ID
   let user = await prisma.users_profile.findFirst({
     where: { googleId }
@@ -41,7 +40,6 @@ exports.findOrCreateGoogleUser = async (googleProfile) => {
 };
 
 exports.generateTokensForGoogleUser = async (user) => {
-  console.log("HERE is the user",user);
   const accessToken = jwt.sign(
     { userId: user.id }, 
     process.env.JWT_SECRET, 
