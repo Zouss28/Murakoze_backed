@@ -101,9 +101,11 @@ app.set('views', __dirname + '/src/templates');
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
-app.get('/*', (req, res, next) => {
-  console.log(req.path);
-  next();
+app.get("/*splat", (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.startsWith('/api-docs')) {
+    return next();
+  }
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 app.listen(port, () => {
