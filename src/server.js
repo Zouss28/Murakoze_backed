@@ -102,9 +102,11 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 
 app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.startsWith('/api-docs')) {
-    return next();
-  }
+  console.log('Incoming request:', req.url, req.path);
+  
+  // if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.startsWith('/api-docs')) {
+  //   return next();
+  // }
   // res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
